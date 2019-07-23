@@ -1,75 +1,73 @@
+//  Packages
 import React from "react"
-import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import { StaticQuery, graphql } from "gatsby"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
 
-import { rhythm, scale } from "../utils/typography"
+// Styles
+export const theme = {
+  colors: {
+    black: "rgba(0, 0, 0, 1)",
+    darkGrey: "hsla(0, 0%, 10%, 1)",
+    white: "rgba(255, 255, 255, 1)",
+    orange: {
+      main: "rgba(232, 82, 43, 1)",
+      light: "rgb(251, 226, 219)",
+    },
+  },
+  breakpoints: ["40rem", "65rem", "75rem", "85rem"],
+  fontSizes: [16, 24, 36, 48, 64, 80],
+  space: [0, 4, 8, 16, 32, 64, 128, 192, 256, 384, 512],
+}
 
-class Layout extends React.Component {
-  render() {
-    const { location, title, children } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
-
-    if (location.pathname === rootPath) {
-      header = (
-        <h1
-          style={{
-            ...scale(1.5),
-            marginBottom: rhythm(1.5),
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h1>
-      )
-    } else {
-      header = (
-        <h3
-          style={{
-            fontFamily: `Montserrat, sans-serif`,
-            marginTop: 0,
-          }}
-        >
-          <Link
-            style={{
-              boxShadow: `none`,
-              textDecoration: `none`,
-              color: `inherit`,
-            }}
-            to={`/`}
-          >
-            {title}
-          </Link>
-        </h3>
-      )
-    }
-    return (
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        <header>{header}</header>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    )
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    background: white;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  };
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', Arial, sans-serif;
+    margin: 0;
+  };
+  button:focus,
+  input:focus {
+    outline: 0;
   }
+`
+
+function Layout({ children }) {
+  const layoutQuery = graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `
+
+  const layoutContent = data => (
+    <React.Fragment>
+      <GlobalStyle />
+      <main>{children}</main>
+    </React.Fragment>
+  )
+
+  return (
+    <ThemeProvider theme={theme}>
+      <StaticQuery query={layoutQuery} render={layoutContent} />
+    </ThemeProvider>
+  )
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

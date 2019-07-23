@@ -3,7 +3,7 @@ module.exports = {
     title: `Gatsby Starter Blog`,
     author: `Kyle Mathews`,
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `http://adrienrahier.com/portfolio/`,
     social: {
       twitter: `kylemathews`,
     },
@@ -45,14 +45,24 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        siteUrl: `http://www.adrienrahier.com/portfolio`,
       },
     },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: `${__dirname}/content/assets`,
+        },
+      },
+    },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-sitemap`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -71,7 +81,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/utils/typography`,
+        google: {
+          families: ["Quicksand", "Lato", "Open Sans"],
+        },
       },
     },
   ],
