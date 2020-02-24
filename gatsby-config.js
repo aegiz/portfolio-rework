@@ -64,6 +64,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -79,7 +80,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-typography`,
+      resolve: `gatsby-plugin-web-font-loader`,
       options: {
         google: {
           families: ["Quicksand", "Lato", "Open Sans"],
@@ -87,4 +88,4 @@ module.exports = {
       },
     },
   ],
-}
+};
