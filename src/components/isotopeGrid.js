@@ -20,9 +20,9 @@ class IsotopeGrid extends Component {
 		return (
 			<div id="filter-container">
 				{this.props.posts.map((post, i) => (
-					<div key={i} className="filter-item filter-one">
-						Item 1
-                        {console.log(post)}
+                    <div key={i}
+                    className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}>
+						{post.node.frontmatter.description}
 					</div>
 				))}
 			</div>

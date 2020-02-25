@@ -42,13 +42,13 @@ class Gallery extends Component {
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 					<FilterGrid
-						filter={"filter-one"}
-						text={"One"}
+						filter={"filter-web"}
+						text={"web"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 					<FilterGrid
-						filter={"filter-two"}
-						text={"Two"}
+						filter={"filter-DIY"}
+						text={"DIY"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 				</div>
