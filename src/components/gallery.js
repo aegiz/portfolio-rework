@@ -22,7 +22,7 @@ class Gallery extends Component {
 	};
 	createIsotopeGrid = isotopeNode => {
 		this.setState({
-			isotope: new Isotope(isotopeNode),
+			isotope: new Isotope(isotopeNode, {percentPosition: true})
 		});
 	};
 	updateIsotopeGrid = newFilter => {

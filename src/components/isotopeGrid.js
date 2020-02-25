@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styled, { withTheme } from "styled-components";
 
-// const Container = styled.div`
-// 	background: transparent;
-// 	border-radius: 3px;
-// 	border: 2px solid palevioletred;
-// 	color: palevioletred;
-// 	margin: 0 1em;
-// 	padding: 0.25em 1em;
-// `;
+const GridItem = styled.div`
+    width: 33.33%;
+    @media (max-width: 1000px) {
+        width: 50%;
+    }
+`;
+
+const InnerIso = styled.div`
+    margin: 0 auto;
+    max-width: 250px;
+	border-radius: 3px;
+	border: 2px solid palevioletred;
+	padding: 1em;
+`;
 
 class IsotopeGrid extends Component {
 	componentDidMount() {
@@ -18,12 +24,14 @@ class IsotopeGrid extends Component {
 
 	render() {
 		return (
-			<div id="filter-container">
+			<div id="ar-isotope">
 				{this.props.posts.map((post, i) => (
-                    <div key={i}
+                    <GridItem key={i}
                     className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}>
-						{post.node.frontmatter.description}
-					</div>
+                        <InnerIso>
+						    {post.node.frontmatter.title}
+                        </InnerIso>
+					</GridItem>
 				))}
 			</div>
 		);
