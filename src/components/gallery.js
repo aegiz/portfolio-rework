@@ -1,7 +1,11 @@
+// Package
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 import Isotope from "isotope-layout/js/isotope";
 import styled, { withTheme } from "styled-components";
+
+// Components
+import IsotopeGrid from "../components/isotopeGrid";
+import FilterGrid from "../components/filterGrid";
 
 const Container = styled.div`
 	background: transparent;
@@ -13,77 +17,45 @@ const Container = styled.div`
 `;
 
 class Gallery extends Component {
-	onFilterChange = newFilter => {
-		if (typeof this.iso === "undefined") {
-			this.iso = new Isotope("#filter-container", {
-				itemSelector: ".filter-item",
-				layoutMode: "fitRows",
-			});
-		}
+	state = {
+		isotope: null,
+	};
+	createIsotopeGrid = isotopeNode => {
+		this.setState({
+			isotope: new Isotope(isotopeNode),
+		});
+	};
+	updateIsotopeGrid = newFilter => {
 		if (newFilter === "*") {
-			this.iso.arrange({ filter: `*` });
+			this.state.isotope.arrange({ filter: `*` });
 		} else {
-			this.iso.arrange({ filter: `.${newFilter}` });
+			this.state.isotope.arrange({ filter: `.${newFilter}` });
 		}
 	};
-
 	render() {
 		return (
 			<Container>
-				<div>
-					<button
-						data-filter="*"
-						onClick={() => {
-							this.onFilterChange("*");
-						}}
-					>
-						All
-					</button>
-
-					<button
-						data-filter="filter-one"
-						onClick={() => {
-							this.onFilterChange("filter-one");
-						}}
-					>
-						One
-					</button>
-
-					<button
-						data-filter="filter-two"
-						onClick={() => {
-							this.onFilterChange("filter-two");
-						}}
-					>
-						Two
-					</button>
+				<div className="filters-container">
+					<FilterGrid
+						filter={"*"}
+						text={"All"}
+						updateIsotopeGrid={this.updateIsotopeGrid}
+					/>
+					<FilterGrid
+						filter={"filter-one"}
+						text={"One"}
+						updateIsotopeGrid={this.updateIsotopeGrid}
+					/>
+					<FilterGrid
+						filter={"filter-two"}
+						text={"Two"}
+						updateIsotopeGrid={this.updateIsotopeGrid}
+					/>
 				</div>
-				<div id="filter-container">
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-one">Item 1</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-					<div className="filter-item filter-two">Item 2</div>
-				</div>
+				<IsotopeGrid
+					createIsotopeGrid={this.createIsotopeGrid}
+					posts={this.props.posts}
+				/>
 			</Container>
 		);
 	}
