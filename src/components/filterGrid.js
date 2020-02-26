@@ -14,7 +14,6 @@ class FilterGrid extends Component {
 	render() {
 		return (
 			<button
-				data-filter={this.props.filter}
 				onClick={() => {
 					this.props.updateIsotopeGrid(this.props.filter);
 				}}

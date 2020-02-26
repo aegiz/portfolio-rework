@@ -10,8 +10,7 @@ import FilterGrid from "../components/filterGrid";
 const Container = styled.div`
 	background: transparent;
 	border-radius: 3px;
-	border: 2px solid palevioletred;
-	color: palevioletred;
+	border: 2px solid black;
 	margin: 0 1em;
 	padding: 0.25em 1em;
 `;
@@ -29,34 +28,34 @@ class Gallery extends Component {
 		if (newFilter === "*") {
 			this.state.isotope.arrange({ filter: `*` });
 		} else {
-			this.state.isotope.arrange({ filter: `.${newFilter}` });
+			this.state.isotope.arrange({ filter: `.filter-${newFilter}` });
 		}
 	};
 	render() {
 		return (
-			<Container>
-				<div className="filters-container">
+			<>
+				<Container className="filters-container">
 					<FilterGrid
 						filter={"*"}
 						text={"All"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 					<FilterGrid
-						filter={"filter-web"}
+						filter={"web"}
 						text={"web"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 					<FilterGrid
-						filter={"filter-DIY"}
+						filter={"DIY"}
 						text={"DIY"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
-				</div>
+				</Container>
 				<IsotopeGrid
 					createIsotopeGrid={this.createIsotopeGrid}
 					posts={this.props.posts}
 				/>
-			</Container>
+			</>
 		);
 	}
 }
