@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { withTheme } from "styled-components";
+// import styled, { withTheme } from "styled-components";
 
 // const Container = styled.div`
 // 	background: transparent;
@@ -24,4 +24,4 @@ class FilterGrid extends Component {
 	}
 }
 
-export default withTheme(FilterGrid);
+export default FilterGrid;

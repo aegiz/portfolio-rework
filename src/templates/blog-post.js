@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 // Utils
-import noMoreLonelyWords from "../utils/noMoreLonelyWords"
+//import noMoreLonelyWords from "../utils/noMoreLonelyWords"
 
 class BlogPostTemplate extends React.Component {
 	render() {
