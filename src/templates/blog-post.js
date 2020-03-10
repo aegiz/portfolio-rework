@@ -1,17 +1,19 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React from "react";
+import { Link, graphql } from "gatsby";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import Footer from "../components/footer";
 
 // Utils
 //import noMoreLonelyWords from "../utils/noMoreLonelyWords"
 
 class BlogPostTemplate extends React.Component {
 	render() {
-		const post = this.props.data.markdownRemark
-		const siteTitle = this.props.data.site.siteMetadata.title
-		const { previous, next } = this.props.pageContext
+		const post = this.props.data.markdownRemark;
+		const siteTitle = this.props.data.site.siteMetadata.title;
+		const { previous, next } = this.props.pageContext;
 
 		return (
 			<Layout location={this.props.location} title={siteTitle}>
@@ -19,6 +21,9 @@ class BlogPostTemplate extends React.Component {
 					title={post.frontmatter.title}
 					description={post.frontmatter.description || post.excerpt}
 				/>
+				<AniLink paintDrip hex="#663399" duration={1} to="/">
+					GO BACK TO HOMEPAGE
+				</AniLink>
 				<h1
 					style={{
 						marginBottom: 0,
@@ -61,11 +66,11 @@ class BlogPostTemplate extends React.Component {
 					</li>
 				</ul>
 			</Layout>
-		)
+		);
 	}
 }
 
-export default BlogPostTemplate
+export default BlogPostTemplate;
 
 export const pageQuery = graphql`
 	query BlogPostBySlug($slug: String!) {
@@ -86,4 +91,4 @@ export const pageQuery = graphql`
 			}
 		}
 	}
-`
+`;
