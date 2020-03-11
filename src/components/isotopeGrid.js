@@ -27,21 +27,21 @@ class IsotopeGrid extends Component {
 		return (
 			<div id="ar-isotope">
 				{this.props.posts.map((post, i) => (
-					<AniLink
-						cover
-						bg="#663399"
-						top="entry"
-						direction="left"
-						duration={1}
-						key={i}
-						to={post.node.frontmatter.path}
+					<GridItem
+						className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}
 					>
-						<GridItem
-							className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}
+						<AniLink
+							cover
+							bg="#663399"
+							top="entry"
+							direction="left"
+							duration={1}
+							key={i}
+							to={post.node.frontmatter.path}
 						>
 							<InnerIso>{post.node.frontmatter.title}</InnerIso>
-						</GridItem>
-					</AniLink>
+						</AniLink>
+					</GridItem>
 				))}
 			</div>
 		);
