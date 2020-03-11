@@ -1,7 +1,6 @@
 // Packages
 import React from "react";
 import { graphql } from "gatsby";
-import styled from "styled-components";
 
 // Components
 import Layout from "../components/layout";
@@ -20,7 +19,7 @@ class PortfolioIndex extends React.Component {
 				<SEO title="Portfolio - Adrien Rahier" />
 				<Header />
 				<Disclaimer />
-				<Gallery posts={data.allMarkdownRemark.edges} />
+				<Gallery posts={data.allMdx.edges} />
 				<Footer />
 			</Layout>
 		);
@@ -31,7 +30,7 @@ export default PortfolioIndex;
 
 export const pageQuery = graphql`
 	query {
-		allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+		allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
 			edges {
 				node {
 					id
