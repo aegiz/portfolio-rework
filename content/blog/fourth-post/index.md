@@ -13,24 +13,12 @@ slidesToScroll: 1,
 speed: 500,
 };
 
-<Slider {...settings}>
-
-<div>
-<h3>2</h3>
-</div>
-<div>
-<h3>3</h3>
-</div>
-<div>
-<h3>4</h3>
-</div>
-<div>
-<h3>5</h3>
-</div>
-<div>
-<h3>6</h3>
-</div>
-</Slider>
+<TitleBar
+size={"32px"}
+bkgdColor={"#4aae9b"}
+text={"HEELLLO"}
+settings={settings}
+/>
 
 THE FOURTH POST!
 
