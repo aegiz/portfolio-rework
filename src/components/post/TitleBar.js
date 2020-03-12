@@ -1,6 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 const TitleBar = ({ text, size, bkgdColor, settings, foo }) => (
 	<div
 		style={{
@@ -19,7 +22,7 @@ const TitleBar = ({ text, size, bkgdColor, settings, foo }) => (
 		</h2>
 		<Slider {...settings}>
 			<div>
-				<img src={`${foo}`} alt="Lake 22, WA"></img>
+				<img width="350" src={`${foo}`} alt="Lake 22, WA"></img>
 			</div>
 			<div>
 				<h3>2</h3>
