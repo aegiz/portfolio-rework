@@ -5,6 +5,33 @@ typeOfArticle: "DIY"
 path: "/fourth-post"
 ---
 
+export const settings = {
+focusOnSelect: true,
+infinite: true,
+slidesToShow: 3,
+slidesToScroll: 1,
+speed: 500,
+};
+
+<Slider {...settings}>
+
+<div>
+<h3>2</h3>
+</div>
+<div>
+<h3>3</h3>
+</div>
+<div>
+<h3>4</h3>
+</div>
+<div>
+<h3>5</h3>
+</div>
+<div>
+<h3>6</h3>
+</div>
+</Slider>
+
 THE FOURTH POST!
 
 Did you know that "despite its name, salted duck eggs can also be made from

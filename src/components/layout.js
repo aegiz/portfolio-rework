@@ -3,6 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { StaticQuery, graphql } from "gatsby";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { MDXProvider } from "@mdx-js/react";
+import { Message } from "theme-ui";
+import Slider from "react-slick";
 
 // Styles
 export const theme = {
@@ -51,7 +54,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-
+	const shortcodes = { Message, Slider };
 	const layoutContent = data => (
 		<React.Fragment>
 			<GlobalStyle />
@@ -60,7 +63,7 @@ function Layout({ children }) {
 					background: `white`,
 				}}
 			>
-				{children}
+				<MDXProvider components={shortcodes}>{children}</MDXProvider>
 			</main>
 		</React.Fragment>
 	);

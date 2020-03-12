@@ -1,17 +1,17 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import Footer from "../components/footer";
 
 // Utils
 //import noMoreLonelyWords from "../utils/noMoreLonelyWords"
 
 class BlogPostTemplate extends React.Component {
 	render() {
+		console.log(this.props.data);
 		const post = this.props.data.mdx;
 		const siteTitle = this.props.data.site.siteMetadata.title;
 		const { previous, next } = this.props.pageContext;
@@ -66,7 +66,6 @@ class BlogPostTemplate extends React.Component {
 						)}
 					</li>
 				</ul>
-				<Footer />
 			</Layout>
 		);
 	}

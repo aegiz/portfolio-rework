@@ -28,6 +28,7 @@ class IsotopeGrid extends Component {
 			<div id="ar-isotope">
 				{this.props.posts.map((post, i) => (
 					<GridItem
+						key={i}
 						className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}
 					>
 						<AniLink
@@ -36,7 +37,6 @@ class IsotopeGrid extends Component {
 							top="entry"
 							direction="left"
 							duration={1}
-							key={i}
 							to={post.node.frontmatter.path}
 						>
 							<InnerIso>{post.node.frontmatter.title}</InnerIso>
