@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 
-const TitleBar = ({ text, size, bkgdColor, settings }) => (
+const TitleBar = ({ text, size, bkgdColor, settings, foo }) => (
 	<div
 		style={{
 			margin: "2rem 0",
@@ -19,7 +19,7 @@ const TitleBar = ({ text, size, bkgdColor, settings }) => (
 		</h2>
 		<Slider {...settings}>
 			<div>
-				<h3>1</h3>
+				<img src={`${foo}`} alt="Lake 22, WA"></img>
 			</div>
 			<div>
 				<h3>2</h3>

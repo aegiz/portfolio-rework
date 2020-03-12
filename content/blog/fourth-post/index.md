@@ -5,12 +5,14 @@ typeOfArticle: "DIY"
 path: "/fourth-post"
 ---
 
+import foo from './salty_egg_2.jpg';
+
 export const settings = {
 focusOnSelect: true,
 infinite: true,
 slidesToShow: 3,
 slidesToScroll: 1,
-speed: 500,
+speed: 500
 };
 
 <TitleBar
@@ -18,6 +20,7 @@ size={"32px"}
 bkgdColor={"#4aae9b"}
 text={"HEELLLO"}
 settings={settings}
+foo={foo}
 />
 
 THE FOURTH POST!
