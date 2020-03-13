@@ -5,8 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
-import TitleBar from "./post/TitleBar";
-import Slider from "react-slick";
+import SlickCarousel from "./post/slick-carousel";
 
 // Styles
 export const theme = {
@@ -55,7 +54,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, Slider, TitleBar };
+	const shortcodes = { Message, SlickCarousel };
 	const layoutContent = data => (
 		<React.Fragment>
 			<GlobalStyle />

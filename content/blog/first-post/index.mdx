@@ -5,22 +5,23 @@ typeOfArticle: "web"
 path: "/first-post"
 ---
 
-import foo from "./salty_egg_2.jpg";
+import image1 from "./assets/slick/salty_egg_2.jpg";
+import image2 from "./assets/slick/salty_egg.jpg";
 
 export const settings = {
 	focusOnSelect: true,
 	infinite: true,
-	slidesToShow: 3,
+	slidesToShow: 1,
 	slidesToScroll: 1,
 	speed: 500,
 };
 
-<TitleBar
+<SlickCarousel
 	size={"32px"}
 	bkgdColor={"#4aae9b"}
 	text={"HEELLLO"}
 	settings={settings}
-	foo={foo}
+	images={[image1, image2]}
 />
 
 This is my first post on my new fake blog! How exciting!
