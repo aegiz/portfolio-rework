@@ -10,7 +10,16 @@ import styled, { withTheme } from "styled-components";
 // https://react-slick.neostack.com/docs/example/swipe-to-slide
 
 const Loading = styled.div`
-	display: ${props => (props.slider1Loaded ? "none" : "block")};
+	display: ${props => (props.sliderLoaded ? "none" : "flex")};
+	background: white;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
 `;
 
 export class CustomSlickCarousel extends Component {
@@ -19,40 +28,68 @@ export class CustomSlickCarousel extends Component {
 		nav2: null,
 		currentSlide: 1,
 		totalSlide: 5,
-		slider1Loaded: false,
-		slider2Loaded: false,
+		sliderLoaded: false,
 	};
 	componentDidMount() {
 		this.setState({
 			nav1: this.slider1,
 			nav2: this.slider2,
+			sliderLoaded: true,
 		});
 	}
 	render() {
-		const settings = {
-			className: "center",
-			infinite: true,
-			centerPadding: "60px",
-			slidesToShow: 5,
-			swipeToSlide: true,
-			onInit: function() {
-				console.log(`Slider Initiated!`);
-			},
-			afterChange: function(index) {
-				console.log(
-					`Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-				);
-			},
-		};
+		function SampleNextArrow(props) {
+			const { className, style, onClick } = props;
+			return (
+				<div
+					className={className}
+					style={{ ...style, display: "block", background: "red" }}
+					onClick={onClick}
+				>
+					<button className="arrow-left">
+						<svg
+							width="24"
+							height="24"
+							xmlns="http://www.w3.org/2000/svg"
+							fillRule="evenodd"
+							clipRule="evenodd"
+						>
+							<path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
+						</svg>
+					</button>
+				</div>
+			);
+		}
+
+		function SamplePrevArrow(props) {
+			const { className, style, onClick } = props;
+			return (
+				<div
+					className={className}
+					style={{ ...style, display: "block", background: "green" }}
+					onClick={onClick}
+				>
+					<button className="arrow-right">
+						<svg
+							width="24"
+							height="24"
+							xmlns="http://www.w3.org/2000/svg"
+							fillRule="evenodd"
+							clipRule="evenodd"
+						>
+							<path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
+						</svg>
+					</button>
+				</div>
+			);
+		}
+
 		const settings1 = {
-			rows: 0,
-			slidesToShow: 2,
 			arrows: false,
 			draggable: false,
 			useTransform: false,
-			mobileFirst: true,
 			onInit: function() {
-				console.log("Hello");
+				console.log("Hello 1");
 			},
 			afterChange: function(index) {
 				console.log(`Slider 1 Changed to: ${index + 1}`);
@@ -75,59 +112,46 @@ export class CustomSlickCarousel extends Component {
 		};
 
 		const settings2 = {
-			rows: 0,
 			useTransform: false,
-			prevArrow: ".arrow-left",
-			nextArrow: ".arrow-right",
-			fade: true,
+			draggable: false,
+			useTransform: false,
 			onInit: function() {
 				console.log("Hello 2");
 			},
 			afterChange: function(index) {
 				console.log(`Slider 2 Changed to: ${index + 1}`);
 			},
+			nextArrow: <SampleNextArrow />,
+			prevArrow: <SamplePrevArrow />,
+			responsive: [
+				{
+					breakpoint: 768,
+					settings: {
+						slidesToShow: 3,
+					},
+				},
+				{
+					breakpoint: 1023,
+					settings: {
+						slidesToShow: 1,
+						vertical: true,
+					},
+				},
+			],
 		};
 		return (
 			<>
-				<Loading className="loading">Carousel is loading...</Loading>
-				<Slider {...settings}>
-					<div>
-						<h3>1</h3>
-					</div>
-					<div>
-						<h3>2</h3>
-					</div>
-					<div>
-						<h3>3</h3>
-					</div>
-					<div>
-						<h3>4</h3>
-					</div>
-					<div>
-						<h3>5</h3>
-					</div>
-					<div>
-						<h3>6</h3>
-					</div>
-					<div>
-						<h3>7</h3>
-					</div>
-					<div>
-						<h3>8</h3>
-					</div>
-					<div>
-						<h3>9</h3>
-					</div>
-				</Slider>
-
 				<div className="container">
+					<Loading className="loading" sliderLoaded={this.state.sliderLoaded}>
+						Carousel is loading...
+					</Loading>
 					<div className="synch-carousels">
 						<div className="left child">
 							<Slider
 								className="gallery"
 								asNavFor={this.state.nav2}
 								ref={slider => (this.slider1 = slider)}
-								settings={settings1}
+								{...settings1}
 							>
 								<div className="item">
 									<img
@@ -163,10 +187,10 @@ export class CustomSlickCarousel extends Component {
 						</div>
 						<div className="right child">
 							<Slider
-								className="gallery2"
+								className="gallery"
 								asNavFor={this.state.nav1}
 								ref={slider => (this.slider2 = slider)}
-								settings={settings2}
+								{...settings2}
 							>
 								<div className="item">
 									<img
@@ -199,30 +223,7 @@ export class CustomSlickCarousel extends Component {
 									/>
 								</div>
 							</Slider>
-							<div className="nav-arrows">
-								<button className="arrow-left">
-									<svg
-										width="24"
-										height="24"
-										xmlns="http://www.w3.org/2000/svg"
-										fillRule="evenodd"
-										clipRule="evenodd"
-									>
-										<path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-									</svg>
-								</button>
-								<button className="arrow-right">
-									<svg
-										width="24"
-										height="24"
-										xmlns="http://www.w3.org/2000/svg"
-										fillRule="evenodd"
-										clipRule="evenodd"
-									>
-										<path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-									</svg>
-								</button>
-							</div>
+
 							<div className="photos-counter">
 								<span>{this.state.currentSlide}</span>
 								<span>/</span>

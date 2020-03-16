@@ -26,21 +26,8 @@ body {
 	overflow: visible;
 }
 
-.loading {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 2;
-	background: white;
-}
-
 .container {
-	max-width: 880px;
+	max-width: 1110px;
 	padding: 20px 10px;
 	margin: 0 auto;
 }
@@ -87,6 +74,14 @@ body {
 
 .synch-carousels .gallery .slick-slide {
 	margin: 0 20px;
+}
+
+.slick-prev:before {
+	content: none;
+}
+
+.slick-next:before {
+	content: none;
 }
 
 .synch-carousels .nav-arrows {
