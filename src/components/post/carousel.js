@@ -26,16 +26,25 @@ export class CustomSlickCarousel extends Component {
 	state = {
 		nav1: null,
 		nav2: null,
-		currentSlide: 1,
+		currentSlide: 0,
 		totalSlide: 5,
-		sliderLoaded: false,
+		slider1Loaded: false,
+		slider2Loaded: false,
 	};
+
+	resize = function() {
+		console.log("hello");
+	};
+
 	componentDidMount() {
 		this.setState({
 			nav1: this.slider1,
 			nav2: this.slider2,
-			sliderLoaded: true,
 		});
+		window.addEventListener("resize", this.resize);
+	}
+	componentWillUnmount() {
+		window.removeEventListener("resize", this.resize);
 	}
 	render() {
 		function SampleNextArrow(props) {
@@ -83,17 +92,24 @@ export class CustomSlickCarousel extends Component {
 				</div>
 			);
 		}
+		const settings = {
+			className: "center",
+			centerMode: true,
+			infinite: true,
+			centerPadding: "60px",
+			slidesToShow: 3,
+			speed: 500,
+		};
 
 		const settings1 = {
 			arrows: false,
-			draggable: false,
-			useTransform: false,
-			onInit: function() {
-				console.log("Hello 1");
-			},
-			afterChange: function(index) {
-				console.log(`Slider 1 Changed to: ${index + 1}`);
-			},
+			vertical: true,
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			onInit: () => this.setState(state => ({ slider1Loaded: true })),
+			beforeChange: (current, next) =>
+				this.setState(state => ({ currentSlide: next })),
 			responsive: [
 				{
 					breakpoint: 768,
@@ -105,7 +121,6 @@ export class CustomSlickCarousel extends Component {
 					breakpoint: 1023,
 					settings: {
 						slidesToShow: 1,
-						vertical: true,
 					},
 				},
 			],
@@ -114,13 +129,10 @@ export class CustomSlickCarousel extends Component {
 		const settings2 = {
 			useTransform: false,
 			draggable: false,
-			useTransform: false,
-			onInit: function() {
-				console.log("Hello 2");
-			},
-			afterChange: function(index) {
-				console.log(`Slider 2 Changed to: ${index + 1}`);
-			},
+			slidesToScroll: 1,
+			onInit: () => this.setState(state => ({ slider2Loaded: true })),
+			beforeChange: (current, next) =>
+				this.setState(state => ({ currentSlide: next })),
 			nextArrow: <SampleNextArrow />,
 			prevArrow: <SamplePrevArrow />,
 			responsive: [
@@ -141,8 +153,49 @@ export class CustomSlickCarousel extends Component {
 		};
 		return (
 			<>
+				<Slider {...settings}>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
+							alt=""
+						/>
+					</div>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
+							alt=""
+						/>
+					</div>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
+							alt=""
+						/>
+					</div>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
+							alt=""
+						/>
+					</div>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
+							alt=""
+						/>
+					</div>
+					<div>
+						<img
+							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
+							alt=""
+						/>
+					</div>
+				</Slider>
 				<div className="container">
-					<Loading className="loading" sliderLoaded={this.state.sliderLoaded}>
+					<Loading
+						className="loading"
+						sliderLoaded={this.state.slider1Loaded && this.state.slider2Loaded}
+					>
 						Carousel is loading...
 					</Loading>
 					<div className="synch-carousels">
@@ -225,7 +278,7 @@ export class CustomSlickCarousel extends Component {
 							</Slider>
 
 							<div className="photos-counter">
-								<span>{this.state.currentSlide}</span>
+								<span>{this.state.currentSlide + 1}</span>
 								<span>/</span>
 								<span>{this.state.totalSlide}</span>
 							</div>
