@@ -1,6 +1,11 @@
+// Package
 import React, { Component } from "react";
 import Slider from "react-slick";
 
+// Components
+import CTAicon from "./icons";
+
+// Styles
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled, { withTheme } from "styled-components";
@@ -58,6 +63,15 @@ const Container2 = styled.div`
 		background: #292929;
 	}
 `;
+
+const IconContainter = styled.div`
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	cursor: pointer;
+`;
+
 export default class VerticalMode extends Component {
 	state = {
 		nav1: null,
@@ -66,6 +80,7 @@ export default class VerticalMode extends Component {
 		totalSlide: 5,
 		slider1Loaded: false,
 		slider2Loaded: false,
+		autoplay: false,
 	};
 
 	componentDidMount() {
@@ -87,15 +102,14 @@ export default class VerticalMode extends Component {
 				this.setState(state => ({ currentSlide: next })),
 		};
 		const settings2 = {
-			arrows: true,
+			arrows: false,
 			useTransform: false,
 			draggable: false,
 			slidesToScroll: 1,
 			onInit: () => this.setState(state => ({ slider2Loaded: true })),
 			beforeChange: (current, next) =>
 				this.setState(state => ({ currentSlide: next })),
-			nextArrow: <SampleNextArrow />,
-			prevArrow: <SamplePrevArrow />,
+			autoplaySpeed: 500,
 			responsive: [
 				{
 					breakpoint: 768,
@@ -112,51 +126,7 @@ export default class VerticalMode extends Component {
 				},
 			],
 		};
-		function SampleNextArrow(props) {
-			const { className, style, onClick } = props;
-			return (
-				<div
-					className={className}
-					style={{ ...style, display: "block", background: "red" }}
-					onClick={onClick}
-				>
-					<button className="arrow-left">
-						<svg
-							width="24"
-							height="24"
-							xmlns="http://www.w3.org/2000/svg"
-							fillRule="evenodd"
-							clipRule="evenodd"
-						>
-							<path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-						</svg>
-					</button>
-				</div>
-			);
-		}
 
-		function SamplePrevArrow(props) {
-			const { className, style, onClick } = props;
-			return (
-				<div
-					className={className}
-					style={{ ...style, display: "block", background: "green" }}
-					onClick={onClick}
-				>
-					<button className="arrow-right">
-						<svg
-							width="24"
-							height="24"
-							xmlns="http://www.w3.org/2000/svg"
-							fillRule="evenodd"
-							clipRule="evenodd"
-						>
-							<path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" />
-						</svg>
-					</button>
-				</div>
-			);
-		}
 		return (
 			<>
 				<MajorContainer>
@@ -248,6 +218,42 @@ export default class VerticalMode extends Component {
 							<span>/</span>
 							<span>{this.state.totalSlide}</span>
 						</div>
+						<IconContainter>
+							<CTAicon
+								type={"previous"}
+								alt={"previous icon"}
+								width={24}
+								height={24}
+								onClick={() => this.state.nav2.slickPrev()}
+							/>
+							<CTAicon
+								type={"next"}
+								alt={"next icon"}
+								width={24}
+								height={24}
+								onClick={() => this.state.nav2.slickNext()}
+							/>
+							<CTAicon
+								type={this.state.autoplay ? "pause" : "play"}
+								alt={"play icon"}
+								width={32}
+								height={32}
+								onClick={() => {
+									// This doesn't work
+									if (this.state.autoplay) {
+										this.state.nav2.slickPause();
+										this.setState({
+											autoplay: false,
+										});
+									} else {
+										this.state.nav2.slickPlay();
+										this.setState({
+											autoplay: true,
+										});
+									}
+								}}
+							/>
+						</IconContainter>
 					</Container2>
 				</MajorContainer>
 			</>
