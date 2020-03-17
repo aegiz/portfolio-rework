@@ -6,6 +6,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
 import CustomSlickCarousel from "./post/carousel";
+import TestCarousel from "./post/carousel-test";
 
 // Styles
 export const theme = {
@@ -54,7 +55,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, CustomSlickCarousel };
+	const shortcodes = { Message, CustomSlickCarousel, TestCarousel };
 	const layoutContent = data => (
 		<React.Fragment>
 			<GlobalStyle />

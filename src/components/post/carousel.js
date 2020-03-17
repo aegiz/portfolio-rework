@@ -3,7 +3,7 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./carousel.css";
+import "./test.css";
 import styled, { withTheme } from "styled-components";
 
 // https://webdesign.tutsplus.com/tutorials/how-to-build-an-attractive-responsive-image-gallery-with-slickjs--cms-31355
@@ -20,6 +20,14 @@ const Loading = styled.div`
 	align-items: center;
 	justify-content: center;
 	z-index: 2;
+`;
+
+const Container = styled.div`
+	background: #5454aa;
+	border-radius: 3px;
+	border: 2px solid black;
+	margin: 0 1em;
+	padding: 0.25em 1em;
 `;
 
 export class CustomSlickCarousel extends Component {
@@ -92,14 +100,6 @@ export class CustomSlickCarousel extends Component {
 				</div>
 			);
 		}
-		const settings = {
-			className: "center",
-			centerMode: true,
-			infinite: true,
-			centerPadding: "60px",
-			slidesToShow: 3,
-			speed: 500,
-		};
 
 		const settings1 = {
 			arrows: false,
@@ -153,91 +153,14 @@ export class CustomSlickCarousel extends Component {
 		};
 		return (
 			<>
-				<Slider {...settings}>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
-							alt=""
-						/>
-					</div>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
-							alt=""
-						/>
-					</div>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
-							alt=""
-						/>
-					</div>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
-							alt=""
-						/>
-					</div>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
-							alt=""
-						/>
-					</div>
-					<div>
-						<img
-							src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
-							alt=""
-						/>
-					</div>
-				</Slider>
-				<div className="container">
-					<Loading
+				<Container className="hip">
+					{/* <Loading
 						className="loading"
 						sliderLoaded={this.state.slider1Loaded && this.state.slider2Loaded}
 					>
 						Carousel is loading...
-					</Loading>
+					</Loading> */}
 					<div className="synch-carousels">
-						<div className="left child">
-							<Slider
-								className="gallery"
-								asNavFor={this.state.nav2}
-								ref={slider => (this.slider1 = slider)}
-								{...settings1}
-							>
-								<div className="item">
-									<img
-										src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
-										alt=""
-									/>
-								</div>
-								<div className="item">
-									<img
-										src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
-										alt=""
-									/>
-								</div>
-								<div className="item">
-									<img
-										src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
-										alt=""
-									/>
-								</div>
-								<div className="item">
-									<img
-										src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
-										alt=""
-									/>
-								</div>
-								<div className="item">
-									<img
-										src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
-										alt=""
-									/>
-								</div>
-							</Slider>
-						</div>
 						<div className="right child">
 							<Slider
 								className="gallery"
@@ -284,7 +207,7 @@ export class CustomSlickCarousel extends Component {
 							</div>
 						</div>
 					</div>
-				</div>
+				</Container>
 			</>
 		);
 	}
