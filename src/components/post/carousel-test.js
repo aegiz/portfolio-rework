@@ -38,6 +38,7 @@ const Container1 = styled.div`
 `;
 
 const Container2 = styled.div`
+	position: relative;
 	width: 620px;
 	background: #5454aa;
 	border-radius: 3px;
@@ -47,6 +48,14 @@ const Container2 = styled.div`
 	img {
 		max-width: 100%;
 		height: auto;
+	}
+	.photos-counter {
+		position: absolute;
+		top: 10px;
+		right: 0;
+		padding: 0 20px;
+		color: white;
+		background: #292929;
 	}
 `;
 export default class VerticalMode extends Component {
@@ -72,7 +81,6 @@ export default class VerticalMode extends Component {
 			slidesToShow: 3,
 			slidesToScroll: 1,
 			vertical: true,
-			verticalSwiping: true,
 			centerMode: true,
 			onInit: () => this.setState(state => ({ slider1Loaded: true })),
 			beforeChange: (current, next) =>
@@ -165,31 +173,31 @@ export default class VerticalMode extends Component {
 							ref={slider => (this.slider1 = slider)}
 							{...settings}
 						>
-							<div>
+							<div onClick={e => this.state.nav1.slickGoTo(0)}>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div onClick={e => this.state.nav1.slickGoTo(1)}>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div onClick={e => this.state.nav1.slickGoTo(2)}>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div onClick={e => this.state.nav1.slickGoTo(3)}>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div onClick={e => this.state.nav1.slickGoTo(4)}>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
 									alt=""
@@ -235,6 +243,11 @@ export default class VerticalMode extends Component {
 								/>
 							</div>
 						</Slider>
+						<div className="photos-counter">
+							<span>{this.state.currentSlide + 1}</span>
+							<span>/</span>
+							<span>{this.state.totalSlide}</span>
+						</div>
 					</Container2>
 				</MajorContainer>
 			</>
