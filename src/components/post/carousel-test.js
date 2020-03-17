@@ -3,7 +3,6 @@ import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./test.css";
 import styled, { withTheme } from "styled-components";
 
 const MajorContainer = styled.div`
@@ -25,30 +24,31 @@ const Loading = styled.div`
 	z-index: 2;
 `;
 
-const Container = styled.div`
+const Container1 = styled.div`
+	width: 320px;
 	background: #5454aa;
 	border-radius: 3px;
 	border: 2px solid black;
 	margin: 0 1em;
 	padding: 0.25em 1em;
-	.hip {
-		width: 320px;
-	}
-
-	.hip img {
+	img {
 		max-width: 100%;
 		height: 120px;
 	}
-
-	.hop {
-		width: 620px;
-	}
-
-	.hop img {
-		max-width: 100%;
-	}
 `;
 
+const Container2 = styled.div`
+	width: 620px;
+	background: #5454aa;
+	border-radius: 3px;
+	border: 2px solid black;
+	margin: 0 1em;
+	padding: 0.25em 1em;
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+`;
 export default class VerticalMode extends Component {
 	state = {
 		nav1: null,
@@ -158,7 +158,7 @@ export default class VerticalMode extends Component {
 					>
 						Carousel is loading...
 					</Loading>
-					<Container className="hip">
+					<Container1>
 						<Slider
 							className="gallery"
 							asNavFor={this.state.nav2}
@@ -196,8 +196,8 @@ export default class VerticalMode extends Component {
 								/>
 							</div>
 						</Slider>
-					</Container>
-					<Container className="hop">
+					</Container1>
+					<Container2>
 						<Slider
 							className="gallery"
 							asNavFor={this.state.nav1}
@@ -235,7 +235,7 @@ export default class VerticalMode extends Component {
 								/>
 							</div>
 						</Slider>
-					</Container>
+					</Container2>
 				</MajorContainer>
 			</>
 		);
