@@ -37,6 +37,7 @@ const Loading = styled.div`
 `;
 
 const Container1 = styled.div`
+	display: ${props => (props.hide ? "none" : "block")};
 	width: 320px;
 	background: #5454aa;
 	padding: 0.25em 1em;
@@ -87,6 +88,9 @@ const IconContainter = styled.div`
 	img {
 		padding: 0 10px;
 	}
+	@media (max-width: 480px) {
+		display: none;
+	}
 `;
 
 export default class VerticalMode extends Component {
@@ -94,7 +98,7 @@ export default class VerticalMode extends Component {
 		nav1: null,
 		nav2: null,
 		currentSlide: 0,
-		totalSlide: 5,
+		totalSlide: this.props.images.length,
 		slider1Loaded: false,
 		slider2Loaded: false,
 		autoplay: false,
@@ -110,7 +114,7 @@ export default class VerticalMode extends Component {
 		const settings = {
 			arrows: false,
 			infinite: true,
-			slidesToShow: 3,
+			slidesToShow: this.props.images.length < 4 ? this.props.images.length : 3,
 			slidesToScroll: 1,
 			vertical: true,
 			centerMode: true,
@@ -164,58 +168,22 @@ export default class VerticalMode extends Component {
 					>
 						Carousel is loading...
 					</Loading>
-					<Container1>
+					<Container1 hide={this.props.images.length < 4}>
 						<Slider
 							className="gallery"
 							asNavFor={this.state.nav2}
 							ref={slider => (this.slider1 = slider)}
 							{...settings}
 						>
-							<div
-								className="slider-item"
-								onClick={e => this.state.nav2.slickGoTo(0)}
-							>
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
-									alt=""
-								/>
-							</div>
-							<div
-								className="slider-item"
-								onClick={e => this.state.nav2.slickGoTo(1)}
-							>
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
-									alt=""
-								/>
-							</div>
-							<div
-								className="slider-item"
-								onClick={e => this.state.nav2.slickGoTo(2)}
-							>
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
-									alt=""
-								/>
-							</div>
-							<div
-								className="slider-item"
-								onClick={e => this.state.nav2.slickGoTo(3)}
-							>
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
-									alt=""
-								/>
-							</div>
-							<div
-								className="slider-item"
-								onClick={e => this.state.nav2.slickGoTo(4)}
-							>
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
-									alt=""
-								/>
-							</div>
+							{this.props.images.map((image, i) => (
+								<div
+									className="slider-item"
+									onClick={e => this.state.nav2.slickGoTo(i)}
+									key={i}
+								>
+									<img src={`${image.src}`} alt={`${image.alt}`}></img>
+								</div>
+							))}
 						</Slider>
 					</Container1>
 					<Container2>
@@ -225,36 +193,11 @@ export default class VerticalMode extends Component {
 							ref={slider => (this.slider2 = slider)}
 							{...settings2}
 						>
-							<div className="slider-item">
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
-									alt=""
-								/>
-							</div>
-							<div className="slider-item">
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
-									alt=""
-								/>
-							</div>
-							<div className="slider-item">
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
-									alt=""
-								/>
-							</div>
-							<div className="slider-item">
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
-									alt=""
-								/>
-							</div>
-							<div className="slider-item">
-								<img
-									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
-									alt=""
-								/>
-							</div>
+							{this.props.images.map((image, i) => (
+								<div className="slider-item" key={i}>
+									<img src={`${image.src}`} alt={`${image.alt}`}></img>
+								</div>
+							))}
 						</Slider>
 						<div className="photos-counter">
 							<span>{this.state.currentSlide + 1}</span>

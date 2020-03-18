@@ -6,7 +6,53 @@ description: This is a custom description for SEO and Open Graph purposes, rathe
 path: "/second-post"
 ---
 
-<TestCarousel />
+import image1 from "./assets/slick/lilo_1.jpg";
+import image2 from "./assets/slick/lilo_2.jpg";
+import image3 from "./assets/slick/lilo_3.jpg";
+import image4 from "./assets/slick/lilo_4.jpg";
+import image5 from "./assets/slick/lilo_5.jpg";
+
+<TestCarousel
+	images={[
+		{
+			src: image1,
+			alt: "Lilo 1",
+		},
+		{
+			src: image2,
+			alt: "Lilo 2",
+		},
+		{
+			src: image3,
+			alt: "Lilo 3",
+		},
+		{
+			src: image4,
+			alt: "Lilo 4",
+		},
+		{
+			src: image5,
+			alt: "Lilo 5",
+		},
+	]}
+/>
+
+<TestCarousel
+	images={[
+		{
+			src: image1,
+			alt: "Lilo 1",
+		},
+		{
+			src: image2,
+			alt: "Lilo 2",
+		},
+		{
+			src: image3,
+			alt: "Lilo 3",
+		},
+	]}
+/>
 
 I'm sure I'll write a lot more interesting things in the future.
 
@@ -20,5 +66,3 @@ Oh, and here's a great quote from this Wikipedia on
 > wrapped in plastic, and vacuum packed. From the salt curing process, the
 > salted duck eggs have a briny aroma, a gelatin-like egg white and a
 > firm-textured, round yolk that is bright orange-red in color.
-
-![Chinese Salty Egg](./salty_egg.jpg)
