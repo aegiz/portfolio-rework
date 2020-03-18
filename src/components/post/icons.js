@@ -22,7 +22,6 @@ class CTAicon extends React.Component {
 				alt={this.props.alt}
 				src={icons[this.props.type]}
 				onClick={this.props.onClick}
-				style={{ padding: "20px" }}
 			></img>
 		);
 	}

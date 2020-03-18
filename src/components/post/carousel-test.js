@@ -12,8 +12,13 @@ import styled, { withTheme } from "styled-components";
 
 const MajorContainer = styled.div`
 	display: flex;
+	flex-direction: row;
 	width: 100%;
 	height: 500px;
+	@media (max-width: 1023px) {
+		height: auto;
+		flex-direction: column-reverse;
+	}
 `;
 
 const Loading = styled.div`
@@ -32,26 +37,23 @@ const Loading = styled.div`
 const Container1 = styled.div`
 	width: 320px;
 	background: #5454aa;
-	border-radius: 3px;
-	border: 2px solid black;
-	margin: 0 1em;
 	padding: 0.25em 1em;
-	img {
-		max-width: 100%;
+	.slider-item img {
+		margin: 0 auto;
 		height: 120px;
+	}
+	@media (max-width: 1023px) {
+		width: 100%;
 	}
 `;
 
 const Container2 = styled.div`
 	position: relative;
 	width: 620px;
-	background: #5454aa;
-	border-radius: 3px;
-	border: 2px solid black;
-	margin: 0 1em;
-	padding: 0.25em 1em;
-	img {
-		max-width: 100%;
+	background: #5454bb;
+	.slider-item img {
+		margin: 0 auto;
+		width: 100%;
 		height: auto;
 	}
 	.photos-counter {
@@ -62,6 +64,9 @@ const Container2 = styled.div`
 		color: white;
 		background: #292929;
 	}
+	@media (max-width: 1023px) {
+		width: 100%;
+	}
 `;
 
 const IconContainter = styled.div`
@@ -70,6 +75,9 @@ const IconContainter = styled.div`
 	right: 0;
 	display: flex;
 	cursor: pointer;
+	img {
+		padding: 20px;
+	}
 `;
 
 export default class VerticalMode extends Component {
@@ -100,16 +108,6 @@ export default class VerticalMode extends Component {
 			onInit: () => this.setState(state => ({ slider1Loaded: true })),
 			beforeChange: (current, next) =>
 				this.setState(state => ({ currentSlide: next })),
-		};
-		const settings2 = {
-			arrows: false,
-			useTransform: false,
-			draggable: false,
-			slidesToScroll: 1,
-			onInit: () => this.setState(state => ({ slider2Loaded: true })),
-			beforeChange: (current, next) =>
-				this.setState(state => ({ currentSlide: next })),
-			autoplaySpeed: 500,
 			responsive: [
 				{
 					breakpoint: 768,
@@ -120,11 +118,22 @@ export default class VerticalMode extends Component {
 				{
 					breakpoint: 1023,
 					settings: {
-						slidesToShow: 1,
-						vertical: true,
+						centerMode: false,
+						vertical: false,
 					},
 				},
 			],
+		};
+		const settings2 = {
+			fade: true,
+			arrows: false,
+			useTransform: false,
+			draggable: false,
+			slidesToScroll: 1,
+			autoplaySpeed: 500,
+			onInit: () => this.setState(state => ({ slider2Loaded: true })),
+			beforeChange: (current, next) =>
+				this.setState(state => ({ currentSlide: next })),
 		};
 
 		return (
@@ -143,31 +152,46 @@ export default class VerticalMode extends Component {
 							ref={slider => (this.slider1 = slider)}
 							{...settings}
 						>
-							<div onClick={e => this.state.nav1.slickGoTo(0)}>
+							<div
+								className="slider-item"
+								onClick={e => this.state.nav2.slickGoTo(0)}
+							>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
 									alt=""
 								/>
 							</div>
-							<div onClick={e => this.state.nav1.slickGoTo(1)}>
+							<div
+								className="slider-item"
+								onClick={e => this.state.nav2.slickGoTo(1)}
+							>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
 									alt=""
 								/>
 							</div>
-							<div onClick={e => this.state.nav1.slickGoTo(2)}>
+							<div
+								className="slider-item"
+								onClick={e => this.state.nav2.slickGoTo(2)}
+							>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
 									alt=""
 								/>
 							</div>
-							<div onClick={e => this.state.nav1.slickGoTo(3)}>
+							<div
+								className="slider-item"
+								onClick={e => this.state.nav2.slickGoTo(3)}
+							>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
 									alt=""
 								/>
 							</div>
-							<div onClick={e => this.state.nav1.slickGoTo(4)}>
+							<div
+								className="slider-item"
+								onClick={e => this.state.nav2.slickGoTo(4)}
+							>
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
 									alt=""
@@ -182,31 +206,31 @@ export default class VerticalMode extends Component {
 							ref={slider => (this.slider2 = slider)}
 							{...settings2}
 						>
-							<div>
+							<div className="slider-item">
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery1.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div className="slider-item">
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery2.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div className="slider-item">
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery3.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div className="slider-item">
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery4.jpg"
 									alt=""
 								/>
 							</div>
-							<div>
+							<div className="slider-item">
 								<img
 									src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/gallery5.jpg"
 									alt=""
