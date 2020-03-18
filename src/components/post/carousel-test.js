@@ -36,14 +36,26 @@ const Loading = styled.div`
 	z-index: 2;
 `;
 
-const Container1 = styled.div`
+const ContainerSliderLeft = styled.div`
 	display: ${props => (props.hide ? "none" : "block")};
 	width: 320px;
 	background: #5454aa;
 	padding: 0.25em 1em;
-	.slider-item img {
-		margin: 0 auto;
-		height: 120px;
+	.slider-item {
+		opacity: 0.8;
+		transition: all 0.3s;
+		cursor: pointer;
+		&:focus {
+			outline: none;
+		}
+		img {
+			margin: 0 auto;
+			height: 120px;
+		}
+	}
+	.slick-current .slider-item {
+		opacity: 1;
+		transform: scale(1.1);
 	}
 	@media (max-width: 1023px) {
 		width: 100%;
@@ -53,7 +65,7 @@ const Container1 = styled.div`
 	}
 `;
 
-const Container2 = styled.div`
+const ContainerSliderRight = styled.div`
 	position: relative;
 	width: 620px;
 	background: #5454bb;
@@ -92,32 +104,33 @@ const IconContainter = styled.div`
 
 export default class VerticalMode extends Component {
 	state = {
-		nav1: null,
-		nav2: null,
+		slick1: null,
+		slick2: null,
 		currentSlide: 0,
 		totalSlide: this.props.images.length,
-		slider1Loaded: false,
-		slider2Loaded: false,
+		sliderLeftLoaded: false,
+		sliderRightLoaded: false,
 		autoplay: false,
 	};
 
 	componentDidMount() {
 		this.setState({
-			nav1: this.slider1,
-			nav2: this.slider2,
+			slick1: this.slider1,
+			slick2: this.slider2,
 		});
 	}
 	render() {
-		const settings = {
+		const settingsSliderLeft = {
+			autoplaySpeed: 300,
 			arrows: false,
 			infinite: true,
 			slidesToShow: this.props.images.length < 4 ? this.props.images.length : 3,
 			slidesToScroll: 1,
 			vertical: true,
 			centerMode: true,
-			onInit: () => this.setState(state => ({ slider1Loaded: true })),
-			beforeChange: (current, next) =>
-				this.setState(state => ({ currentSlide: next })),
+			onInit: () => this.setState(state => ({ sliderLeftLoaded: true })),
+			afterChange: (current, next) =>
+				this.setState(state => ({ currentSlide: current })),
 			responsive: [
 				{
 					breakpoint: 1023,
@@ -136,22 +149,24 @@ export default class VerticalMode extends Component {
 				},
 			],
 		};
-		const settings2 = {
+		const settingsSliderRight = {
 			fade: true,
 			arrows: false,
 			useTransform: false,
 			draggable: false,
+			swipe: false,
 			slidesToScroll: 1,
-			autoplaySpeed: 500,
-			onInit: () => this.setState(state => ({ slider2Loaded: true })),
-			beforeChange: (current, next) =>
-				this.setState(state => ({ currentSlide: next })),
+			autoplaySpeed: 300,
+			onInit: () => this.setState(state => ({ sliderRightLoaded: true })),
+			afterChange: (current, next) =>
+				this.setState(state => ({ currentSlide: current })),
 			responsive: [
 				{
 					breakpoint: 480,
 					settings: {
 						fade: false,
 						draggable: true,
+						swipe: true,
 					},
 				},
 			],
@@ -161,35 +176,34 @@ export default class VerticalMode extends Component {
 			<>
 				<MajorContainer>
 					<Loading
-						className="loading"
-						sliderLoaded={this.state.slider1Loaded && this.state.slider2Loaded}
+						sliderLoaded={
+							this.state.sliderLeftLoaded && this.state.sliderRightLoaded
+						}
 					>
 						Carousel is loading...
 					</Loading>
-					<Container1 hide={this.props.images.length < 4}>
+					<ContainerSliderLeft hide={this.props.images.length < 4}>
 						<Slider
-							className="gallery"
-							asNavFor={this.state.nav2}
+							asNavFor={this.state.slick2}
 							ref={slider => (this.slider1 = slider)}
-							{...settings}
+							{...settingsSliderLeft}
 						>
 							{this.props.images.map((image, i) => (
 								<div
 									className="slider-item"
-									onClick={e => this.state.nav2.slickGoTo(i)}
+									onClick={e => this.state.slick2.slickGoTo(i)}
 									key={i}
 								>
 									<img src={`${image.src}`} alt={`${image.alt}`}></img>
 								</div>
 							))}
 						</Slider>
-					</Container1>
-					<Container2>
+					</ContainerSliderLeft>
+					<ContainerSliderRight>
 						<Slider
-							className="gallery"
-							asNavFor={this.state.nav1}
+							asNavFor={this.state.slick1}
 							ref={slider => (this.slider2 = slider)}
-							{...settings2}
+							{...settingsSliderRight}
 						>
 							{this.props.images.map((image, i) => (
 								<div className="slider-item" key={i}>
@@ -208,14 +222,14 @@ export default class VerticalMode extends Component {
 								alt={"previous icon"}
 								width={24}
 								height={24}
-								onClick={() => this.state.nav2.slickPrev()}
+								onClick={() => this.state.slick2.slickPrev()}
 							/>
 							<CTAicon
 								type={"next"}
 								alt={"next icon"}
 								width={24}
 								height={24}
-								onClick={() => this.state.nav2.slickNext()}
+								onClick={() => this.state.slick2.slickNext()}
 							/>
 							<CTAicon
 								type={this.state.autoplay ? "pause" : "play"}
@@ -225,12 +239,12 @@ export default class VerticalMode extends Component {
 								onClick={() => {
 									// This doesn't work
 									if (this.state.autoplay) {
-										this.state.nav2.slickPause();
+										this.state.slick2.slickPause();
 										this.setState({
 											autoplay: false,
 										});
 									} else {
-										this.state.nav2.slickPlay();
+										this.state.slick2.slickPlay();
 										this.setState({
 											autoplay: true,
 										});
@@ -238,7 +252,7 @@ export default class VerticalMode extends Component {
 								}}
 							/>
 						</IconContainter>
-					</Container2>
+					</ContainerSliderRight>
 				</MajorContainer>
 			</>
 		);
