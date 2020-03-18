@@ -15,6 +15,8 @@ const MajorContainer = styled.div`
 	flex-direction: row;
 	width: 100%;
 	height: 500px;
+	max-width: 1000px;
+	margin: 0 auto;
 	@media (max-width: 1023px) {
 		height: auto;
 		flex-direction: column-reverse;
@@ -45,6 +47,9 @@ const Container1 = styled.div`
 	@media (max-width: 1023px) {
 		width: 100%;
 	}
+	@media (max-width: 480px) {
+		display: none;
+	}
 `;
 
 const Container2 = styled.div`
@@ -70,13 +75,17 @@ const Container2 = styled.div`
 `;
 
 const IconContainter = styled.div`
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	display: flex;
 	cursor: pointer;
 	img {
-		padding: 20px;
+		padding: 0 10px;
 	}
 `;
 
@@ -110,14 +119,16 @@ export default class VerticalMode extends Component {
 				this.setState(state => ({ currentSlide: next })),
 			responsive: [
 				{
-					breakpoint: 768,
+					breakpoint: 1023,
 					settings: {
-						slidesToShow: 3,
+						centerMode: false,
+						vertical: false,
 					},
 				},
 				{
-					breakpoint: 1023,
+					breakpoint: 768,
 					settings: {
+						slidesToShow: 2,
 						centerMode: false,
 						vertical: false,
 					},
@@ -134,6 +145,14 @@ export default class VerticalMode extends Component {
 			onInit: () => this.setState(state => ({ slider2Loaded: true })),
 			beforeChange: (current, next) =>
 				this.setState(state => ({ currentSlide: next })),
+			responsive: [
+				{
+					breakpoint: 480,
+					settings: {
+						arrows: true,
+					},
+				},
+			],
 		};
 
 		return (
