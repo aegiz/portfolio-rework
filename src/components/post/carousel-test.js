@@ -88,9 +88,6 @@ const IconContainter = styled.div`
 	img {
 		padding: 0 10px;
 	}
-	@media (max-width: 480px) {
-		display: none;
-	}
 `;
 
 export default class VerticalMode extends Component {
@@ -153,7 +150,8 @@ export default class VerticalMode extends Component {
 				{
 					breakpoint: 480,
 					settings: {
-						arrows: true,
+						fade: false,
+						draggable: true,
 					},
 				},
 			],
