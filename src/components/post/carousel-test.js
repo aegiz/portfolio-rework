@@ -8,6 +8,7 @@ import CTAicon from "./icons";
 // Styles
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./carousel.css";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
@@ -18,28 +19,32 @@ const MainContainer = styled.div`
 	margin: 0 auto;
 `;
 
-const Thumbnails = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	justify-content: flex-start;
+const Thumbnails = styled.ul`
 	width: 100%;
+	max-width: 300px;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border: 1px solid silver;
+	display: flex;
+	flex-wrap: wrap;
 	@media (max-width: 1023px) {
 		display: none;
 	}
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.li`
 	width: 100px;
 	height: 100px;
-	padding: 0 10px;
+	padding: 5px;
+	margin: 10px;
 	cursor: pointer;
 	img {
 		border: ${props =>
 			props.current != props.index ? "none" : "1px solid red"};
 		opacity: 1;
 		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		transition: all 0.3s;
 		&:hover {
@@ -52,9 +57,9 @@ const CarouselContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	width: 100%;
-	height: 500px;
+	max-width: 700px;
 	@media (max-width: 1023px) {
-		height: auto;
+		margin: 0 auto;
 		flex-direction: column-reverse;
 	}
 `;
@@ -76,7 +81,7 @@ const ContainerSliderLeft = styled.div`
 	display: none;
 	@media (max-width: 1023px) {
 		display: block;
-		padding: 0.25em 1em;
+		padding: 10px 0;
 		width: 100%;
 	}
 	@media (max-width: 480px) {
@@ -102,11 +107,12 @@ const ContainerSliderLeft = styled.div`
 
 const ContainerSliderRight = styled.div`
 	position: relative;
-	width: 620px;
+	width: 100%;
 	.slider-item img {
-		margin: 0 auto;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
+		margin: 0 auto;
 	}
 	.photos-counter {
 		position: absolute;

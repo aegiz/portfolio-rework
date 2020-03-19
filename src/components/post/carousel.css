@@ -1,120 +1,20 @@
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+.slick-slider {
+	height: 100%;
 }
 
-img {
-	max-width: 100%;
-	height: auto;
+.slick-slider .slick-list {
+	height: 100%;
 }
 
-button {
-	background: none;
-	border: none;
-	outline: none;
-	cursor: pointer;
+.slick-slider .slick-list .slick-track {
+	display: flex !important;
+	height: 100%;
 }
 
-.over-visible {
-	overflow: visible;
+.slick-slider .slick-list .slick-track .slick-slide {
+	height: 100%;
 }
 
-.container {
-	max-width: 1110px;
-	padding: 20px 10px;
-	margin: 0 auto;
-}
-
-.synch-carousels {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.synch-carousels > * {
-	width: 100%;
-}
-
-.synch-carousels .slick-slide {
-	outline: none;
-}
-
-.synch-carousels .slick-vertical .slick-slide {
-	border: none;
-}
-
-.slick-prev:before {
-	content: none;
-}
-
-.slick-next:before {
-	content: none;
-}
-
-.synch-carousels .nav-arrows {
-	display: flex;
-	position: absolute;
-	bottom: -50px;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.synch-carousels .nav-arrows svg {
-	fill: white;
-}
-
-.synch-carousels .arrow-left {
-	margin-right: 35px;
-}
-
-.synch-carousels .photos-counter {
-	position: absolute;
-	top: 10px;
-	right: 0;
-	padding: 0 20px;
-	color: white;
-	background: #292929;
-}
-
-@media screen and (min-width: 480px) {
-	.synch-carousels .right {
-		margin-bottom: 20px;
-	}
-
-	.synch-carousels .gallery {
-		display: block;
-	}
-}
-
-@media screen and (min-width: 1024px) {
-	.synch-carousels .right {
-		position: relative;
-		width: calc(100% - 230px);
-		margin-bottom: 0;
-		order: 2;
-	}
-
-	.synch-carousels .left {
-		width: 210px;
-	}
-
-	.synch-carousels .gallery .slick-slide {
-		margin: 0 0 20px 0;
-	}
-
-	.synch-carousels .gallery .slick-list {
-		margin: 0;
-	}
-}
-
-.slick-slide {
-	margin: 0 20px;
-	cursor: pointer;
-	opacity: 0.5;
-}
-
-.slick-current {
-	opacity: 1;
+.slick-slider .slick-list .slick-track .slick-slide div {
+	height: 100%;
 }
