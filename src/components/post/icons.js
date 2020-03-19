@@ -1,6 +1,4 @@
 // Icons
-import playImg from "./icons/play.svg";
-import pauseImg from "./icons/pause.svg";
 import previousImg from "./icons/previous.svg";
 import nextImg from "./icons/next.svg";
 
@@ -10,8 +8,6 @@ import React from "react";
 class CTAicon extends React.Component {
 	render() {
 		const icons = {
-			play: playImg,
-			pause: pauseImg,
 			previous: previousImg,
 			next: nextImg,
 		};

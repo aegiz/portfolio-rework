@@ -41,7 +41,7 @@ const Thumbnail = styled.li`
 	cursor: pointer;
 	img {
 		border: ${props =>
-			props.current != props.index ? "none" : "1px solid red"};
+			props.current !== props.index ? "none" : "1px solid red"};
 		opacity: 1;
 		width: 100%;
 		height: 100%;
@@ -138,20 +138,20 @@ const IconContainter = styled.div`
 	right: 0;
 	background: rgba(255, 255, 255, 0.3);
 	img {
-		opacity: 1;
+		opacity: 0.5;
 		padding: 0 10px;
 		transition: all 0.3s;
 		cursor: pointer;
 		&:hover {
-			opacity: 0.8;
+			opacity: 1;
 		}
 	}
 `;
 
 export default class CustomCarousel extends Component {
 	state = {
-		slick1: null,
-		slick2: null,
+		slickLeft: null,
+		slickRight: null,
 		currentSlide: 0,
 		totalSlide: this.props.images.length,
 		sliderLeftLoaded: false,
@@ -161,8 +161,8 @@ export default class CustomCarousel extends Component {
 
 	componentDidMount() {
 		this.setState({
-			slick1: this.slider1,
-			slick2: this.slider2,
+			slickLeft: this.sliderLeft,
+			slickRight: this.sliderRight,
 		});
 	}
 	render() {
@@ -202,7 +202,7 @@ export default class CustomCarousel extends Component {
 			draggable: false,
 			swipe: false,
 			slidesToScroll: 1,
-			autoplaySpeed: 300,
+			autoplay: false,
 			onInit: () => this.setState(state => ({ sliderRightLoaded: true })),
 			beforeChange: (current, next) =>
 				this.setState(state => ({ currentSlide: next })),
@@ -225,7 +225,7 @@ export default class CustomCarousel extends Component {
 						{this.props.images.map((image, i) => (
 							<Thumbnail
 								className="thumbnail"
-								onClick={e => this.state.slick2.slickGoTo(i)}
+								onClick={e => this.state.slickRight.slickGoTo(i)}
 								key={i}
 								index={i}
 								current={this.state.currentSlide}
@@ -244,14 +244,14 @@ export default class CustomCarousel extends Component {
 						</Loading>
 						<ContainerSliderLeft hide={this.props.images.length < 4}>
 							<Slider
-								asNavFor={this.state.slick2}
-								ref={slider => (this.slider1 = slider)}
+								asNavFor={this.state.slickRight}
+								ref={slider => (this.sliderLeft = slider)}
 								{...settingsSliderLeft}
 							>
 								{this.props.images.map((image, i) => (
 									<div
 										className="slider-item"
-										onClick={e => this.state.slick2.slickGoTo(i)}
+										onClick={e => this.state.slickRight.slickGoTo(i)}
 										key={i}
 									>
 										<img src={`${image.src}`} alt={`${image.alt}`}></img>
@@ -261,8 +261,8 @@ export default class CustomCarousel extends Component {
 						</ContainerSliderLeft>
 						<ContainerSliderRight>
 							<Slider
-								asNavFor={this.state.slick1}
-								ref={slider => (this.slider2 = slider)}
+								asNavFor={this.state.slickLeft}
+								ref={slider => (this.sliderRight = slider)}
 								{...settingsSliderRight}
 							>
 								{this.props.images.map((image, i) => (
@@ -282,34 +282,14 @@ export default class CustomCarousel extends Component {
 									alt={"previous icon"}
 									width={24}
 									height={24}
-									onClick={() => this.state.slick2.slickPrev()}
+									onClick={() => this.state.slickRight.slickPrev()}
 								/>
 								<CTAicon
 									type={"next"}
 									alt={"next icon"}
 									width={24}
 									height={24}
-									onClick={() => this.state.slick2.slickNext()}
-								/>
-								<CTAicon
-									type={this.state.autoplay ? "pause" : "play"}
-									alt={"play icon"}
-									width={32}
-									height={32}
-									onClick={() => {
-										// This doesn't work
-										if (this.state.autoplay) {
-											this.state.slick2.slickPause();
-											this.setState({
-												autoplay: false,
-											});
-										} else {
-											this.state.slick2.slickPlay();
-											this.setState({
-												autoplay: true,
-											});
-										}
-									}}
+									onClick={() => this.state.slickRight.slickNext()}
 								/>
 							</IconContainter>
 						</ContainerSliderRight>

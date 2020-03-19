@@ -5,8 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
-import CustomSlickCarousel from "./post/carousel";
-import TestCarousel from "./post/carousel-test";
+import CustomSlickCarousel from "./post/carousel-test";
 
 // Styles
 export const theme = {
@@ -55,7 +54,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, CustomSlickCarousel, TestCarousel };
+	const shortcodes = { Message, CustomSlickCarousel };
 	const layoutContent = data => (
 		<React.Fragment>
 			<GlobalStyle />
