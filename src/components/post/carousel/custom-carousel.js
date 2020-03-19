@@ -65,7 +65,7 @@ const CarouselContainer = styled.div`
 `;
 
 const Loading = styled.div`
-	display: ${props => (props.sliderLoaded ? "none" : "flex")};
+	display: ${props => (props.carouselReady ? "none" : "flex")};
 	background: white;
 	position: fixed;
 	top: 0;
@@ -156,7 +156,7 @@ export default class CustomCarousel extends Component {
 		totalSlide: this.props.images.length,
 		sliderLeftLoaded: false,
 		sliderRightLoaded: false,
-		autoplay: false,
+		assetsLoaded: false,
 	};
 
 	componentDidMount() {
@@ -196,6 +196,7 @@ export default class CustomCarousel extends Component {
 			],
 		};
 		const settingsSliderRight = {
+			autoplaySpeed: 300,
 			fade: true,
 			arrows: false,
 			useTransform: false,
@@ -217,7 +218,15 @@ export default class CustomCarousel extends Component {
 				},
 			],
 		};
-
+		let counter = 0;
+		const imageLoaded = () => {
+			counter++;
+			if (counter >= this.props.images.length) {
+				this.setState({
+					assetsLoaded: true,
+				});
+			}
+		};
 		return (
 			<>
 				<MainContainer>
@@ -230,14 +239,20 @@ export default class CustomCarousel extends Component {
 								index={i}
 								current={this.state.currentSlide}
 							>
-								<img src={`${image.src}`} alt={`${image.alt}`}></img>
+								<img
+									src={`${image.src}`}
+									alt={`${image.alt}`}
+									onLoad={imageLoaded}
+								/>
 							</Thumbnail>
 						))}
 					</Thumbnails>
 					<CarouselContainer>
 						<Loading
-							sliderLoaded={
-								this.state.sliderLeftLoaded && this.state.sliderRightLoaded
+							carouselReady={
+								this.state.sliderLeftLoaded &&
+								this.state.sliderRightLoaded &&
+								this.state.assetsLoaded
 							}
 						>
 							Carousel is loading...
@@ -254,7 +269,7 @@ export default class CustomCarousel extends Component {
 										onClick={e => this.state.slickRight.slickGoTo(i)}
 										key={i}
 									>
-										<img src={`${image.src}`} alt={`${image.alt}`}></img>
+										<img src={`${image.src}`} alt={`${image.alt}`} />
 									</div>
 								))}
 							</Slider>
@@ -267,7 +282,7 @@ export default class CustomCarousel extends Component {
 							>
 								{this.props.images.map((image, i) => (
 									<div className="slider-item" key={i}>
-										<img src={`${image.src}`} alt={`${image.alt}`}></img>
+										<img src={`${image.src}`} alt={`${image.alt}`} />
 									</div>
 								))}
 							</Slider>
