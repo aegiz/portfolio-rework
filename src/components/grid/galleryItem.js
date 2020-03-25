@@ -17,9 +17,15 @@ const Category = styled.div`
 `;
 
 const Title = styled.div`
-	color: ${props => props.theme.colors.black};
+	color: ${({ theme }) => theme.colors.black};
 	text-transform: uppercase;
-	font-size: 24px;
+	font-weight: ${({ theme }) => theme.fontWeights.bold};
+	${({ theme }) => theme.mediaQueries.l} {
+		color: blue;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		color: red;
+	}
 `;
 
 const Hashtags = styled.div`
@@ -34,12 +40,14 @@ class galleryItem extends Component {
 		const project = this.props.post;
 		return (
 			<GalleryItem>
+				<Category>Category</Category>
 				<Title>{project.node.frontmatter.title}</Title>
 				{project.node.frontmatter.featuredImage && (
 					<Img
 						fluid={project.node.frontmatter.featuredImage.childImageSharp.fluid}
 					/>
 				)}
+				<Hashtags>#hop</Hashtags>
 			</GalleryItem>
 		);
 	}
