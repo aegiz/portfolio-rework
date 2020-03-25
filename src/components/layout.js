@@ -10,7 +10,7 @@ import CustomSlickCarousel from "./post/carousel/custom-carousel";
 // Styles: Theme
 export const theme = {
 	fonts: {
-		merri: "Merriweather Open Sans, Helvetica, Arial, sans-serif",
+		merri: "Merriweather, Open Sans, Helvetica, Arial, sans-serif",
 		open: "Open Sans, Helvetica, Arial, sans-serif",
 		lato: "Lato, Helvetica, Arial, sans-serif",
 		mono: "Helvetica, Arial, sans-serif",
