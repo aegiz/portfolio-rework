@@ -2,6 +2,7 @@ import React from "react";
 import { graphql } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import Img from "gatsby-image";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
@@ -15,6 +16,7 @@ class BlogPostTemplate extends React.Component {
 		const siteTitle = this.props.data.site.siteMetadata.title;
 		const { previous, next } = this.props.pageContext;
 
+		let featuredImgFluid = post.frontmatter.featuredImage.childImageSharp.fluid;
 		return (
 			<Layout location={this.props.location} title={siteTitle}>
 				<SEO
@@ -31,6 +33,7 @@ class BlogPostTemplate extends React.Component {
 				>
 					{post.frontmatter.title}
 				</h1>
+				<Img fluid={featuredImgFluid} />
 				<p
 					style={{
 						display: `block`,
@@ -40,7 +43,6 @@ class BlogPostTemplate extends React.Component {
 				</p>
 				<MDXRenderer>{post.body}</MDXRenderer>
 				<hr />
-
 				<ul
 					style={{
 						display: `flex`,
@@ -88,6 +90,13 @@ export const pageQuery = graphql`
 				title
 				date(formatString: "MMMM DD, YYYY")
 				description
+				featuredImage {
+					childImageSharp {
+						fluid(maxWidth: 800) {
+							...GatsbyImageSharpFluid
+						}
+					}
+				}
 			}
 		}
 	}

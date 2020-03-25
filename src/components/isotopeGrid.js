@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styled, { withTheme } from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import Img from "gatsby-image";
 
 const GridItem = styled.div`
 	width: 33.33%;
@@ -39,7 +40,15 @@ class IsotopeGrid extends Component {
 							duration={1}
 							to={post.node.frontmatter.path}
 						>
-							<InnerIso>{post.node.frontmatter.title}</InnerIso>
+							<InnerIso>
+								{post.node.frontmatter.featuredImage && (
+									<Img
+										fluid={
+											post.node.frontmatter.featuredImage.childImageSharp.fluid
+										}
+									/>
+								)}
+							</InnerIso>
 						</AniLink>
 					</GridItem>
 				))}

@@ -9,6 +9,8 @@ module.exports = {
 		},
 	},
 	plugins: [
+		`gatsby-plugin-sharp`,
+		`gatsby-transformer-sharp`,
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -70,8 +72,6 @@ module.exports = {
 		},
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-sitemap`,
-		`gatsby-transformer-sharp`,
-		`gatsby-plugin-sharp`,
 		`gatsby-plugin-feed-mdx`,
 		`gatsby-plugin-transition-link`,
 		{
