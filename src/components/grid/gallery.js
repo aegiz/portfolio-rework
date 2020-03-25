@@ -4,10 +4,10 @@ import Isotope from "isotope-layout/js/isotope";
 import styled, { withTheme } from "styled-components";
 
 // Components
-import IsotopeGrid from "../components/isotopeGrid";
-import FilterGrid from "../components/filterGrid";
+import IsotopeGrid from "./galleryGrid";
+import FilterGrid from "./galleryFilter";
 
-const Container = styled.div`
+const FilterContainer = styled.div`
 	background: transparent;
 	border-radius: 3px;
 	border: 2px solid black;
@@ -34,7 +34,7 @@ class Gallery extends Component {
 	render() {
 		return (
 			<>
-				<Container className="filters-container">
+				<FilterContainer className="filters-container">
 					<FilterGrid
 						filter={"*"}
 						text={"All"}
@@ -50,7 +50,7 @@ class Gallery extends Component {
 						text={"DIY"}
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
-				</Container>
+				</FilterContainer>
 				<IsotopeGrid
 					createIsotopeGrid={this.createIsotopeGrid}
 					posts={this.props.posts}

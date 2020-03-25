@@ -1,8 +1,11 @@
+// Package
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styled, { withTheme } from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
-import Img from "gatsby-image";
+
+// Component
+import GalleryItem from "./galleryItem";
 
 const GridItem = styled.div`
 	width: 33.33%;
@@ -11,15 +14,7 @@ const GridItem = styled.div`
 	}
 `;
 
-const InnerIso = styled.div`
-	margin: 0 auto;
-	max-width: 250px;
-	border-radius: 3px;
-	border: 2px solid palevioletred;
-	padding: 1em;
-`;
-
-class IsotopeGrid extends Component {
+class GalleryGrid extends Component {
 	componentDidMount() {
 		this.props.createIsotopeGrid(ReactDOM.findDOMNode(this));
 	}
@@ -40,15 +35,7 @@ class IsotopeGrid extends Component {
 							duration={1}
 							to={post.node.frontmatter.path}
 						>
-							<InnerIso>
-								{post.node.frontmatter.featuredImage && (
-									<Img
-										fluid={
-											post.node.frontmatter.featuredImage.childImageSharp.fluid
-										}
-									/>
-								)}
-							</InnerIso>
+							<GalleryItem post={post} />
 						</AniLink>
 					</GridItem>
 				))}
@@ -57,4 +44,4 @@ class IsotopeGrid extends Component {
 	}
 }
 
-export default withTheme(IsotopeGrid);
+export default withTheme(GalleryGrid);

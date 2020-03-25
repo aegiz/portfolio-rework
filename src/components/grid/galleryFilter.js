@@ -10,7 +10,7 @@ import React, { Component } from "react";
 // 	padding: 0.25em 1em;
 // `;
 
-class FilterGrid extends Component {
+class GalleryFilter extends Component {
 	render() {
 		return (
 			<button
@@ -24,4 +24,4 @@ class FilterGrid extends Component {
 	}
 }
 
-export default FilterGrid;
+export default GalleryFilter;

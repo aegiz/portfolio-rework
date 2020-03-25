@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Header from "../components/header";
 import Disclaimer from "../components/disclaimer";
-import Gallery from "../components/gallery";
+import Gallery from "../components/grid/gallery";
 //import Project from "../components/project";
 import Footer from "../components/footer";
 
