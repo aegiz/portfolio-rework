@@ -7,7 +7,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
 import CustomSlickCarousel from "./post/carousel/custom-carousel";
 
-// Styles
+// Styles: Theme
 export const theme = {
 	colors: {
 		black: "rgba(0, 0, 0, 1)",
@@ -23,6 +23,7 @@ export const theme = {
 	space: [0, 4, 8, 16, 32, 64, 128, 192, 256, 384, 512],
 };
 
+// Styles: Global
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -30,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-size: 16px;
     font-weight: 500;
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-family: 'Merriweather', 'Open Sans', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   };
@@ -56,7 +57,7 @@ function Layout({ children }) {
 	`;
 	const shortcodes = { Message, CustomSlickCarousel };
 	const layoutContent = data => (
-		<React.Fragment>
+		<>
 			<GlobalStyle />
 			<main
 				style={{
@@ -65,7 +66,7 @@ function Layout({ children }) {
 			>
 				<MDXProvider components={shortcodes}>{children}</MDXProvider>
 			</main>
-		</React.Fragment>
+		</>
 	);
 
 	return (

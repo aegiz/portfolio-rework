@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
-const InnerIso = styled.div`
+const GalleryItem = styled.div`
 	margin: 0 auto;
 	max-width: 250px;
 	border-radius: 3px;
@@ -10,19 +10,37 @@ const InnerIso = styled.div`
 	padding: 1em;
 `;
 
+const Category = styled.div`
+	color: white;
+	text-transform: uppercase;
+	font-size: 16px;
+`;
+
+const Title = styled.div`
+	color: ${props => props.theme.colors.black};
+	text-transform: uppercase;
+	font-size: 24px;
+`;
+
+const Hashtags = styled.div`
+	color: white;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: bold;
+`;
+
 class galleryItem extends Component {
 	render() {
+		const project = this.props.post;
 		return (
-			<InnerIso>
-				{this.props.post.node.frontmatter.featuredImage && (
+			<GalleryItem>
+				<Title>{project.node.frontmatter.title}</Title>
+				{project.node.frontmatter.featuredImage && (
 					<Img
-						fluid={
-							this.props.post.node.frontmatter.featuredImage.childImageSharp
-								.fluid
-						}
+						fluid={project.node.frontmatter.featuredImage.childImageSharp.fluid}
 					/>
 				)}
-			</InnerIso>
+			</GalleryItem>
 		);
 	}
 }

@@ -4,7 +4,7 @@ import Isotope from "isotope-layout/js/isotope";
 import styled, { withTheme } from "styled-components";
 
 // Components
-import IsotopeGrid from "./galleryGrid";
+import GalleryGrid from "./galleryGrid";
 import FilterGrid from "./galleryFilter";
 
 const FilterContainer = styled.div`
@@ -51,7 +51,7 @@ class Gallery extends Component {
 						updateIsotopeGrid={this.updateIsotopeGrid}
 					/>
 				</FilterContainer>
-				<IsotopeGrid
+				<GalleryGrid
 					createIsotopeGrid={this.createIsotopeGrid}
 					posts={this.props.posts}
 				/>
