@@ -1,3 +1,11 @@
+INSTALL:
+
+Execute the following command:
+
+```bash
+sudo npm install --unsafe-perm
+```
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">

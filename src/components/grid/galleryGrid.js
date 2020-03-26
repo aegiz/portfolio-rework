@@ -1,6 +1,5 @@
 // Package
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 
@@ -16,16 +15,27 @@ const GridItem = styled.div`
 `;
 
 class GalleryGrid extends Component {
-	componentDidMount() {
-		this.props.createIsotopeGrid(ReactDOM.findDOMNode(this));
-	}
+	constructor(props) {
+		super(props);
 
+		this.element = React.createRef();
+		this.sizer = React.createRef();
+	}
+	componentDidMount() {
+		this.props.createIsotopeGrid(this.element.current, this.sizer.current);
+	}
+	componentWillUnmount() {
+		// this.props.destroyIsotopeGrid();
+		// this.shuffle.destroy();
+		// this.shuffle = null;
+	}
 	render() {
 		return (
-			<div id="ar-isotope">
+			<div ref={this.element} className="row my-shuffle">
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
+						className="photo-item"
 						gridDisplay={post.node.frontmatter.gridDisplay}
 						typeOfArticle={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
@@ -43,6 +53,11 @@ class GalleryGrid extends Component {
 						</AniLink>
 					</GridItem>
 				))}
+				<div
+					ref={this.sizer}
+					className="col-1@xs col-1@sm photo-grid__sizer"
+					style={{ width: "20%" }}
+				></div>
 			</div>
 		);
 	}

@@ -1,7 +1,7 @@
 // Package
 import React, { Component } from "react";
-import Isotope from "isotope-packery/packery-mode.pkgd";
 import styled from "styled-components";
+import Shuffle from "shufflejs";
 
 // Components
 import GalleryGrid from "./galleryGrid";
@@ -17,22 +17,22 @@ const FilterContainer = styled.div`
 
 class Gallery extends Component {
 	state = {
-		isotope: null,
+		shuffle: null,
 	};
-	createIsotopeGrid = isotopeNode => {
+	createIsotopeGrid = (grid, sizer) => {
 		this.setState({
-			isotope: new Isotope(isotopeNode, {
-				percentPosition: true,
-				layoutMode: "packery",
+			shuffle: new Shuffle(grid, {
+				itemSelector: ".photo-item",
+				sizer: sizer,
 			}),
 		});
 	};
 	updateIsotopeGrid = newFilter => {
-		if (newFilter === "*") {
-			this.state.isotope.arrange({ filter: `*` });
-		} else {
-			this.state.isotope.arrange({ filter: `.filter-${newFilter}` });
-		}
+		// if (newFilter === "*") {
+		// 	this.state.isotope.arrange({ filter: `*` });
+		// } else {
+		// 	this.state.isotope.arrange({ filter: `.filter-${newFilter}` });
+		// }
 	};
 	render() {
 		return (
