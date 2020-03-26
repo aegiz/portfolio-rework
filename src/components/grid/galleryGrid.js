@@ -9,6 +9,14 @@ import GalleryItem from "./galleryItem";
 const GridItem = styled.div`
 	border: 1px solid rebeccapurple;
 	width: ${props => props.gridDisplay * 20}%;
+	height: 300px;
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 50%;
+	}
+`;
+
+const Sizer = styled.div`
+	width: 20%;
 	${({ theme }) => theme.mediaQueries.m} {
 		width: 50%;
 	}
@@ -24,9 +32,7 @@ class GalleryGrid extends Component {
 		this.props.createIsotopeGrid(this.element.current, this.sizer.current);
 	}
 	componentWillUnmount() {
-		// this.props.destroyIsotopeGrid();
-		// this.shuffle.destroy();
-		// this.shuffle = null;
+		this.props.destroyGrid();
 	}
 	render() {
 		return (
@@ -34,7 +40,7 @@ class GalleryGrid extends Component {
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
-						className="photo-item"
+						className="grid-item"
 						data-type={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
 							.replace(/\s/g, "")}
@@ -53,12 +59,17 @@ class GalleryGrid extends Component {
 							direction="left"
 							duration={1}
 							to={post.node.frontmatter.path}
+							style={{
+								display: "block",
+								width: "100%",
+								height: "100%",
+							}}
 						>
 							<GalleryItem post={post} />
 						</AniLink>
 					</GridItem>
 				))}
-				<div ref={this.sizer} style={{ width: "20%" }}></div>
+				<Sizer ref={this.sizer}></Sizer>
 			</div>
 		);
 	}

@@ -22,9 +22,10 @@ class Gallery extends Component {
 	createIsotopeGrid = (grid, sizer) => {
 		this.setState({
 			shuffle: new Shuffle(grid, {
-				itemSelector: ".photo-item",
+				itemSelector: ".grid-item",
 				sizer: sizer,
 				initialSort: {
+					reverse: true,
 					by: function(element) {
 						return element.getAttribute("data-date");
 					},
@@ -38,6 +39,10 @@ class Gallery extends Component {
 				? element
 				: element.dataset.type.includes(newFilter);
 		});
+	};
+	destroyGrid = () => {
+		this.state.shuffle.destroy();
+		this.state.shuffle = null;
 	};
 	render() {
 		return (
@@ -56,7 +61,7 @@ class Gallery extends Component {
 				</FilterContainer>
 				<GalleryGrid
 					createIsotopeGrid={this.createIsotopeGrid}
-					updateGrid={this.updateGrid}
+					destroyGrid={this.destroyGrid}
 					posts={this.props.posts}
 				/>
 			</>
