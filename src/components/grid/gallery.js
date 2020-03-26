@@ -24,14 +24,19 @@ class Gallery extends Component {
 			shuffle: new Shuffle(grid, {
 				itemSelector: ".photo-item",
 				sizer: sizer,
-				initialSort: null,
+				initialSort: {
+					by: function(element) {
+						return element.getAttribute("data-date");
+					},
+				},
 			}),
 		});
 	};
-	updateGrid = () => {};
 	filterGrid = newFilter => {
 		this.state.shuffle.filter(element => {
-			return element.dataset.type.includes("freelancework");
+			return newFilter === "all"
+				? element
+				: element.dataset.type.includes(newFilter);
 		});
 	};
 	render() {
@@ -40,11 +45,11 @@ class Gallery extends Component {
 				<FilterContainer>
 					<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
 					<GalleryFilter
-						filter={"Freelance Job"}
+						filter={"Freelance Work"}
 						filterGrid={this.filterGrid}
 					/>
 					<GalleryFilter
-						filter={"Full-Time Job"}
+						filter={"Full-Time Work"}
 						filterGrid={this.filterGrid}
 					/>
 					<GalleryFilter filter={"Side Project"} filterGrid={this.filterGrid} />

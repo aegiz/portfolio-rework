@@ -23,11 +23,6 @@ class GalleryGrid extends Component {
 	componentDidMount() {
 		this.props.createIsotopeGrid(this.element.current, this.sizer.current);
 	}
-	componentDidUpdate() {
-		// Notify shuffle to dump the elements it's currently holding and consider
-		// all elements matching the `itemSelector` as new.
-		this.props.updateGrid();
-	}
 	componentWillUnmount() {
 		// this.props.destroyIsotopeGrid();
 		// this.shuffle.destroy();
@@ -39,12 +34,13 @@ class GalleryGrid extends Component {
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
-						className={`photo-item photo-item--${post.node.frontmatter.typeOfArticle
-							.toLowerCase()
-							.replace(/\s/g, "")}`}
+						className="photo-item"
 						data-type={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
 							.replace(/\s/g, "")}
+						data-date={Math.floor(
+							new Date(post.node.frontmatter.date).getTime() / 1000
+						)}
 						gridDisplay={post.node.frontmatter.gridDisplay}
 						typeOfArticle={post.node.frontmatter.typeOfArticle
 							.toLowerCase()

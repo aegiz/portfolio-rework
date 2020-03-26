@@ -41,6 +41,7 @@ class galleryItem extends Component {
 		const frontmatter = project.node.frontmatter;
 		return (
 			<GalleryItem>
+				<div>{frontmatter.date}</div>
 				<Category>{frontmatter.typeOfArticle}</Category>
 				<Title>{frontmatter.title}</Title>
 				{frontmatter.featuredImage && (
