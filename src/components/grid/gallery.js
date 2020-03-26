@@ -5,7 +5,7 @@ import Shuffle from "shufflejs";
 
 // Components
 import GalleryGrid from "./galleryGrid";
-import FilterGrid from "./galleryFilter";
+import GalleryFilter from "./galleryFilter";
 
 const FilterContainer = styled.div`
 	background: transparent;
@@ -24,38 +24,34 @@ class Gallery extends Component {
 			shuffle: new Shuffle(grid, {
 				itemSelector: ".photo-item",
 				sizer: sizer,
+				initialSort: null,
 			}),
 		});
 	};
-	updateIsotopeGrid = newFilter => {
-		// if (newFilter === "*") {
-		// 	this.state.isotope.arrange({ filter: `*` });
-		// } else {
-		// 	this.state.isotope.arrange({ filter: `.filter-${newFilter}` });
-		// }
+	updateGrid = () => {};
+	filterGrid = newFilter => {
+		this.state.shuffle.filter(element => {
+			return element.dataset.type.includes("freelancework");
+		});
 	};
 	render() {
 		return (
 			<>
-				<FilterContainer className="filters-container">
-					<FilterGrid
-						filter={"*"}
-						text={"All"}
-						updateIsotopeGrid={this.updateIsotopeGrid}
+				<FilterContainer>
+					<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
+					<GalleryFilter
+						filter={"Freelance Job"}
+						filterGrid={this.filterGrid}
 					/>
-					<FilterGrid
-						filter={"web"}
-						text={"web"}
-						updateIsotopeGrid={this.updateIsotopeGrid}
+					<GalleryFilter
+						filter={"Full-Time Job"}
+						filterGrid={this.filterGrid}
 					/>
-					<FilterGrid
-						filter={"DIY"}
-						text={"DIY"}
-						updateIsotopeGrid={this.updateIsotopeGrid}
-					/>
+					<GalleryFilter filter={"Side Project"} filterGrid={this.filterGrid} />
 				</FilterContainer>
 				<GalleryGrid
 					createIsotopeGrid={this.createIsotopeGrid}
+					updateGrid={this.updateGrid}
 					posts={this.props.posts}
 				/>
 			</>

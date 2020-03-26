@@ -17,12 +17,16 @@ const GridItem = styled.div`
 class GalleryGrid extends Component {
 	constructor(props) {
 		super(props);
-
 		this.element = React.createRef();
 		this.sizer = React.createRef();
 	}
 	componentDidMount() {
 		this.props.createIsotopeGrid(this.element.current, this.sizer.current);
+	}
+	componentDidUpdate() {
+		// Notify shuffle to dump the elements it's currently holding and consider
+		// all elements matching the `itemSelector` as new.
+		this.props.updateGrid();
 	}
 	componentWillUnmount() {
 		// this.props.destroyIsotopeGrid();
@@ -31,11 +35,16 @@ class GalleryGrid extends Component {
 	}
 	render() {
 		return (
-			<div ref={this.element} className="row my-shuffle">
+			<div ref={this.element}>
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
-						className="photo-item"
+						className={`photo-item photo-item--${post.node.frontmatter.typeOfArticle
+							.toLowerCase()
+							.replace(/\s/g, "")}`}
+						data-type={post.node.frontmatter.typeOfArticle
+							.toLowerCase()
+							.replace(/\s/g, "")}
 						gridDisplay={post.node.frontmatter.gridDisplay}
 						typeOfArticle={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
@@ -53,11 +62,7 @@ class GalleryGrid extends Component {
 						</AniLink>
 					</GridItem>
 				))}
-				<div
-					ref={this.sizer}
-					className="col-1@xs col-1@sm photo-grid__sizer"
-					style={{ width: "20%" }}
-				></div>
+				<div ref={this.sizer} style={{ width: "20%" }}></div>
 			</div>
 		);
 	}

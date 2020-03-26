@@ -15,10 +15,10 @@ class GalleryFilter extends Component {
 		return (
 			<button
 				onClick={() => {
-					this.props.updateIsotopeGrid(this.props.filter);
+					this.props.filterGrid(this.props.filter.toLowerCase().replace(/\s/g, ""));
 				}}
 			>
-				{this.props.text}
+				{this.props.filter}
 			</button>
 		);
 	}
