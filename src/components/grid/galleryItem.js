@@ -40,9 +40,7 @@ class galleryItem extends Component {
 		const project = this.props.post;
 		const frontmatter = project.node.frontmatter;
 		return (
-			<GalleryItem
-				className={`gallery-item gallery-item--${frontmatter.display} gallery-item--${frontmatter.typeOfArticle}`}
-			>
+			<GalleryItem>
 				<Category>{frontmatter.typeOfArticle}</Category>
 				<Title>{frontmatter.title}</Title>
 				{frontmatter.featuredImage && (

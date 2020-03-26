@@ -1,6 +1,6 @@
 // Package
 import React, { Component } from "react";
-import Isotope from "isotope-layout/js/isotope";
+import Isotope from "isotope-packery/packery-mode.pkgd";
 import styled from "styled-components";
 
 // Components
@@ -21,7 +21,10 @@ class Gallery extends Component {
 	};
 	createIsotopeGrid = isotopeNode => {
 		this.setState({
-			isotope: new Isotope(isotopeNode, { percentPosition: true }),
+			isotope: new Isotope(isotopeNode, {
+				percentPosition: true,
+				layoutMode: "packery",
+			}),
 		});
 	};
 	updateIsotopeGrid = newFilter => {

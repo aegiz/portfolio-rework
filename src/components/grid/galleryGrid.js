@@ -8,8 +8,9 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 import GalleryItem from "./galleryItem";
 
 const GridItem = styled.div`
-	width: 33.33%;
-	@media (max-width: 1000px) {
+	border: 1px solid rebeccapurple;
+	width: ${props => props.gridDisplay * 20}%;
+	${({ theme }) => theme.mediaQueries.m} {
 		width: 50%;
 	}
 `;
@@ -25,7 +26,10 @@ class GalleryGrid extends Component {
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
-						className={`filter-item filter-${post.node.frontmatter.typeOfArticle}`}
+						gridDisplay={post.node.frontmatter.gridDisplay}
+						typeOfArticle={post.node.frontmatter.typeOfArticle
+							.toLowerCase()
+							.replace(/\s/g, "")}
 					>
 						<AniLink
 							cover
