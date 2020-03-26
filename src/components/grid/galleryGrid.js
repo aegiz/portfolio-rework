@@ -1,7 +1,7 @@
 // Package
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 
 // Component
@@ -44,4 +44,4 @@ class GalleryGrid extends Component {
 	}
 }
 
-export default withTheme(GalleryGrid);
+export default GalleryGrid;

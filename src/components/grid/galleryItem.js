@@ -38,16 +38,17 @@ const Hashtags = styled.div`
 class galleryItem extends Component {
 	render() {
 		const project = this.props.post;
+		const frontmatter = project.node.frontmatter;
 		return (
-			<GalleryItem>
-				<Category>Category</Category>
-				<Title>{project.node.frontmatter.title}</Title>
-				{project.node.frontmatter.featuredImage && (
-					<Img
-						fluid={project.node.frontmatter.featuredImage.childImageSharp.fluid}
-					/>
+			<GalleryItem
+				className={`gallery-item gallery-item--${frontmatter.display} gallery-item--${frontmatter.typeOfArticle}`}
+			>
+				<Category>{frontmatter.typeOfArticle}</Category>
+				<Title>{frontmatter.title}</Title>
+				{frontmatter.featuredImage && (
+					<Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
 				)}
-				<Hashtags>#hop</Hashtags>
+				<Hashtags>{frontmatter.hashtags}</Hashtags>
 			</GalleryItem>
 		);
 	}

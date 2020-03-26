@@ -1,7 +1,7 @@
 // Package
 import React, { Component } from "react";
 import Isotope from "isotope-layout/js/isotope";
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 
 // Components
 import GalleryGrid from "./galleryGrid";
@@ -60,4 +60,4 @@ class Gallery extends Component {
 	}
 }
 
-export default withTheme(Gallery);
+export default Gallery;
