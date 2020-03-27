@@ -2,20 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
-// Helpers
-const handleColorType = type => {
-	if (type === "freelancework") {
-		return ({ theme }) => theme.colors.red.main;
-	} else if (type === "full-timework") {
-		return `blue`;
-	} else if (type === "sideproject") {
-		return ({ theme }) => `rgba(0, 0, 0, 0.3)`;
-	} else {
-		return `rgba(255, 255, 255, 0.15)`;
-	}
-};
-
-// Styled component
 const GalleryItem = styled.div`
 	width: 100%;
 	height: 100%;
@@ -25,14 +11,14 @@ const GalleryItem = styled.div`
 		transition: all 0.3s;
 		filter: grayscale(100%);
 		mix-blend-mode: ${props =>
-			props.gridDisplay !== 1 ? `hard-light` : `multiply`};
+			props.typeOfArticle === "sideproject" ? `multiply` : `hard-light`};
 	}
 	&:hover {
 		.image-background {
 			background: ${props =>
-				props.gridDisplay !== 1
-					? handleColorType(``)
-					: handleColorType(props.typeOfArticle)};
+				props.typeOfArticle === "sideproject"
+					? ({ theme }) => theme.colors.red.main
+					: `rgba(255, 255, 255, 0.15)`};
 		}
 		.overlay {
 			opacity: 0;
@@ -81,7 +67,7 @@ const Overlay = styled.div`
 	z-index: 2;
 	transition: all 0.3s;
 	opacity: 1;
-	background: ${props => handleColorType(props.typeOfArticle)};
+	background: ${({ theme }) => theme.colors.black};
 `;
 
 const ImageBackground = styled.div`
@@ -101,26 +87,19 @@ class galleryItem extends Component {
 	render() {
 		const project = this.props.post;
 		const frontmatter = project.node.frontmatter;
+		const typeOfArticleClean = frontmatter.typeOfArticle
+			.toLowerCase()
+			.replace(/\s/g, "");
 		return (
-			<GalleryItem
-				gridDisplay={frontmatter.gridDisplay}
-				typeOfArticle={frontmatter.typeOfArticle
-					.toLowerCase()
-					.replace(/\s/g, "")}
-			>
+			<GalleryItem typeOfArticle={typeOfArticleClean}>
 				<Content>
 					<div>{frontmatter.date}</div>
 					<Category>{frontmatter.typeOfArticle}</Category>
 					<Title>{frontmatter.title}</Title>
 					<Hashtags>{frontmatter.hashtags}</Hashtags>
 				</Content>
-				{frontmatter.gridDisplay === 1 && (
-					<Overlay
-						className="overlay"
-						typeOfArticle={frontmatter.typeOfArticle
-							.toLowerCase()
-							.replace(/\s/g, "")}
-					/>
+				{typeOfArticleClean === "sideproject" && (
+					<Overlay className="overlay" />
 				)}
 				<ImageBackground className="image-background">
 					{frontmatter.featuredImage && (

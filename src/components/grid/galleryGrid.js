@@ -12,7 +12,17 @@ const ShuffleGrid = styled.div`
 
 const GridItem = styled.div`
 	margin: 20px 0 0 0;
-	width: ${props => props.gridDisplay * 20}%;
+	width: ${props => {
+		if (props.typeOfArticle === "sideproject") {
+			return `20%`;
+		} else if (props.typeOfArticle === "freelancework") {
+			return `40%`;
+		} else if (props.typeOfArticle === "full-timework") {
+			return `60%`;
+		} else {
+			return `20%`;
+		}
+	}};
 	height: 300px;
 	${({ theme }) => theme.mediaQueries.m} {
 		width: 50%;
@@ -51,7 +61,6 @@ class GalleryGrid extends Component {
 						data-date={Math.floor(
 							new Date(post.node.frontmatter.date).getTime() / 1000
 						)}
-						gridDisplay={post.node.frontmatter.gridDisplay}
 						typeOfArticle={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
 							.replace(/\s/g, "")}

@@ -44,7 +44,6 @@ export const pageQuery = graphql`
 						path
 						typeOfArticle
 						description
-						gridDisplay
 						featuredImage {
 							childImageSharp {
 								fluid(maxWidth: 800) {
