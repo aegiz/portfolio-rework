@@ -6,8 +6,12 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 // Component
 import GalleryItem from "./galleryItem";
 
+const ShuffleGrid = styled.div`
+	margin: 0 10px;
+`;
+
 const GridItem = styled.div`
-	border: 1px solid rebeccapurple;
+	margin: 20px 0 0 0;
 	width: ${props => props.gridDisplay * 20}%;
 	height: 300px;
 	${({ theme }) => theme.mediaQueries.m} {
@@ -36,7 +40,7 @@ class GalleryGrid extends Component {
 	}
 	render() {
 		return (
-			<div ref={this.element}>
+			<ShuffleGrid ref={this.element}>
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
@@ -61,8 +65,9 @@ class GalleryGrid extends Component {
 							to={post.node.frontmatter.path}
 							style={{
 								display: "block",
-								width: "100%",
+								width: "calc(100% - 20px)",
 								height: "100%",
+								margin: "0 auto",
 							}}
 						>
 							<GalleryItem post={post} />
@@ -70,7 +75,7 @@ class GalleryGrid extends Component {
 					</GridItem>
 				))}
 				<Sizer ref={this.sizer}></Sizer>
-			</div>
+			</ShuffleGrid>
 		);
 	}
 }

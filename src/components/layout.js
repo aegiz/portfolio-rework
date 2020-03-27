@@ -19,9 +19,9 @@ export const theme = {
 		black: "rgba(0, 0, 0, 1)",
 		darkGrey: "hsla(0, 0%, 10%, 1)",
 		white: "rgba(255, 255, 255, 1)",
-		orange: {
-			main: "rgba(232, 82, 43, 1)",
-			light: "rgb(251, 226, 219)",
+		red: {
+			main: "rgba(185, 37, 37, 1)",
+			light: "rgba(251, 226, 219, 0.5)",
 		},
 	},
 	breakpoints: {

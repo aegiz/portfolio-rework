@@ -42,7 +42,6 @@ class Gallery extends Component {
 	};
 	destroyGrid = () => {
 		this.state.shuffle.destroy();
-		this.state.shuffle = null;
 	};
 	render() {
 		return (
