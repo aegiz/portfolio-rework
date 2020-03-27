@@ -10,15 +10,33 @@ const GalleryItem = styled.div`
 	img {
 		transition: all 0.3s;
 		filter: grayscale(100%);
-		mix-blend-mode: ${props =>
-			props.typeOfArticle === "sideproject" ? `multiply` : `hard-light`};
+		mix-blend-mode: multiply;
+	}
+	&:after {
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.2;
+		z-index: 2;
+		background: ${({ theme }) => theme.colors.black};
 	}
 	&:hover {
 		.image-background {
-			background: ${props =>
-				props.typeOfArticle === "sideproject"
-					? ({ theme }) => theme.colors.red.main
-					: `rgba(255, 255, 255, 0.15)`};
+			opacity: 0.9;
+			background: ${props => {
+				if (props.typeOfArticle === "freelancework") {
+					return ({ theme }) => theme.colors.yellow.main;
+				} else if (props.typeOfArticle === "full-timework") {
+					return ({ theme }) => theme.colors.blue.main;
+				} else if (props.typeOfArticle === "sideproject") {
+					return ({ theme }) => theme.colors.red.main;
+				} else {
+					return `transparent`;
+				}
+			}};
 		}
 		.overlay {
 			opacity: 0;
@@ -48,8 +66,8 @@ const Category = styled.div`
 `;
 
 const ColorSquare = styled.div`
-	width: 20px;
-	height: 20px;
+	width: 16px;
+	height: 16px;
 	margin-right: 10px;
 	background: ${props => {
 		if (props.typeOfArticle === "freelancework") {
@@ -70,12 +88,7 @@ const Title = styled.div`
 	text-transform: uppercase;
 	font-weight: ${({ theme }) => theme.fontWeights.bold};
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
-	${({ theme }) => theme.mediaQueries.l} {
-		color: blue;
-	}
-	${({ theme }) => theme.mediaQueries.m} {
-		color: red;
-	}
+	word-break: break-word;
 `;
 
 const Date = styled.div`
@@ -86,8 +99,8 @@ const Date = styled.div`
 
 const Hashtags = styled.div`
 	margin: 30px 0 0 0;
+	line-height: 1.8;
 	color: ${({ theme }) => theme.colors.white};
-	text-transform: uppercase;
 	font-weight: ${({ theme }) => theme.fontWeights.bold};
 	font-size: ${({ theme }) => theme.fontSizes.normal};
 `;

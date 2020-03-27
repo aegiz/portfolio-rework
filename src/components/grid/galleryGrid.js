@@ -24,14 +24,14 @@ const GridItem = styled.div`
 		}
 	}};
 	height: 300px;
-	${({ theme }) => theme.mediaQueries.m} {
+	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
 `;
 
 const Sizer = styled.div`
 	width: 20%;
-	${({ theme }) => theme.mediaQueries.m} {
+	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
 `;
