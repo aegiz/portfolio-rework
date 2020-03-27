@@ -7,9 +7,9 @@ const handleColorType = type => {
 	if (type === "freelancework") {
 		return ({ theme }) => theme.colors.red.main;
 	} else if (type === "full-timework") {
-		return `yellow`;
+		return `blue`;
 	} else if (type === "sideproject") {
-		return ({ theme }) => theme.colors.red.main;
+		return ({ theme }) => `rgba(0, 0, 0, 0.3)`;
 	} else {
 		return `rgba(255, 255, 255, 0.15)`;
 	}

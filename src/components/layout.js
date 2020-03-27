@@ -19,6 +19,10 @@ export const theme = {
 		black: "rgba(0, 0, 0, 1)",
 		darkGrey: "hsla(0, 0%, 10%, 1)",
 		white: "rgba(255, 255, 255, 1)",
+		yellow: {
+			main: "rgba(255, 188, 0, 1)",
+			light: "rgba(251, 226, 219, 0.5)",
+		},
 		red: {
 			main: "rgba(185, 37, 37, 1)",
 			light: "rgba(251, 226, 219, 0.5)",
