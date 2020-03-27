@@ -2,18 +2,40 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
+// Helpers
+const handleColorType = type => {
+	if (type === "freelancework") {
+		return ({ theme }) => theme.colors.red.main;
+	} else if (type === "full-timework") {
+		return `yellow`;
+	} else if (type === "sideproject") {
+		return ({ theme }) => theme.colors.red.main;
+	} else {
+		return `rgba(255, 255, 255, 0.15)`;
+	}
+};
+
+// Styled component
 const GalleryItem = styled.div`
 	width: 100%;
 	height: 100%;
 	position: relative;
 	margin: 0 auto;
+	img {
+		transition: all 0.3s;
+		filter: grayscale(100%);
+		mix-blend-mode: ${props =>
+			props.gridDisplay !== 1 ? `hard-light` : `multiply`};
+	}
 	&:hover {
-		.overlay {
-			opacity: 0.5;
+		.image-background {
+			background: ${props =>
+				props.gridDisplay !== 1
+					? handleColorType(``)
+					: handleColorType(props.typeOfArticle)};
 		}
-		img {
-			filter: grayscale(100%);
-			mix-blend-mode: darken;
+		.overlay {
+			opacity: 0;
 		}
 	}
 `;
@@ -59,17 +81,7 @@ const Overlay = styled.div`
 	z-index: 2;
 	transition: all 0.3s;
 	opacity: 1;
-	background: ${props => {
-		if (props.typeOfArticle === "freelancework") {
-			return ({ theme }) => theme.colors.red.main;
-		} else if (props.typeOfArticle === "full-timework") {
-			return `blue`;
-		} else if (props.typeOfArticle === "sideproject") {
-			return `yellow`;
-		} else {
-			return `transparent`;
-		}
-	}};
+	background: ${props => handleColorType(props.typeOfArticle)};
 `;
 
 const ImageBackground = styled.div`
@@ -79,6 +91,7 @@ const ImageBackground = styled.div`
 	width: 100%;
 	height: 100%;
 	z-index: 1;
+	transition: all 0.3s;
 	.gatsby-image-wrapper {
 		height: 100%;
 	}
@@ -89,7 +102,12 @@ class galleryItem extends Component {
 		const project = this.props.post;
 		const frontmatter = project.node.frontmatter;
 		return (
-			<GalleryItem>
+			<GalleryItem
+				gridDisplay={frontmatter.gridDisplay}
+				typeOfArticle={frontmatter.typeOfArticle
+					.toLowerCase()
+					.replace(/\s/g, "")}
+			>
 				<Content>
 					<div>{frontmatter.date}</div>
 					<Category>{frontmatter.typeOfArticle}</Category>
@@ -104,7 +122,7 @@ class galleryItem extends Component {
 							.replace(/\s/g, "")}
 					/>
 				)}
-				<ImageBackground>
+				<ImageBackground className="image-background">
 					{frontmatter.featuredImage && (
 						<Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
 					)}
