@@ -42,6 +42,7 @@ export const pageQuery = graphql`
 						date
 						title
 						path
+						hashtags
 						typeOfArticle
 						description
 						featuredImage {

@@ -77,6 +77,7 @@ class GalleryGrid extends Component {
 								width: "calc(100% - 20px)",
 								height: "100%",
 								margin: "0 auto",
+								textDecoration: "none",
 							}}
 						>
 							<GalleryItem post={post} />

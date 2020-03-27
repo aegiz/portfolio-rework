@@ -27,22 +27,49 @@ const GalleryItem = styled.div`
 `;
 
 const Content = styled.div`
-	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 0 30px;
 	height: 100%;
 	position: relative;
 	z-index: 3;
 `;
 
 const Category = styled.div`
-	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 30px 0 0 0;
+	color: ${({ theme }) => theme.colors.white};
 	text-transform: uppercase;
-	font-size: 16px;
+	font-size: ${({ theme }) => theme.fontSizes.l};
+`;
+
+const ColorSquare = styled.div`
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	background: ${props => {
+		if (props.typeOfArticle === "freelancework") {
+			return ({ theme }) => theme.colors.yellow.main;
+		} else if (props.typeOfArticle === "full-timework") {
+			return ({ theme }) => theme.colors.blue.main;
+		} else if (props.typeOfArticle === "sideproject") {
+			return ({ theme }) => theme.colors.red.main;
+		} else {
+			return `transparent`;
+		}
+	}};
 `;
 
 const Title = styled.div`
-	color: ${({ theme }) => theme.colors.black};
+	margin: 30px 0 0 0;
+	color: ${({ theme }) => theme.colors.white};
 	text-transform: uppercase;
 	font-weight: ${({ theme }) => theme.fontWeights.bold};
+	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		color: blue;
 	}
@@ -51,11 +78,18 @@ const Title = styled.div`
 	}
 `;
 
+const Date = styled.div`
+	color: ${({ theme }) => theme.colors.white};
+	font-weight: ${({ theme }) => theme.fontWeights.thin};
+	font-size: ${({ theme }) => theme.fontSizes.s};
+`;
+
 const Hashtags = styled.div`
-	color: white;
+	margin: 30px 0 0 0;
+	color: ${({ theme }) => theme.colors.white};
 	text-transform: uppercase;
-	font-size: 16px;
-	font-weight: bold;
+	font-weight: ${({ theme }) => theme.fontWeights.bold};
+	font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 const Overlay = styled.div`
@@ -93,9 +127,12 @@ class galleryItem extends Component {
 		return (
 			<GalleryItem typeOfArticle={typeOfArticleClean}>
 				<Content>
-					<div>{frontmatter.date}</div>
-					<Category>{frontmatter.typeOfArticle}</Category>
+					<Category>
+						<ColorSquare typeOfArticle={typeOfArticleClean}></ColorSquare>
+						<div>{frontmatter.typeOfArticle}</div>
+					</Category>
 					<Title>{frontmatter.title}</Title>
+					<Date>{frontmatter.date}</Date>
 					<Hashtags>{frontmatter.hashtags}</Hashtags>
 				</Content>
 				{typeOfArticleClean === "sideproject" && (
