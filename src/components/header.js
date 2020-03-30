@@ -34,7 +34,7 @@ export default () => {
 		query HeadingQuery {
 			file(relativePath: { eq: "new-zealand.jpg" }) {
 				childImageSharp {
-					fluid {
+					fluid(maxWidth: 2000) {
 						...GatsbyImageSharpFluid
 					}
 				}

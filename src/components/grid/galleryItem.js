@@ -9,7 +9,6 @@ const GalleryItem = styled.div`
 	margin: 0 auto;
 	img {
 		transition: all 0.3s;
-		filter: grayscale(100%);
 		mix-blend-mode: multiply;
 	}
 	&:after {
@@ -30,7 +29,7 @@ const GalleryItem = styled.div`
 				if (props.typeOfArticle === "freelancework") {
 					return ({ theme }) => theme.colors.yellow.main;
 				} else if (props.typeOfArticle === "full-timework") {
-					return ({ theme }) => theme.colors.blue.main;
+					return ({ theme }) => theme.colors.yellow.light;
 				} else if (props.typeOfArticle === "sideproject") {
 					return ({ theme }) => theme.colors.red.main;
 				} else {
@@ -47,7 +46,7 @@ const GalleryItem = styled.div`
 const Content = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	padding: 0 30px;
 	height: 100%;
 	position: relative;
@@ -65,39 +64,50 @@ const Category = styled.div`
 	font-size: ${({ theme }) => theme.fontSizes.l};
 `;
 
-const ColorSquare = styled.div`
-	width: 16px;
-	height: 16px;
-	margin-right: 10px;
-	background: ${props => {
-		if (props.typeOfArticle === "freelancework") {
-			return ({ theme }) => theme.colors.yellow.main;
-		} else if (props.typeOfArticle === "full-timework") {
-			return ({ theme }) => theme.colors.blue.main;
-		} else if (props.typeOfArticle === "sideproject") {
-			return ({ theme }) => theme.colors.red.main;
-		} else {
-			return `transparent`;
-		}
-	}};
-`;
+// const ColorSquare = styled.div`
+// 	width: 10px;
+// 	height: 10px;
+// 	margin-right: 10px;
+// 	background: ${props => {
+// 		if (props.typeOfArticle === "freelancework") {
+// 			return ({ theme }) => theme.colors.yellow.main;
+// 		} else if (props.typeOfArticle === "full-timework") {
+// 			return ({ theme }) => theme.colors.blue.main;
+// 		} else if (props.typeOfArticle === "sideproject") {
+// 			return ({ theme }) => theme.colors.red.main;
+// 		} else {
+// 			return `transparent`;
+// 		}
+// 	}};
+// `;
 
-const Title = styled.div`
-	margin: 30px 0 0 0;
+const Title = styled.h2`
+	width: 100%;
+	margin: 0 0 40px;
 	color: ${({ theme }) => theme.colors.white};
 	text-transform: uppercase;
-	font-weight: ${({ theme }) => theme.fontWeights.bold};
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	word-break: break-word;
+	&:after {
+		content: "";
+		background: white;
+		display: block;
+		width: 40%;
+		height: 3px;
+		margin-top: 20px;
+		transition: all 0.4s ease-out;
+	}
 `;
 
 const Date = styled.div`
+	display: none;
 	color: ${({ theme }) => theme.colors.white};
 	font-weight: ${({ theme }) => theme.fontWeights.thin};
 	font-size: ${({ theme }) => theme.fontSizes.s};
 `;
 
 const Hashtags = styled.div`
+	display: none;
 	margin: 30px 0 0 0;
 	line-height: 1.8;
 	color: ${({ theme }) => theme.colors.white};
@@ -114,7 +124,15 @@ const Overlay = styled.div`
 	z-index: 2;
 	transition: all 0.3s;
 	opacity: 1;
-	background: ${({ theme }) => theme.colors.black};
+	background: ${props => {
+		if (props.typeOfArticle === "freelancework") {
+			return ({ theme }) => theme.colors.yellow.main;
+		} else if (props.typeOfArticle === "full-timework") {
+			return ({ theme }) => theme.colors.yellow.light;
+		} else {
+			return `transparent`;
+		}
+	}};
 `;
 
 const ImageBackground = styled.div`
@@ -141,20 +159,20 @@ class galleryItem extends Component {
 			<GalleryItem typeOfArticle={typeOfArticleClean}>
 				<Content>
 					<Category>
-						<ColorSquare typeOfArticle={typeOfArticleClean}></ColorSquare>
-						<div>{frontmatter.typeOfArticle}</div>
+						{/* <ColorSquare typeOfArticle={typeOfArticleClean}></ColorSquare> */}
+						<Title>{frontmatter.title}</Title>
 					</Category>
-					<Title>{frontmatter.title}</Title>
 					<Date>{frontmatter.date}</Date>
 					<Hashtags>{frontmatter.hashtags}</Hashtags>
 				</Content>
-				{typeOfArticleClean === "sideproject" && (
-					<Overlay className="overlay" />
+				{typeOfArticleClean !== "sideproject" && (
+					<Overlay className="overlay" typeOfArticle={typeOfArticleClean} />
 				)}
 				<ImageBackground className="image-background">
-					{frontmatter.featuredImage && (
-						<Img fluid={frontmatter.featuredImage.childImageSharp.fluid} />
-					)}
+					<Img
+						loading="eager"
+						fluid={frontmatter.featuredImage.childImageSharp.fluid}
+					/>
 				</ImageBackground>
 			</GalleryItem>
 		);

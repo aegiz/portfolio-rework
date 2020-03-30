@@ -12,6 +12,8 @@ export const theme = {
 	fonts: {
 		merri: "Merriweather, Open Sans, Helvetica, Arial, sans-serif",
 		ibm: "IBM Plex Sans, Open Sans, Helvetica, Arial, sans-serif",
+		libre: "Libre Baskerville, Arial, Tahoma, sans-serif",
+		pop: "Poppins, Arial, Tahoma, sans-serif",
 		open: "Open Sans, Helvetica, Arial, sans-serif",
 		lato: "Lato, Helvetica, Arial, sans-serif",
 		mono: "Helvetica, Arial, sans-serif",
@@ -25,8 +27,9 @@ export const theme = {
 			light: "rgba(153, 153, 236, 0.5)",
 		},
 		yellow: {
-			main: "rgba(255, 188, 0, 1)",
-			light: "rgba(251, 226, 219, 0.5)",
+			main: "#F0C12B",
+			light: "#fddf81",
+			dark: "rgba(240, 193, 43, 1)",
 		},
 		red: {
 			main: "rgba(205, 77, 62, 1)",
@@ -80,14 +83,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     background: white;
     box-sizing: border-box;
-    font-family: ${({ theme }) => theme.fonts.ibm
-	};
+    font-family: ${({ theme }) => theme.fonts.pop};
     font-size: ${({ theme }) => theme.fontSizes.normal};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   };
   h1, h2, h3, h4, h5, h6 {
-    font-family: ${({ theme }) => theme.fonts.lato};
+    font-family: ${({ theme }) => theme.fonts.ibm};
     margin: 0;
   };
   button:focus,

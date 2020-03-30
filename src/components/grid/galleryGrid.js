@@ -7,11 +7,11 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 import GalleryItem from "./galleryItem";
 
 const ShuffleGrid = styled.div`
-	margin: 0 10px;
+	margin: 0 10px 40px;
 `;
 
 const GridItem = styled.div`
-	margin: 20px 0 0 0;
+	margin: 10px 0 0 0;
 	width: ${props => {
 		if (props.typeOfArticle === "sideproject") {
 			return `20%`;
@@ -23,7 +23,7 @@ const GridItem = styled.div`
 			return `20%`;
 		}
 	}};
-	height: 300px;
+	height: 270px;
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
@@ -74,7 +74,7 @@ class GalleryGrid extends Component {
 							to={post.node.frontmatter.path}
 							style={{
 								display: "block",
-								width: "calc(100% - 20px)",
+								width: "calc(100% - 10px)",
 								height: "100%",
 								margin: "0 auto",
 								textDecoration: "none",
