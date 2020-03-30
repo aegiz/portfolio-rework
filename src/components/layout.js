@@ -11,6 +11,7 @@ import CustomSlickCarousel from "./post/carousel/custom-carousel";
 export const theme = {
 	fonts: {
 		merri: "Merriweather, Open Sans, Helvetica, Arial, sans-serif",
+		ibm: "IBM Plex Sans, Open Sans, Helvetica, Arial, sans-serif",
 		open: "Open Sans, Helvetica, Arial, sans-serif",
 		lato: "Lato, Helvetica, Arial, sans-serif",
 		mono: "Helvetica, Arial, sans-serif",
@@ -28,8 +29,8 @@ export const theme = {
 			light: "rgba(251, 226, 219, 0.5)",
 		},
 		red: {
-			main: "rgba(185, 37, 37, 1)",
-			light: "rgba(251, 226, 219, 0.5)",
+			main: "rgba(205, 77, 62, 1)",
+			light: "rgba(208, 130, 120, 1)",
 		},
 	},
 	breakpoints: {
@@ -79,7 +80,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     background: white;
     box-sizing: border-box;
-    font-family: ${({ theme }) => theme.fonts.merri};
+    font-family: ${({ theme }) => theme.fonts.ibm
+	};
     font-size: ${({ theme }) => theme.fontSizes.normal};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

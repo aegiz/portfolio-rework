@@ -7,7 +7,12 @@ import Shuffle from "shufflejs";
 import GalleryGrid from "./galleryGrid";
 import GalleryFilter from "./galleryFilter";
 
+const MainContainer = styled.div`
+	margin-top: 40px;
+`;
+
 const FilterContainer = styled.div`
+	position: relative;
 	background: transparent;
 	border-radius: 3px;
 	border: 2px solid black;
@@ -46,23 +51,28 @@ class Gallery extends Component {
 	render() {
 		return (
 			<>
-				<FilterContainer>
-					<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
-					<GalleryFilter
-						filter={"Freelance Work"}
-						filterGrid={this.filterGrid}
+				<MainContainer>
+					<FilterContainer>
+						<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
+						<GalleryFilter
+							filter={"Freelance Work"}
+							filterGrid={this.filterGrid}
+						/>
+						<GalleryFilter
+							filter={"Full-Time Work"}
+							filterGrid={this.filterGrid}
+						/>
+						<GalleryFilter
+							filter={"Side Project"}
+							filterGrid={this.filterGrid}
+						/>
+					</FilterContainer>
+					<GalleryGrid
+						createIsotopeGrid={this.createIsotopeGrid}
+						destroyGrid={this.destroyGrid}
+						posts={this.props.posts}
 					/>
-					<GalleryFilter
-						filter={"Full-Time Work"}
-						filterGrid={this.filterGrid}
-					/>
-					<GalleryFilter filter={"Side Project"} filterGrid={this.filterGrid} />
-				</FilterContainer>
-				<GalleryGrid
-					createIsotopeGrid={this.createIsotopeGrid}
-					destroyGrid={this.destroyGrid}
-					posts={this.props.posts}
-				/>
+				</MainContainer>
 			</>
 		);
 	}
