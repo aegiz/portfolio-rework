@@ -13,16 +13,32 @@ const MainContainer = styled.div`
 `;
 
 const BackgroundContainer = styled.div`
+	position: relative;
+	padding: 180px 0;
 	width: 100%;
 	height: 100%;
-	position: relative;
+`;
+
+const Test = styled.div`
+	position: absolute;
+	z-index: 1;
+	top: 120px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: ${({ theme }) => theme.fontSizes["7xl"]};
+	text-transform: uppercase;
+	background-image: url("${props => props.imageBase}");
+	background-size: 120% auto;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
 `;
 
 const InnerBackgroundContainer = styled.div`
 	width: 100%;
 	height: 730px;
 	position: absolute;
-	top: 0;
+	top: -80px;
 	left: 0;
 	.gatsby-image-wrapper {
 		height: 100%;
@@ -60,18 +76,9 @@ export default () => {
 		<header>
 			<MainContainer>
 				<BackgroundContainer>
-					<p
-						style={{
-							position: "relative",
-							zIndex: 1,
-							textAlign: "center",
-							margin: "200px auto",
-						}}
-					>
-						Welcome to
-						<br />
-						is the header
-					</p>
+					<Test imageBase={data.file.childImageSharp.fluid.base64}>
+						Portfolio
+					</Test>
 					<InnerBackgroundContainer>
 						<Img
 							fluid={data.file.childImageSharp.fluid}
