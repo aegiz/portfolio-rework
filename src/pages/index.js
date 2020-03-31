@@ -47,7 +47,13 @@ export const pageQuery = graphql`
 						description
 						featuredImage {
 							childImageSharp {
-								fluid(maxWidth: 800, grayscale: true) {
+								duotone: fluid(
+									maxWidth: 900
+									duotone: { highlight: "#fddf81", shadow: "#DC1212" }
+								) {
+									...GatsbyImageSharpFluid
+								}
+								grayscale: fluid(maxWidth: 800, grayscale: true) {
 									...GatsbyImageSharpFluid
 								}
 							}

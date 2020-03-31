@@ -11,7 +11,7 @@ const GalleryItem = styled.div`
 		transition: all 0.3s;
 		mix-blend-mode: multiply;
 	}
-	&:after {
+	/* &:after {
 		content: "";
 		width: 100%;
 		height: 100%;
@@ -21,16 +21,17 @@ const GalleryItem = styled.div`
 		opacity: 0.2;
 		z-index: 2;
 		background: ${({ theme }) => theme.colors.black};
-	}
+	} */
 	&:hover {
 		.image-background {
 			opacity: 0.9;
 			background: ${props => {
-				if (props.typeOfArticle === "freelancework") {
-					return ({ theme }) => theme.colors.yellow.main;
-				} else if (props.typeOfArticle === "full-timework") {
-					return ({ theme }) => theme.colors.yellow.light;
-				} else if (props.typeOfArticle === "sideproject") {
+				// if (props.typeOfArticle === "freelancework") {
+				// 	return ({ theme }) => theme.colors.yellow.main;
+				// } else if (props.typeOfArticle === "full-timework") {
+				// 	return ({ theme }) => theme.colors.yellow.light;
+				// } else
+				if (props.typeOfArticle === "sideproject") {
 					return ({ theme }) => theme.colors.red.main;
 				} else {
 					return `transparent`;
@@ -169,10 +170,17 @@ class galleryItem extends Component {
 					<Overlay className="overlay" typeOfArticle={typeOfArticleClean} />
 				)}
 				<ImageBackground className="image-background">
-					<Img
-						loading="eager"
-						fluid={frontmatter.featuredImage.childImageSharp.fluid}
-					/>
+					{typeOfArticleClean === "sideproject" ? (
+						<Img
+							loading="eager"
+							fluid={frontmatter.featuredImage.childImageSharp.grayscale}
+						/>
+					) : (
+						<Img
+							loading="eager"
+							fluid={frontmatter.featuredImage.childImageSharp.duotone}
+						/>
+					)}
 				</ImageBackground>
 			</GalleryItem>
 		);
