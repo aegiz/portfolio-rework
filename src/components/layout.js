@@ -29,7 +29,7 @@ export const theme = {
 		yellow: {
 			main: "#F0C12B",
 			light: "#fddf81",
-			dark: "rgba(240, 193, 43, 1)",
+			dark: "#cba429",
 		},
 		red: {
 			main: "rgba(205, 77, 62, 1)",
@@ -114,7 +114,7 @@ function Layout({ children }) {
 			<GlobalStyle />
 			<main
 				style={{
-					background: `white`,
+					background: `rgba(47, 50, 56, 1`,
 				}}
 			>
 				<MDXProvider components={shortcodes}>{children}</MDXProvider>

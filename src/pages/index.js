@@ -49,11 +49,11 @@ export const pageQuery = graphql`
 							childImageSharp {
 								duotone: fluid(
 									maxWidth: 900
-									duotone: { highlight: "#fddf81", shadow: "#DC1212" }
+									duotone: { highlight: "#FFFFFF", shadow: "#2f3238" }
 								) {
 									...GatsbyImageSharpFluid
 								}
-								grayscale: fluid(maxWidth: 800, grayscale: true) {
+								grayscale: fluid(maxWidth: 400, grayscale: true) {
 									...GatsbyImageSharpFluid
 								}
 							}

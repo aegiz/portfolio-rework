@@ -27,6 +27,20 @@ const InnerBackgroundContainer = styled.div`
 	.gatsby-image-wrapper {
 		height: 100%;
 	}
+	& :after {
+		content: "";
+		width: 100%;
+		height: 300px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		opacity: 1;
+		background: linear-gradient(
+			0deg,
+			rgba(47, 50, 56, 1) 0%,
+			rgba(47, 50, 56, 0) 100%
+		);
+	}
 `;
 
 export default () => {
