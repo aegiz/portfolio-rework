@@ -19,19 +19,29 @@ const BackgroundContainer = styled.div`
 	height: 100%;
 `;
 
-const Test = styled.div`
+const FirstVersion = styled.div`
 	position: absolute;
 	z-index: 1;
 	top: 120px;
 	left: 50%;
 	transform: translateX(-50%);
-	font-size: ${({ theme }) => theme.fontSizes["7xl"]};
-	text-transform: uppercase;
-	background-image: url("${props => props.imageBase}");
-	background-size: 120% auto;
-	background-clip: text;
-	-webkit-background-clip: text;
-	color: transparent;
+	h1 {
+		margin:0;
+		font-size: ${({ theme }) => theme.fontSizes["7xl"]};
+		font-weight: ${({ theme }) => theme.fontWeights["medium"]};
+		text-transform: uppercase;
+		background-image: url("${props => props.imageBase}");
+		background-size: 120% auto;
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+	}
+`;
+
+const Shape = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
 `;
 
 const InnerBackgroundContainer = styled.div`
@@ -76,9 +86,10 @@ export default () => {
 		<header>
 			<MainContainer>
 				<BackgroundContainer>
-					<Test imageBase={data.file.childImageSharp.fluid.base64}>
-						Portfolio
-					</Test>
+					<FirstVersion imageBase={data.file.childImageSharp.fluid.base64}>
+						<h1>Portfolio</h1>
+						<Shape />
+					</FirstVersion>
 					<InnerBackgroundContainer>
 						<Img
 							fluid={data.file.childImageSharp.fluid}
