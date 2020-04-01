@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+// Helpers
 const handleColorType = type => {
 	if (type === "freelancework") {
 		return ({ theme }) => theme.colors.yellow.main;
@@ -13,6 +14,7 @@ const handleColorType = type => {
 	}
 };
 
+// Styles
 const Filter = styled.div`
 	cursor: pointer;
 	position: relative;

@@ -52,9 +52,8 @@ const SocialIcons = styled.div`
 `;
 
 // First version
-
 const FirstVersion = styled.div`
-	display: none;
+	display: ${props => (props.renderHeader === 1 ? "block" : "none")};
 `;
 
 const Hexagon = styled.div`
@@ -109,7 +108,7 @@ const FolioLogoFirst = styled.div`
 
 // Second version
 const SecondVersion = styled.div`
-	display: block;
+	display: ${props => (props.renderHeader === 2 ? "block" : "none")};
 `;
 
 const FolioLogoSecond = styled.div`
@@ -188,7 +187,7 @@ const BackgroundContainer = styled.div`
 	}
 `;
 
-export default () => {
+export default props => {
 	const data = useStaticQuery(graphql`
 		query HeadingQuery {
 			file(relativePath: { eq: "new-zealand.jpg" }) {
@@ -223,7 +222,7 @@ export default () => {
 							<img src={`linkedin.svg`} alt="linkedin icon" />
 						</a>
 					</SocialIcons>
-					<FirstVersion>
+					<FirstVersion renderHeader={props.renderHeader}>
 						<Hexagon>
 							<img src={`hexagon.svg`} alt="hexa icon" />
 						</Hexagon>
@@ -234,7 +233,7 @@ export default () => {
 							<h1>Portfolio</h1>
 						</FolioLogoFirst>
 					</FirstVersion>
-					<SecondVersion>
+					<SecondVersion renderHeader={props.renderHeader}>
 						<FolioLogoSecond imageBase={data.file.childImageSharp.fluid.base64}>
 							<div className="intro">
 								<p>Adrien Rahier</p>
