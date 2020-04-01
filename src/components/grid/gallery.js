@@ -8,6 +8,8 @@ import GalleryGrid from "./galleryGrid";
 import GalleryFilter from "./galleryFilter";
 
 const MainContainer = styled.div`
+	z-index: 2;
+	position: relative;
 	margin: 40px auto 0;
 	width: 100%;
 	max-width: 1400px;

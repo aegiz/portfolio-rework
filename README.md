@@ -6,6 +6,11 @@ Execute the following command:
 sudo npm install --unsafe-perm
 ```
 
+Explanations static dir:
+
+The static directory can be used for any assets that you need to serve publicly (the contents of this get copied over to public) without any processing. This could include favicons, images or even some legacy HTML maybe.
+
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">

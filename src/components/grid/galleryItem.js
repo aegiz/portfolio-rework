@@ -127,7 +127,7 @@ const Project = styled.div`
 		}
 		&:after {
 			content: "";
-			background: white;
+			background: ${({ theme }) => theme.colors.white};
 			display: block;
 			width: 30px;
 			height: 3px;

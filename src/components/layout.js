@@ -27,7 +27,7 @@ export const theme = {
 			light: "rgba(153, 153, 236, 0.5)",
 		},
 		yellow: {
-			main: "#F0C12B",
+			main: "#F9C440",
 			light: "#fddf81",
 			dark: "#cba429",
 		},
