@@ -6,7 +6,6 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Header from "../components/header";
-import Disclaimer from "../components/disclaimer";
 import Gallery from "../components/grid/gallery";
 //import Project from "../components/project";
 import Footer from "../components/footer";
@@ -18,7 +17,6 @@ class PortfolioIndex extends React.Component {
 			<Layout>
 				<SEO title="Portfolio - Adrien Rahier" />
 				<Header />
-				<Disclaimer />
 				<Gallery posts={data.allMdx.edges} />
 				<Footer />
 			</Layout>

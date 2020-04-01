@@ -14,21 +14,10 @@ const MainContainer = styled.div`
 
 const InnerContainer = styled.div`
 	position: relative;
-	padding: 170px 0;
+	padding: 190px 0;
 	width: 100%;
 	height: 100%;
 	max-width: 1400px;
-`;
-
-const Hexagon = styled.div`
-	position: absolute;
-	top: 155px;
-	left: 50%;
-	transform: translateX(-50%);
-	img {
-		width: 50px;
-		height: 50px;
-	}
 `;
 
 const SocialIcons = styled.div`
@@ -62,7 +51,24 @@ const SocialIcons = styled.div`
 	}
 `;
 
-const FirstVersionLogo = styled.div`
+// First version
+
+const FirstVersion = styled.div`
+	display: none;
+`;
+
+const Hexagon = styled.div`
+	position: absolute;
+	top: 155px;
+	left: 50%;
+	transform: translateX(-50%);
+	img {
+		width: 50px;
+		height: 50px;
+	}
+`;
+
+const FolioLogoFirst = styled.div`
 	position: absolute;
 	z-index: 1;
 	top: 120px;
@@ -91,7 +97,7 @@ const FirstVersionLogo = styled.div`
 		color: ${({ theme }) => theme.colors.grey.main};
 		&:after {
 			content: none;
-			background: white;
+			background: ${({ theme }) => theme.colors.white};
 			display: block;
 			width: 10%;
 			height: 3px;
@@ -101,11 +107,52 @@ const FirstVersionLogo = styled.div`
 	}
 `;
 
-const Shape = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
+// Second version
+const SecondVersion = styled.div`
+	display: block;
 `;
+
+const FolioLogoSecond = styled.div`
+ 	position: absolute;
+ 	z-index: 1;
+	top: 180px;
+ 	left: 50%;
+ 	transform: translateX(-50%);
+	.intro {
+		margin: 0 0 5px 0;
+		p {
+			opacity: 0.5;
+			margin:0;
+			text-transform: uppercase;
+			letter-spacing: ${({ theme }) => theme.fontSizes["xs"]};
+			font-weight: ${({ theme }) => theme.fontWeights["l"]};
+			font-size: ${({ theme }) => theme.fontSizes["xl"]};
+			color: ${({ theme }) => theme.colors.grey.main};
+			text-align: center;
+			&:after {
+				content: "";
+				background: ${({ theme }) => theme.colors.white};
+				display: block;
+				width: 30px;
+				height: 3px;
+				margin: 10px auto 10px;
+				transition: all 0.35s ease-out;
+			}
+		}
+	}
+ 	h1 {
+ 		margin:0;
+ 		font-size: ${({ theme }) => theme.fontSizes["7xl"]};
+ 		font-weight: ${({ theme }) => theme.fontWeights["medium"]};
+		line-height: 0.8;
+ 		text-transform: uppercase;
+ 		background-image: url("${props => props.imageBase}");
+ 		background-size: 120% auto;
+ 		background-clip: text;
+ 		-webkit-background-clip: text;
+ 		color: transparent;
+ 	}
+ `;
 
 const BackgroundContainer = styled.div`
 	width: 100%;
@@ -167,25 +214,34 @@ export default () => {
 				<InnerContainer>
 					<SocialIcons>
 						<a href="/">
-							<img src={`twitter.svg`} alt="Twitter" />
+							<img src={`twitter.svg`} alt="Twitter icon" />
 						</a>
 						<a href="/">
-							<img src={`github.svg`} alt="Github" />
+							<img src={`github.svg`} alt="Github icon" />
 						</a>
 						<a href="/">
-							<img src={`linkedin.svg`} alt="linkedin" />
+							<img src={`linkedin.svg`} alt="linkedin icon" />
 						</a>
 					</SocialIcons>
-					<Hexagon>
-						<img src={`hexagon.svg`} alt="hexa" />
-					</Hexagon>
-					<FirstVersionLogo imageBase={data.file.childImageSharp.fluid.base64}>
-						<div className="intro">
-							<p>Adrien Rahier</p>
-						</div>
-						<h1>Portfolio</h1>
-						<Shape />
-					</FirstVersionLogo>
+					<FirstVersion>
+						<Hexagon>
+							<img src={`hexagon.svg`} alt="hexa icon" />
+						</Hexagon>
+						<FolioLogoFirst imageBase={data.file.childImageSharp.fluid.base64}>
+							<div className="intro">
+								<p>Adrien Rahier</p>
+							</div>
+							<h1>Portfolio</h1>
+						</FolioLogoFirst>
+					</FirstVersion>
+					<SecondVersion>
+						<FolioLogoSecond imageBase={data.file.childImageSharp.fluid.base64}>
+							<div className="intro">
+								<p>Adrien Rahier</p>
+							</div>
+							<h1>Portfolio</h1>
+						</FolioLogoSecond>
+					</SecondVersion>
 				</InnerContainer>
 			</MainContainer>
 		</header>

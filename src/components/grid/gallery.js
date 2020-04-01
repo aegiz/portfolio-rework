@@ -17,19 +17,36 @@ const MainContainer = styled.div`
 
 const FilterTrigger = styled.div`
 	cursor: pointer;
-	position: relative;
+	padding: 0 15px;
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+	justify-content: flex-end;
+	.filter-trigger {
+		display: flex;
+		flex-direction: row;
+		padding: 10px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		transition: all 0.3s;
+		background: ${props =>
+			props.filterOpen ? "rgba(255, 255, 255, 0.2)" : "rgba(255, 255, 255, 0)"};
+		span {
+			color: ${({ theme }) => theme.colors.white};
+			margin-left: 8px;
+		}
+		&:hover {
+			border: 1px solid rgba(255, 255, 255, 0.5);
+		}
+	}
 `;
 
 const FilterContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	${props =>
+		props.filterOpen ? "opacity:1; height:50px;" : "opacity:0; height:0;"};
+	transition: all 0.2s;
 	position: relative;
-	background: transparent;
-	border-radius: 3px;
 	margin: 0 1em;
-	padding: 0.25em 1em;
 	span {
 		margin-left: 10px;
 	}
@@ -38,6 +55,7 @@ const FilterContainer = styled.div`
 class Gallery extends Component {
 	state = {
 		shuffle: null,
+		filterOpen: false,
 	};
 	createIsotopeGrid = (grid, sizer) => {
 		this.setState({
@@ -63,23 +81,21 @@ class Gallery extends Component {
 	destroyGrid = () => {
 		this.state.shuffle.destroy();
 	};
+	_handleClick = e => {
+		e.preventDefault();
+		this.setState({ filterOpen: !this.state.filterOpen });
+	};
 	render() {
 		return (
 			<>
 				<MainContainer>
-					<FilterTrigger>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="#000"
-						>
-							<path d="M0 6C0 5.17157 0.671573 4.5 1.5 4.5H22.5C23.3284 4.5 24 5.17157 24 6C24 6.82843 23.3284 7.5 22.5 7.5H1.5C0.671573 7.5 0 6.82843 0 6ZM3 12C3 11.1716 3.67157 10.5 4.5 10.5H19.5C20.3284 10.5 21 11.1716 21 12C21 12.8284 20.3284 13.5 19.5 13.5H4.5C3.67157 13.5 3 12.8284 3 12ZM7.5 16.5C6.67157 16.5 6 17.1716 6 18C6 18.8284 6.67157 19.5 7.5 19.5H16.5C17.3284 19.5 18 18.8284 18 18C18 17.1716 17.3284 16.5 16.5 16.5H7.5Z"></path>
-						</svg>
-						<span>Filters</span>
+					<FilterTrigger filterOpen={this.state.filterOpen}>
+						<div className="filter-trigger" onClick={this._handleClick}>
+							<img src={`filter.svg`} alt="filter" />
+							<span>Filters</span>
+						</div>
 					</FilterTrigger>
-					<FilterContainer>
+					<FilterContainer filterOpen={this.state.filterOpen}>
 						<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
 						<GalleryFilter
 							filter={"Freelance Work"}

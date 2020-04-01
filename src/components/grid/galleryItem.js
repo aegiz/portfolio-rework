@@ -241,10 +241,10 @@ class galleryItem extends Component {
 						<div className="hashtag">
 							<p>
 								{frontmatter.hashtags.split(" ").map((word, i) => (
-									<>
+									<span key={i}>
 										<span className="diese"> #</span>
 										{word}
-									</>
+									</span>
 								))}
 							</p>
 						</div>
