@@ -20,12 +20,23 @@ const InnerContainer = styled.div`
 	max-width: 1400px;
 `;
 
+const Hexagon = styled.div`
+	position: absolute;
+	top: 155px;
+	left: 50%;
+	transform: translateX(-50%);
+	img {
+		width: 50px;
+		height: 50px;
+	}
+`;
+
 const SocialIcons = styled.div`
 	z-index: 2;
 	position: absolute;
 	top: 20px;
 	right: 0;
-	padding: 0 20px;
+	padding: 0 30px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -37,7 +48,7 @@ const SocialIcons = styled.div`
 		align-items: center;
 		justify-content: center;
 		& :nth-child(2) {
-			margin: 0 10px 0 10px;
+			margin: 0 15px 0 15px;
 		}
 	}
 	img {
@@ -54,34 +65,32 @@ const SocialIcons = styled.div`
 const FirstVersionLogo = styled.div`
 	position: absolute;
 	z-index: 1;
-	top: 180px;
+	top: 120px;
 	left: 50%;
 	transform: translateX(-50%);
+	padding: 45px;
+	opacity: 0.3;
 	.intro {
-		margin: 0 0 5px 0;
+		margin: 0 0 20px 0;
 		p {
-			margin:0;
+			margin: 0 0 0 8px;
 			text-transform: uppercase;
-			letter-spacing: ${({ theme }) => theme.fontSizes["xs"]};
+			letter-spacing: 0.4em;
 			font-weight: ${({ theme }) => theme.fontWeights["l"]};
 			font-size: ${({ theme }) => theme.fontSizes["xl"]};
-			color: ${({ theme }) => theme.colors.white};
+			color: ${({ theme }) => theme.colors.grey.dark};
 			text-align: center;
 		}
 	}
 	h1 {
-		margin:0;
+		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["7xl"]};
 		font-weight: ${({ theme }) => theme.fontWeights["medium"]};
 		line-height: 0.8;
 		text-transform: uppercase;
-		background-image: url("${props => props.imageBase}");
-		background-size: 120% auto;
-		background-clip: text;
-		-webkit-background-clip: text;
-		color: transparent;
+		color: ${({ theme }) => theme.colors.grey.main};
 		&:after {
-			content: "";
+			content: none;
 			background: white;
 			display: block;
 			width: 10%;
@@ -111,7 +120,7 @@ const BackgroundContainer = styled.div`
 		left: 0;
 		width: 100%;
 		height: 100%;
-		box-shadow: inset 0px 160px 40px rgba(0, 0, 0, 0.1);
+		box-shadow: inset 0px 160px 40px rgba(0, 0, 0, 0.05);
 	}
 	.gatsby-image-wrapper {
 		height: 100%;
@@ -167,6 +176,9 @@ export default () => {
 							<img src={`linkedin.svg`} alt="linkedin" />
 						</a>
 					</SocialIcons>
+					<Hexagon>
+						<img src={`hexagon.svg`} alt="hexa" />
+					</Hexagon>
 					<FirstVersionLogo imageBase={data.file.childImageSharp.fluid.base64}>
 						<div className="intro">
 							<p>Adrien Rahier</p>
