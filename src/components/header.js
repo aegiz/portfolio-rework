@@ -41,7 +41,7 @@ const SocialIcons = styled.div`
 		}
 	}
 	img {
-		opacity: 0.3;
+		opacity: 0.2;
 		width: 35px;
 		height: 35px;
 		transition: all 0.3s;

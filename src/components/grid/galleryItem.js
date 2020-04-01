@@ -226,7 +226,7 @@ class galleryItem extends Component {
 							loading="eager"
 							fluid={frontmatter.featuredImage.childImageSharp.grayscale}
 						/>
-						<div className="figcap"></div>
+						<div className="figcap" />
 					</SideProject>
 				) : (
 					<Project typeOfArticle={typeOfArticleClean}>
@@ -248,12 +248,12 @@ class galleryItem extends Component {
 								))}
 							</p>
 						</div>
-						<div className="overlay" typeOfArticle={typeOfArticleClean}></div>
+						<div className="overlay" />
 						<Img
 							loading="eager"
 							fluid={frontmatter.featuredImage.childImageSharp.duotone}
 						/>
-						<div className="figcap"></div>
+						<div className="figcap" />
 					</Project>
 				)}
 			</GalleryItem>

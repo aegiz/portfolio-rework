@@ -56,6 +56,7 @@ class Gallery extends Component {
 	state = {
 		shuffle: null,
 		filterOpen: false,
+		currentFilter: "all",
 	};
 	createIsotopeGrid = (grid, sizer) => {
 		this.setState({
@@ -71,11 +72,16 @@ class Gallery extends Component {
 			}),
 		});
 	};
-	filterGrid = newFilter => {
+	updateGrid = newFilter => {
 		this.state.shuffle.filter(element => {
 			return newFilter === "all"
 				? element
 				: element.dataset.type.includes(newFilter);
+		});
+	};
+	updateFilter = newFilter => {
+		this.setState({
+			currentFilter: newFilter,
 		});
 	};
 	destroyGrid = () => {
@@ -84,6 +90,8 @@ class Gallery extends Component {
 	_handleClick = e => {
 		e.preventDefault();
 		this.setState({ filterOpen: !this.state.filterOpen });
+		this.updateFilter("all");
+		this.updateGrid("all");
 	};
 	render() {
 		return (
@@ -96,18 +104,29 @@ class Gallery extends Component {
 						</div>
 					</FilterTrigger>
 					<FilterContainer filterOpen={this.state.filterOpen}>
-						<GalleryFilter filter={"All"} filterGrid={this.filterGrid} />
 						<GalleryFilter
-							filter={"Freelance Work"}
-							filterGrid={this.filterGrid}
+							filter={"All"}
+							currentFilter={this.state.currentFilter}
+							updateGrid={this.updateGrid}
+							updateFilter={this.updateFilter}
 						/>
 						<GalleryFilter
 							filter={"Full-Time Work"}
-							filterGrid={this.filterGrid}
+							currentFilter={this.state.currentFilter}
+							updateGrid={this.updateGrid}
+							updateFilter={this.updateFilter}
+						/>
+						<GalleryFilter
+							filter={"Freelance Work"}
+							currentFilter={this.state.currentFilter}
+							updateGrid={this.updateGrid}
+							updateFilter={this.updateFilter}
 						/>
 						<GalleryFilter
 							filter={"Side Project"}
-							filterGrid={this.filterGrid}
+							currentFilter={this.state.currentFilter}
+							updateGrid={this.updateGrid}
+							updateFilter={this.updateFilter}
 						/>
 					</FilterContainer>
 					<GalleryGrid
