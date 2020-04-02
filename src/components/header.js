@@ -2,6 +2,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
+import background from "../../static/trouble.jpg";
 
 const MainContainer = styled.div`
 	width: 100%;
@@ -165,14 +166,12 @@ const Slide = styled.div`
 	border-radius: 50%;
 	background-size: 16rem 16rem;
 	overflow: hidden;
-	background-image: url("http://troublemakers.ca/app/uploads/images/bg/02.jpg");
 `;
 
 const SlideItem = styled.div`
 	width: 16rem;
 	overflow: hidden;
 	height: 1rem;
-	background-image: url("http://troublemakers.ca/app/uploads/images/bg/02.jpg");
 	background-repeat: no-repeat;
 	background-position: center -${props => props.numberI}rem;
 	background-size: 16rem 16rem;
@@ -306,23 +305,87 @@ export default props => {
 					</SecondVersion>
 					<ThirdVersion renderHeader={props.renderHeader}>
 						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
-							<Slide>
-								<SlideItem factor={-1} numberI={0} />
-								<SlideItem factor={1} numberI={1} />
-								<SlideItem factor={-1} numberI={2} />
-								<SlideItem factor={1} numberI={3} />
-								<SlideItem factor={-1} numberI={4} />
-								<SlideItem factor={1} numberI={5} />
-								<SlideItem factor={-1} numberI={6} />
-								<SlideItem factor={1} numberI={7} />
-								<SlideItem factor={-1} numberI={8} />
-								<SlideItem factor={1} numberI={9} />
-								<SlideItem factor={-1} numberI={10} />
-								<SlideItem factor={1} numberI={11} />
-								<SlideItem factor={-1} numberI={12} />
-								<SlideItem factor={1} numberI={13} />
-								<SlideItem factor={-1} numberI={14} />
-								<SlideItem factor={1} numberI={15} />
+							<Slide style={{ backgroundImage: `url(${background})` }}>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={0}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={1}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={2}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={3}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={4}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={5}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={6}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={7}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={8}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={9}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={10}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={11}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={12}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={13}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={14}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={15}
+								/>
 							</Slide>
 							<LogoThird>
 								<img src={`logo1.png`} alt="logo 1" />
@@ -331,23 +394,87 @@ export default props => {
 					</ThirdVersion>
 					<FourthVersion renderHeader={props.renderHeader}>
 						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
-							<Slide>
-								<SlideItem factor={-1} numberI={0} />
-								<SlideItem factor={1} numberI={1} />
-								<SlideItem factor={-1} numberI={2} />
-								<SlideItem factor={1} numberI={3} />
-								<SlideItem factor={-1} numberI={4} />
-								<SlideItem factor={1} numberI={5} />
-								<SlideItem factor={-1} numberI={6} />
-								<SlideItem factor={1} numberI={7} />
-								<SlideItem factor={-1} numberI={8} />
-								<SlideItem factor={1} numberI={9} />
-								<SlideItem factor={-1} numberI={10} />
-								<SlideItem factor={1} numberI={11} />
-								<SlideItem factor={-1} numberI={12} />
-								<SlideItem factor={1} numberI={13} />
-								<SlideItem factor={-1} numberI={14} />
-								<SlideItem factor={1} numberI={15} />
+							<Slide style={{ backgroundImage: `url(${background})` }}>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={0}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={1}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={2}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={3}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={4}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={5}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={6}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={7}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={8}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={9}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={10}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={11}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={12}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={13}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={-1}
+									numberI={14}
+								/>
+								<SlideItem
+									style={{ backgroundImage: `url(${background})` }}
+									factor={1}
+									numberI={15}
+								/>
 							</Slide>
 							<LogoFourth>
 								<img src={`logo2.png`} alt="logo 2" />
