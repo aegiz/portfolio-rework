@@ -19,24 +19,16 @@ export const theme = {
 		mono: "Helvetica, Arial, sans-serif",
 	},
 	colors: {
-		white: "rgba(255, 255, 255, 1)",
-		black: "rgba(0, 0, 0, 1)",
+		white: "#FFF",
+		black: "#000",
 		grey: {
-			main: "#808080",
-			dark: "hsla(0, 0%, 10%, 1)",
-		},
-		blue: {
-			main: "rgba(35, 35, 255, 1)",
-			light: "rgba(153, 153, 236, 0.5)",
+			main: "#888",
+			dark: "#111",
 		},
 		yellow: {
-			main: "#F9C440",
-			light: "#fddf81",
-			dark: "#cba429",
-		},
-		red: {
-			main: "rgba(205, 77, 62, 1)",
-			light: "rgba(208, 130, 120, 1)",
+			main: "#FC4",
+			light: "#FD8",
+			dark: "#CA2",
 		},
 	},
 	breakpoints: {

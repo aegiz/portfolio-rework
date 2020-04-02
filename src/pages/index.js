@@ -24,7 +24,7 @@ const Hop = styled.div`
 
 class PortfolioIndex extends React.Component {
 	state = {
-		renderHeader: 2,
+		renderHeader: 1,
 	};
 	updateHeader = newVal => {
 		this.setState({
@@ -56,6 +56,24 @@ class PortfolioIndex extends React.Component {
 						}}
 					>
 						Header 2
+					</Hop>
+					<Hop
+						display={3}
+						renderHeader={this.state.renderHeader}
+						onClick={() => {
+							this.updateHeader(3);
+						}}
+					>
+						Header 3
+					</Hop>
+					<Hop
+						display={4}
+						renderHeader={this.state.renderHeader}
+						onClick={() => {
+							this.updateHeader(4);
+						}}
+					>
+						Header 4
 					</Hop>
 				</Version>
 				<Footer />

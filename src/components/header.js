@@ -94,15 +94,6 @@ const FolioLogoFirst = styled.div`
 		line-height: 0.8;
 		text-transform: uppercase;
 		color: ${({ theme }) => theme.colors.grey.main};
-		&:after {
-			content: none;
-			background: ${({ theme }) => theme.colors.white};
-			display: block;
-			width: 10%;
-			height: 3px;
-			margin: 40px auto 0;
-			transition: all 0.35s ease-out;
-		}
 	}
 `;
 
@@ -152,6 +143,81 @@ const FolioLogoSecond = styled.div`
  		color: transparent;
  	}
  `;
+
+// Third version
+
+const ThirdVersion = styled.div`
+	display: ${props => (props.renderHeader === 3 ? "block" : "none")};
+`;
+
+const FolioLogoThird = styled.div`
+	position: absolute;
+	z-index: 10;
+	top: 130px;
+	left: 50%;
+	transform: translateX(-50%);
+`;
+
+const Slide = styled.div`
+	opacity: 0.2;
+	width: 16rem;
+	height: 16rem;
+	border-radius: 50%;
+	background-size: 16rem 16rem;
+	overflow: hidden;
+	background-image: url("http://troublemakers.ca/app/uploads/images/bg/02.jpg");
+`;
+
+const SlideItem = styled.div`
+	width: 16rem;
+	overflow: hidden;
+	height: 1rem;
+	background-image: url("http://troublemakers.ca/app/uploads/images/bg/02.jpg");
+	background-repeat: no-repeat;
+	background-position: center -${props => props.numberI}rem;
+	background-size: 16rem 16rem;
+	transition: all 0.3s ease-in-out;
+	animation: slideAnim 3s ease-in-out ${props => props.numberI * -0.5}s
+		alternate infinite;
+	@keyframes slideAnim {
+		from {
+			transform: translateX(${props => props.factor}rem);
+		}
+		to {
+			transform: translateX(${props => props.factor * -1}rem);
+		}
+	}
+`;
+
+const LogoThird = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	img {
+		filter: grayscale(100%);
+		width: 150px;
+		height: 150px;
+	}
+`;
+
+// Fourth version
+const FourthVersion = styled.div`
+	display: ${props => (props.renderHeader === 4 ? "block" : "none")};
+`;
+const LogoFourth = styled.div`
+	position: absolute;
+	top: 50%;
+	left: calc(50% - 7px);
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	img {
+		filter: grayscale(100%);
+		width: 250px;
+		height: 250px;
+	}
+`;
 
 const BackgroundContainer = styled.div`
 	width: 100%;
@@ -205,10 +271,7 @@ export default props => {
 			<MainContainer>
 				<BackgroundContainer>
 					<div className="box-shadow"></div>
-					<Img
-						fluid={data.file.childImageSharp.fluid}
-						alt="A corgi smiling happily"
-					/>
+					<Img fluid={data.file.childImageSharp.fluid} />
 				</BackgroundContainer>
 				<InnerContainer>
 					<SocialIcons>
@@ -241,6 +304,56 @@ export default props => {
 							<h1>Portfolio</h1>
 						</FolioLogoSecond>
 					</SecondVersion>
+					<ThirdVersion renderHeader={props.renderHeader}>
+						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
+							<Slide>
+								<SlideItem factor={-1} numberI={0} />
+								<SlideItem factor={1} numberI={1} />
+								<SlideItem factor={-1} numberI={2} />
+								<SlideItem factor={1} numberI={3} />
+								<SlideItem factor={-1} numberI={4} />
+								<SlideItem factor={1} numberI={5} />
+								<SlideItem factor={-1} numberI={6} />
+								<SlideItem factor={1} numberI={7} />
+								<SlideItem factor={-1} numberI={8} />
+								<SlideItem factor={1} numberI={9} />
+								<SlideItem factor={-1} numberI={10} />
+								<SlideItem factor={1} numberI={11} />
+								<SlideItem factor={-1} numberI={12} />
+								<SlideItem factor={1} numberI={13} />
+								<SlideItem factor={-1} numberI={14} />
+								<SlideItem factor={1} numberI={15} />
+							</Slide>
+							<LogoThird>
+								<img src={`logo1.png`} alt="logo 1" />
+							</LogoThird>
+						</FolioLogoThird>
+					</ThirdVersion>
+					<FourthVersion renderHeader={props.renderHeader}>
+						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
+							<Slide>
+								<SlideItem factor={-1} numberI={0} />
+								<SlideItem factor={1} numberI={1} />
+								<SlideItem factor={-1} numberI={2} />
+								<SlideItem factor={1} numberI={3} />
+								<SlideItem factor={-1} numberI={4} />
+								<SlideItem factor={1} numberI={5} />
+								<SlideItem factor={-1} numberI={6} />
+								<SlideItem factor={1} numberI={7} />
+								<SlideItem factor={-1} numberI={8} />
+								<SlideItem factor={1} numberI={9} />
+								<SlideItem factor={-1} numberI={10} />
+								<SlideItem factor={1} numberI={11} />
+								<SlideItem factor={-1} numberI={12} />
+								<SlideItem factor={1} numberI={13} />
+								<SlideItem factor={-1} numberI={14} />
+								<SlideItem factor={1} numberI={15} />
+							</Slide>
+							<LogoFourth>
+								<img src={`logo2.png`} alt="logo 2" />
+							</LogoFourth>
+						</FolioLogoThird>
+					</FourthVersion>
 				</InnerContainer>
 			</MainContainer>
 		</header>
