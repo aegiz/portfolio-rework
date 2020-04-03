@@ -59,18 +59,25 @@ class Gallery extends Component {
 		currentFilter: "all",
 	};
 	createIsotopeGrid = (grid, sizer) => {
-		this.setState({
-			shuffle: new Shuffle(grid, {
-				itemSelector: ".grid-item",
-				sizer: sizer,
-				initialSort: {
-					reverse: true,
-					by: function(element) {
-						return element.getAttribute("data-date");
+		Shuffle.ShuffleItem.Css.VISIBLE.before.opacity = 0;
+		Shuffle.ShuffleItem.Css.VISIBLE.after.opacity = 1;
+		this.setState(
+			{
+				shuffle: new Shuffle(grid, {
+					itemSelector: ".grid-item",
+					sizer: sizer,
+					initialSort: {
+						reverse: true,
+						by: function(element) {
+							return element.getAttribute("data-date");
+						},
 					},
-				},
-			}),
-		});
+				}),
+			},
+			() => {
+				console.log(this.state.shuffle);
+			}
+		);
 	};
 	updateGrid = newFilter => {
 		this.state.shuffle.filter(element => {
