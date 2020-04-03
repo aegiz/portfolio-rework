@@ -11,6 +11,7 @@ const ShuffleGrid = styled.div`
 `;
 
 const GridItem = styled.div`
+	opacity: ${props => (props.shuffle ? "1" : "0")} !important;
 	margin: 10px 0 0 0;
 	width: ${props => {
 		if (props.typeOfArticle === "sideproject") {
@@ -43,7 +44,7 @@ class GalleryGrid extends Component {
 		this.sizer = React.createRef();
 	}
 	componentDidMount() {
-		this.props.createIsotopeGrid(this.element.current, this.sizer.current);
+		this.props.createGrid(this.element.current, this.sizer.current);
 	}
 	componentWillUnmount() {
 		this.props.destroyGrid();
@@ -54,6 +55,7 @@ class GalleryGrid extends Component {
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
+						shuffle={this.props.shuffle}
 						className="grid-item"
 						data-type={post.node.frontmatter.typeOfArticle
 							.toLowerCase()

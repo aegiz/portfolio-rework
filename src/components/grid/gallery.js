@@ -58,26 +58,20 @@ class Gallery extends Component {
 		filterOpen: false,
 		currentFilter: "all",
 	};
-	createIsotopeGrid = (grid, sizer) => {
-		Shuffle.ShuffleItem.Css.VISIBLE.before.opacity = 0;
-		Shuffle.ShuffleItem.Css.VISIBLE.after.opacity = 1;
-		this.setState(
-			{
-				shuffle: new Shuffle(grid, {
-					itemSelector: ".grid-item",
-					sizer: sizer,
-					initialSort: {
-						reverse: true,
-						by: function(element) {
-							return element.getAttribute("data-date");
-						},
+	createGrid = (grid, sizer) => {
+		// Shuffle.ShuffleItem.Css.INITIAL.visibility = "hidden";
+		this.setState({
+			shuffle: new Shuffle(grid, {
+				itemSelector: ".grid-item",
+				sizer: sizer,
+				initialSort: {
+					reverse: true,
+					by: function(element) {
+						return element.getAttribute("data-date");
 					},
-				}),
-			},
-			() => {
-				console.log(this.state.shuffle);
-			}
-		);
+				},
+			}),
+		});
 	};
 	updateGrid = newFilter => {
 		this.state.shuffle.filter(element => {
@@ -137,7 +131,8 @@ class Gallery extends Component {
 						/>
 					</FilterContainer>
 					<GalleryGrid
-						createIsotopeGrid={this.createIsotopeGrid}
+						shuffle={this.state.shuffle}
+						createGrid={this.createGrid}
 						destroyGrid={this.destroyGrid}
 						posts={this.props.posts}
 					/>
