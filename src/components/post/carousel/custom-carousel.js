@@ -15,6 +15,7 @@ import "./carousel.css";
 import styled from "styled-components";
 
 const MainContainer = styled.div`
+	opacity: ${props => (props.carouselReady ? "1" : "0")};
 	display: flex;
 	flex-direction: row;
 	width: 100%;
@@ -66,19 +67,6 @@ const CarouselContainer = styled.div`
 		margin: 0 auto;
 		flex-direction: column-reverse;
 	}
-`;
-
-const Loading = styled.div`
-	display: ${props => (props.carouselReady ? "none" : "flex")};
-	background: white;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	align-items: center;
-	justify-content: center;
-	z-index: 2;
 `;
 
 const ContainerSliderLeft = styled.div`
@@ -160,7 +148,6 @@ export default class CustomCarousel extends Component {
 		totalSlide: this.props.images.length,
 		sliderLeftLoaded: false,
 		sliderRightLoaded: false,
-		assetsLoaded: false,
 	};
 
 	componentDidMount() {
@@ -222,100 +209,79 @@ export default class CustomCarousel extends Component {
 				},
 			],
 		};
-		let counter = 0;
-		const imageLoaded = () => {
-			counter++;
-			if (counter >= this.props.images.length) {
-				this.setState({
-					assetsLoaded: true,
-				});
-			}
-		};
 		return (
-			<>
-				<MainContainer>
-					<Thumbnails>
-						{this.props.images.map((image, i) => (
-							<Thumbnail
-								className="thumbnail"
-								onClick={e => this.state.slickRight.slickGoTo(i)}
-								key={i}
-								index={i}
-								current={this.state.currentSlide}
-							>
-								{/* <img
-									src={`${image.src}`}
-									alt={`${image.alt}`}
-									onLoad={imageLoaded}
-								/> */}
-								<CustImg src={"new-zealand.jpg"} />
-							</Thumbnail>
-						))}
-					</Thumbnails>
-					<CarouselContainer>
-						<Loading
-							carouselReady={
-								this.state.sliderLeftLoaded &&
-								this.state.sliderRightLoaded &&
-								this.state.assetsLoaded
-							}
+			<MainContainer
+				carouselReady={
+					this.state.sliderLeftLoaded && this.state.sliderRightLoaded
+				}
+			>
+				<Thumbnails>
+					{this.props.images.map((image, i) => (
+						<Thumbnail
+							className="thumbnail"
+							onClick={e => this.state.slickRight.slickGoTo(i)}
+							key={i}
+							index={i}
+							current={this.state.currentSlide}
 						>
-							Carousel is loading...
-						</Loading>
-						<ContainerSliderLeft hide={this.props.images.length < 4}>
-							<Slider
-								asNavFor={this.state.slickRight}
-								ref={slider => (this.sliderLeft = slider)}
-								{...settingsSliderLeft}
-							>
-								{this.props.images.map((image, i) => (
-									<div
-										className="slider-item"
-										onClick={e => this.state.slickRight.slickGoTo(i)}
-										key={i}
-									>
-										<img src={`${image.src}`} alt={`${image.alt}`} />
-									</div>
-								))}
-							</Slider>
-						</ContainerSliderLeft>
-						<ContainerSliderRight>
-							<Slider
-								asNavFor={this.state.slickLeft}
-								ref={slider => (this.sliderRight = slider)}
-								{...settingsSliderRight}
-							>
-								{this.props.images.map((image, i) => (
-									<div className="slider-item" key={i}>
-										<img src={`${image.src}`} alt={`${image.alt}`} />
-									</div>
-								))}
-							</Slider>
-							<div className="photos-counter">
-								<span>{this.state.currentSlide + 1}</span>
-								<span>/</span>
-								<span>{this.state.totalSlide}</span>
-							</div>
-							<IconContainter>
-								<CTAicon
-									type={"previous"}
-									alt={"previous icon"}
-									width={24}
-									height={24}
-									onClick={() => this.state.slickRight.slickPrev()}
-								/>
-								<CTAicon
-									type={"next"}
-									alt={"next icon"}
-									width={24}
-									height={24}
-									onClick={() => this.state.slickRight.slickNext()}
-								/>
-							</IconContainter>
-						</ContainerSliderRight>
-					</CarouselContainer>
-				</MainContainer>
-			</>
+							<CustImg src={`${image.src}`} alt={`${image.alt}`} />
+						</Thumbnail>
+					))}
+				</Thumbnails>
+				<CarouselContainer>
+					<ContainerSliderLeft hide={this.props.images.length < 4}>
+						<Slider
+							asNavFor={this.state.slickRight}
+							ref={slider => (this.sliderLeft = slider)}
+							{...settingsSliderLeft}
+						>
+							{this.props.images.map((image, i) => (
+								<div
+									className="slider-item"
+									onClick={e => this.state.slickRight.slickGoTo(i)}
+									key={i}
+								>
+									<CustImg src={`${image.src}`} alt={`${image.alt}`} />
+								</div>
+							))}
+						</Slider>
+					</ContainerSliderLeft>
+					<ContainerSliderRight>
+						<Slider
+							asNavFor={this.state.slickLeft}
+							ref={slider => (this.sliderRight = slider)}
+							{...settingsSliderRight}
+						>
+							{this.props.images.map((image, i) => (
+								<div className="slider-item" key={i}>
+									<CustImg src={`${image.src}`} alt={`${image.alt}`} />
+								</div>
+							))}
+						</Slider>
+						<div className="photos-counter">
+							<span>{this.state.currentSlide + 1}</span>
+							<span>/</span>
+							<span>{this.state.totalSlide}</span>
+						</div>
+						<IconContainter>
+							<CTAicon
+								type={"previous"}
+								alt={"previous icon"}
+								width={24}
+								height={24}
+								onClick={() => this.state.slickRight.slickPrev()}
+							/>
+							<CTAicon
+								type={"next"}
+								alt={"next icon"}
+								width={24}
+								height={24}
+								onClick={() => this.state.slickRight.slickNext()}
+							/>
+						</IconContainter>
+					</ContainerSliderRight>
+				</CarouselContainer>
+			</MainContainer>
 		);
 	}
 }
