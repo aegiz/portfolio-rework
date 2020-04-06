@@ -4,12 +4,11 @@ import { graphql } from "gatsby";
 import styled from "styled-components";
 
 // Components
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import Header from "../components/header";
-import Gallery from "../components/grid/gallery";
-//import Project from "../components/project";
-import Footer from "../components/footer";
+import Layout from "@components/layout";
+import SEO from "@components/seo";
+import Header from "@components/header";
+import Gallery from "@components/grid/gallery";
+import Footer from "@components/footer";
 
 const Version = styled.div`
 	position: absolute;

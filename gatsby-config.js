@@ -28,8 +28,8 @@ module.exports = {
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				path: `${__dirname}/content`,
-				name: `content`,
+				path: `${__dirname}/content/assets/carousel`,
+				name: `carousel`,
 			},
 		},
 		{
@@ -84,5 +84,19 @@ module.exports = {
 		},
 		`gatsby-plugin-offline`,
 		`gatsby-plugin-react-helmet`,
+		{
+			resolve: `gatsby-plugin-alias-imports`,
+			options: {
+				alias: {
+					"@src": "src",
+					"@components": "src/components",
+					"@pages": "src/pages",
+					"@templates": "src/templates",
+					"@utils": "src/utils",
+					"@blog": "content/blog",
+				},
+				extensions: ["js"],
+			},
+		},
 	],
 };

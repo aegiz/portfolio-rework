@@ -5,6 +5,9 @@ import Slider from "react-slick";
 // Components
 import CTAicon from "./icons";
 
+// Utils
+import CustImg from "@utils/StaticImg";
+
 // Styles
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -54,6 +57,7 @@ const Thumbnail = styled.li`
 `;
 
 const CarouselContainer = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	width: 100%;
@@ -239,11 +243,12 @@ export default class CustomCarousel extends Component {
 								index={i}
 								current={this.state.currentSlide}
 							>
-								<img
+								{/* <img
 									src={`${image.src}`}
 									alt={`${image.alt}`}
 									onLoad={imageLoaded}
-								/>
+								/> */}
+								<CustImg src={"new-zealand.jpg"} />
 							</Thumbnail>
 						))}
 					</Thumbnails>

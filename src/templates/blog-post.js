@@ -4,8 +4,8 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 // import Img from "gatsby-image";
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "@components/layout";
+import SEO from "@components/seo";
 
 // Utils
 // import CustImg from "../utils/Img";

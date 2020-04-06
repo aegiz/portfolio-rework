@@ -5,7 +5,9 @@ import { StaticQuery, graphql } from "gatsby";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
-import CustomSlickCarousel from "./post/carousel/custom-carousel";
+
+// Components
+import CustomSlickCarousel from "@components/post/carousel/custom-carousel";
 
 // Styles: Theme
 export const theme = {
