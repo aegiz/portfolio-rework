@@ -67,7 +67,7 @@ const CarouselContainer = styled.div`
 const Loading = styled.div`
 	display: ${props => (props.carouselReady ? "none" : "flex")};
 	background: white;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	bottom: 0;

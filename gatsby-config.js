@@ -3,7 +3,7 @@ module.exports = {
 		title: `Adrien Rahier Portfolio`,
 		author: `Adrien Rahier`,
 		description: `Portfolio of Adrien Rahier.`,
-		siteUrl: `http://adrienrahier.com/portfolio/`,
+		siteUrl: `https://adrienrahier.com/portfolio/`,
 		social: {
 			twitter: `adrienrahier`,
 		},
@@ -56,7 +56,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl: `http://www.adrienrahier.com/portfolio`,
+				siteUrl: `https://www.adrienrahier.com/portfolio`,
 			},
 		},
 		{
@@ -69,7 +69,6 @@ module.exports = {
 		},
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-sitemap`,
-		`gatsby-plugin-feed-mdx`,
 		`gatsby-plugin-transition-link`,
 		{
 			resolve: `gatsby-plugin-manifest`,
@@ -80,18 +79,10 @@ module.exports = {
 				background_color: `#ffffff`,
 				theme_color: `#663399`,
 				display: `minimal-ui`,
-				icon: `content/assets/gatsby-icon.png`,
+				icon: `static/gatsby-icon.png`,
 			},
 		},
 		`gatsby-plugin-offline`,
 		`gatsby-plugin-react-helmet`,
-		{
-			resolve: `gatsby-plugin-web-font-loader`,
-			options: {
-				google: {
-					families: ["Quicksand", "Lato", "Open Sans"],
-				},
-			},
-		},
 	],
 };
