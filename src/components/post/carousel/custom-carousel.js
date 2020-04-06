@@ -239,7 +239,10 @@ export default class CustomCarousel extends Component {
 								<div
 									className="slider-item"
 									onClick={e => this.state.slickRight.slickGoTo(i)}
+									onKeyDown={e => this.state.slickRight.slickGoTo(i)}
 									key={i}
+									role="button"
+									tabIndex="0"
 								>
 									<CustImg src={`${image.src}`} alt={`${image.alt}`} />
 								</div>
@@ -270,6 +273,7 @@ export default class CustomCarousel extends Component {
 								width={24}
 								height={24}
 								onClick={() => this.state.slickRight.slickPrev()}
+								onKeyDown={() => this.state.slickRight.slickPrev()}
 							/>
 							<CTAicon
 								type={"next"}
@@ -277,6 +281,7 @@ export default class CustomCarousel extends Component {
 								width={24}
 								height={24}
 								onClick={() => this.state.slickRight.slickNext()}
+								onKeyDown={() => this.state.slickRight.slickNext()}
 							/>
 						</IconContainter>
 					</ContainerSliderRight>

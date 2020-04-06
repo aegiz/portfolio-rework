@@ -12,13 +12,14 @@ class CTAicon extends React.Component {
 			next: nextImg,
 		};
 		return (
-			<img
-				width={this.props.width}
-				height={this.props.height}
-				alt={this.props.alt}
-				src={icons[this.props.type]}
-				onClick={this.props.onClick}
-			></img>
+			<button onClick={this.props.onClick} onKeyDown={this.props.onClick}>
+				<img
+					width={this.props.width}
+					height={this.props.height}
+					alt={this.props.alt}
+					src={icons[this.props.type]}
+				/>
+			</button>
 		);
 	}
 }

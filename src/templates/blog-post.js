@@ -2,13 +2,10 @@ import React from "react";
 import { graphql } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-// import Img from "gatsby-image";
+import Img from "gatsby-image";
 
 import Layout from "@components/layout";
 import SEO from "@components/seo";
-
-// Utils
-// import CustImg from "../utils/Img";
 
 class BlogPostTemplate extends React.Component {
 	render() {
@@ -33,8 +30,6 @@ class BlogPostTemplate extends React.Component {
 				>
 					{post.frontmatter.title}
 				</h1>
-				{/* <Img fluid={featuredImgFluid} /> */}
-				{/* <CustImg src={"new-zealand.jpg"} /> */}
 				<p
 					style={{
 						display: `block`,
@@ -44,6 +39,7 @@ class BlogPostTemplate extends React.Component {
 				</p>
 				<MDXRenderer>{post.body}</MDXRenderer>
 				<hr />
+				<Img fluid={featuredImgFluid} />
 				<ul
 					style={{
 						display: `flex`,

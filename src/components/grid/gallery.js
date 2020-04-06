@@ -98,7 +98,13 @@ class Gallery extends Component {
 			<>
 				<MainContainer>
 					<FilterTrigger filterOpen={this.state.filterOpen}>
-						<div className="filter-trigger" onClick={this._handleClick}>
+						<div
+							className="filter-trigger"
+							onKeyDown={this._handleClick}
+							onClick={this._handleClick}
+							tabIndex="0"
+							role="button"
+						>
 							<img src={`filter.svg`} alt="filter" />
 							<span>Filters</span>
 						</div>
