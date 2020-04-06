@@ -257,7 +257,7 @@ export default props => {
 		query HeadingQuery {
 			file(relativePath: { eq: "new-zealand.jpg" }) {
 				childImageSharp {
-					fluid(maxWidth: 2000) {
+					fluid(maxWidth: 1000) {
 						...GatsbyImageSharpFluid
 					}
 				}

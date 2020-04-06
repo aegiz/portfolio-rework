@@ -210,8 +210,7 @@ const Project = styled.div`
 
 class galleryItem extends Component {
 	render() {
-		const project = this.props.post;
-		const frontmatter = project.node.frontmatter;
+		const frontmatter = this.props.post.node.frontmatter;
 		const typeOfArticleClean = frontmatter.typeOfArticle
 			.toLowerCase()
 			.replace(/\s/g, "");

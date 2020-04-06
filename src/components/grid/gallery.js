@@ -59,7 +59,6 @@ class Gallery extends Component {
 		currentFilter: "all",
 	};
 	createGrid = (grid, sizer) => {
-		// Shuffle.ShuffleItem.Css.INITIAL.visibility = "hidden";
 		this.setState({
 			shuffle: new Shuffle(grid, {
 				itemSelector: ".grid-item",
@@ -131,7 +130,7 @@ class Gallery extends Component {
 						/>
 					</FilterContainer>
 					<GalleryGrid
-						shuffle={this.state.shuffle}
+						instance={this.state.shuffle}
 						createGrid={this.createGrid}
 						destroyGrid={this.destroyGrid}
 						posts={this.props.posts}

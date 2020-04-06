@@ -11,7 +11,7 @@ const ShuffleGrid = styled.div`
 `;
 
 const GridItem = styled.div`
-	opacity: ${props => (props.shuffle ? "1" : "0")} !important;
+	opacity: ${props => (props.instance ? "1" : "0")} !important;
 	margin: 10px 0 0 0;
 	width: ${props => {
 		if (props.typeOfArticle === "sideproject") {
@@ -55,7 +55,7 @@ class GalleryGrid extends Component {
 				{this.props.posts.map((post, i) => (
 					<GridItem
 						key={i}
-						shuffle={this.props.shuffle}
+						instance={this.props.instance}
 						className="grid-item"
 						data-type={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
