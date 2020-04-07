@@ -30,11 +30,15 @@ const FilterTrigger = styled.div`
 		background: ${props =>
 			props.filterOpen ? "rgba(255, 255, 255, 0.2)" : "rgba(255, 255, 255, 0)"};
 		span {
+			user-select: none;
 			color: ${({ theme }) => theme.colors.white};
 			margin-left: 8px;
 		}
 		&:hover {
 			border: 1px solid rgba(255, 255, 255, 0.5);
+		}
+		&:focus {
+			outline: none;
 		}
 	}
 `;
@@ -87,6 +91,11 @@ class Gallery extends Component {
 	destroyGrid = () => {
 		this.state.shuffle.destroy();
 	};
+	_handleKeyDown = ev => {
+		if (ev.keyCode === 13) {
+			this._handleClick(ev);
+		}
+	};
 	_handleClick = e => {
 		e.preventDefault();
 		this.setState({ filterOpen: !this.state.filterOpen });
@@ -100,8 +109,8 @@ class Gallery extends Component {
 					<FilterTrigger filterOpen={this.state.filterOpen}>
 						<div
 							className="filter-trigger"
-							onKeyDown={this._handleClick}
 							onClick={this._handleClick}
+							onKeyDown={this._handleKeyDown}
 							tabIndex="0"
 							role="button"
 						>

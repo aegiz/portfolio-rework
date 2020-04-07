@@ -95,6 +95,7 @@ module.exports = {
 			options: {
 				alias: {
 					"@src": "src",
+					"@static": "static",
 					"@components": "src/components",
 					"@pages": "src/pages",
 					"@templates": "src/templates",

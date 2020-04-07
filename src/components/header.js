@@ -3,7 +3,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
-import background from "../../static/trouble.jpg";
+import clouds from "@static/clouds.jpg";
 
 const MainContainer = styled.div`
 	width: 100%;
@@ -22,137 +22,41 @@ const InnerContainer = styled.div`
 	max-width: 1400px;
 `;
 
-const SocialIcons = styled.div`
-	z-index: 2;
+const OtherLinks = styled.div`
 	position: absolute;
+	z-index: 2;
 	top: 20px;
 	right: 0;
-	padding: 0 30px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	a {
-		display: block;
+	padding: 0 15px;
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		& :nth-child(2) {
-			margin: 0 15px 0 15px;
-		}
-	}
-	img {
-		opacity: 0.2;
-		width: 35px;
-		height: 35px;
-		transition: all 0.3s;
-		&:hover {
-			opacity: 1;
-		}
-	}
-`;
-
-// First version
-const FirstVersion = styled.div`
-	display: ${props => (props.renderHeader === 1 ? "block" : "none")};
-`;
-
-const Hexagon = styled.div`
-	position: absolute;
-	top: 155px;
-	left: 50%;
-	transform: translateX(-50%);
-	img {
-		width: 50px;
-		height: 50px;
-	}
-`;
-
-const FolioLogoFirst = styled.div`
-	position: absolute;
-	z-index: 1;
-	top: 120px;
-	left: 50%;
-	transform: translateX(-50%);
-	padding: 45px;
-	opacity: 0.3;
-	.intro {
-		margin: 0 0 20px 0;
-		p {
-			margin: 0 0 0 8px;
-			text-transform: uppercase;
-			letter-spacing: 0.4em;
-			font-weight: ${({ theme }) => theme.fontWeights["l"]};
-			font-size: ${({ theme }) => theme.fontSizes["xl"]};
-			color: ${({ theme }) => theme.colors.grey.dark};
-			text-align: center;
-		}
-	}
-	h1 {
-		margin: 0;
-		font-size: ${({ theme }) => theme.fontSizes["7xl"]};
-		font-weight: ${({ theme }) => theme.fontWeights["medium"]};
-		line-height: 0.8;
-		text-transform: uppercase;
-		color: ${({ theme }) => theme.colors.grey.main};
-	}
-`;
-
-// Second version
-const SecondVersion = styled.div`
-	display: ${props => (props.renderHeader === 2 ? "block" : "none")};
-`;
-
-const FolioLogoSecond = styled.div`
- 	position: absolute;
- 	z-index: 1;
-	top: 180px;
- 	left: 50%;
- 	transform: translateX(-50%);
-	.intro {
-		margin: 0 0 5px 0;
-		p {
-			opacity: 0.5;
-			margin:0;
-			text-transform: uppercase;
-			letter-spacing: ${({ theme }) => theme.fontSizes["xs"]};
-			font-weight: ${({ theme }) => theme.fontWeights["l"]};
-			font-size: ${({ theme }) => theme.fontSizes["xl"]};
-			color: ${({ theme }) => theme.colors.grey.main};
-			text-align: center;
-			&:after {
-				content: "";
-				background: ${({ theme }) => theme.colors.white};
-				display: block;
-				width: 30px;
-				height: 3px;
-				margin: 10px auto 10px;
-				transition: all 0.35s ease-out;
+		li {
+			opacity: 0.3;
+			transition: all 0.3s;
+			margin-left: 30px;
+			user-select: none;
+			&:first-child {
+				font-weight: ${({ theme }) => theme.fontWeights.medium};
+				opacity: 1;
+			}
+			&:hover {
+				opacity: 1;
 			}
 		}
+		a {
+			color: ${({ theme }) => theme.colors.black};
+			text-decoration: none;
+		}
 	}
- 	h1 {
- 		margin:0;
- 		font-size: ${({ theme }) => theme.fontSizes["7xl"]};
- 		font-weight: ${({ theme }) => theme.fontWeights["medium"]};
-		line-height: 0.8;
- 		text-transform: uppercase;
- 		background-image: url("${props => props.imageBase}");
- 		background-size: 120% auto;
- 		background-clip: text;
- 		-webkit-background-clip: text;
- 		color: transparent;
- 	}
- `;
-
-// Third version
-
-const ThirdVersion = styled.div`
-	display: ${props => (props.renderHeader === 3 ? "block" : "none")};
 `;
 
-const FolioLogoThird = styled.div`
+const LogoContainer = styled.div`
 	position: absolute;
 	z-index: 10;
 	top: 130px;
@@ -165,6 +69,8 @@ const Slide = styled.div`
 	width: 16rem;
 	height: 16rem;
 	border-radius: 50%;
+	background-color: black;
+	background-image: url("${clouds}");
 	background-size: 16rem 16rem;
 	overflow: hidden;
 `;
@@ -173,40 +79,24 @@ const SlideItem = styled.div`
 	width: 16rem;
 	overflow: hidden;
 	height: 1rem;
+	background-image: url("${clouds}");
 	background-repeat: no-repeat;
-	background-position: center -${props => props.numberI}rem;
+	background-position: center -${props => props.index}rem;
 	background-size: 16rem 16rem;
 	transition: all 0.3s ease-in-out;
-	animation: slideAnim 3s ease-in-out ${props => props.numberI * -0.5}s
+	animation: slideAnim 3s ease-in-out ${props => props.index * -0.5}s
 		alternate infinite;
 	@keyframes slideAnim {
 		from {
-			transform: translateX(${props => props.factor}rem);
+			transform: translateX(1rem);
 		}
 		to {
-			transform: translateX(${props => props.factor * -1}rem);
+			transform: translateX(-1rem);
 		}
 	}
 `;
 
-const LogoThird = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	overflow: hidden;
-	img {
-		filter: grayscale(100%);
-		width: 150px;
-		height: 150px;
-	}
-`;
-
-// Fourth version
-const FourthVersion = styled.div`
-	display: ${props => (props.renderHeader === 4 ? "block" : "none")};
-`;
-const LogoFourth = styled.div`
+const Logo = styled.div`
 	position: absolute;
 	top: 50%;
 	left: calc(50% - 7px);
@@ -258,7 +148,7 @@ export default props => {
 		query HeadingQuery {
 			file(relativePath: { eq: "new-zealand.jpg" }) {
 				childImageSharp {
-					fluid(maxWidth: 1000) {
+					fluid(maxWidth: 1500) {
 						...GatsbyImageSharpFluid
 					}
 				}
@@ -274,214 +164,27 @@ export default props => {
 					<Img fluid={data.file.childImageSharp.fluid} />
 				</BackgroundContainer>
 				<InnerContainer>
-					<SocialIcons>
-						<a href="/">
-							<img src={`twitter.svg`} alt="Twitter icon" />
-						</a>
-						<a href="/">
-							<img src={`github.svg`} alt="Github icon" />
-						</a>
-						<a href="/">
-							<img src={`linkedin.svg`} alt="linkedin icon" />
-						</a>
-					</SocialIcons>
-					<FirstVersion renderHeader={props.renderHeader}>
-						<Hexagon>
-							<img src={`hexagon.svg`} alt="hexa icon" />
-						</Hexagon>
-						<FolioLogoFirst imageBase={data.file.childImageSharp.fluid.base64}>
-							<div className="intro">
-								<p>Adrien Rahier</p>
-							</div>
-							<h1>Portfolio</h1>
-						</FolioLogoFirst>
-					</FirstVersion>
-					<SecondVersion renderHeader={props.renderHeader}>
-						<FolioLogoSecond imageBase={data.file.childImageSharp.fluid.base64}>
-							<div className="intro">
-								<p>Adrien Rahier</p>
-							</div>
-							<h1>Portfolio</h1>
-						</FolioLogoSecond>
-					</SecondVersion>
-					<ThirdVersion renderHeader={props.renderHeader}>
-						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
-							<Slide style={{ backgroundImage: `url(${background})` }}>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={0}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={1}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={2}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={3}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={4}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={5}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={6}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={7}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={8}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={9}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={10}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={11}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={12}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={13}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={14}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={15}
-								/>
-							</Slide>
-							<LogoThird>
-								<img src={`logo1.png`} alt="logo 1" />
-							</LogoThird>
-						</FolioLogoThird>
-					</ThirdVersion>
-					<FourthVersion renderHeader={props.renderHeader}>
-						<FolioLogoThird imageBase={data.file.childImageSharp.fluid.base64}>
-							<Slide style={{ backgroundImage: `url(${background})` }}>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={0}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={1}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={2}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={3}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={4}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={5}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={6}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={7}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={8}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={9}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={10}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={11}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={12}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={13}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={-1}
-									numberI={14}
-								/>
-								<SlideItem
-									style={{ backgroundImage: `url(${background})` }}
-									factor={1}
-									numberI={15}
-								/>
-							</Slide>
-							<LogoFourth>
-								<img src={`logo2.png`} alt="logo 2" />
-							</LogoFourth>
-						</FolioLogoThird>
-					</FourthVersion>
+					<OtherLinks>
+						<ul>
+							<li>Portfolio</li>
+							<li>
+								<a href="/blog">Blog</a>
+							</li>
+							<li>
+								<a href="/about">About</a>
+							</li>
+						</ul>
+					</OtherLinks>
+					<LogoContainer>
+						<Slide>
+							{[...Array(16)].map((e, i) => (
+								<SlideItem index={i} key={i} />
+							))}
+						</Slide>
+						<Logo>
+							<img src={`logo2.png`} alt="logo 2" />
+						</Logo>
+					</LogoContainer>
 				</InnerContainer>
 			</MainContainer>
 		</header>
