@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
 		`
 			{
 				allMdx(
+					filter: { frontmatter: { draft: { eq: false } } }
 					sort: { fields: [frontmatter___date], order: DESC }
 					limit: 1000
 				) {

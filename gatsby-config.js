@@ -69,6 +69,12 @@ module.exports = {
 		},
 		`gatsby-plugin-styled-components`,
 		`gatsby-plugin-sitemap`,
+		{
+			resolve: `gatsby-plugin-sitemap`,
+			options: {
+				exclude: [`/example`],
+			},
+		},
 		`gatsby-plugin-transition-link`,
 		{
 			resolve: `gatsby-plugin-manifest`,

@@ -85,7 +85,10 @@ export default PortfolioIndex;
 
 export const pageQuery = graphql`
 	query {
-		allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+		allMdx(
+			filter: { frontmatter: { draft: { eq: false } } }
+			sort: { fields: [frontmatter___date], order: DESC }
+		) {
 			edges {
 				node {
 					id

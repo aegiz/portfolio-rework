@@ -19,6 +19,7 @@ class BlogPostTemplate extends React.Component {
 				<SEO
 					title={post.frontmatter.title}
 					description={post.frontmatter.description || post.excerpt}
+					path={post.frontmatter.path}
 				/>
 				<AniLink paintDrip hex="#663399" duration={1} to="/">
 					GO BACK TO HOMEPAGE
@@ -87,6 +88,7 @@ export const pageQuery = graphql`
 				title
 				date
 				description
+				path
 				featuredImage {
 					childImageSharp {
 						fluid(maxWidth: 800) {
