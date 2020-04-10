@@ -2,7 +2,6 @@ import React from "react";
 import { graphql } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import { MDXRenderer } from "gatsby-plugin-mdx";
-import Img from "gatsby-image";
 
 import Layout from "@components/layout";
 import SEO from "@components/seo";
@@ -13,7 +12,6 @@ class BlogPostTemplate extends React.Component {
 		const siteTitle = this.props.data.site.siteMetadata.title;
 		const { previous, next } = this.props.pageContext;
 
-		let featuredImgFluid = post.frontmatter.featuredImage.childImageSharp.fluid;
 		return (
 			<Layout location={this.props.location} title={siteTitle}>
 				<SEO
@@ -24,7 +22,7 @@ class BlogPostTemplate extends React.Component {
 				<AniLink paintDrip hex="#663399" duration={1} to="/">
 					GO BACK TO HOMEPAGE
 				</AniLink>
-				<h1
+				{/* <h1
 					style={{
 						marginBottom: 0,
 					}}
@@ -37,10 +35,8 @@ class BlogPostTemplate extends React.Component {
 					}}
 				>
 					{post.frontmatter.date}
-				</p>
+				</p> */}
 				<MDXRenderer>{post.body}</MDXRenderer>
-				<hr />
-				<Img fluid={featuredImgFluid} />
 				<ul
 					style={{
 						display: `flex`,
