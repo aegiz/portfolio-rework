@@ -16,18 +16,25 @@ const MainContainer = styled.div`
 
 const InnerContainer = styled.div`
 	position: relative;
-	padding: 190px 0;
 	width: 100%;
 	height: 100%;
 	max-width: 1400px;
+	padding: 190px 0;
+	${({ theme }) => theme.mediaQueries.m} {
+		padding: 155px 0;
+	}
 `;
 
 const OtherLinks = styled.div`
 	position: absolute;
 	z-index: 2;
-	top: 20px;
+	top: 25px;
 	right: 0;
 	padding: 0 15px;
+	${({ theme }) => theme.mediaQueries.m} {
+		right: 50%;
+		transform: translateX(50%);
+	}
 	ul {
 		list-style: none;
 		margin: 0;
@@ -59,39 +66,43 @@ const OtherLinks = styled.div`
 const LogoContainer = styled.div`
 	position: absolute;
 	z-index: 10;
-	top: 130px;
 	left: 50%;
 	transform: translateX(-50%);
+	top: 130px;
+	--size-logo: 256px;
+	${({ theme }) => theme.mediaQueries.m} {
+		top: 100px;
+		--size-logo: 220px;
+	}
 `;
 
 const Slide = styled.div`
 	opacity: 0.2;
-	width: 16rem;
-	height: 16rem;
+	width: var(--size-logo);
+	height: var(--size-logo);
 	border-radius: 50%;
-	background-color: black;
 	background-image: url("${clouds}");
-	background-size: 16rem 16rem;
+	background-size: var(--size-logo) var(--size-logo);
 	overflow: hidden;
 `;
 
 const SlideItem = styled.div`
-	width: 16rem;
+	width: var(--size-logo);
 	overflow: hidden;
-	height: 1rem;
+	height: calc(var(--size-logo) / 16);
 	background-image: url("${clouds}");
 	background-repeat: no-repeat;
 	background-position: center -${props => props.index}rem;
-	background-size: 16rem 16rem;
+	background-size: var(--size-logo) var(--size-logo);
 	transition: all 0.3s ease-in-out;
 	animation: slideAnim 3s ease-in-out ${props => props.index * -0.5}s
 		alternate infinite;
 	@keyframes slideAnim {
 		from {
-			transform: translateX(1rem);
+			transform: translateX(16px);
 		}
 		to {
-			transform: translateX(-1rem);
+			transform: translateX(-16px);
 		}
 	}
 `;

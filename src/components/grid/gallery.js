@@ -10,17 +10,23 @@ import GalleryFilter from "./galleryFilter";
 const MainContainer = styled.div`
 	z-index: 2;
 	position: relative;
-	margin: 40px auto 0;
 	width: 100%;
 	max-width: 1400px;
+	margin: 80px auto 0;
+	${({ theme }) => theme.mediaQueries.m} {
+		margin: 40px auto 0;
+	}
 `;
 
 const FilterTrigger = styled.div`
-	cursor: pointer;
-	padding: 0 15px;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
+	display: none;
+	${({ theme }) => theme.mediaQueries.m} {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		cursor: pointer;
+		padding: 0 15px;
+	}
 	.filter-trigger {
 		display: flex;
 		flex-direction: row;
@@ -44,13 +50,17 @@ const FilterTrigger = styled.div`
 `;
 
 const FilterContainer = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: row;
-	${props =>
-		props.filterOpen ? "opacity:1; height:50px;" : "opacity:0; height:0;"};
+	opacity: 1;
+	height: 50px;
+	margin: 0 15px;
 	transition: all 0.2s;
-	position: relative;
-	margin: 0 1em;
+	${({ theme }) => theme.mediaQueries.m} {
+		${props =>
+			props.filterOpen ? "opacity:1; height:50px;" : "opacity:0; height:0;"};
+	}
 	span {
 		margin-left: 10px;
 	}
@@ -146,6 +156,7 @@ class Gallery extends Component {
 					</FilterContainer>
 					<GalleryGrid
 						instance={this.state.shuffle}
+						currentFilter={this.state.currentFilter}
 						createGrid={this.createGrid}
 						destroyGrid={this.destroyGrid}
 						posts={this.props.posts}

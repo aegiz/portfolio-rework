@@ -54,13 +54,13 @@ export default class footer extends React.Component {
 					<InnerContainer>
 						<p>This is the footer</p>
 						<SocialIcons>
-							<a href="https://twitter.com/adrienrahier" target="_blank">
+							<a href="https://twitter.com/adrienrahier" target="_blank" rel="noopener noreferrer">
 								<img src={`twitter.svg`} alt="Twitter icon" />
 							</a>
-							<a href="https://github.com/aegiz" target="_blank">
+							<a href="https://github.com/aegiz" target="_blank" rel="noopener noreferrer">
 								<img src={`github.svg`} alt="Github icon" />
 							</a>
-							<a href="http://linkedin.com/in/adrienrahier" target="_blank">
+							<a href="http://linkedin.com/in/adrienrahier" target="_blank" rel="noopener noreferrer">
 								<img src={`linkedin.svg`} alt="linkedin icon" />
 							</a>
 						</SocialIcons>

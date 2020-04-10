@@ -18,6 +18,8 @@ const GridItem = styled.div`
 			return `20%`;
 		} else if (props.typeOfArticle === "freelancework") {
 			return `40%`;
+		} else if (props.currentFilter === "full-timework" && props.typeOfArticle === "full-timework") {
+			return `50%`;
 		} else if (props.typeOfArticle === "full-timework") {
 			return `60%`;
 		} else {
@@ -28,12 +30,18 @@ const GridItem = styled.div`
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
+	${({ theme }) => theme.mediaQueries.s} {
+		width: 100%;
+	}
 `;
 
 const Sizer = styled.div`
 	width: 20%;
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		width: 100%;
 	}
 `;
 
@@ -56,6 +64,7 @@ class GalleryGrid extends Component {
 					<GridItem
 						key={i}
 						instance={this.props.instance}
+						currentFilter={this.props.currentFilter}
 						className="grid-item"
 						data-type={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
