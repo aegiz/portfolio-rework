@@ -8,6 +8,7 @@ import { Message } from "theme-ui";
 
 // Components
 import CustomSlickCarousel from "@components/post/carousel/custom-carousel";
+import Header1 from "@components/post/header1/header1";
 
 // Styles: Theme
 export const theme = {
@@ -106,7 +107,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, CustomSlickCarousel };
+	const shortcodes = { Message, CustomSlickCarousel, Header1 };
 	const layoutContent = data => (
 		<>
 			<GlobalStyle />
