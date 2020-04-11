@@ -130,7 +130,7 @@ const Logo = styled.div`
 	img {
 		width: 147px;
 		height: 113px;
-		filter: invert(100%);
+		/* filter: invert(100%); */
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		top: calc(50% - 3px);
