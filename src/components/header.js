@@ -76,7 +76,22 @@ const LogoContainer = styled.div`
 	}
 `;
 
-const Slide = styled.div`
+const Bar = styled.div`
+	position: absolute;
+	width: 135px;
+	height: 1px;
+	top: 153px;
+	left: 107px;
+	background: #969696;
+	transform: rotate(112deg);
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 100px;
+		top: 136px;
+		left: 102px;
+	}
+`;
+
+const Slice = styled.div`
 	opacity: 0.2;
 	width: var(--size-logo);
 	height: var(--size-logo);
@@ -86,7 +101,7 @@ const Slide = styled.div`
 	overflow: hidden;
 `;
 
-const SlideItem = styled.div`
+const SliceItem = styled.div`
 	width: var(--size-logo);
 	overflow: hidden;
 	height: calc(var(--size-logo) / 16);
@@ -95,9 +110,9 @@ const SlideItem = styled.div`
 	background-position: center -${props => props.index}rem;
 	background-size: var(--size-logo) var(--size-logo);
 	transition: all 0.3s ease-in-out;
-	animation: slideAnim 3s ease-in-out ${props => props.index * -0.5}s
+	animation: sliceAnim 3s ease-in-out ${props => props.index * -0.5}s
 		alternate infinite;
-	@keyframes slideAnim {
+	@keyframes sliceAnim {
 		from {
 			transform: translateX(16px);
 		}
@@ -109,14 +124,21 @@ const SlideItem = styled.div`
 
 const Logo = styled.div`
 	position: absolute;
-	top: 50%;
-	left: calc(50% - 7px);
+	top: calc(50% - 5px);
+	left: calc(50% - 5px);
 	transform: translate(-50%, -50%);
-	overflow: hidden;
 	img {
-		filter: grayscale(100%);
-		width: 250px;
-		height: 250px;
+		width: 147px;
+		height: 113px;
+		filter: invert(100%);
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		top: calc(50% - 3px);
+		left: calc(50% - 2px);
+		img {
+			width: 129px;
+			height: 99px;
+		}
 	}
 `;
 
@@ -187,13 +209,17 @@ export default props => {
 						</ul>
 					</OtherLinks>
 					<LogoContainer>
-						<Slide>
+						<Bar />
+						<Slice>
 							{[...Array(16)].map((e, i) => (
-								<SlideItem index={i} key={i} />
+								<SliceItem index={i} key={i} />
 							))}
-						</Slide>
+						</Slice>
 						<Logo>
-							<img src={`logo2.png`} alt="logo 2" />
+							<img
+								src={`logo_AR.png`}
+								alt="Logo Portfolio AR (Adrien Rahier)"
+							/>
 						</Logo>
 					</LogoContainer>
 				</InnerContainer>
