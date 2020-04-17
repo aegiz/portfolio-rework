@@ -10,11 +10,16 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
 
+// Utils
+import MdToHtml from "@utils/MdToHtml";
+
 // Assets
 import Start from "@static/start.png";
 
 const Background = styled.div`
 	position: absolute;
+	/* z-index:  10; */
+	opacity: 0.5;
 	width: 100%;
 	height: 100%;
 	background-image: url("${Start}");
@@ -31,7 +36,7 @@ const BlogPostContainer = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
-	height: 1016px;
+	height: 950px;
 	/* height: 100vh; */
 	/* max-width: 1400px; */
 	margin: 0 auto;
@@ -46,32 +51,31 @@ const LeftPanel = styled.div`
 	height: 100%;
 	margin: 0;
 	background: ${({ theme }) => theme.colors.white};
-	opacity: 0.4;
 	padding: 73px 90px 0;
 `;
 
 const LeftPanelInner = styled.div`
 	margin-top: 40px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	.upper {
+		justify-content: normal;
+	}
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
 	margin-top: 15px;
-	h1 {
-		font-size: ${({ theme }) => theme.fontSizes["6xl"]};
-	}
+	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
 `;
 
-const Date = styled.div`
-	display: none;
-	p {
-		font-size: ${({ theme }) => theme.fontSizes.normal};
-	}
-`;
-
-const Hastags = styled.div`
-	display: none;
-	p {
-		font-size: ${({ theme }) => theme.fontSizes.normal};
+const Hashtags = styled.div`
+	font-size: ${({ theme }) => theme.fontSizes["xl"]};
+	.diese {
+		font-weight: ${({ theme }) => theme.fontWeights.medium};
+		color: ${({ theme }) => theme.colors.black};
 	}
 `;
 
@@ -83,29 +87,88 @@ const Description = styled.div`
 	}
 `;
 
-const MiddlePanel = styled.div`
-	display: none;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+const OtherProjects = styled.div`
+	width: 100%;
+	margin: 0 0 15px 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	a {
+		margin: 0 15px 0 0;
+		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+	}
 `;
 
 const RightPanel = styled.div`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
 	width: 55%;
+	height: 100%;
 	margin: 0;
-	background: ${({ theme }) => theme.colors.white};
 `;
 
-const Cover = styled.div``;
-
-const NextProject = styled.div`
+const ProjectPanel = styled.div`
+	z-index: 1;
 	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	left: calc(45% - 40px);
+	bottom: 0;
+	width: 31.7%;
+	min-height: 425px;
+	padding: 25px 50px 0 119px;
+	background: ${({ theme }) => theme.colors.black};
+	color: ${({ theme }) => theme.colors.white};
+	h2 {
+		margin: 48px 0 0 0;
+		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+	}
+	p {
+		margin: 13px 0 0 0;
+		font-size: ${({ theme }) => theme.fontSizes["l"]};
+	}
+`;
+
+const Cover = styled.div`
+	width: 100%;
+	height: 76.05%;
+	.gatsby-image-wrapper {
+		height: 100%;
+	}
+`;
+
+const OtherInfo = styled.div`
+	width: 100%;
+	height: 23.95%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	background: ${({ theme }) => theme.colors.yellow.light};
+`;
+
+const OtherInfoInner = styled.div`
+	width: 50%;
+	text-align: right;
+	padding: 20px;
+	a {
+		text-decoration: none;
+		color: ${({ theme }) => theme.colors.black};
+	}
+`;
+
+const TypeOfProject = styled.p`
+	font-size: ${({ theme }) => theme.fontSizes.normal};
+`; // Maybe here use inheritance instead of reapeating myself
+
+const Role = styled.p`
+	font-size: ${({ theme }) => theme.fontSizes.normal};
+`;
+
+const Date = styled.div`
+	font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 class BlogPostTemplate extends React.Component {
@@ -135,59 +198,72 @@ class BlogPostTemplate extends React.Component {
 							GO BACK TO HOMEPAGE
 						</AniLink>
 						<LeftPanelInner>
-							<Title>
-								<h1>{post.frontmatter.title}</h1>
-							</Title>
-							<Date>
-								<p>Start:{post.frontmatter.date}</p>
-								<p>Duration:{post.frontmatter.date}</p>
-							</Date>
-							<Hastags>
-								<p>Start:{post.frontmatter.hastags}</p>
-								<p>Duration:{post.frontmatter.hastags}</p>
-							</Hastags>
-							<Description>
-								<p>{post.frontmatter.description}</p>
-							</Description>
+							<div className="upper">
+								<Title>{post.frontmatter.title}</Title>
+								<Hashtags>
+									{post.frontmatter.hashtags.split(" ").map((word, i) => (
+										<span key={i}>
+											<span className="diese"> #</span>
+											{word}
+										</span>
+									))}
+								</Hashtags>
+								<Description>
+									<MdToHtml content={post.frontmatter.description} />
+								</Description>
+							</div>
+							<OtherProjects>
+								<AniLink
+									cover
+									bg="#000000"
+									top="entry"
+									direction="left"
+									duration={1}
+									to={previous.fields.slug}
+									rel="previous"
+								>
+									← {previous.frontmatter.title}
+								</AniLink>
+								<AniLink
+									cover
+									bg="#000000"
+									top="entry"
+									direction="left"
+									duration={1}
+									to={next.fields.slug}
+									rel="next"
+								>
+									{next.frontmatter.title} →
+								</AniLink>
+							</OtherProjects>
 						</LeftPanelInner>
 					</LeftPanel>
-					<MiddlePanel>
+					<ProjectPanel>
+						<h2>So much swag</h2>
+						<p>One line description</p>
+						<h2>Coolest activity</h2>
+						<p>Kayaking the whole lake</p>
 						<MDXRenderer>{post.body}</MDXRenderer>
 						{/* https://codepen.io/kathykato/pen/rZRaNe */}
 						<button>Learn more</button>
-					</MiddlePanel>
+					</ProjectPanel>
 					<RightPanel>
 						<Cover>
 							<Img
 								fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
 							/>
 						</Cover>
-						<NextProject>
-							<ul
-								style={{
-									display: `flex`,
-									flexWrap: `wrap`,
-									justifyContent: `space-between`,
-									listStyle: `none`,
-									padding: 0,
-								}}
-							>
-								<li>
-									{previous && (
-										<AniLink fade to={previous.fields.slug} rel="prev">
-											← {previous.frontmatter.title}
-										</AniLink>
-									)}
-								</li>
-								<li>
-									{next && (
-										<AniLink fade to={next.fields.slug} rel="next">
-											{next.frontmatter.title} →
-										</AniLink>
-									)}
-								</li>
-							</ul>
-						</NextProject>
+						<OtherInfo>
+							<OtherInfoInner>
+								<TypeOfProject>
+									Project Type: <b>TBC</b>
+								</TypeOfProject>
+								<Role>
+									Role: <b>Solutions Engineer</b>
+								</Role>
+								<Date>{post.frontmatter.date} (7 months)</Date>
+							</OtherInfoInner>
+						</OtherInfo>
 					</RightPanel>
 				</BlogPostContainer>
 			</Layout>
@@ -213,7 +289,8 @@ export const pageQuery = graphql`
 				title
 				date
 				description
-				description
+				hashtags
+				typeOfArticle
 				path
 				featuredImage {
 					childImageSharp {

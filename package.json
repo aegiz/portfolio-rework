@@ -38,6 +38,7 @@
 		"react-dom": "^16.13.1",
 		"react-helmet": "^5.2.1",
 		"react-slick": "^0.25.2",
+		"showdown": "^1.9.1",
 		"shufflejs": "^5.2.3",
 		"slick-carousel": "^1.8.1",
 		"styled-components": "^4.4.1",
