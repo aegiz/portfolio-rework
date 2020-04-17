@@ -1,7 +1,7 @@
 // Package
-import React, { Component } from "react";
-import styled from "styled-components";
 import Img from "gatsby-image";
+import styled from "styled-components";
+import React, { Component } from "react";
 
 const GalleryItem = styled.div`
 	position: relative;

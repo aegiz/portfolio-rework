@@ -3,6 +3,8 @@ import React, { Component } from "react";
 
 // Utils
 import CustImg from "@utils/StaticImg";
+
+// Assets
 import Frame2 from "@static/Frame2.png";
 
 // Styles

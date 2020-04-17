@@ -3,6 +3,8 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import styled from "styled-components";
+
+// Assets
 import clouds from "@static/clouds.jpg";
 
 const MainContainer = styled.div`

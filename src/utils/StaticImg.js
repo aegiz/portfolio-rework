@@ -1,11 +1,11 @@
 /* In order to import images src, srcset etc in custom components we need to retrieve all the image
-* See https://github.com/wesbos/Gatsby-Workshop/blob/master/notes/04%20-%20Images.md for more info
-*/
+ * See https://github.com/wesbos/Gatsby-Workshop/blob/master/notes/04%20-%20Images.md for more info
+ */
 
 // Package
+import Img from "gatsby-image";
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import Img from "gatsby-image";
 
 export default function Image({ src, alt }) {
 	const { allImageSharp } = useStaticQuery(graphql`

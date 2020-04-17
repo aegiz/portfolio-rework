@@ -1,7 +1,7 @@
 // Package
-import React, { Component } from "react";
-import styled from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import styled from "styled-components";
+import React, { Component } from "react";
 
 // Component
 import GalleryItem from "./galleryItem";
@@ -18,7 +18,10 @@ const GridItem = styled.div`
 			return `20%`;
 		} else if (props.typeOfArticle === "freelancework") {
 			return `40%`;
-		} else if (props.currentFilter === "full-timework" && props.typeOfArticle === "full-timework") {
+		} else if (
+			props.currentFilter === "full-timework" &&
+			props.typeOfArticle === "full-timework"
+		) {
 			return `50%`;
 		} else if (props.typeOfArticle === "full-timework") {
 			return `60%`;
@@ -78,7 +81,7 @@ class GalleryGrid extends Component {
 					>
 						<AniLink
 							cover
-							bg="#663399"
+							bg="#000000"
 							top="entry"
 							direction="left"
 							duration={1}

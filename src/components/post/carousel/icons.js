@@ -1,9 +1,9 @@
-// Icons
-import previousImg from "./icons/previous.svg";
-import nextImg from "./icons/next.svg";
-
 // Package
 import React from "react";
+
+// Assets
+import previousImg from "./icons/previous.svg";
+import nextImg from "./icons/next.svg";
 
 class CTAicon extends React.Component {
 	render() {

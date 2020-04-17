@@ -1,10 +1,10 @@
 //  Packages
 import React from "react";
 import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
+import { StaticQuery, graphql } from "gatsby";
 
 // Components
 import CustomSlickCarousel from "@components/post/carousel/custom-carousel";
@@ -63,8 +63,9 @@ export const theme = {
 		"3xl": "1.875rem",
 		"4xl": "2.25rem",
 		"5xl": "3rem",
-		"6xl": "4rem",
+		"6xl": "5rem",
 		"7xl": "8rem",
+		"8xl": "10rem",
 	},
 
 	mediaQueries: {
@@ -78,23 +79,25 @@ export const theme = {
 
 // Styles: Reset and Global
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    background: white;
-    box-sizing: border-box;
-    font-family: ${({ theme }) => theme.fonts.pop};
-    font-size: ${({ theme }) => theme.fontSizes.normal};
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  };
-  h1, h2, h3, h4, h5, h6 {
-    font-family: ${({ theme }) => theme.fonts.ibm};
-    margin: 0;
-  };
-  button:focus,
-  input:focus {
-    outline: 0;
-  }
+	*, *:before, *:after {
+		box-sizing: border-box;
+	}
+	body {
+		margin: 0;
+		background: white;
+		font-family: ${({ theme }) => theme.fonts.pop};
+		font-size: ${({ theme }) => theme.fontSizes.normal};
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	h1,	h2,	h3,	h4,	h5,	h6 {
+		font-family: ${({ theme }) => theme.fonts.ibm};
+		margin: 0;
+	}
+	button:focus,
+	input:focus {
+		outline: 0;
+	}
 `;
 
 function Layout({ children }) {

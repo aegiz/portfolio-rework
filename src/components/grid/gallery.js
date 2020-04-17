@@ -1,11 +1,11 @@
 // Package
 import React, { Component } from "react";
-import styled from "styled-components";
 import Shuffle from "shufflejs";
+import styled from "styled-components";
 
 // Components
-import GalleryGrid from "./galleryGrid";
 import GalleryFilter from "./galleryFilter";
+import GalleryGrid from "./galleryGrid";
 
 const MainContainer = styled.div`
 	z-index: 2;
