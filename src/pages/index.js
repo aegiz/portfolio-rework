@@ -39,10 +39,8 @@ export const pageQuery = graphql`
 						slug
 					}
 					frontmatter {
-						date
 						title
-						path
-						hashtags
+						beginning
 						typeOfArticle
 						description
 						featuredImage {
@@ -58,6 +56,8 @@ export const pageQuery = graphql`
 								}
 							}
 						}
+						hashtags
+						path
 					}
 				}
 			}

@@ -7,6 +7,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
+import BackHomeCTA from "@components/post/CTA/backHomeCTA";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
 
@@ -69,14 +70,6 @@ const LeftPanelInner = styled.div`
 const Title = styled.h1`
 	margin-top: 15px;
 	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
-`;
-
-const Hashtags = styled.div`
-	font-size: ${({ theme }) => theme.fontSizes["xl"]};
-	.diese {
-		font-weight: ${({ theme }) => theme.fontWeights.medium};
-		color: ${({ theme }) => theme.colors.black};
-	}
 `;
 
 const Description = styled.div`
@@ -195,19 +188,11 @@ class BlogPostTemplate extends React.Component {
 							duration={1}
 							to="/"
 						>
-							GO BACK TO HOMEPAGE
+							<BackHomeCTA />
 						</AniLink>
 						<LeftPanelInner>
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
-								<Hashtags>
-									{post.frontmatter.hashtags.split(" ").map((word, i) => (
-										<span key={i}>
-											<span className="diese"> #</span>
-											{word}
-										</span>
-									))}
-								</Hashtags>
 								<Description>
 									<MdToHtml content={post.frontmatter.description} />
 								</Description>
@@ -261,7 +246,9 @@ class BlogPostTemplate extends React.Component {
 								<Role>
 									Role: <b>Solutions Engineer</b>
 								</Role>
-								<Date>{post.frontmatter.date} (7 months)</Date>
+								<Date>
+									{post.frontmatter.beginning} ({post.frontmatter.duration})
+								</Date>
 							</OtherInfoInner>
 						</OtherInfo>
 					</RightPanel>
@@ -287,11 +274,11 @@ export const pageQuery = graphql`
 			body
 			frontmatter {
 				title
-				date
-				description
-				hashtags
+				beginning
+				end
+				duration
 				typeOfArticle
-				path
+				description
 				featuredImage {
 					childImageSharp {
 						fluid(maxWidth: 800) {
@@ -299,6 +286,9 @@ export const pageQuery = graphql`
 						}
 					}
 				}
+				techno
+				role
+				path
 			}
 		}
 	}

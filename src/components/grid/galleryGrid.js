@@ -73,7 +73,7 @@ class GalleryGrid extends Component {
 							.toLowerCase()
 							.replace(/\s/g, "")}
 						data-date={Math.floor(
-							new Date(post.node.frontmatter.date).getTime() / 1000
+							new Date(post.node.frontmatter.beginning).getTime() / 1000
 						)}
 						typeOfArticle={post.node.frontmatter.typeOfArticle
 							.toLowerCase()
