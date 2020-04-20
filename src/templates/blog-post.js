@@ -38,7 +38,7 @@ const BlogPostContainer = styled.div`
 	justify-content: center;
 	width: 100%;
 	height: 950px;
-	/* height: 100vh; */
+	height: 100vh;
 	/* max-width: 1400px; */
 	margin: 0 auto;
 `;
@@ -82,14 +82,36 @@ const Description = styled.div`
 
 const OtherProjects = styled.div`
 	width: 100%;
-	margin: 0 0 15px 0;
+	max-width: 350px;
+	margin: 0 auto 20px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+`;
+
+const Projects = styled.div`
+	position: relative;
+	padding: 0 20px;
+	&:before {
+		content: "";
+		position: absolute;
+		top: calc(50% - 3px);
+		left: 4px;
+		border-style: solid;
+		border-width: 0 6px 7px 6px;
+		border-color: transparent transparent #000000 transparent;
+		transform: ${props => (props.previous ? "" : "rotate(180deg)")};
+	}
 	a {
-		margin: 0 15px 0 0;
-		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+		opacity: 0.5;
+		text-decoration: none;
+		color: ${({ theme }) => theme.colors.black};
+		font-size: ${({ theme }) => theme.fontSizes["m"]};
+		transition: all 0.3s;
+		&:hover {
+			opacity: 1;
+		}
 	}
 `;
 
@@ -198,28 +220,38 @@ class BlogPostTemplate extends React.Component {
 								</Description>
 							</div>
 							<OtherProjects>
-								<AniLink
-									cover
-									bg="#000000"
-									top="entry"
-									direction="left"
-									duration={1}
-									to={previous.fields.slug}
-									rel="previous"
-								>
-									← {previous.frontmatter.title}
-								</AniLink>
-								<AniLink
-									cover
-									bg="#000000"
-									top="entry"
-									direction="left"
-									duration={1}
-									to={next.fields.slug}
-									rel="next"
-								>
-									{next.frontmatter.title} →
-								</AniLink>
+								{previous && (
+									<Projects previous>
+										<AniLink
+											swipe
+											bg="#000000"
+											top="entry"
+											direction="down"
+											duration={1}
+											entryOffset={0}
+											to={previous.fields.slug}
+											rel="previous"
+										>
+											Previous Project
+										</AniLink>
+									</Projects>
+								)}
+								{next && (
+									<Projects>
+										<AniLink
+											swipe
+											bg="#000000"
+											top="entry"
+											direction="up"
+											duration={1}
+											entryOffset={0}
+											to={next.fields.slug}
+											rel="next"
+										>
+											Next Project
+										</AniLink>
+									</Projects>
+								)}
 							</OtherProjects>
 						</LeftPanelInner>
 					</LeftPanel>
@@ -227,9 +259,8 @@ class BlogPostTemplate extends React.Component {
 						<h2>So much swag</h2>
 						<p>One line description</p>
 						<h2>Coolest activity</h2>
-						<p>Kayaking the whole lake</p>
+						<p>Playing with his toys</p>
 						<MDXRenderer>{post.body}</MDXRenderer>
-						{/* https://codepen.io/kathykato/pen/rZRaNe */}
 						<button>Learn more</button>
 					</ProjectPanel>
 					<RightPanel>
