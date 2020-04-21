@@ -1,16 +1,12 @@
 // Package
-//import React, { lazy, Suspense, Component } from "react";
-import React, { Component } from "react";
-
-// Components
-
-import Video from "@components/post/video";
-import Carousel from "@components/post/carousel";
+import React, { lazy, Suspense, Component } from "react";
 
 // Styles
 import styled from "styled-components";
 
-//const CustomSlickCarousel = lazy(() => import("@components/post/carousel"));
+// Components
+const Carousel = lazy(() => import("@components/post/carousel"));
+const Video = lazy(() => import("@components/post/video"));
 
 const Container = styled.div`
 	position: relative;
@@ -41,21 +37,23 @@ const ProjectInner = styled.div`
 	transition: all 0.3s; */
 `;
 
-// const Calendar = React.lazy(() => {
-// 	return new Promise(resolve => setTimeout(resolve, 5 * 1000)).then(() =>
-// 		import("@components/post/carousel")
-// 	);
-// });
-
 export default class middleColumn extends Component {
 	state = {
-		comp: null,
+		currentProject: null,
 	};
 	render() {
-		const renderComp = data => {
-			console.log(data);
+		const importAsset = (type, data) => {
+			return (
+				<Suspense fallback="Loading charts">
+					{type === "carousel" && <Carousel images={data} />}
+					{type === "video" && <Video data={data} />}
+				</Suspense>
+			);
+		};
+		const renderProject = (type, data) => {
+			const asset = importAsset(type, data);
 			this.setState({
-				comp: <Carousel images={data} />,
+				currentProject: asset,
 			});
 		};
 		return (
@@ -65,15 +63,17 @@ export default class middleColumn extends Component {
 						<Project
 							key={i}
 							onClick={() => {
-								renderComp(project.data);
+								renderProject(project.type, project.data);
 							}}
 						>
 							<ProjectTitle>{project.title}</ProjectTitle>
 							<ProjectDescription>{project.description}</ProjectDescription>
-							{this.state.comp}
 						</Project>
 					);
 				})}
+				{this.state.currentProject && (
+					<ProjectInner>{this.state.currentProject}</ProjectInner>
+				)}
 			</Container>
 		);
 	}
