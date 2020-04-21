@@ -82,9 +82,8 @@ class GalleryGrid extends Component {
 						<AniLink
 							cover
 							bg="#000000"
-							top="entry"
 							direction="left"
-							duration={1}
+							duration={0.8}
 							to={post.node.frontmatter.path}
 							style={{
 								display: "block",

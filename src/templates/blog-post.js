@@ -7,7 +7,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
-import BackHomeCTA from "@components/post/CTA/backHomeCTA";
+import homeCTA from "@components/post/homeCTA";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
 
@@ -15,12 +15,12 @@ import SEO from "@components/seo";
 import MdToHtml from "@utils/MdToHtml";
 
 // Assets
-import Start from "@static/start.png";
+import Start from "@static/middle.png";
 
 const Background = styled.div`
 	position: absolute;
 	/* z-index:  10; */
-	opacity: 0.5;
+	/* opacity: 0.5; */
 	width: 100%;
 	height: 100%;
 	background-image: url("${Start}");
@@ -38,8 +38,7 @@ const BlogPostContainer = styled.div`
 	justify-content: center;
 	width: 100%;
 	height: 950px;
-	height: 100vh;
-	/* max-width: 1400px; */
+	/* height: 100vh; */
 	margin: 0 auto;
 `;
 
@@ -70,6 +69,14 @@ const LeftPanelInner = styled.div`
 const Title = styled.h1`
 	margin-top: 15px;
 	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
+	&:after {
+		content: "";
+		background: ${({ theme }) => theme.colors.black};
+		display: block;
+		width: 30px;
+		height: 3px;
+		margin-top: 20px;
+	}
 `;
 
 const Description = styled.div`
@@ -207,10 +214,10 @@ class BlogPostTemplate extends React.Component {
 							bg="#000000"
 							top="entry"
 							direction="right"
-							duration={1}
+							duration={0.8}
 							to="/"
 						>
-							<BackHomeCTA />
+							<homeCTA />
 						</AniLink>
 						<LeftPanelInner>
 							<div className="upper">
@@ -223,12 +230,10 @@ class BlogPostTemplate extends React.Component {
 								{previous && (
 									<Projects previous>
 										<AniLink
-											swipe
+											cover
 											bg="#000000"
-											top="entry"
 											direction="down"
-											duration={1}
-											entryOffset={0}
+											duration={0.8}
 											to={previous.fields.slug}
 											rel="previous"
 										>
@@ -239,12 +244,10 @@ class BlogPostTemplate extends React.Component {
 								{next && (
 									<Projects>
 										<AniLink
-											swipe
+											cover
 											bg="#000000"
-											top="entry"
 											direction="up"
-											duration={1}
-											entryOffset={0}
+											duration={0.8}
 											to={next.fields.slug}
 											rel="next"
 										>

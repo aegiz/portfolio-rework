@@ -33,7 +33,7 @@ const SideProject = styled.div`
 		z-index: 3;
 		&:after {
 			content: "";
-			background: white;
+			background: ${({ theme }) => theme.colors.white};
 			display: block;
 			width: 30px;
 			height: 3px;

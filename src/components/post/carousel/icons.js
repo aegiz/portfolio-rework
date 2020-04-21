@@ -2,14 +2,14 @@
 import React from "react";
 
 // Assets
-import previousImg from "./icons/previous.svg";
-import nextImg from "./icons/next.svg";
+import previousIcon from "./assets/previous.svg";
+import nextIcon from "./assets/next.svg";
 
 class CTAicon extends React.Component {
 	render() {
 		const icons = {
-			previous: previousImg,
-			next: nextImg,
+			previous: previousIcon,
+			next: nextIcon,
 		};
 		return (
 			<button onClick={this.props.onClick} onKeyDown={this.props.onClick}>

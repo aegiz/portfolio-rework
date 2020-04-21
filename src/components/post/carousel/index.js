@@ -11,7 +11,7 @@ import CustImg from "@utils/StaticImg";
 // Styles
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./carousel.css";
+import "./assets/carousel.css";
 import styled from "styled-components";
 
 const MainContainer = styled.div`

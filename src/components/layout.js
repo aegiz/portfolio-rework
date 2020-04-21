@@ -7,7 +7,7 @@ import { Message } from "theme-ui";
 import { StaticQuery, graphql } from "gatsby";
 
 // Components
-import CustomSlickCarousel from "@components/post/carousel/custom-carousel";
+import MiddleColumn from "@components/post/middleColumn";
 
 // Styles: Theme
 export const theme = {
@@ -109,7 +109,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, CustomSlickCarousel };
+	const shortcodes = { Message, MiddleColumn };
 	const layoutContent = data => (
 		<>
 			<GlobalStyle />
