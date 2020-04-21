@@ -1,12 +1,16 @@
 // Package
+//import React, { lazy, Suspense, Component } from "react";
 import React, { Component } from "react";
 
 // Components
-import CustomSlickCarousel from "@components/post/carousel";
+
 import Video from "@components/post/video";
+import Carousel from "@components/post/carousel";
 
 // Styles
 import styled from "styled-components";
+
+//const CustomSlickCarousel = lazy(() => import("@components/post/carousel"));
 
 const Container = styled.div`
 	position: relative;
@@ -14,6 +18,7 @@ const Container = styled.div`
 
 const Project = styled.div`
 	position: relative;
+	cursor: pointer;
 `;
 
 const ProjectTitle = styled.p`
@@ -25,32 +30,47 @@ const ProjectDescription = styled.p`
 `;
 
 const ProjectInner = styled.div`
-	display: none;
-	overflow: hidden;
+	/* display: none;
+	 overflow: hidden;
 	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 0;
 	height: 100%;
-	transition: all 0.3s;
+	transition: all 0.3s; */
 `;
 
+// const Calendar = React.lazy(() => {
+// 	return new Promise(resolve => setTimeout(resolve, 5 * 1000)).then(() =>
+// 		import("@components/post/carousel")
+// 	);
+// });
+
 export default class middleColumn extends Component {
+	state = {
+		comp: null,
+	};
 	render() {
+		const renderComp = data => {
+			console.log(data);
+			this.setState({
+				comp: <Carousel images={data} />,
+			});
+		};
 		return (
 			<Container>
 				{this.props.content.map((project, i) => {
 					return (
-						<Project key={i}>
+						<Project
+							key={i}
+							onClick={() => {
+								renderComp(project.data);
+							}}
+						>
 							<ProjectTitle>{project.title}</ProjectTitle>
 							<ProjectDescription>{project.description}</ProjectDescription>
-							<ProjectInner>
-								{project.type === "carousel" && (
-									<CustomSlickCarousel images={project.data} />
-								)}
-								{project.type === "video" && <Video data={project.data} />}
-							</ProjectInner>
+							{this.state.comp}
 						</Project>
 					);
 				})}

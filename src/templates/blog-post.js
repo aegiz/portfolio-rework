@@ -7,7 +7,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
-import homeCTA from "@components/post/homeCTA";
+import CTAhome from "@components/post/CTAhome";
 import Layout from "@components/layout";
 import SEO from "@components/seo";
 
@@ -217,7 +217,7 @@ class BlogPostTemplate extends React.Component {
 							duration={0.8}
 							to="/"
 						>
-							<homeCTA />
+							<CTAhome />
 						</AniLink>
 						<LeftPanelInner>
 							<div className="upper">
