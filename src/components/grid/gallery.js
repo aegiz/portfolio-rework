@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Shuffle from "shufflejs";
 import styled from "styled-components";
@@ -67,6 +68,9 @@ const FilterContainer = styled.div`
 `;
 
 class Gallery extends Component {
+	static propTypes = {
+		post: PropTypes.shape(),
+	};
 	state = {
 		shuffle: null,
 		filterOpen: false,

@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 // Styles
@@ -9,6 +10,14 @@ const Video = styled.div`
 `;
 
 export default class CustomVideo extends Component {
+	static propTypes = {
+		data: PropTypes.shape({
+			title: PropTypes.string.isRequired,
+			width: PropTypes.number.isRequired,
+			height: PropTypes.number.isRequired,
+			src: PropTypes.string.isRequired,
+		}).isRequired,
+	};
 	render() {
 		return (
 			<Video>

@@ -1,5 +1,6 @@
 // Package
 import Img from "gatsby-image";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import React, { Component } from "react";
 
@@ -210,8 +211,16 @@ const Project = styled.div`
 `;
 
 class galleryItem extends Component {
+	static propTypes = {
+		frontmatter: PropTypes.shape({
+			typeOfArticle: PropTypes.string.isRequired,
+			title: PropTypes.string.isRequired,
+			featuredImage: PropTypes.object.isRequired,
+			hashtags: PropTypes.string.isRequired,
+		}),
+	};
 	render() {
-		const frontmatter = this.props.post.node.frontmatter;
+		const frontmatter = this.props.frontmatter;
 		const typeOfArticleClean = frontmatter.typeOfArticle
 			.toLowerCase()
 			.replace(/\s/g, "");

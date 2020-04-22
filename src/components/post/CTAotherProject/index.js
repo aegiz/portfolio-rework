@@ -1,5 +1,6 @@
 // Package
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 // Styles
@@ -52,6 +53,12 @@ const Projects = styled.div`
 `;
 
 export default class CTAotherProject extends Component {
+	static propTypes = {
+		previous: PropTypes.string.isRequired,
+		previousText: PropTypes.string.isRequired,
+		next: PropTypes.string.isRequired,
+		nextText: PropTypes.string.isRequired,
+	};
 	render() {
 		return (
 			<OtherProjects desktop={this.props.desktop}>
@@ -62,7 +69,7 @@ export default class CTAotherProject extends Component {
 							bg="#000000"
 							direction="down"
 							duration={0.8}
-							to={this.props.previous.fields.slug}
+							to={this.props.previous}
 							rel="previous"
 						>
 							{this.props.previousText}
@@ -76,7 +83,7 @@ export default class CTAotherProject extends Component {
 							bg="#000000"
 							direction="up"
 							duration={0.8}
-							to={this.props.next.fields.slug}
+							to={this.props.next}
 							rel="next"
 						>
 							{this.props.nextText}

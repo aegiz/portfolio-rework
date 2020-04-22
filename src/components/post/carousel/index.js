@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Slider from "react-slick";
 
@@ -141,6 +142,14 @@ const IconContainter = styled.div`
 `;
 
 export default class CustomCarousel extends Component {
+	static propTypes = {
+		images: PropTypes.arrayOf(
+			PropTypes.shape({
+				src: PropTypes.string.isRequired,
+				alt: PropTypes.string.isRequired,
+			}).isRequired
+		).isRequired,
+	};
 	state = {
 		slickLeft: null,
 		slickRight: null,

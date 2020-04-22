@@ -1,5 +1,6 @@
 // Package
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import React, { Component } from "react";
 
@@ -49,6 +50,16 @@ const Sizer = styled.div`
 `;
 
 class GalleryGrid extends Component {
+	static propTypes = {
+		createGrid: PropTypes.func.isRequired,
+		destroyGrid: PropTypes.func.isRequired,
+		posts: PropTypes.arrayOf(
+			PropTypes.shape({
+				instance: PropTypes.shape(),
+				currentFilter: PropTypes.string,
+			}).isRequired
+		),
+	};
 	constructor(props) {
 		super(props);
 		this.element = React.createRef();
@@ -93,7 +104,7 @@ class GalleryGrid extends Component {
 								textDecoration: "none",
 							}}
 						>
-							<GalleryItem post={post} />
+							<GalleryItem frontmatter={post.node.frontmatter} />
 						</AniLink>
 					</GridItem>
 				))}

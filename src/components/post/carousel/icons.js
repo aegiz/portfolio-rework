@@ -1,11 +1,19 @@
 // Package
-import React from "react";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 
 // Assets
 import previousIcon from "./assets/previous.svg";
 import nextIcon from "./assets/next.svg";
 
-class CTAicon extends React.Component {
+export default class CTAIcon extends Component {
+	static propTypes = {
+		onClick: PropTypes.func.isRequired,
+		type: PropTypes.string.isRequired,
+		alt: PropTypes.string.isRequired,
+		width: PropTypes.number.isRequired,
+		height: PropTypes.number.isRequired,
+	};
 	render() {
 		const icons = {
 			previous: previousIcon,
@@ -23,5 +31,3 @@ class CTAicon extends React.Component {
 		);
 	}
 }
-
-export default CTAicon;

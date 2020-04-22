@@ -1,5 +1,6 @@
 // Package
 import AniLink from "gatsby-plugin-transition-link/AniLink";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 // Styles
@@ -103,6 +104,9 @@ const ButtonText = styled.span`
 `;
 
 export default class BackHomeCTA extends Component {
+	static propTypes = {
+		text: PropTypes.string.isRequired,
+	};
 	render() {
 		return (
 			<MainContainer>
@@ -118,7 +122,7 @@ export default class BackHomeCTA extends Component {
 						<Circle aria-hidden="true">
 							<Icon />
 						</Circle>
-						<ButtonText>Homepage</ButtonText>
+						<ButtonText>{this.props.text}</ButtonText>
 					</Button>
 				</AniLink>
 			</MainContainer>

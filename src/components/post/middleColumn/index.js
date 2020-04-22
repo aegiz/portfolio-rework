@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { lazy, Suspense, Component } from "react";
 
 // Styles
@@ -46,6 +47,16 @@ const ProjectInner = styled.div`
 `;
 
 export default class middleColumn extends Component {
+	static propTypes = {
+		content: PropTypes.arrayOf(
+			PropTypes.shape({
+				type: PropTypes.string.isRequired,
+				title: PropTypes.string.isRequired,
+				description: PropTypes.string.isRequired,
+				data: PropTypes.shape.isRequired,
+			}).isRequired
+		).isRequired,
+	};
 	state = {
 		currentProject: null,
 	};

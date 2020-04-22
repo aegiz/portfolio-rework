@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import Img from "gatsby-image";
 import React, { Component } from "react";
 
@@ -20,6 +21,10 @@ const Cover = styled.div`
 `;
 
 export default class CoverComp extends Component {
+	static propTypes = {
+		desktop: PropTypes.bool,
+		src: PropTypes.object.isRequired,
+	};
 	render() {
 		return (
 			<Cover desktop={this.props.desktop}>

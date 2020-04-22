@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 // Styles
@@ -37,6 +38,10 @@ const Date = styled.div`
 `;
 
 export default class OtherInfoComp extends Component {
+	static propTypes = {
+		beginning: PropTypes.string.isRequired,
+		duration: PropTypes.string.isRequired,
+	};
 	render() {
 		return (
 			<OtherInfo>

@@ -1,4 +1,5 @@
 // Package
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
@@ -65,6 +66,12 @@ const Filter = styled.div`
 `;
 
 class GalleryFilter extends Component {
+	static propTypes = {
+		filter: PropTypes.string.isRequired,
+		updateGrid: PropTypes.func.isRequired,
+		updateFilter: PropTypes.func.isRequired,
+		currentFilter: PropTypes.string.isRequired,
+	};
 	render() {
 		const typeOfArticleClean = this.props.filter
 			.toLowerCase()
