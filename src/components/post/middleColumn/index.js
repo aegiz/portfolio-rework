@@ -17,12 +17,20 @@ const Project = styled.div`
 	cursor: pointer;
 `;
 
-const ProjectTitle = styled.p`
-	position: relative;
+const ProjectTitle = styled.h2`
+	margin: 48px 0 0 0;
+	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+	${({ theme }) => theme.mediaQueries.l} {
+		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+	}
 `;
 
 const ProjectDescription = styled.p`
-	position: relative;
+	margin: 13px 0 0 0;
+	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	${({ theme }) => theme.mediaQueries.l} {
+		font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	}
 `;
 
 const ProjectInner = styled.div`

@@ -149,7 +149,6 @@ export default class CustomCarousel extends Component {
 		sliderLeftLoaded: false,
 		sliderRightLoaded: false,
 	};
-
 	componentDidMount() {
 		this.setState({
 			slickLeft: this.sliderLeft,

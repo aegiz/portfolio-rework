@@ -1,21 +1,22 @@
 // Packages
-import AniLink from "gatsby-plugin-transition-link/AniLink";
-import Img from "gatsby-image";
 import React from "react";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
+import Cover from "@components/post/Cover";
 import CTAhome from "@components/post/CTAhome";
+import CTAotherProject from "@components/post/CTAotherProject";
 import Layout from "@components/layout";
+import OtherInfo from "@components/post/otherInfo";
 import SEO from "@components/seo";
 
 // Utils
 import MdToHtml from "@utils/MdToHtml";
 
 // Assets
-import Start from "@static/middle.png";
+import Middle from "@static/middle.png";
 
 const Background = styled.div`
 	position: absolute;
@@ -23,7 +24,7 @@ const Background = styled.div`
 	/* opacity: 0.5; */
 	width: 100%;
 	height: 100%;
-	background-image: url("${Start}");
+	background-image: url("${Middle}");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	background-position: 0 0;
@@ -43,6 +44,7 @@ const BlogPostContainer = styled.div`
 `;
 
 const LeftPanel = styled.div`
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -51,11 +53,11 @@ const LeftPanel = styled.div`
 	height: 100%;
 	margin: 0;
 	background: ${({ theme }) => theme.colors.white};
-	padding: 73px 90px 0;
 `;
 
 const LeftPanelInner = styled.div`
-	margin-top: 40px;
+	margin-top: 55px;
+	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -63,15 +65,24 @@ const LeftPanelInner = styled.div`
 	align-items: center;
 	.upper {
 		justify-content: normal;
+		width: 100%;
+		padding: 0 90px;
+		${({ theme }) => theme.mediaQueries.l} {
+			padding: 0 70px;
+		}
 	}
 `;
 
 const Title = styled.h1`
-	margin-top: 15px;
+	mix-blend-mode: exclusion;
+	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
+	${({ theme }) => theme.mediaQueries.l} {
+		font-size: ${({ theme }) => theme.fontSizes["5xl"]};
+	}
 	&:after {
 		content: "";
-		background: ${({ theme }) => theme.colors.black};
+		background: ${({ theme }) => theme.colors.white};
 		display: block;
 		width: 30px;
 		height: 3px;
@@ -84,40 +95,8 @@ const Description = styled.div`
 	p {
 		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
-	}
-`;
-
-const OtherProjects = styled.div`
-	width: 100%;
-	max-width: 350px;
-	margin: 0 auto 20px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-`;
-
-const Projects = styled.div`
-	position: relative;
-	padding: 0 20px;
-	&:before {
-		content: "";
-		position: absolute;
-		top: calc(50% - 3px);
-		left: 4px;
-		border-style: solid;
-		border-width: 0 6px 7px 6px;
-		border-color: transparent transparent #000000 transparent;
-		transform: ${props => (props.previous ? "" : "rotate(180deg)")};
-	}
-	a {
-		opacity: 0.5;
-		text-decoration: none;
-		color: ${({ theme }) => theme.colors.black};
-		font-size: ${({ theme }) => theme.fontSizes["m"]};
-		transition: all 0.3s;
-		&:hover {
-			opacity: 1;
+		${({ theme }) => theme.mediaQueries.l} {
+			font-size: ${({ theme }) => theme.fontSizes["normal"]};
 		}
 	}
 `;
@@ -143,54 +122,9 @@ const ProjectPanel = styled.div`
 	padding: 25px 50px 0 119px;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
-	h2 {
-		margin: 48px 0 0 0;
-		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+	${({ theme }) => theme.mediaQueries.l} {
+		padding: 25px 50px 0;
 	}
-	p {
-		margin: 13px 0 0 0;
-		font-size: ${({ theme }) => theme.fontSizes["l"]};
-	}
-`;
-
-const Cover = styled.div`
-	width: 100%;
-	height: 76.05%;
-	.gatsby-image-wrapper {
-		height: 100%;
-	}
-`;
-
-const OtherInfo = styled.div`
-	width: 100%;
-	height: 23.95%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-end;
-	background: ${({ theme }) => theme.colors.yellow.light};
-`;
-
-const OtherInfoInner = styled.div`
-	width: 50%;
-	text-align: right;
-	padding: 20px;
-	a {
-		text-decoration: none;
-		color: ${({ theme }) => theme.colors.black};
-	}
-`;
-
-const TypeOfProject = styled.p`
-	font-size: ${({ theme }) => theme.fontSizes.normal};
-`; // Maybe here use inheritance instead of reapeating myself
-
-const Role = styled.p`
-	font-size: ${({ theme }) => theme.fontSizes.normal};
-`;
-
-const Date = styled.div`
-	font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
 class BlogPostTemplate extends React.Component {
@@ -209,16 +143,7 @@ class BlogPostTemplate extends React.Component {
 				<Background />
 				<BlogPostContainer>
 					<LeftPanel>
-						<AniLink
-							cover
-							bg="#000000"
-							top="entry"
-							direction="right"
-							duration={0.8}
-							to="/"
-						>
-							<CTAhome />
-						</AniLink>
+						<CTAhome />
 						<LeftPanelInner>
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
@@ -226,65 +151,24 @@ class BlogPostTemplate extends React.Component {
 									<MdToHtml content={post.frontmatter.description} />
 								</Description>
 							</div>
-							<OtherProjects>
-								{previous && (
-									<Projects previous>
-										<AniLink
-											cover
-											bg="#000000"
-											direction="down"
-											duration={0.8}
-											to={previous.fields.slug}
-											rel="previous"
-										>
-											Previous Project
-										</AniLink>
-									</Projects>
-								)}
-								{next && (
-									<Projects>
-										<AniLink
-											cover
-											bg="#000000"
-											direction="up"
-											duration={0.8}
-											to={next.fields.slug}
-											rel="next"
-										>
-											Next Project
-										</AniLink>
-									</Projects>
-								)}
-							</OtherProjects>
+							<CTAotherProject
+								previous={previous}
+								previousText={"Previous Project"}
+								next={next}
+								nextText={"Previous Project"}
+							/>
 						</LeftPanelInner>
 					</LeftPanel>
 					<ProjectPanel>
-						<h2>So much swag</h2>
-						<p>One line description</p>
-						<h2>Coolest activity</h2>
-						<p>Playing with his toys</p>
 						<MDXRenderer>{post.body}</MDXRenderer>
 						<button>Learn more</button>
 					</ProjectPanel>
 					<RightPanel>
-						<Cover>
-							<Img
-								fluid={post.frontmatter.featuredImage.childImageSharp.fluid}
-							/>
-						</Cover>
-						<OtherInfo>
-							<OtherInfoInner>
-								<TypeOfProject>
-									Project Type: <b>TBC</b>
-								</TypeOfProject>
-								<Role>
-									Role: <b>Solutions Engineer</b>
-								</Role>
-								<Date>
-									{post.frontmatter.beginning} ({post.frontmatter.duration})
-								</Date>
-							</OtherInfoInner>
-						</OtherInfo>
+						<Cover src={post.frontmatter.featuredImage.childImageSharp.fluid} />
+						<OtherInfo
+							beginning={post.frontmatter.beginning}
+							duration={post.frontmatter.duration}
+						/>
 					</RightPanel>
 				</BlogPostContainer>
 			</Layout>
