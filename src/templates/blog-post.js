@@ -41,6 +41,10 @@ const BlogPostContainer = styled.div`
 	height: 950px;
 	/* height: 100vh; */
 	margin: 0 auto;
+	${({ theme }) => theme.mediaQueries.m} {
+		flex-direction: column;
+		height: auto;
+	}
 `;
 
 const LeftPanel = styled.div`
@@ -49,14 +53,34 @@ const LeftPanel = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
-	width: 45%;
 	height: 100%;
 	margin: 0;
 	background: ${({ theme }) => theme.colors.white};
+	width: 45%;
+	${({ theme }) => theme.mediaQueries.m} {
+		z-index: 2;
+		width: 100%;
+	}
 `;
 
-const LeftPanelInner = styled.div`
-	margin-top: 55px;
+const LeftPanelTop = styled.div`
+	display: block;
+	${({ theme }) => theme.mediaQueries.m} {
+		position: fixed;
+		z-index: 2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		height: 60px;
+		width: 100%;
+		background: ${({ theme }) => theme.colors.white};
+		padding: 0 70px;
+	}
+`;
+
+const LeftPanelIntro = styled.div`
+	margin-top: 60px;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -68,6 +92,7 @@ const LeftPanelInner = styled.div`
 		width: 100%;
 		padding: 0 90px;
 		${({ theme }) => theme.mediaQueries.l} {
+			margin-top: 15px;
 			padding: 0 70px;
 		}
 	}
@@ -92,6 +117,9 @@ const Title = styled.h1`
 
 const Description = styled.div`
 	margin-top: 50px;
+	${({ theme }) => theme.mediaQueries.l} {
+		margin: 40px auto;
+	}
 	p {
 		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
@@ -99,17 +127,6 @@ const Description = styled.div`
 			font-size: ${({ theme }) => theme.fontSizes["normal"]};
 		}
 	}
-`;
-
-const RightPanel = styled.div`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-	width: 55%;
-	height: 100%;
-	margin: 0;
 `;
 
 const ProjectPanel = styled.div`
@@ -124,6 +141,27 @@ const ProjectPanel = styled.div`
 	color: ${({ theme }) => theme.colors.white};
 	${({ theme }) => theme.mediaQueries.l} {
 		padding: 25px 50px 0;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		padding: 25px 70px 0;
+		position: relative;
+		width: 100%;
+		left: auto;
+		bottom: auto;
+	}
+`;
+
+const RightPanel = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	height: 100%;
+	width: 55%;
+	margin: 0;
+	${({ theme }) => theme.mediaQueries.m} {
+		display: none;
 	}
 `;
 
@@ -143,8 +181,19 @@ class BlogPostTemplate extends React.Component {
 				<Background />
 				<BlogPostContainer>
 					<LeftPanel>
-						<CTAhome />
-						<LeftPanelInner>
+						<LeftPanelTop>
+							<CTAhome />
+							<CTAotherProject
+								previous={previous}
+								previousText={"Previous Project"}
+								next={next}
+								nextText={"Next Project"}
+							/>
+						</LeftPanelTop>
+						<LeftPanelIntro>
+							<Cover
+								src={post.frontmatter.featuredImage.childImageSharp.fluid}
+							/>
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
 								<Description>
@@ -152,19 +201,23 @@ class BlogPostTemplate extends React.Component {
 								</Description>
 							</div>
 							<CTAotherProject
+								desktop
 								previous={previous}
 								previousText={"Previous Project"}
 								next={next}
-								nextText={"Previous Project"}
+								nextText={"Next Project"}
 							/>
-						</LeftPanelInner>
+						</LeftPanelIntro>
 					</LeftPanel>
 					<ProjectPanel>
 						<MDXRenderer>{post.body}</MDXRenderer>
 						<button>Learn more</button>
 					</ProjectPanel>
 					<RightPanel>
-						<Cover src={post.frontmatter.featuredImage.childImageSharp.fluid} />
+						<Cover
+							desktop
+							src={post.frontmatter.featuredImage.childImageSharp.fluid}
+						/>
 						<OtherInfo
 							beginning={post.frontmatter.beginning}
 							duration={post.frontmatter.duration}

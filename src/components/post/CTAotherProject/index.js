@@ -6,13 +6,18 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const OtherProjects = styled.div`
-	width: 100%;
-	max-width: 350px;
-	margin: 0 auto 20px;
-	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
+	max-width: 350px;
+	margin: 0 auto 20px;
+	display: ${props => (props.desktop ? "flex" : "none")};
+	${({ theme }) => theme.mediaQueries.m} {
+		display: ${props => (props.desktop ? "none" : "flex")};
+		justify-content: flex-end;
+		margin: auto;
+	}
 `;
 
 const Projects = styled.div`
@@ -28,7 +33,13 @@ const Projects = styled.div`
 		border-color: transparent transparent #000000 transparent;
 		transform: ${props => (props.previous ? "" : "rotate(180deg)")};
 	}
+	${({ theme }) => theme.mediaQueries.m} {
+		&:nth-child(2) {
+			padding: 0 0 0 20px;
+		}
+	}
 	a {
+		display: block;
 		opacity: 0.5;
 		text-decoration: none;
 		color: ${({ theme }) => theme.colors.black};
@@ -43,7 +54,7 @@ const Projects = styled.div`
 export default class CTAotherProject extends Component {
 	render() {
 		return (
-			<OtherProjects>
+			<OtherProjects desktop={this.props.desktop}>
 				{this.props.previous && (
 					<Projects previous>
 						<AniLink

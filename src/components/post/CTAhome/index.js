@@ -9,8 +9,15 @@ const MainContainer = styled.div`
 	margin-top: 73px;
 	width: 100%;
 	padding: 0 90px;
+	a {
+		display: block;
+	}
 	${({ theme }) => theme.mediaQueries.l} {
 		padding: 0 70px;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		margin: 0;
+		padding: 0;
 	}
 `;
 
