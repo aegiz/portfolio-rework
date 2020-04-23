@@ -61,16 +61,18 @@ export default class middleColumn extends Component {
 		currentProject: null,
 	};
 	render() {
-		const importAsset = (type, data) => {
+		const importAsset = (type, data, index) => {
 			return (
 				<Suspense fallback="Loading charts">
-					{type === "carousel" && <Carousel images={data} />}
+					{type === "carousel" && (
+						<Carousel images={data} id={index} key={index} />
+					)}
 					{type === "video" && <Video data={data} />}
 				</Suspense>
 			);
 		};
-		const renderProject = (type, data) => {
-			const asset = importAsset(type, data);
+		const renderProject = (type, data, index) => {
+			const asset = importAsset(type, data, index);
 			this.setState({
 				currentProject: asset,
 			});
@@ -82,7 +84,7 @@ export default class middleColumn extends Component {
 						<Project
 							key={i}
 							onClick={() => {
-								renderProject(project.type, project.data);
+								renderProject(project.type, project.data, i);
 							}}
 						>
 							<ProjectTitle>{project.title}</ProjectTitle>

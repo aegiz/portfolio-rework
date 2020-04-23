@@ -153,8 +153,8 @@ export default class CustomCarousel extends Component {
 	state = {
 		slickLeft: null,
 		slickRight: null,
-		currentSlide: 0,
-		totalSlide: this.props.images.length,
+		currentSlide: null,
+		totalSlide: null,
 		sliderLeftLoaded: false,
 		sliderRightLoaded: false,
 	};
@@ -162,6 +162,8 @@ export default class CustomCarousel extends Component {
 		this.setState({
 			slickLeft: this.sliderLeft,
 			slickRight: this.sliderRight,
+			currentSlide: 0,
+			totalSlide: this.props.images.length,
 		});
 	}
 	render() {
