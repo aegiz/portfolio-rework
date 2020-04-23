@@ -184,10 +184,16 @@ class BlogPostTemplate extends React.Component {
 						<LeftPanelTop>
 							<CTAhome text={"Homepage"} />
 							<CTAotherProject
-								previous={previous.fields.slug}
-								previousText={"Previous Project"}
-								next={next.fields.slug}
-								nextText={"Next Project"}
+								previous={
+									previous
+										? { slug: previous.fields.slug, text: "Previous Project" }
+										: undefined
+								}
+								next={
+									next
+										? { slug: next.fields.slug, text: "Next Project" }
+										: undefined
+								}
 							/>
 						</LeftPanelTop>
 						<LeftPanelIntro>
@@ -202,10 +208,16 @@ class BlogPostTemplate extends React.Component {
 							</div>
 							<CTAotherProject
 								desktop
-								previous={previous.fields.slug}
-								previousText={"Previous Project"}
-								next={next.fields.slug}
-								nextText={"Next Project"}
+								previous={
+									previous
+										? { slug: previous.fields.slug, text: "Previous Project" }
+										: undefined
+								}
+								next={
+									next
+										? { slug: next.fields.slug, text: "Next Project" }
+										: undefined
+								}
 							/>
 						</LeftPanelIntro>
 					</LeftPanel>

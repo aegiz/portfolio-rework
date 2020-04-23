@@ -54,10 +54,15 @@ const Projects = styled.div`
 
 export default class CTAotherProject extends Component {
 	static propTypes = {
-		previous: PropTypes.string.isRequired,
-		previousText: PropTypes.string.isRequired,
-		next: PropTypes.string.isRequired,
-		nextText: PropTypes.string.isRequired,
+		desktop: PropTypes.bool,
+		previous: PropTypes.shape({
+			slug: PropTypes.string.isRequired,
+			text: PropTypes.shape.isRequired,
+		}),
+		next: PropTypes.shape({
+			slug: PropTypes.string.isRequired,
+			text: PropTypes.shape.isRequired,
+		}),
 	};
 	render() {
 		return (
@@ -69,10 +74,10 @@ export default class CTAotherProject extends Component {
 							bg="#000000"
 							direction="down"
 							duration={0.8}
-							to={this.props.previous}
+							to={this.props.previous.slug}
 							rel="previous"
 						>
-							{this.props.previousText}
+							{this.props.previous.text}
 						</AniLink>
 					</Projects>
 				)}
@@ -83,10 +88,10 @@ export default class CTAotherProject extends Component {
 							bg="#000000"
 							direction="up"
 							duration={0.8}
-							to={this.props.next}
+							to={this.props.next.slug}
 							rel="next"
 						>
-							{this.props.nextText}
+							{this.props.next.text}
 						</AniLink>
 					</Projects>
 				)}
