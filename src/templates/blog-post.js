@@ -39,7 +39,6 @@ const BlogPostContainer = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
-	/* height: 950px; */
 	height: 100vh;
 	overflow: hidden;
 	margin: 0 auto;
@@ -55,10 +54,10 @@ const LeftPanel = styled.div`
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
-	height: 100%;
 	margin: 0;
 	background: ${({ theme }) => theme.colors.white};
 	width: 45%;
+	height: 100%;
 	${({ theme }) => theme.mediaQueries.m} {
 		z-index: 2;
 		width: 100%;
@@ -67,15 +66,15 @@ const LeftPanel = styled.div`
 
 const LeftPanelTop = styled.div`
 	display: block;
+	width: 100%;
 	${({ theme }) => theme.mediaQueries.m} {
 		position: fixed;
 		z-index: 2;
+		height: 60px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: flex-start;
-		height: 60px;
-		width: 100%;
 		background: ${({ theme }) => theme.colors.white};
 		padding: 0 70px;
 	}
@@ -119,9 +118,8 @@ const Title = styled.h1`
 
 const Description = styled.div`
 	margin-top: 50px;
-	${({ theme }) => theme.mediaQueries.l} {
-		margin: 40px auto;
-	}
+	overflow: auto;
+	height: ${props => props.windowHeight - 435}px;
 	p {
 		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
@@ -136,12 +134,14 @@ const MiddlePanel = styled.div`
 	position: absolute;
 	left: calc(45% - 40px);
 	bottom: 0;
-	width: 31.7%;
-	min-height: 425px;
-	padding: 25px 119px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
-	height: ${props => (props.middlePanelOpen ? "100%" : "0%")};
+	width: 31.7%;
+	height: ${props => (props.middlePanelOpen ? "100%" : "400px")};
 	transition: all 0.3s;
 	${({ theme }) => theme.mediaQueries.l} {
 		padding: 25px 50px 0;
@@ -152,6 +152,51 @@ const MiddlePanel = styled.div`
 		width: 100%;
 		left: auto;
 		bottom: auto;
+	}
+`;
+
+const MiddlePanelCTAContainer = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 40px 0 0 0;
+	width: 100%;
+	height: 40px;
+	padding: 0 119px;
+`;
+
+const MiddlePanelCTA = styled.button`
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+	border: 0;
+	margin: 0;
+	padding: 0 0 0 16px;
+	cursor: pointer;
+	outline: none;
+	background: transparent;
+	text-transform: uppercase;
+	color: ${({ theme }) => theme.colors.white};
+	font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
+	transition: all 0.3s;
+	opacity: ${props => {
+		if (props.more && props.middlePanelOpen) {
+			return "0";
+		} else if (props.more && !props.middlePanelOpen) {
+			return "1";
+		} else if (!props.more && props.middlePanelOpen) {
+			return "1";
+		} else if (!props.more && !props.middlePanelOpen) {
+			return "0";
+		}
+	}};
+	&:before {
+		content: '${props => (props.middlePanelOpen ? "-" : "+")}';
+		position: absolute;
+		top: '${props => (props.middlePanelOpen ? "-1px" : "0")}';
+		left: 0;
 	}
 `;
 
@@ -212,7 +257,7 @@ class BlogPostTemplate extends React.Component {
 							)}
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
-								<Description>
+								<Description windowHeight={this.props.windowHeight}>
 									<MdToHtml content={post.frontmatter.description} />
 								</Description>
 							</div>
@@ -234,15 +279,29 @@ class BlogPostTemplate extends React.Component {
 					</LeftPanel>
 					<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
 						<MDXRenderer>{post.body}</MDXRenderer>
-						<button
-							onClick={() =>
-								this.setState(prevState => ({
-									middlePanelOpen: !prevState.middlePanelOpen,
-								}))
-							}
-						>
-							See more
-						</button>
+						<MiddlePanelCTAContainer>
+							<MiddlePanelCTA
+								more
+								middlePanelOpen={this.state.middlePanelOpen}
+								onClick={() =>
+									this.setState(prevState => ({
+										middlePanelOpen: !prevState.middlePanelOpen,
+									}))
+								}
+							>
+								See More
+							</MiddlePanelCTA>
+							<MiddlePanelCTA
+								middlePanelOpen={this.state.middlePanelOpen}
+								onClick={() =>
+									this.setState(prevState => ({
+										middlePanelOpen: !prevState.middlePanelOpen,
+									}))
+								}
+							>
+								See Less
+							</MiddlePanelCTA>
+						</MiddlePanelCTAContainer>
 					</MiddlePanel>
 					<RightPanel>
 						{!this.props.isM && (

@@ -10,16 +10,36 @@ const Carousel = lazy(() => import("@components/post/carousel"));
 const Video = lazy(() => import("@components/post/video"));
 
 const Container = styled.div`
-	position: relative;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 `;
 
 const Step = styled.div`
-	position: relative;
+	position: absolute;
 	cursor: pointer;
+	width: 100%;
+	height: 80px;
+	left: 0;
+	padding: 0 119px;
+	&:nth-child(1) {
+		top: 150px;
+	}
+	&:nth-child(2) {
+		top: 250px;
+	}
+	&:nth-child(3) {
+		opacity: 0;
+		top: 350px;
+	}
+	&:nth-child(4) {
+		opacity: 0;
+		top: 400px;
+	}
 `;
 
 const StepTitle = styled.h2`
-	margin: 48px 0 0 0;
+	margin: 0;
 	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
@@ -29,6 +49,7 @@ const StepTitle = styled.h2`
 const StepDescription = styled.p`
 	margin: 13px 0 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	font-weight: ${({ theme }) => theme.fontWeights["thin"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["normal"]};
 	}
