@@ -27,7 +27,7 @@ const Filter = styled.div`
 	align-items: center;
 	justify-content: center;
 	opacity: ${props =>
-		props.typeOfArticle === props.currentFilter ? "1" : "0.5"};
+		props.typeOfProject === props.currentFilter ? "1" : "0.5"};
 	&:hover {
 		&:after {
 			width: 100%;
@@ -42,7 +42,7 @@ const Filter = styled.div`
 		position: absolute;
 		bottom: 5px;
 		left: 0;
-		background: ${props => handleColorType(props.typeOfArticle)};
+		background: ${props => handleColorType(props.typeOfProject)};
 		transition: all 0.35s;
 	}
 	.square {
@@ -51,7 +51,7 @@ const Filter = styled.div`
 		cursor: pointer;
 		width: 15px;
 		height: 15px;
-		background: ${props => handleColorType(props.typeOfArticle)};
+		background: ${props => handleColorType(props.typeOfProject)};
 	}
 	button {
 		cursor: pointer;
@@ -73,16 +73,16 @@ class GalleryFilter extends Component {
 		currentFilter: PropTypes.string.isRequired,
 	};
 	render() {
-		const typeOfArticleClean = this.props.filter
+		const typeOfProjectClean = this.props.filter
 			.toLowerCase()
 			.replace(/\s/g, "");
 		return (
 			<Filter
 				onClick={() => {
-					this.props.updateGrid(typeOfArticleClean);
-					this.props.updateFilter(typeOfArticleClean);
+					this.props.updateGrid(typeOfProjectClean);
+					this.props.updateFilter(typeOfProjectClean);
 				}}
-				typeOfArticle={typeOfArticleClean}
+				typeOfProject={typeOfProjectClean}
 				currentFilter={this.props.currentFilter}
 			>
 				<div className="square" />

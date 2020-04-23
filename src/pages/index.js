@@ -41,7 +41,7 @@ export const pageQuery = graphql`
 					frontmatter {
 						title
 						beginning
-						typeOfArticle
+						typeOfProject
 						description
 						featuredImage {
 							childImageSharp {

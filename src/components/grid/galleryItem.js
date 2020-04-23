@@ -87,7 +87,7 @@ const Project = styled.div`
 	position: relative;
 	height: 100%;
 	background: ${props =>
-		props.typeOfArticle === "freelancework"
+		props.typeOfProject === "freelancework"
 			? ({ theme }) => theme.colors.yellow.main
 			: ({ theme }) => theme.colors.yellow.light};
 	.gatsby-image-wrapper {
@@ -108,7 +108,7 @@ const Project = styled.div`
 		transition: all 0.3s;
 		opacity: 1;
 		background: ${props =>
-			props.typeOfArticle === "freelancework"
+			props.typeOfProject === "freelancework"
 				? ({ theme }) => theme.colors.yellow.main
 				: ({ theme }) => theme.colors.yellow.light};
 	}
@@ -213,7 +213,7 @@ const Project = styled.div`
 class galleryItem extends Component {
 	static propTypes = {
 		frontmatter: PropTypes.shape({
-			typeOfArticle: PropTypes.string.isRequired,
+			typeOfProject: PropTypes.string.isRequired,
 			title: PropTypes.string.isRequired,
 			featuredImage: PropTypes.object.isRequired,
 			hashtags: PropTypes.string.isRequired,
@@ -221,12 +221,12 @@ class galleryItem extends Component {
 	};
 	render() {
 		const frontmatter = this.props.frontmatter;
-		const typeOfArticleClean = frontmatter.typeOfArticle
+		const typeOfProjectClean = frontmatter.typeOfProject
 			.toLowerCase()
 			.replace(/\s/g, "");
 		return (
 			<GalleryItem>
-				{typeOfArticleClean === "sideproject" ? (
+				{typeOfProjectClean === "sideproject" ? (
 					<SideProject>
 						<div className="title">
 							<h2>{frontmatter.title}</h2>
@@ -238,11 +238,11 @@ class galleryItem extends Component {
 						<div className="figcap" />
 					</SideProject>
 				) : (
-					<Project typeOfArticle={typeOfArticleClean}>
+					<Project typeOfProject={typeOfProjectClean}>
 						<div className="title">
 							<h2>{frontmatter.title}</h2>
 							<p>
-								{typeOfArticleClean === "freelancework"
+								{typeOfProjectClean === "freelancework"
 									? "Freelance"
 									: "Full-time"}
 							</p>

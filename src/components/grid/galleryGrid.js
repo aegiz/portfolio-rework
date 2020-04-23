@@ -15,16 +15,16 @@ const GridItem = styled.div`
 	opacity: ${props => (props.instance ? "1" : "0")} !important;
 	margin: 10px 0 0 0;
 	width: ${props => {
-		if (props.typeOfArticle === "sideproject") {
+		if (props.typeOfProject === "sideproject") {
 			return `20%`;
-		} else if (props.typeOfArticle === "freelancework") {
+		} else if (props.typeOfProject === "freelancework") {
 			return `40%`;
 		} else if (
 			props.currentFilter === "full-timework" &&
-			props.typeOfArticle === "full-timework"
+			props.typeOfProject === "full-timework"
 		) {
 			return `50%`;
-		} else if (props.typeOfArticle === "full-timework") {
+		} else if (props.typeOfProject === "full-timework") {
 			return `60%`;
 		} else {
 			return `20%`;
@@ -80,13 +80,13 @@ class GalleryGrid extends Component {
 						instance={this.props.instance}
 						currentFilter={this.props.currentFilter}
 						className="grid-item"
-						data-type={post.node.frontmatter.typeOfArticle
+						data-type={post.node.frontmatter.typeOfProject
 							.toLowerCase()
 							.replace(/\s/g, "")}
 						data-date={Math.floor(
 							new Date(post.node.frontmatter.beginning).getTime() / 1000
 						)}
-						typeOfArticle={post.node.frontmatter.typeOfArticle
+						typeOfProject={post.node.frontmatter.typeOfProject
 							.toLowerCase()
 							.replace(/\s/g, "")}
 					>

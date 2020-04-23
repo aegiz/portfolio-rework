@@ -248,6 +248,7 @@ export const pageQuery = graphql`
 				beginning
 				end
 				duration
+				typeOfProject
 				typeOfArticle
 				description
 				featuredImage {

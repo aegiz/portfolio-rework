@@ -13,12 +13,12 @@ const Container = styled.div`
 	position: relative;
 `;
 
-const Project = styled.div`
+const Step = styled.div`
 	position: relative;
 	cursor: pointer;
 `;
 
-const ProjectTitle = styled.h2`
+const StepTitle = styled.h2`
 	margin: 48px 0 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
@@ -26,7 +26,7 @@ const ProjectTitle = styled.h2`
 	}
 `;
 
-const ProjectDescription = styled.p`
+const StepDescription = styled.p`
 	margin: 13px 0 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["l"]};
 	${({ theme }) => theme.mediaQueries.l} {
@@ -50,50 +50,55 @@ export default class middleColumn extends Component {
 	static propTypes = {
 		content: PropTypes.arrayOf(
 			PropTypes.shape({
-				type: PropTypes.string.isRequired,
 				title: PropTypes.string.isRequired,
 				description: PropTypes.string.isRequired,
-				data: PropTypes.shape.isRequired,
+				components: PropTypes.arrayOf(
+					PropTypes.shape({
+						type: PropTypes.string.isRequired,
+						data: PropTypes.shape.isRequired,
+					}).isRequired
+				).isRequired,
 			}).isRequired
 		).isRequired,
 	};
 	state = {
-		currentProject: null,
+		currentStep: null,
 	};
 	render() {
 		const importAsset = (type, data, index) => {
 			return (
-				<Suspense fallback="Loading charts">
-					{type === "carousel" && (
-						<Carousel images={data} id={index} key={index} />
-					)}
+				<Suspense key={index} fallback="Loading charts">
+					{type === "carousel" && <Carousel images={data} id={index} />}
 					{type === "video" && <Video data={data} />}
 				</Suspense>
 			);
 		};
-		const renderProject = (type, data, index) => {
-			const asset = importAsset(type, data, index);
+		const renderStep = (components, index) => {
+			let assets = [];
+			components.forEach((component, i) => {
+				assets.push(importAsset(component.type, component.data, index + i));
+			});
 			this.setState({
-				currentProject: asset,
+				currentStep: assets,
 			});
 		};
 		return (
 			<Container>
-				{this.props.content.map((project, i) => {
+				{this.props.content.map((step, i) => {
 					return (
-						<Project
+						<Step
 							key={i}
 							onClick={() => {
-								renderProject(project.type, project.data, i);
+								renderStep(step.components, i);
 							}}
 						>
-							<ProjectTitle>{project.title}</ProjectTitle>
-							<ProjectDescription>{project.description}</ProjectDescription>
-						</Project>
+							<StepTitle>{step.title}</StepTitle>
+							<StepDescription>{step.description}</StepDescription>
+						</Step>
 					);
 				})}
-				{this.state.currentProject && (
-					<ProjectInner>{this.state.currentProject}</ProjectInner>
+				{this.state.currentStep && (
+					<ProjectInner>{this.state.currentStep}</ProjectInner>
 				)}
 			</Container>
 		);

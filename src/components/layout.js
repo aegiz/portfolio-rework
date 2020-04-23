@@ -8,6 +8,7 @@ import { StaticQuery, graphql } from "gatsby";
 
 // Components
 import MiddleColumn from "@components/post/middleColumn";
+import SlideShow from "@components/post/slideshow";
 
 // Styles: Theme
 export const theme = {
@@ -109,7 +110,7 @@ function Layout({ children }) {
 			}
 		}
 	`;
-	const shortcodes = { Message, MiddleColumn };
+	const shortcodes = { Message, MiddleColumn, SlideShow };
 	const layoutContent = data => (
 		<>
 			<GlobalStyle />
