@@ -7,15 +7,14 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const OtherProjects = styled.div`
+	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	max-width: 350px;
 	margin: 0 auto 20px;
-	display: ${props => (props.desktop ? "flex" : "none")};
 	${({ theme }) => theme.mediaQueries.m} {
-		display: ${props => (props.desktop ? "none" : "flex")};
 		justify-content: flex-end;
 		margin: auto;
 	}
@@ -54,7 +53,6 @@ const Projects = styled.div`
 
 export default class CTAotherProject extends Component {
 	static propTypes = {
-		desktop: PropTypes.bool,
 		previous: PropTypes.shape({
 			slug: PropTypes.string.isRequired,
 			text: PropTypes.shape.isRequired,
@@ -66,7 +64,7 @@ export default class CTAotherProject extends Component {
 	};
 	render() {
 		return (
-			<OtherProjects desktop={this.props.desktop}>
+			<OtherProjects>
 				{this.props.previous && (
 					<Projects previous>
 						<AniLink

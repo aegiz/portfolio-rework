@@ -27,22 +27,10 @@ export default function withWindowDimensions(WrappedComponent) {
 					windowWidth={this.state.width}
 					windowHeight={this.state.height}
 					isXs={this.state.width <= theme.breakpoints.xs}
-					isS={
-						this.state.width > theme.breakpoints.xs &&
-						this.state.width <= theme.breakpoints.s
-					}
-					isM={
-						this.state.width > theme.breakpoints.s &&
-						this.state.width <= theme.breakpoints.m
-					}
-					isL={
-						this.state.width > theme.breakpoints.m &&
-						this.state.width <= theme.breakpoints.l
-					}
-					isXL={
-						this.state.width > theme.breakpoints.l &&
-						this.state.width <= theme.breakpoints.xl
-					}
+					isS={this.state.width <= theme.breakpoints.s}
+					isM={this.state.width <= theme.breakpoints.m}
+					isL={this.state.width <= theme.breakpoints.l}
+					isXL={this.state.width <= theme.breakpoints.xl}
 					isXXL={this.state.width > theme.breakpoints.xl}
 				/>
 			);

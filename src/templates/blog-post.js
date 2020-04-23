@@ -189,42 +189,47 @@ class BlogPostTemplate extends React.Component {
 					<LeftPanel>
 						<LeftPanelTop>
 							<CTAhome text={"Homepage"} />
-							<CTAotherProject
-								previous={
-									previous
-										? { slug: previous.fields.slug, text: "Previous Project" }
-										: undefined
-								}
-								next={
-									next
-										? { slug: next.fields.slug, text: "Next Project" }
-										: undefined
-								}
-							/>
+							{this.props.isM && (
+								<CTAotherProject
+									previous={
+										previous
+											? { slug: previous.fields.slug, text: "Previous Project" }
+											: undefined
+									}
+									next={
+										next
+											? { slug: next.fields.slug, text: "Next Project" }
+											: undefined
+									}
+								/>
+							)}
 						</LeftPanelTop>
 						<LeftPanelIntro>
-							<Cover
-								src={post.frontmatter.featuredImage.childImageSharp.fluid}
-							/>
+							{this.props.isM && (
+								<Cover
+									src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								/>
+							)}
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
 								<Description>
 									<MdToHtml content={post.frontmatter.description} />
 								</Description>
 							</div>
-							<CTAotherProject
-								desktop
-								previous={
-									previous
-										? { slug: previous.fields.slug, text: "Previous Project" }
-										: undefined
-								}
-								next={
-									next
-										? { slug: next.fields.slug, text: "Next Project" }
-										: undefined
-								}
-							/>
+							{!this.props.isM && (
+								<CTAotherProject
+									previous={
+										previous
+											? { slug: previous.fields.slug, text: "Previous Project" }
+											: undefined
+									}
+									next={
+										next
+											? { slug: next.fields.slug, text: "Next Project" }
+											: undefined
+									}
+								/>
+							)}
 						</LeftPanelIntro>
 					</LeftPanel>
 					<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
@@ -240,10 +245,11 @@ class BlogPostTemplate extends React.Component {
 						</button>
 					</MiddlePanel>
 					<RightPanel>
-						<Cover
-							desktop
-							src={post.frontmatter.featuredImage.childImageSharp.fluid}
-						/>
+						{!this.props.isM && (
+							<Cover
+								src={post.frontmatter.featuredImage.childImageSharp.fluid}
+							/>
+						)}
 						<OtherInfo
 							beginning={post.frontmatter.beginning}
 							duration={post.frontmatter.duration}
