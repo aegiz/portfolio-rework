@@ -14,6 +14,7 @@ import SEO from "@components/seo";
 
 // Utils
 import MdToHtml from "@utils/MdToHtml";
+import withWindowDimensions from "@utils/withWindowDimensions";
 
 // Assets
 import Middle from "@static/middle.png";
@@ -38,8 +39,9 @@ const BlogPostContainer = styled.div`
 	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
-	height: 950px;
-	/* height: 100vh; */
+	/* height: 950px; */
+	height: 100vh;
+	overflow: hidden;
 	margin: 0 auto;
 	${({ theme }) => theme.mediaQueries.m} {
 		flex-direction: column;
@@ -129,16 +131,18 @@ const Description = styled.div`
 	}
 `;
 
-const ProjectPanel = styled.div`
+const MiddlePanel = styled.div`
 	z-index: 1;
 	position: absolute;
 	left: calc(45% - 40px);
 	bottom: 0;
 	width: 31.7%;
 	min-height: 425px;
-	padding: 25px 50px 0 119px;
+	padding: 25px 119px 0;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
+	height: ${props => (props.middlePanelOpen ? "100%" : "0%")};
+	transition: all 0.3s;
 	${({ theme }) => theme.mediaQueries.l} {
 		padding: 25px 50px 0;
 	}
@@ -166,11 +170,13 @@ const RightPanel = styled.div`
 `;
 
 class BlogPostTemplate extends React.Component {
+	state = {
+		middlePanelOpen: false,
+	};
 	render() {
 		const post = this.props.data.mdx;
 		const siteTitle = this.props.data.site.siteMetadata.title;
 		const { previous, next } = this.props.pageContext;
-
 		return (
 			<Layout location={this.props.location} title={siteTitle}>
 				<SEO
@@ -221,10 +227,18 @@ class BlogPostTemplate extends React.Component {
 							/>
 						</LeftPanelIntro>
 					</LeftPanel>
-					<ProjectPanel>
+					<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
 						<MDXRenderer>{post.body}</MDXRenderer>
-						<button>Learn more</button>
-					</ProjectPanel>
+						<button
+							onClick={() =>
+								this.setState(prevState => ({
+									middlePanelOpen: !prevState.middlePanelOpen,
+								}))
+							}
+						>
+							See more
+						</button>
+					</MiddlePanel>
 					<RightPanel>
 						<Cover
 							desktop
@@ -241,7 +255,7 @@ class BlogPostTemplate extends React.Component {
 	}
 }
 
-export default BlogPostTemplate;
+export default withWindowDimensions(BlogPostTemplate);
 
 export const pageQuery = graphql`
 	query BlogPostBySlug($slug: String!) {
