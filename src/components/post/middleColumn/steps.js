@@ -20,7 +20,6 @@ const handleStepTransition = (middleColumnOpen, index) => {
 };
 
 // Styled Components
-
 const StepsContainer = styled.div`
 	position: absolute;
 	top: 0;
@@ -91,8 +90,7 @@ const ProjectInner = styled.div`
 
 export default class StepsComp extends Component {
 	static propTypes = {
-		content: PropTypes.shape.isRequired,
-		initNumberOfSteps: PropTypes.func.isRequired,
+		content: PropTypes.array.isRequired,
 		middleColumnOpen: PropTypes.bool.isRequired,
 	};
 	state = {
@@ -115,9 +113,6 @@ export default class StepsComp extends Component {
 			currentStep: assets,
 		});
 	};
-	componentDidMount() {
-		this.props.initNumberOfSteps(this.props.content.length);
-	}
 	render() {
 		return (
 			<StepsContainer>

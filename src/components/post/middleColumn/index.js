@@ -3,15 +3,11 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
-// Assets
-import PlusIcon from "@static/plus.svg";
-import MinusIcon from "@static/minus.svg";
-
 // Components
 import Steps from "./steps";
+import TriggerCTA from "./triggerCTA";
 
 // Styles
-
 const MiddleColumn = styled.div`
 	z-index: 1;
 	position: absolute;
@@ -37,58 +33,6 @@ const MiddleColumn = styled.div`
 	}
 `;
 
-const MiddleColumnCTAContainer = styled.div`
-	position: relative;
-	width: 100%;
-	height: 80px;
-	padding: 0 119px;
-	${({ theme }) => theme.mediaQueries.xl} {
-		padding: 0 70px;
-	}
-`;
-
-const MiddleColumnCTA = styled.button`
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translateY(-50%);
-	border: 0;
-	margin: 0;
-	padding: inherit;
-	cursor: pointer;
-	outline: none;
-	background: transparent;
-	text-transform: uppercase;
-	color: ${({ theme }) => theme.colors.white};
-	font-size: ${({ theme }) => theme.fontSizes["normal"]};
-	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
-	transition: all 0.3s;
-	opacity: ${props => {
-		if (props.more && props.middleColumnOpen) {
-			return "0";
-		} else if (props.more && !props.middleColumnOpen) {
-			return "1";
-		} else if (!props.more && props.middleColumnOpen) {
-			return "1";
-		} else if (!props.more && !props.middleColumnOpen) {
-			return "0";
-		}
-	}};
-	img {
-		display: inline-block;
-		width: 14px;
-		height: 14px;
-		margin-bottom: 3px;
-		vertical-align: bottom;
-	}
-	span {
-		height: 18px;
-		margin-left: 5px;
-		display: inline-block;
-		vertical-align: bottom;
-	}
-`;
-
 export default class middleColumn extends Component {
 	static propTypes = {
 		textCTAopen: PropTypes.string,
@@ -108,23 +52,10 @@ export default class middleColumn extends Component {
 	};
 	state = {
 		middleColumnOpen: false,
-		isTransitioning: false,
-		nbOfSteps: 0,
 	};
-	_handleCTAClick = () => {
-		this.setState(prevState => ({
-			isTransitioning: true,
-			middleColumnOpen: !prevState.middleColumnOpen,
-		}));
-		setTimeout(() => {
-			this.setState(() => ({
-				isTransitioning: false,
-			}));
-		}, 450);
-	};
-	initNumberOfSteps = stepNumber => {
+	updateColumnOpen = open => {
 		this.setState({
-			nbOfSteps: stepNumber,
+			middleColumnOpen: open,
 		});
 	};
 	render() {
@@ -132,29 +63,13 @@ export default class middleColumn extends Component {
 			<MiddleColumn middleColumnOpen={this.state.middleColumnOpen}>
 				<Steps
 					content={this.props.content}
-					initNumberOfSteps={this.initNumberOfSteps}
 					middleColumnOpen={this.state.middleColumnOpen}
 				/>
-				{this.state.nbOfSteps > 2 && (
-					<MiddleColumnCTAContainer>
-						<MiddleColumnCTA
-							more
-							middleColumnOpen={this.state.middleColumnOpen}
-							onClick={this._handleCTAClick}
-							disabled={this.state.isTransitioning}
-						>
-							<img src={PlusIcon} alt="plus icon" />
-							<span>See More</span>
-						</MiddleColumnCTA>
-						<MiddleColumnCTA
-							middleColumnOpen={this.state.middleColumnOpen}
-							onClick={this._handleCTAClick}
-							disabled={this.state.isTransitioning}
-						>
-							<img src={MinusIcon} alt="minus icon" />
-							<span>See Less</span>
-						</MiddleColumnCTA>
-					</MiddleColumnCTAContainer>
+				{this.props.content.length > 2 && (
+					<TriggerCTA
+						updateColumnOpen={this.updateColumnOpen}
+						middleColumnOpen={this.state.middleColumnOpen}
+					/>
 				)}
 			</MiddleColumn>
 		);
