@@ -90,6 +90,10 @@ const ProjectInner = styled.div`
 
 export default class middleColumn extends Component {
 	static propTypes = {
+		middlePanelOpen: PropTypes.bool,
+		initNumberOfSteps: PropTypes.func,
+		textCTAopen: PropTypes.string,
+		textCTAclose: PropTypes.string,
 		content: PropTypes.arrayOf(
 			PropTypes.shape({
 				title: PropTypes.string.isRequired,
@@ -103,28 +107,30 @@ export default class middleColumn extends Component {
 			}).isRequired
 		).isRequired,
 	};
-
 	state = {
 		currentStep: null,
 	};
+	_importAsset = (type, data, index) => {
+		return (
+			<Suspense key={index} fallback="Loading charts">
+				{type === "carousel" && <Carousel images={data} id={index} />}
+				{type === "video" && <Video data={data} />}
+			</Suspense>
+		);
+	};
+	_renderStep = (components, index) => {
+		let assets = [];
+		components.forEach((component, i) => {
+			assets.push(this._importAsset(component.type, component.data, index + i));
+		});
+		this.setState({
+			currentStep: assets,
+		});
+	};
+	componentDidMount() {
+		this.props.initNumberOfSteps(this.props.content.length);
+	}
 	render() {
-		const importAsset = (type, data, index) => {
-			return (
-				<Suspense key={index} fallback="Loading charts">
-					{type === "carousel" && <Carousel images={data} id={index} />}
-					{type === "video" && <Video data={data} />}
-				</Suspense>
-			);
-		};
-		const renderStep = (components, index) => {
-			let assets = [];
-			components.forEach((component, i) => {
-				assets.push(importAsset(component.type, component.data, index + i));
-			});
-			this.setState({
-				currentStep: assets,
-			});
-		};
 		return (
 			<Container>
 				{this.props.content.map((step, i) => {
@@ -132,7 +138,7 @@ export default class middleColumn extends Component {
 						<StepOuterContainer
 							key={i}
 							onClick={() => {
-								renderStep(step.components, i);
+								this._renderStep(step.components, i);
 							}}
 							index={i}
 							middlePanelOpen={this.props.middlePanelOpen}

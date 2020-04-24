@@ -161,6 +161,9 @@ const MiddlePanelCTAContainer = styled.div`
 	width: 100%;
 	height: 80px;
 	padding: 0 119px;
+	${({ theme }) => theme.mediaQueries.xl} {
+		padding: 0 70px;
+	}
 `;
 
 const MiddlePanelCTA = styled.button`
@@ -222,6 +225,24 @@ const RightPanel = styled.div`
 class BlogPostTemplate extends React.Component {
 	state = {
 		middlePanelOpen: false,
+		isTransitioning: false,
+		nbOfSteps: 0,
+	};
+	_handleClick = () => {
+		this.setState(prevState => ({
+			isTransitioning: true,
+			middlePanelOpen: !prevState.middlePanelOpen,
+		}));
+		setTimeout(() => {
+			this.setState(() => ({
+				isTransitioning: false,
+			}));
+		}, 450);
+	};
+	initNumberOfSteps = stepNumber => {
+		this.setState({
+			nbOfSteps: stepNumber,
+		});
 	};
 	render() {
 		const post = this.props.data.mdx;
@@ -282,41 +303,46 @@ class BlogPostTemplate extends React.Component {
 							)}
 						</LeftPanelIntro>
 					</LeftPanel>
-					<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
-						<MDXRenderer middlePanelOpen={this.state.middlePanelOpen}>
-							{post.body}
-						</MDXRenderer>
-						<MiddlePanelCTAContainer>
-							<MiddlePanelCTA
-								more
+					{post.frontmatter.typeOfArticle === "multistep" && (
+						<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
+							<MDXRenderer
 								middlePanelOpen={this.state.middlePanelOpen}
-								onClick={() =>
-									this.setState(prevState => ({
-										middlePanelOpen: !prevState.middlePanelOpen,
-									}))
-								}
+								initNumberOfSteps={this.initNumberOfSteps}
 							>
-								<img src={PlusIcon} alt="plus icon" />
-								<span>See More</span>
-							</MiddlePanelCTA>
-							<MiddlePanelCTA
-								middlePanelOpen={this.state.middlePanelOpen}
-								onClick={() =>
-									this.setState(prevState => ({
-										middlePanelOpen: !prevState.middlePanelOpen,
-									}))
-								}
-							>
-								<img src={MinusIcon} alt="minus icon" />
-								<span>See Less</span>
-							</MiddlePanelCTA>
-						</MiddlePanelCTAContainer>
-					</MiddlePanel>
+								{post.body}
+							</MDXRenderer>
+							{this.state.nbOfSteps > 2 && (
+								<MiddlePanelCTAContainer>
+									<MiddlePanelCTA
+										more
+										middlePanelOpen={this.state.middlePanelOpen}
+										onClick={this._handleClick}
+										disabled={this.state.isTransitioning}
+									>
+										<img src={PlusIcon} alt="plus icon" />
+										<span>See More</span>
+									</MiddlePanelCTA>
+									<MiddlePanelCTA
+										middlePanelOpen={this.state.middlePanelOpen}
+										onClick={this._handleClick}
+										disabled={this.state.isTransitioning}
+									>
+										<img src={MinusIcon} alt="minus icon" />
+										<span>See Less</span>
+									</MiddlePanelCTA>
+								</MiddlePanelCTAContainer>
+							)}
+						</MiddlePanel>
+					)}
 					<RightPanel>
-						{!this.props.isM && (
-							<Cover
-								src={post.frontmatter.featuredImage.childImageSharp.fluid}
-							/>
+						{post.frontmatter.typeOfArticle === "multistep" &&
+							!this.props.isM && (
+								<Cover
+									src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								/>
+							)}
+						{post.frontmatter.typeOfArticle === "singlestep" && (
+							<MDXRenderer>{post.body}</MDXRenderer>
 						)}
 						<OtherInfo
 							beginning={post.frontmatter.beginning}
