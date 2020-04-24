@@ -1,97 +1,96 @@
 // Package
 import PropTypes from "prop-types";
-import React, { lazy, Suspense, Component } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
+// Assets
+import PlusIcon from "@static/plus.svg";
+import MinusIcon from "@static/minus.svg";
+
 // Components
-const Carousel = lazy(() => import("@components/post/carousel"));
-const Video = lazy(() => import("@components/post/video"));
+import Steps from "./steps";
 
-/* Styles */
+// Styles
 
-// Helpers
-const handleStepTransition = (middlePanelOpen, index) => {
-	const delay = 0.45 + 0.15 * (index - 2);
-	if (middlePanelOpen) {
-		return "height 0.3s ease " + delay + "s, opacity 0.3s ease " + delay + "s";
-	} else {
-		return "height 0.3s ease " + delay + "s, opacity 0.15s ease";
-	}
-};
-
-// Styled Components
-const Container = styled.div`
+const MiddleColumn = styled.div`
+	z-index: 1;
 	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-`;
-
-const StepOuterContainer = styled.div`
-	position: absolute;
-	cursor: pointer;
-	width: 100%;
-	height: ${props => (props.middlePanelOpen ? "100%" : "400px")};
-	left: 0;
-	padding: 50px 119px 0;
-	/* Poperties that will affect all the element... Except the two first ones*/
-	bottom: -${props => 300 + (props.index - 2) * 150}px;
-	opacity: ${props => (props.middlePanelOpen ? "1" : "0")};
-	transition: ${props =>
-		handleStepTransition(props.middlePanelOpen, props.index)};
-	${({ theme }) => theme.mediaQueries.xl} {
-		padding: 50px 70px 0;
+	left: calc(45% - 40px);
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	background: ${({ theme }) => theme.colors.black};
+	color: ${({ theme }) => theme.colors.white};
+	width: 31.7%;
+	height: ${props => (props.middleColumnOpen ? "100%" : "400px")};
+	transition: all 0.3s;
+	${({ theme }) => theme.mediaQueries.l} {
+		padding: 25px 50px 0;
 	}
-	&:nth-child(1) {
-		transition: height 0.3s ease 0.15s;
-		bottom: 0;
-		opacity: 1;
-	}
-	&:nth-child(2) {
-		transition: height 0.3s ease 0.3s;
-		bottom: -150px;
-		opacity: 1;
+	${({ theme }) => theme.mediaQueries.m} {
+		padding: 25px 70px 0;
+		position: relative;
+		width: 100%;
+		left: auto;
+		bottom: auto;
 	}
 `;
 
-const Step = styled.div`
+const MiddleColumnCTAContainer = styled.div`
 	position: relative;
-`;
-
-const StepTitle = styled.h2`
-	margin: 0;
-	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
-	${({ theme }) => theme.mediaQueries.l} {
-		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+	width: 100%;
+	height: 80px;
+	padding: 0 119px;
+	${({ theme }) => theme.mediaQueries.xl} {
+		padding: 0 70px;
 	}
 `;
 
-const StepDescription = styled.p`
-	margin: 13px 0 0 0;
-	font-size: ${({ theme }) => theme.fontSizes["l"]};
-	font-weight: ${({ theme }) => theme.fontWeights["thin"]};
-	${({ theme }) => theme.mediaQueries.l} {
-		font-size: ${({ theme }) => theme.fontSizes["normal"]};
-	}
-`;
-
-const ProjectInner = styled.div`
-	/* display: none;
-	 overflow: hidden;
-	opacity: 0;
+const MiddleColumnCTA = styled.button`
 	position: absolute;
-	top: 0;
+	top: 50%;
 	left: 0;
-	width: 0;
-	height: 100%;
-	transition: all 0.3s; */
+	transform: translateY(-50%);
+	border: 0;
+	margin: 0;
+	padding: inherit;
+	cursor: pointer;
+	outline: none;
+	background: transparent;
+	text-transform: uppercase;
+	color: ${({ theme }) => theme.colors.white};
+	font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
+	transition: all 0.3s;
+	opacity: ${props => {
+		if (props.more && props.middleColumnOpen) {
+			return "0";
+		} else if (props.more && !props.middleColumnOpen) {
+			return "1";
+		} else if (!props.more && props.middleColumnOpen) {
+			return "1";
+		} else if (!props.more && !props.middleColumnOpen) {
+			return "0";
+		}
+	}};
+	img {
+		display: inline-block;
+		width: 14px;
+		height: 14px;
+		margin-bottom: 3px;
+		vertical-align: bottom;
+	}
+	span {
+		height: 18px;
+		margin-left: 5px;
+		display: inline-block;
+		vertical-align: bottom;
+	}
 `;
 
 export default class middleColumn extends Component {
 	static propTypes = {
-		middlePanelOpen: PropTypes.bool,
-		initNumberOfSteps: PropTypes.func,
 		textCTAopen: PropTypes.string,
 		textCTAclose: PropTypes.string,
 		content: PropTypes.arrayOf(
@@ -108,52 +107,56 @@ export default class middleColumn extends Component {
 		).isRequired,
 	};
 	state = {
-		currentStep: null,
+		middleColumnOpen: false,
+		isTransitioning: false,
+		nbOfSteps: 0,
 	};
-	_importAsset = (type, data, index) => {
-		return (
-			<Suspense key={index} fallback="Loading charts">
-				{type === "carousel" && <Carousel images={data} id={index} />}
-				{type === "video" && <Video data={data} />}
-			</Suspense>
-		);
+	_handleCTAClick = () => {
+		this.setState(prevState => ({
+			isTransitioning: true,
+			middleColumnOpen: !prevState.middleColumnOpen,
+		}));
+		setTimeout(() => {
+			this.setState(() => ({
+				isTransitioning: false,
+			}));
+		}, 450);
 	};
-	_renderStep = (components, index) => {
-		let assets = [];
-		components.forEach((component, i) => {
-			assets.push(this._importAsset(component.type, component.data, index + i));
-		});
+	initNumberOfSteps = stepNumber => {
 		this.setState({
-			currentStep: assets,
+			nbOfSteps: stepNumber,
 		});
 	};
-	componentDidMount() {
-		this.props.initNumberOfSteps(this.props.content.length);
-	}
 	render() {
 		return (
-			<Container>
-				{this.props.content.map((step, i) => {
-					return (
-						<StepOuterContainer
-							key={i}
-							onClick={() => {
-								this._renderStep(step.components, i);
-							}}
-							index={i}
-							middlePanelOpen={this.props.middlePanelOpen}
+			<MiddleColumn middleColumnOpen={this.state.middleColumnOpen}>
+				<Steps
+					content={this.props.content}
+					initNumberOfSteps={this.initNumberOfSteps}
+					middleColumnOpen={this.state.middleColumnOpen}
+				/>
+				{this.state.nbOfSteps > 2 && (
+					<MiddleColumnCTAContainer>
+						<MiddleColumnCTA
+							more
+							middleColumnOpen={this.state.middleColumnOpen}
+							onClick={this._handleCTAClick}
+							disabled={this.state.isTransitioning}
 						>
-							<Step>
-								<StepTitle>{step.title}</StepTitle>
-								<StepDescription>{step.description}</StepDescription>
-							</Step>
-						</StepOuterContainer>
-					);
-				})}
-				{this.state.currentStep && (
-					<ProjectInner>{this.state.currentStep}</ProjectInner>
+							<img src={PlusIcon} alt="plus icon" />
+							<span>See More</span>
+						</MiddleColumnCTA>
+						<MiddleColumnCTA
+							middleColumnOpen={this.state.middleColumnOpen}
+							onClick={this._handleCTAClick}
+							disabled={this.state.isTransitioning}
+						>
+							<img src={MinusIcon} alt="minus icon" />
+							<span>See Less</span>
+						</MiddleColumnCTA>
+					</MiddleColumnCTAContainer>
 				)}
-			</Container>
+			</MiddleColumn>
 		);
 	}
 }
