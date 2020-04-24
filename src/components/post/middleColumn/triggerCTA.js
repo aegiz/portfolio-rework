@@ -25,7 +25,7 @@ const handleCTAappearance = (more, middleColumnOpen) => {
 		opacity = "0";
 		visibility = "hidden";
 	}
-	return "opacity:" + opacity + ";" + "visibility:" + visibility + ";";
+	return `opacity:${opacity}; visibility:${visibility};`;
 };
 
 // Styled Components
