@@ -1,41 +1,62 @@
 // Package
 import PropTypes from "prop-types";
 import React, { lazy, Suspense, Component } from "react";
-
-// Styles
 import styled from "styled-components";
 
 // Components
 const Carousel = lazy(() => import("@components/post/carousel"));
 const Video = lazy(() => import("@components/post/video"));
 
+/* Styles */
+
+// Helpers
+const handleStepTransition = (middlePanelOpen, index) => {
+	const delay = 0.45 + 0.15 * (index - 2);
+	if (middlePanelOpen) {
+		return "height 0.3s ease " + delay + "s, opacity 0.3s ease " + delay + "s";
+	} else {
+		return "height 0.3s ease " + delay + "s, opacity 0.15s ease";
+	}
+};
+
+// Styled Components
 const Container = styled.div`
 	position: absolute;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 `;
 
-const Step = styled.div`
+const StepOuterContainer = styled.div`
 	position: absolute;
 	cursor: pointer;
 	width: 100%;
-	height: 80px;
+	height: ${props => (props.middlePanelOpen ? "100%" : "400px")};
 	left: 0;
-	padding: 0 119px;
+	padding: 50px 119px 0;
+	/* Poperties that will affect all the element... Except the two first ones*/
+	bottom: -${props => 300 + (props.index - 2) * 150}px;
+	opacity: ${props => (props.middlePanelOpen ? "1" : "0")};
+	transition: ${props =>
+		handleStepTransition(props.middlePanelOpen, props.index)};
+	${({ theme }) => theme.mediaQueries.xl} {
+		padding: 50px 70px 0;
+	}
 	&:nth-child(1) {
-		top: 150px;
+		transition: height 0.3s ease 0.15s;
+		bottom: 0;
+		opacity: 1;
 	}
 	&:nth-child(2) {
-		top: 250px;
+		transition: height 0.3s ease 0.3s;
+		bottom: -150px;
+		opacity: 1;
 	}
-	&:nth-child(3) {
-		opacity: 0;
-		top: 350px;
-	}
-	&:nth-child(4) {
-		opacity: 0;
-		top: 400px;
-	}
+`;
+
+const Step = styled.div`
+	position: relative;
 `;
 
 const StepTitle = styled.h2`
@@ -82,6 +103,7 @@ export default class middleColumn extends Component {
 			}).isRequired
 		).isRequired,
 	};
+
 	state = {
 		currentStep: null,
 	};
@@ -107,15 +129,19 @@ export default class middleColumn extends Component {
 			<Container>
 				{this.props.content.map((step, i) => {
 					return (
-						<Step
+						<StepOuterContainer
 							key={i}
 							onClick={() => {
 								renderStep(step.components, i);
 							}}
+							index={i}
+							middlePanelOpen={this.props.middlePanelOpen}
 						>
-							<StepTitle>{step.title}</StepTitle>
-							<StepDescription>{step.description}</StepDescription>
-						</Step>
+							<Step>
+								<StepTitle>{step.title}</StepTitle>
+								<StepDescription>{step.description}</StepDescription>
+							</Step>
+						</StepOuterContainer>
 					);
 				})}
 				{this.state.currentStep && (

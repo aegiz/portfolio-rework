@@ -17,7 +17,9 @@ import MdToHtml from "@utils/MdToHtml";
 import withWindowDimensions from "@utils/withWindowDimensions";
 
 // Assets
-import Middle from "@static/middle.png";
+import Middle from "@static/start.png";
+import PlusIcon from "@static/plus.svg";
+import MinusIcon from "@static/minus.svg";
 
 const Background = styled.div`
 	position: absolute;
@@ -136,8 +138,7 @@ const MiddlePanel = styled.div`
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-end;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
 	width: 31.7%;
@@ -156,12 +157,9 @@ const MiddlePanel = styled.div`
 `;
 
 const MiddlePanelCTAContainer = styled.div`
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	margin: 40px 0 0 0;
+	position: relative;
 	width: 100%;
-	height: 40px;
+	height: 80px;
 	padding: 0 119px;
 `;
 
@@ -172,7 +170,7 @@ const MiddlePanelCTA = styled.button`
 	transform: translateY(-50%);
 	border: 0;
 	margin: 0;
-	padding: 0 0 0 16px;
+	padding: inherit;
 	cursor: pointer;
 	outline: none;
 	background: transparent;
@@ -192,11 +190,18 @@ const MiddlePanelCTA = styled.button`
 			return "0";
 		}
 	}};
-	&:before {
-		content: '${props => (props.middlePanelOpen ? "-" : "+")}';
-		position: absolute;
-		top: '${props => (props.middlePanelOpen ? "-1px" : "0")}';
-		left: 0;
+	img {
+		display: inline-block;
+		width: 14px;
+		height: 14px;
+		margin-bottom: 3px;
+		vertical-align: bottom;
+	}
+	span {
+		height: 18px;
+		margin-left: 5px;
+		display: inline-block;
+		vertical-align: bottom;
 	}
 `;
 
@@ -278,7 +283,9 @@ class BlogPostTemplate extends React.Component {
 						</LeftPanelIntro>
 					</LeftPanel>
 					<MiddlePanel middlePanelOpen={this.state.middlePanelOpen}>
-						<MDXRenderer>{post.body}</MDXRenderer>
+						<MDXRenderer middlePanelOpen={this.state.middlePanelOpen}>
+							{post.body}
+						</MDXRenderer>
 						<MiddlePanelCTAContainer>
 							<MiddlePanelCTA
 								more
@@ -289,7 +296,8 @@ class BlogPostTemplate extends React.Component {
 									}))
 								}
 							>
-								See More
+								<img src={PlusIcon} alt="plus icon" />
+								<span>See More</span>
 							</MiddlePanelCTA>
 							<MiddlePanelCTA
 								middlePanelOpen={this.state.middlePanelOpen}
@@ -299,7 +307,8 @@ class BlogPostTemplate extends React.Component {
 									}))
 								}
 							>
-								See Less
+								<img src={MinusIcon} alt="minus icon" />
+								<span>See Less</span>
 							</MiddlePanelCTA>
 						</MiddlePanelCTAContainer>
 					</MiddlePanel>

@@ -16,6 +16,7 @@ draft: false
 ---
 
 <MiddleColumn
+	middlePanelOpen={props.middlePanelOpen}
 	content={[
 		{
 			title: "So much swag (1)",
@@ -86,6 +87,21 @@ draft: false
 		{
 			title: "Coolest video evar",
 			description: "Lilo is getting wild!",
+			components: [
+				{
+					type: "video",
+					data: {
+						title: "this is a great title",
+						width: 560,
+						height: 315,
+						src: "https://www.youtube.com/embed/4t9a0To2ygo",
+					},
+				},
+			],
+		},
+		{
+			title: "Another cool video",
+			description: "Lilo is playing again",
 			components: [
 				{
 					type: "video",
