@@ -29,7 +29,7 @@ const handleCTAappearance = (more, middleColumnOpen) => {
 };
 
 // Styled Components
-const MiddleColumnCTAContainer = styled.div`
+const TriggerCTAContainer = styled.div`
 	position: relative;
 	width: 100%;
 	height: 80px;
@@ -39,7 +39,7 @@ const MiddleColumnCTAContainer = styled.div`
 	}
 `;
 
-const MiddleColumnCTA = styled.button`
+const TriggerCTA = styled.button`
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -71,7 +71,7 @@ const MiddleColumnCTA = styled.button`
 	}
 `;
 
-export default class CoverComp extends Component {
+export default class TriggerComp extends Component {
 	static propTypes = {
 		updateColumnOpen: PropTypes.func.isRequired,
 		middleColumnOpen: PropTypes.bool.isRequired,
@@ -93,8 +93,8 @@ export default class CoverComp extends Component {
 	};
 	render() {
 		return (
-			<MiddleColumnCTAContainer>
-				<MiddleColumnCTA
+			<TriggerCTAContainer>
+				<TriggerCTA
 					more
 					middleColumnOpen={this.props.middleColumnOpen}
 					onClick={() => {
@@ -103,9 +103,9 @@ export default class CoverComp extends Component {
 					disabled={this.state.isTransitioning}
 				>
 					<img src={PlusIcon} alt="plus icon" />
-					<span>See More</span>
-				</MiddleColumnCTA>
-				<MiddleColumnCTA
+					<span>{this.props.textCTAopen}</span>
+				</TriggerCTA>
+				<TriggerCTA
 					middleColumnOpen={this.props.middleColumnOpen}
 					onClick={() => {
 						this._handleCTAClick(false);
@@ -113,9 +113,9 @@ export default class CoverComp extends Component {
 					disabled={this.state.isTransitioning}
 				>
 					<img src={MinusIcon} alt="minus icon" />
-					<span>See Less</span>
-				</MiddleColumnCTA>
-			</MiddleColumnCTAContainer>
+					<span>{this.props.textCTAclose}</span>
+				</TriggerCTA>
+			</TriggerCTAContainer>
 		);
 	}
 }

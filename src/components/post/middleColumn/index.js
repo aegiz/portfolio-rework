@@ -35,8 +35,8 @@ const MiddleColumn = styled.div`
 
 export default class middleColumn extends Component {
 	static propTypes = {
-		textCTAopen: PropTypes.string,
-		textCTAclose: PropTypes.string,
+		textCTAopen: PropTypes.string.isRequired,
+		textCTAclose: PropTypes.string.isRequired,
 		content: PropTypes.arrayOf(
 			PropTypes.shape({
 				title: PropTypes.string.isRequired,
@@ -67,6 +67,8 @@ export default class middleColumn extends Component {
 				/>
 				{this.props.content.length > 2 && (
 					<TriggerCTA
+						textCTAopen={this.props.textCTAopen}
+						textCTAclose={this.props.textCTAclose}
 						updateColumnOpen={this.updateColumnOpen}
 						middleColumnOpen={this.state.middleColumnOpen}
 					/>

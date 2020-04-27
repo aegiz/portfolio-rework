@@ -13,9 +13,9 @@ const Video = lazy(() => import("@components/post/video"));
 const handleStepTransition = (middleColumnOpen, index) => {
 	const delay = 0.45 + 0.15 * (index - 2);
 	if (middleColumnOpen) {
-		return "height 0.3s ease " + delay + "s, opacity 0.3s ease " + delay + "s";
+		return `height 0.3s ease ${delay}s, opacity 0.3s ease ${delay}s;`;
 	} else {
-		return "height 0.3s ease " + delay + "s, opacity 0.15s ease";
+		return `height 0.3s ease ${delay}s, opacity 0.15s ease;`;
 	}
 };
 

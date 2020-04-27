@@ -71,6 +71,8 @@ const LogoContainer = styled.div`
 	left: 50%;
 	transform: translateX(-50%);
 	top: 130px;
+	overflow: hidden;
+	border-radius: 50%;
 	--size-logo: 256px;
 	${({ theme }) => theme.mediaQueries.m} {
 		top: 100px;
