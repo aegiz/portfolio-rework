@@ -83,7 +83,6 @@ export default class TriggerComp extends Component {
 		isTransitioning: false,
 	};
 	_handleCTAClick = open => {
-		console.log(open);
 		this.props.updateStepsColumnOpen(open);
 		this.setState(() => ({
 			isTransitioning: true,

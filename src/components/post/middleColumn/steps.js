@@ -35,32 +35,35 @@ const handleStepHeight = (stepsColumnOpen, nbSteps, HEIGHT_STEP) => {
 	}
 };
 
-const handleStepOpacity = (index, stepsColumnOpen) => {
-	if (index === 0) {
-		return `1`;
-	} else if (index === 1) {
-		return `1`;
+const handleStepOpacity = (index, stepsColumnOpen, innerStepsOpen) => {
+	if (innerStepsOpen) {
+		return `0`;
 	} else {
-		if (stepsColumnOpen) {
+		if (index === 0) {
+			return `1`;
+		} else if (index === 1) {
 			return `1`;
 		} else {
-			return `0`;
+			if (stepsColumnOpen) {
+				return `1`;
+			} else {
+				return `0`;
+			}
 		}
 	}
 };
 
-const handleStepTransition = (index, stepsColumnOpen) => {
+const handleStepTransition = (
+	index,
+	stepsColumnOpen,
+	innerStepsOpen,
+	TIME_TRANSITION
+) => {
 	const delay = 0.45 + 0.15 * (index - 2);
-	if (index === 0) {
-		return `height 0.3s ease 0.15s;`;
-	} else if (index === 1) {
-		return `height 0.3s ease 0.3s;`;
+	if (stepsColumnOpen || innerStepsOpen) {
+		return `height ${TIME_TRANSITION}s ease ${delay}s, opacity ${TIME_TRANSITION}s ease ${delay}s;`;
 	} else {
-		if (stepsColumnOpen) {
-			return `height 0.3s ease ${delay}s, opacity 0.3s ease ${delay}s;`;
-		} else {
-			return `height 0.3s ease ${delay}s, opacity 0.15s ease;`;
-		}
+		return `height ${TIME_TRANSITION}s ease ${delay}s, opacity 0.15s ease;`;
 	}
 };
 
@@ -79,14 +82,24 @@ const StepOuterContainer = styled.div`
 	width: 100%;
 	left: 0;
 	padding: 50px 119px 0;
-
+	/* Custom */
 	bottom: ${props => handleStepBottom(props.index)};
 	height: ${props =>
 		handleStepHeight(props.stepsColumnOpen, props.nbSteps, props.HEIGHT_STEP)};
-	opacity: ${props => handleStepOpacity(props.index, props.stepsColumnOpen)};
+	opacity: ${props =>
+		handleStepOpacity(
+			props.index,
+			props.stepsColumnOpen,
+			props.innerStepsOpen
+		)};
 	transition: ${props =>
-		handleStepTransition(props.index, props.stepsColumnOpen)};
-
+		handleStepTransition(
+			props.index,
+			props.stepsColumnOpen,
+			props.innerStepsOpen,
+			props.TIME_TRANSITION
+		)};
+	/* Media queries */
 	${({ theme }) => theme.mediaQueries.xl} {
 		padding: 50px 70px 0;
 	}
@@ -119,13 +132,15 @@ const StepDescription = styled.p`
 `;
 
 const ProjectInner = styled.div`
-	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 0;
+	width: ${props => (props.innerStepsOpen ? `100%` : `0`)};
 	height: 100%;
-	transition: all 0.3s;
+	opacity: ${props => (props.innerStepsOpen ? `1` : `0`)};
+	transition: ${props =>
+		`opacity ${props.TIME_TRANSITION}s ease ${props.nbSteps *
+			props.TIME_TRANSITION}s`};
 `;
 
 export default class StepsComp extends Component {
@@ -134,6 +149,7 @@ export default class StepsComp extends Component {
 		stepsColumnOpen: PropTypes.bool.isRequired,
 		innerStepsOpen: PropTypes.bool.isRequired,
 		HEIGHT_STEP: PropTypes.number.isRequired,
+		TIME_TRANSITION: PropTypes.number.isRequired,
 		updateInnerStepsOpen: PropTypes.func.isRequired,
 	};
 	state = {
@@ -172,6 +188,7 @@ export default class StepsComp extends Component {
 							innerStepsOpen={this.props.innerStepsOpen}
 							nbSteps={this.props.content.length}
 							HEIGHT_STEP={this.props.HEIGHT_STEP}
+							TIME_TRANSITION={this.props.TIME_TRANSITION}
 						>
 							<Step>
 								<StepTitle>{step.title}</StepTitle>
@@ -180,9 +197,13 @@ export default class StepsComp extends Component {
 						</StepOuterContainer>
 					);
 				})}
-				{this.state.currentStep && (
-					<ProjectInner>{this.state.currentStep}</ProjectInner>
-				)}
+				<ProjectInner
+					nbSteps={this.props.content.length}
+					innerStepsOpen={this.props.innerStepsOpen}
+					TIME_TRANSITION={this.props.TIME_TRANSITION}
+				>
+					{this.state.currentStep}
+				</ProjectInner>
 			</StepsContainer>
 		);
 	}

@@ -9,6 +9,7 @@ import TriggerCTA from "./triggerCTA";
 
 /* Styles */
 const HEIGHT_STEP = 150;
+const TIME_TRANSITION = 0.25;
 
 // Helpers
 const handleHeightMiddleColumn = (stepsColumnOpen, nbSteps) => {
@@ -25,6 +26,14 @@ const handleHeightMiddleColumn = (stepsColumnOpen, nbSteps) => {
 	}
 };
 
+const handleWidthMiddleColumn = innerStepsOpen => {
+	if (innerStepsOpen) {
+		return `calc(55% + 40px)`;
+	} else {
+		return `31.7%`;
+	}
+};
+
 // Styled Components
 const MiddleColumn = styled.div`
 	z-index: 1;
@@ -37,10 +46,12 @@ const MiddleColumn = styled.div`
 	justify-content: flex-end;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
-	width: 31.7%;
+	width: ${props => handleWidthMiddleColumn(props.innerStepsOpen)};
 	height: ${props =>
 		handleHeightMiddleColumn(props.stepsColumnOpen, props.nbSteps)};
-	transition: all 0.3s;
+	transition: height ${TIME_TRANSITION}s ease,
+		width ${TIME_TRANSITION}s ease
+			${props => props.nbSteps * TIME_TRANSITION - 0.1 * props.nbSteps}s;
 	${({ theme }) => theme.mediaQueries.l} {
 		padding: 25px 70px 0;
 	}
@@ -87,6 +98,7 @@ export default class middleColumn extends Component {
 		return (
 			<MiddleColumn
 				stepsColumnOpen={this.state.stepsColumnOpen}
+				innerStepsOpen={this.state.innerStepsOpen}
 				nbSteps={this.props.content.length}
 			>
 				<Steps
@@ -94,6 +106,7 @@ export default class middleColumn extends Component {
 					stepsColumnOpen={this.state.stepsColumnOpen}
 					innerStepsOpen={this.state.innerStepsOpen}
 					HEIGHT_STEP={HEIGHT_STEP}
+					TIME_TRANSITION={TIME_TRANSITION}
 					updateInnerStepsOpen={this.updateInnerStepsOpen}
 				/>
 				{this.props.content.length > 2 && (
