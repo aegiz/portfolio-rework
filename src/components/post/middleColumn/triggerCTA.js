@@ -33,7 +33,14 @@ const TriggerCTAContainer = styled.div`
 	position: relative;
 	width: 100%;
 	height: 80px;
+	opacity: ${props => (props.innerStepsOpen ? `0` : `1`)};
+	transition: ${props =>
+		`opacity ${props.TIME_TRANSITION}s ease ${props.nbSteps *
+			props.TIME_TRANSITION -
+			0.1 * props.nbSteps +
+			0.1}s`};
 	padding: 0 119px;
+
 	${({ theme }) => theme.mediaQueries.xl} {
 		padding: 0 70px;
 	}
@@ -78,6 +85,9 @@ export default class TriggerComp extends Component {
 	static propTypes = {
 		updateStepsColumnOpen: PropTypes.func.isRequired,
 		stepsColumnOpen: PropTypes.bool.isRequired,
+		innerStepsOpen: PropTypes.bool.isRequired,
+		nbSteps: PropTypes.number.isRequired,
+		TIME_TRANSITION: PropTypes.number.isRequired,
 	};
 	state = {
 		isTransitioning: false,
@@ -95,7 +105,11 @@ export default class TriggerComp extends Component {
 	};
 	render() {
 		return (
-			<TriggerCTAContainer>
+			<TriggerCTAContainer
+				innerStepsOpen={this.props.innerStepsOpen}
+				nbSteps={this.props.nbSteps}
+				TIME_TRANSITION={this.props.TIME_TRANSITION}
+			>
 				<TriggerCTA
 					more
 					stepsColumnOpen={this.props.stepsColumnOpen}

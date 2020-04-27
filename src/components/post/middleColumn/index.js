@@ -115,6 +115,9 @@ export default class middleColumn extends Component {
 						textCTAclose={this.props.textCTAclose}
 						updateStepsColumnOpen={this.updateStepsColumnOpen}
 						stepsColumnOpen={this.state.stepsColumnOpen}
+						innerStepsOpen={this.state.innerStepsOpen}
+						nbSteps={this.props.content.length}
+						TIME_TRANSITION={TIME_TRANSITION}
 					/>
 				)}
 			</MiddleColumn>

@@ -106,7 +106,7 @@ const StepOuterContainer = styled.div`
 	&:nth-child(1) {
 	}
 	&:nth-child(2) {
-		${props => (props.nbSteps === 2 ? "padding-top: 28px;" : "")}
+		${props => (props.nbSteps === 2 ? `padding-top: 28px;` : ``)}
 	}
 `;
 
@@ -135,6 +135,7 @@ const ProjectInner = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
+	padding: 20px;
 	width: ${props => (props.innerStepsOpen ? `100%` : `0`)};
 	height: 100%;
 	opacity: ${props => (props.innerStepsOpen ? `1` : `0`)};
