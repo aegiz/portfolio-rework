@@ -10,12 +10,57 @@ const Video = lazy(() => import("@components/post/video"));
 /* Styles */
 
 // Helpers
-const handleStepTransition = (middleColumnOpen, index) => {
-	const delay = 0.45 + 0.15 * (index - 2);
-	if (middleColumnOpen) {
-		return `height 0.3s ease ${delay}s, opacity 0.3s ease ${delay}s;`;
+
+const handleStepBottom = index => {
+	if (index === 0) {
+		return `0`;
+	} else if (index === 1) {
+		return `-150px;`;
 	} else {
-		return `height 0.3s ease ${delay}s, opacity 0.15s ease;`;
+		return `-${300 + (index - 2) * 150}px;`;
+	}
+};
+
+const handleStepHeight = (stepsColumnOpen, nbSteps, HEIGHT_STEP) => {
+	if (stepsColumnOpen) {
+		return "100%";
+	} else {
+		if (nbSteps > 2) {
+			return `${HEIGHT_STEP * 2 + 100}px`;
+		} else if (nbSteps === 2) {
+			return `${HEIGHT_STEP * 2}px`;
+		} else if (nbSteps === 1) {
+			return `${HEIGHT_STEP}px`;
+		}
+	}
+};
+
+const handleStepOpacity = (index, stepsColumnOpen) => {
+	if (index === 0) {
+		return `1`;
+	} else if (index === 1) {
+		return `1`;
+	} else {
+		if (stepsColumnOpen) {
+			return `1`;
+		} else {
+			return `0`;
+		}
+	}
+};
+
+const handleStepTransition = (index, stepsColumnOpen) => {
+	const delay = 0.45 + 0.15 * (index - 2);
+	if (index === 0) {
+		return `height 0.3s ease 0.15s;`;
+	} else if (index === 1) {
+		return `height 0.3s ease 0.3s;`;
+	} else {
+		if (stepsColumnOpen) {
+			return `height 0.3s ease ${delay}s, opacity 0.3s ease ${delay}s;`;
+		} else {
+			return `height 0.3s ease ${delay}s, opacity 0.15s ease;`;
+		}
 	}
 };
 
@@ -32,26 +77,23 @@ const StepOuterContainer = styled.div`
 	position: absolute;
 	cursor: pointer;
 	width: 100%;
-	height: ${props => (props.middleColumnOpen ? "100%" : "400px")};
 	left: 0;
 	padding: 50px 119px 0;
-	/* Poperties that will affect all the element... Except the two first ones*/
-	bottom: -${props => 300 + (props.index - 2) * 150}px;
-	opacity: ${props => (props.middleColumnOpen ? "1" : "0")};
+
+	bottom: ${props => handleStepBottom(props.index)};
+	height: ${props =>
+		handleStepHeight(props.stepsColumnOpen, props.nbSteps, props.HEIGHT_STEP)};
+	opacity: ${props => handleStepOpacity(props.index, props.stepsColumnOpen)};
 	transition: ${props =>
-		handleStepTransition(props.middleColumnOpen, props.index)};
+		handleStepTransition(props.index, props.stepsColumnOpen)};
+
 	${({ theme }) => theme.mediaQueries.xl} {
 		padding: 50px 70px 0;
 	}
 	&:nth-child(1) {
-		transition: height 0.3s ease 0.15s;
-		bottom: 0;
-		opacity: 1;
 	}
 	&:nth-child(2) {
-		transition: height 0.3s ease 0.3s;
-		bottom: -150px;
-		opacity: 1;
+		${props => (props.nbSteps === 2 ? "padding-top: 28px;" : "")}
 	}
 `;
 
@@ -77,21 +119,22 @@ const StepDescription = styled.p`
 `;
 
 const ProjectInner = styled.div`
-	/* display: none;
-	 overflow: hidden;
 	opacity: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 0;
 	height: 100%;
-	transition: all 0.3s; */
+	transition: all 0.3s;
 `;
 
 export default class StepsComp extends Component {
 	static propTypes = {
 		content: PropTypes.array.isRequired,
-		middleColumnOpen: PropTypes.bool.isRequired,
+		stepsColumnOpen: PropTypes.bool.isRequired,
+		innerStepsOpen: PropTypes.bool.isRequired,
+		HEIGHT_STEP: PropTypes.number.isRequired,
+		updateInnerStepsOpen: PropTypes.func.isRequired,
 	};
 	state = {
 		currentStep: null,
@@ -122,9 +165,13 @@ export default class StepsComp extends Component {
 							key={i}
 							onClick={() => {
 								this._renderStep(step.components, i);
+								this.props.updateInnerStepsOpen(true);
 							}}
 							index={i}
-							middleColumnOpen={this.props.middleColumnOpen}
+							stepsColumnOpen={this.props.stepsColumnOpen}
+							innerStepsOpen={this.props.innerStepsOpen}
+							nbSteps={this.props.content.length}
+							HEIGHT_STEP={this.props.HEIGHT_STEP}
 						>
 							<Step>
 								<StepTitle>{step.title}</StepTitle>

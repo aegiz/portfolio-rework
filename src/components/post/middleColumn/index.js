@@ -7,7 +7,25 @@ import styled from "styled-components";
 import Steps from "./steps";
 import TriggerCTA from "./triggerCTA";
 
-// Styles
+/* Styles */
+const HEIGHT_STEP = 150;
+
+// Helpers
+const handleHeightMiddleColumn = (stepsColumnOpen, nbSteps) => {
+	if (stepsColumnOpen) {
+		return "100%";
+	} else {
+		if (nbSteps > 2) {
+			return `${HEIGHT_STEP * 2 + 100}px`;
+		} else if (nbSteps === 2) {
+			return `${HEIGHT_STEP * 2}px`;
+		} else if (nbSteps === 1) {
+			return `${HEIGHT_STEP}px`;
+		}
+	}
+};
+
+// Styled Components
 const MiddleColumn = styled.div`
 	z-index: 1;
 	position: absolute;
@@ -15,17 +33,18 @@ const MiddleColumn = styled.div`
 	bottom: 0;
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	justify-content: flex-end;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
 	width: 31.7%;
-	height: ${props => (props.middleColumnOpen ? "100%" : "400px")};
+	height: ${props =>
+		handleHeightMiddleColumn(props.stepsColumnOpen, props.nbSteps)};
 	transition: all 0.3s;
 	${({ theme }) => theme.mediaQueries.l} {
-		padding: 25px 50px 0;
+		padding: 25px 70px 0;
 	}
 	${({ theme }) => theme.mediaQueries.m} {
-		padding: 25px 70px 0;
 		position: relative;
 		width: 100%;
 		left: auto;
@@ -51,26 +70,38 @@ export default class middleColumn extends Component {
 		).isRequired,
 	};
 	state = {
-		middleColumnOpen: false,
+		stepsColumnOpen: false,
+		innerStepsOpen: false,
 	};
-	updateColumnOpen = open => {
+	updateStepsColumnOpen = open => {
 		this.setState({
-			middleColumnOpen: open,
+			stepsColumnOpen: open,
+		});
+	};
+	updateInnerStepsOpen = open => {
+		this.setState({
+			innerStepsOpen: open,
 		});
 	};
 	render() {
 		return (
-			<MiddleColumn middleColumnOpen={this.state.middleColumnOpen}>
+			<MiddleColumn
+				stepsColumnOpen={this.state.stepsColumnOpen}
+				nbSteps={this.props.content.length}
+			>
 				<Steps
 					content={this.props.content}
-					middleColumnOpen={this.state.middleColumnOpen}
+					stepsColumnOpen={this.state.stepsColumnOpen}
+					innerStepsOpen={this.state.innerStepsOpen}
+					HEIGHT_STEP={HEIGHT_STEP}
+					updateInnerStepsOpen={this.updateInnerStepsOpen}
 				/>
 				{this.props.content.length > 2 && (
 					<TriggerCTA
 						textCTAopen={this.props.textCTAopen}
 						textCTAclose={this.props.textCTAclose}
-						updateColumnOpen={this.updateColumnOpen}
-						middleColumnOpen={this.state.middleColumnOpen}
+						updateStepsColumnOpen={this.updateStepsColumnOpen}
+						stepsColumnOpen={this.state.stepsColumnOpen}
 					/>
 				)}
 			</MiddleColumn>

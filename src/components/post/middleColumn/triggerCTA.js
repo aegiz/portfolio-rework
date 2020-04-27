@@ -10,18 +10,18 @@ import styled from "styled-components";
 /* Styles */
 
 // Helpers
-const handleCTAappearance = (more, middleColumnOpen) => {
+const handleCTAappearance = (more, stepsColumnOpen) => {
 	let opacity, visibility;
-	if (more && middleColumnOpen) {
+	if (more && stepsColumnOpen) {
 		opacity = "0";
 		visibility = "hidden";
-	} else if (more && !middleColumnOpen) {
+	} else if (more && !stepsColumnOpen) {
 		opacity = "1";
 		visibility = "visible";
-	} else if (!more && middleColumnOpen) {
+	} else if (!more && stepsColumnOpen) {
 		opacity = "1";
 		visibility = "visible";
-	} else if (!more && !middleColumnOpen) {
+	} else if (!more && !stepsColumnOpen) {
 		opacity = "0";
 		visibility = "hidden";
 	}
@@ -36,6 +36,9 @@ const TriggerCTAContainer = styled.div`
 	padding: 0 119px;
 	${({ theme }) => theme.mediaQueries.xl} {
 		padding: 0 70px;
+	}
+	${({ theme }) => theme.mediaQueries.l} {
+		padding: 0;
 	}
 `;
 
@@ -55,7 +58,7 @@ const TriggerCTA = styled.button`
 	font-size: ${({ theme }) => theme.fontSizes["normal"]};
 	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
 	transition: all 0.3s;
-	${props => handleCTAappearance(props.more, props.middleColumnOpen)};
+	${props => handleCTAappearance(props.more, props.stepsColumnOpen)};
 	img {
 		display: inline-block;
 		width: 14px;
@@ -73,15 +76,15 @@ const TriggerCTA = styled.button`
 
 export default class TriggerComp extends Component {
 	static propTypes = {
-		updateColumnOpen: PropTypes.func.isRequired,
-		middleColumnOpen: PropTypes.bool.isRequired,
+		updateStepsColumnOpen: PropTypes.func.isRequired,
+		stepsColumnOpen: PropTypes.bool.isRequired,
 	};
 	state = {
 		isTransitioning: false,
 	};
 	_handleCTAClick = open => {
 		console.log(open);
-		this.props.updateColumnOpen(open);
+		this.props.updateStepsColumnOpen(open);
 		this.setState(() => ({
 			isTransitioning: true,
 		}));
@@ -96,7 +99,7 @@ export default class TriggerComp extends Component {
 			<TriggerCTAContainer>
 				<TriggerCTA
 					more
-					middleColumnOpen={this.props.middleColumnOpen}
+					stepsColumnOpen={this.props.stepsColumnOpen}
 					onClick={() => {
 						this._handleCTAClick(true);
 					}}
@@ -106,7 +109,7 @@ export default class TriggerComp extends Component {
 					<span>{this.props.textCTAopen}</span>
 				</TriggerCTA>
 				<TriggerCTA
-					middleColumnOpen={this.props.middleColumnOpen}
+					stepsColumnOpen={this.props.stepsColumnOpen}
 					onClick={() => {
 						this._handleCTAClick(false);
 					}}
