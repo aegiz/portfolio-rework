@@ -183,6 +183,7 @@ export default class StepsComp extends Component {
 		innerStepsOpen: PropTypes.bool.isRequired,
 		HEIGHT_STEP: PropTypes.number.isRequired,
 		TIME_TRANSITION: PropTypes.number.isRequired,
+		updateStepsColumnOpen: PropTypes.func.isRequired,
 		updateInnerStepsOpen: PropTypes.func.isRequired,
 	};
 	state = {
@@ -207,6 +208,27 @@ export default class StepsComp extends Component {
 			currentTitle: step.title,
 		});
 	};
+	_clickOnStep = (step, i) => {
+		this._renderStep(step, i);
+		if (!this.props.stepsColumnOpen) {
+			this.props.updateStepsColumnOpen(true);
+		}
+		if (this.props.content.length < 3) {
+			setTimeout(() => {
+				this.props.updateInnerStepsOpen(true);
+			}, 350);
+		} else {
+			this.props.updateInnerStepsOpen(true);
+		}
+	};
+	_clickOnClose = () => {
+		this.props.updateInnerStepsOpen(false);
+		if (this.props.content.length < 3) {
+			setTimeout(() => {
+				this.props.updateStepsColumnOpen(false);
+			}, 500);
+		}
+	};
 	render() {
 		return (
 			<StepsContainer>
@@ -214,16 +236,15 @@ export default class StepsComp extends Component {
 					return (
 						<StepOuterContainer
 							key={i}
-							onClick={() => {
-								this._renderStep(step, i);
-								this.props.updateInnerStepsOpen(true);
-							}}
 							index={i}
 							stepsColumnOpen={this.props.stepsColumnOpen}
 							innerStepsOpen={this.props.innerStepsOpen}
 							nbSteps={this.props.content.length}
 							HEIGHT_STEP={this.props.HEIGHT_STEP}
 							TIME_TRANSITION={this.props.TIME_TRANSITION}
+							onClick={() => {
+								this._clickOnStep(step, i);
+							}}
 						>
 							<Step>
 								<StepTitle>{step.title}</StepTitle>
@@ -241,8 +262,7 @@ export default class StepsComp extends Component {
 						<>
 							<Close
 								onClick={() => {
-									// this._renderStep(step, i);
-									this.props.updateInnerStepsOpen(false);
+									this._clickOnClose();
 								}}
 							>
 								<img src={CloseIcon} alt={"close icon"} />

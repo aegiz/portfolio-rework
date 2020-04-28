@@ -107,6 +107,7 @@ export default class middleColumn extends Component {
 					innerStepsOpen={this.state.innerStepsOpen}
 					HEIGHT_STEP={HEIGHT_STEP}
 					TIME_TRANSITION={TIME_TRANSITION}
+					updateStepsColumnOpen={this.updateStepsColumnOpen}
 					updateInnerStepsOpen={this.updateInnerStepsOpen}
 				/>
 				{this.props.content.length > 2 && (
