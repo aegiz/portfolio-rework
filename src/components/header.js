@@ -80,21 +80,6 @@ const LogoContainer = styled.div`
 	}
 `;
 
-const Bar = styled.div`
-	position: absolute;
-	width: 135px;
-	height: 1px;
-	top: 153px;
-	left: 107px;
-	background: #969696;
-	transform: rotate(112deg);
-	${({ theme }) => theme.mediaQueries.m} {
-		width: 100px;
-		top: 136px;
-		left: 102px;
-	}
-`;
-
 const Slice = styled.div`
 	opacity: 0.2;
 	width: var(--size-logo);
@@ -128,13 +113,12 @@ const SliceItem = styled.div`
 
 const Logo = styled.div`
 	position: absolute;
-	top: calc(50% - 5px);
-	left: calc(50% - 5px);
+	top: calc(50% + 19px);
+	left: 50%;
 	transform: translate(-50%, -50%);
 	img {
-		width: 147px;
-		height: 113px;
-		/* filter: invert(100%); */
+		width: 139px;
+		height: 141px;
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		top: calc(50% - 3px);
@@ -213,17 +197,13 @@ export default props => {
 						</ul>
 					</OtherLinks>
 					<LogoContainer>
-						<Bar />
 						<Slice>
 							{[...Array(16)].map((e, i) => (
 								<SliceItem index={i} key={i} />
 							))}
 						</Slice>
 						<Logo>
-							<img
-								src={`logo_AR.png`}
-								alt="Logo Portfolio AR (Adrien Rahier)"
-							/>
+							<img src={`logo.svg`} alt="Logo Portfolio AR (Adrien Rahier)" />
 						</Logo>
 					</LogoContainer>
 				</InnerContainer>
