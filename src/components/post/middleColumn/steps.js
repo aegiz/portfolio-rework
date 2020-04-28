@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import React, { lazy, Suspense, Component } from "react";
 import styled from "styled-components";
 
+// Assets
+import CloseIcon from "@static/close.svg";
+
 // Components
 const Carousel = lazy(() => import("@components/post/carousel"));
 const Video = lazy(() => import("@components/post/video"));
@@ -60,10 +63,25 @@ const handleStepTransition = (
 	TIME_TRANSITION
 ) => {
 	const delay = 0.45 + 0.15 * (index - 2);
-	if (stepsColumnOpen || innerStepsOpen) {
+	if (stepsColumnOpen) {
 		return `height ${TIME_TRANSITION}s ease ${delay}s, opacity ${TIME_TRANSITION}s ease ${delay}s;`;
+	} else if (innerStepsOpen) {
+		return `height ${TIME_TRANSITION}s ease ${delay -
+			0.2}s, opacity ${TIME_TRANSITION}s ease ${delay - 0.2}s;`;
 	} else {
 		return `height ${TIME_TRANSITION}s ease ${delay}s, opacity 0.15s ease;`;
+	}
+};
+
+const handleInnerStepTransition = (
+	nbSteps,
+	TIME_TRANSITION,
+	innerStepsOpen
+) => {
+	if (innerStepsOpen) {
+		return `opacity ${TIME_TRANSITION}s ease ${nbSteps * TIME_TRANSITION}s`;
+	} else {
+		return `opacity ${TIME_TRANSITION}s eases, width ${TIME_TRANSITION}s eases`;
 	}
 };
 
@@ -139,9 +157,23 @@ const ProjectInner = styled.div`
 	width: ${props => (props.innerStepsOpen ? `100%` : `0`)};
 	height: 100%;
 	opacity: ${props => (props.innerStepsOpen ? `1` : `0`)};
+	visibility: ${props => (props.innerStepsOpen ? `visible` : `hidden`)};
 	transition: ${props =>
-		`opacity ${props.TIME_TRANSITION}s ease ${props.nbSteps *
-			props.TIME_TRANSITION}s`};
+		handleInnerStepTransition(
+			props.nbSteps,
+			props.TIME_TRANSITION,
+			props.innerStepsOpen
+		)};
+`;
+
+const Close = styled.a`
+	position: absolute;
+	top: 0;
+	right: 0;
+	img {
+		width: 50px;
+		height: 50px;
+	}
 `;
 
 export default class StepsComp extends Component {
@@ -155,6 +187,7 @@ export default class StepsComp extends Component {
 	};
 	state = {
 		currentStep: null,
+		currentTitle: null,
 	};
 	_importAsset = (type, data, index) => {
 		return (
@@ -164,13 +197,14 @@ export default class StepsComp extends Component {
 			</Suspense>
 		);
 	};
-	_renderStep = (components, index) => {
+	_renderStep = (step, index) => {
 		let assets = [];
-		components.forEach((component, i) => {
+		step.components.forEach((component, i) => {
 			assets.push(this._importAsset(component.type, component.data, index + i));
 		});
 		this.setState({
 			currentStep: assets,
+			currentTitle: step.title,
 		});
 	};
 	render() {
@@ -181,7 +215,7 @@ export default class StepsComp extends Component {
 						<StepOuterContainer
 							key={i}
 							onClick={() => {
-								this._renderStep(step.components, i);
+								this._renderStep(step, i);
 								this.props.updateInnerStepsOpen(true);
 							}}
 							index={i}
@@ -203,6 +237,19 @@ export default class StepsComp extends Component {
 					innerStepsOpen={this.props.innerStepsOpen}
 					TIME_TRANSITION={this.props.TIME_TRANSITION}
 				>
+					{this.state.currentTitle && (
+						<>
+							<Close
+								onClick={() => {
+									// this._renderStep(step, i);
+									this.props.updateInnerStepsOpen(false);
+								}}
+							>
+								<img src={CloseIcon} alt={"close icon"} />
+							</Close>
+							<StepTitle>{this.state.currentTitle}</StepTitle>
+						</>
+					)}
 					{this.state.currentStep}
 				</ProjectInner>
 			</StepsContainer>
