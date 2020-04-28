@@ -21,7 +21,7 @@ const handleHeightMiddleColumn = (stepsColumnOpen, nbSteps) => {
 		} else if (nbSteps === 2) {
 			return `${HEIGHT_STEP * 2}px`;
 		} else if (nbSteps === 1) {
-			return `${HEIGHT_STEP}px`;
+			return `23.95%`;
 		}
 	}
 };

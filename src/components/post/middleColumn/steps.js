@@ -122,6 +122,7 @@ const StepOuterContainer = styled.div`
 		padding: 50px 70px 0;
 	}
 	&:nth-child(1) {
+		${props => (props.nbSteps === 1 ? `bottom: auto;` : ``)}
 	}
 	&:nth-child(2) {
 		${props => (props.nbSteps === 2 ? `padding-top: 28px;` : ``)}
@@ -198,7 +199,7 @@ export default class StepsComp extends Component {
 			</Suspense>
 		);
 	};
-	_renderStep = (step, index) => {
+	_renderInnerContentStep = (step, index) => {
 		let assets = [];
 		step.components.forEach((component, i) => {
 			assets.push(this._importAsset(component.type, component.data, index + i));
@@ -209,11 +210,15 @@ export default class StepsComp extends Component {
 		});
 	};
 	_clickOnStep = (step, i) => {
-		this._renderStep(step, i);
+		this._renderInnerContentStep(step, i);
 		if (!this.props.stepsColumnOpen) {
 			this.props.updateStepsColumnOpen(true);
 		}
-		if (this.props.content.length < 3) {
+		if (this.props.content.length === 1) {
+			setTimeout(() => {
+				this.props.updateInnerStepsOpen(true);
+			}, 150);
+		} else if (this.props.content.length === 2) {
 			setTimeout(() => {
 				this.props.updateInnerStepsOpen(true);
 			}, 350);
