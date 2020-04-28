@@ -3,17 +3,14 @@ import PropTypes from "prop-types";
 import React, { lazy, Suspense, Component } from "react";
 import styled from "styled-components";
 
-// Assets
-import CloseIcon from "@static/close.svg";
-
 // Components
+import InnerStep from "./innerStep";
 const Carousel = lazy(() => import("@components/post/carousel"));
 const Video = lazy(() => import("@components/post/video"));
 
 /* Styles */
 
 // Helpers
-
 const handleStepBottom = index => {
 	if (index === 0) {
 		return `0`;
@@ -70,18 +67,6 @@ const handleStepTransition = (
 			0.2}s, opacity ${TIME_TRANSITION}s ease ${delay - 0.2}s;`;
 	} else {
 		return `height ${TIME_TRANSITION}s ease ${delay}s, opacity 0.15s ease;`;
-	}
-};
-
-const handleInnerStepTransition = (
-	nbSteps,
-	TIME_TRANSITION,
-	innerStepsOpen
-) => {
-	if (innerStepsOpen) {
-		return `opacity ${TIME_TRANSITION}s ease ${nbSteps * TIME_TRANSITION}s`;
-	} else {
-		return `opacity ${TIME_TRANSITION}s eases, width ${TIME_TRANSITION}s eases`;
 	}
 };
 
@@ -150,33 +135,6 @@ const StepDescription = styled.p`
 	}
 `;
 
-const ProjectInner = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 20px;
-	width: ${props => (props.innerStepsOpen ? `100%` : `0`)};
-	height: 100%;
-	opacity: ${props => (props.innerStepsOpen ? `1` : `0`)};
-	visibility: ${props => (props.innerStepsOpen ? `visible` : `hidden`)};
-	transition: ${props =>
-		handleInnerStepTransition(
-			props.nbSteps,
-			props.TIME_TRANSITION,
-			props.innerStepsOpen
-		)};
-`;
-
-const Close = styled.a`
-	position: absolute;
-	top: 0;
-	right: 0;
-	img {
-		width: 50px;
-		height: 50px;
-	}
-`;
-
 export default class StepsComp extends Component {
 	static propTypes = {
 		content: PropTypes.array.isRequired,
@@ -226,14 +184,6 @@ export default class StepsComp extends Component {
 			this.props.updateInnerStepsOpen(true);
 		}
 	};
-	_clickOnClose = () => {
-		this.props.updateInnerStepsOpen(false);
-		if (this.props.content.length < 3) {
-			setTimeout(() => {
-				this.props.updateStepsColumnOpen(false);
-			}, 500);
-		}
-	};
 	render() {
 		return (
 			<StepsContainer>
@@ -258,25 +208,15 @@ export default class StepsComp extends Component {
 						</StepOuterContainer>
 					);
 				})}
-				<ProjectInner
+				<InnerStep
 					nbSteps={this.props.content.length}
 					innerStepsOpen={this.props.innerStepsOpen}
 					TIME_TRANSITION={this.props.TIME_TRANSITION}
-				>
-					{this.state.currentTitle && (
-						<>
-							<Close
-								onClick={() => {
-									this._clickOnClose();
-								}}
-							>
-								<img src={CloseIcon} alt={"close icon"} />
-							</Close>
-							<StepTitle>{this.state.currentTitle}</StepTitle>
-						</>
-					)}
-					{this.state.currentStep}
-				</ProjectInner>
+					currentStep={this.state.currentStep}
+					currentTitle={this.state.currentTitle}
+					updateStepsColumnOpen={this.props.updateStepsColumnOpen}
+					updateInnerStepsOpen={this.props.updateInnerStepsOpen}
+				/>
 			</StepsContainer>
 		);
 	}
