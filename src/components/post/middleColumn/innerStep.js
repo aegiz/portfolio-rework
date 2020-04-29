@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
+// Assets
+import closeIcon from "@static/close.svg";
+
 /* Styles */
 
 // Helpers
@@ -90,7 +93,7 @@ export default class InnerStepsComp extends Component {
 								this._clickOnClose();
 							}}
 						>
-							<img src={`close.svg`} alt={"close icon"} />
+							<img src={closeIcon} alt={"close icon"} />
 						</Close>
 						<Title>{this.props.currentTitle}</Title>
 					</>

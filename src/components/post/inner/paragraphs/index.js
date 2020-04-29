@@ -25,11 +25,14 @@ const ParagraphContainer = styled.div`
 	justify-content: flex-start;
 `;
 
-const Paragraph = styled.p`
+const Paragraph = styled.div`
 	margin: 15px 0;
 	color: ${({ theme }) => theme.colors.white};
-	/* text-align: justify; */
+	font-size: ${({ theme }) => theme.fontSizes["normal"]};
 	${props => handleMarginParagraph(props.nbParagraph)}
+	a {
+		color: ${({ theme }) => theme.colors.white};
+	}
 `;
 
 export default class ParagraphComp extends Component {
