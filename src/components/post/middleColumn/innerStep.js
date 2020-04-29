@@ -21,6 +21,7 @@ const handleInnerStepTransition = (
 // Styled Components
 const InnerStepsContainer = styled.div`
 	z-index: 2;
+	overflow: auto;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -39,8 +40,8 @@ const InnerStepsContainer = styled.div`
 
 const Close = styled.button`
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 10px;
+	right: 10px;
 	padding: 0;
 	margin: 0;
 	img {
@@ -53,7 +54,7 @@ const Title = styled.h2`
 	margin: 0 0 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
-		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
 	}
 `;
 

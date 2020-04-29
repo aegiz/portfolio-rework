@@ -155,7 +155,7 @@ export default class StepsComp extends Component {
 		return (
 			<Suspense key={index} fallback="Loading charts">
 				{type === "carousel" && data.length > 1 && (
-					<Carousel images={data} id={index} />
+					<Carousel data={data} id={index} />
 				)}
 				{type === "illustration" && <Illustration data={data} />}
 				{type === "paragraphs" && <Paragraphs data={data} />}

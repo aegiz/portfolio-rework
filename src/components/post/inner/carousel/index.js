@@ -69,6 +69,9 @@ const IconContainter = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	${({ theme }) => theme.mediaQueries.l} {
+		bottom: -50px;
+	}
 	img {
 		opacity: 0.5;
 		padding: 0 10px;
@@ -87,6 +90,9 @@ const CTAprev = styled.button`
 	padding: 0;
 	margin: 0;
 	background: ${theme.colors.white};
+	${({ theme }) => theme.mediaQueries.l} {
+		height: 50px;
+	}
 	&:before {
 		content: "";
 		position: absolute;
@@ -107,9 +113,9 @@ const CTAnext = styled(CTAprev)`
 	}
 `;
 
-export default class CustomCarousel extends Component {
+export default class CarouselComp extends Component {
 	static propTypes = {
-		images: PropTypes.arrayOf(
+		data: PropTypes.arrayOf(
 			PropTypes.shape({
 				src: PropTypes.string.isRequired,
 				alt: PropTypes.string.isRequired,
@@ -126,7 +132,7 @@ export default class CustomCarousel extends Component {
 		this.setState({
 			slider: this.slider,
 			DigitsSlide: 0,
-			totalSlide: this.props.images.length,
+			totalSlide: this.props.data.length,
 		});
 	}
 	_addDigits = nb => {
@@ -158,7 +164,7 @@ export default class CustomCarousel extends Component {
 		return (
 			<CarouselContainer carouselReady={this.state.sliderLoaded}>
 				<Slider ref={slider => (this.slider = slider)} {...settingsSlider}>
-					{this.props.images.map((image, i) => (
+					{this.props.data.map((image, i) => (
 						<SliderItem key={i}>
 							<CustImg src={`${image.src}`} alt={`${image.alt}`} />
 						</SliderItem>

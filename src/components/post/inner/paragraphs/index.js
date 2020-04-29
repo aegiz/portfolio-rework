@@ -3,26 +3,53 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const Paragraph = styled.div`
-	position: relative;
+// Utils
+import MdToHtml from "@utils/MdToHtml";
+
+/* Styles */
+
+// Helpers
+const handleMarginParagraph = nbParagraph => {
+	if (nbParagraph === 2) {
+		return `&:nth-child(1) { margin-right: 15px; } &:nth-child(2) { margin-left: 15px; }`;
+	} else if (nbParagraph === 3) {
+		return `&:nth-child(2) { margin: 15px 30px; }`;
+	}
+};
+
+// Styled Components
+const ParagraphContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+`;
+
+const Paragraph = styled.p`
+	margin: 15px 0;
+	color: ${({ theme }) => theme.colors.white};
+	/* text-align: justify; */
+	${props => handleMarginParagraph(props.nbParagraph)}
 `;
 
 export default class ParagraphComp extends Component {
 	static propTypes = {
-		data: PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			width: PropTypes.number.isRequired,
-			height: PropTypes.number.isRequired,
-			src: PropTypes.string.isRequired,
-		}).isRequired,
+		data: PropTypes.arrayOf(
+			PropTypes.shape({
+				text: PropTypes.string.isRequired,
+			}).isRequired
+		).isRequired,
 	};
+
 	render() {
 		return (
-			<Paragraph>
-				<div>
-					<p></p>
-				</div>
-			</Paragraph>
+			<ParagraphContainer>
+				{this.props.data.map((paragraph, i) => (
+					<Paragraph nbParagraph={this.props.data.length} key={i}>
+						<MdToHtml content={paragraph.text} />
+					</Paragraph>
+				))}
+			</ParagraphContainer>
 		);
 	}
 }
