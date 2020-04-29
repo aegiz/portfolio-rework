@@ -260,7 +260,7 @@ class galleryItem extends Component {
 						<div className="overlay" />
 						<Img
 							loading="eager"
-							fluid={frontmatter.featuredImage.childImageSharp.duotone}
+							fluid={frontmatter.featuredImage.childImageSharp.grayscale}
 						/>
 						<div className="figcap" />
 					</Project>

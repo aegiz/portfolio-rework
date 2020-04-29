@@ -1,4 +1,6 @@
-/* In order to import images src, srcset etc in custom components we need to retrieve all the image
+/* In order to import images src, srcset etc in custom components
+ * we need to retrieve all the image in the content/assets folder(s).
+ * The accessible folders are defined in gatsby-config
  * See https://github.com/wesbos/Gatsby-Workshop/blob/master/notes/04%20-%20Images.md for more info
  */
 

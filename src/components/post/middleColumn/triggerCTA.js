@@ -1,10 +1,6 @@
 // Package
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-
-// Assets
-import PlusIcon from "@static/plus.svg";
-import MinusIcon from "@static/minus.svg";
 import styled from "styled-components";
 
 /* Styles */
@@ -118,7 +114,7 @@ export default class TriggerComp extends Component {
 					}}
 					disabled={this.state.isTransitioning}
 				>
-					<img src={PlusIcon} alt="plus icon" />
+					<img src={`plus.svg`} alt="plus icon" />
 					<span>{this.props.textCTAopen}</span>
 				</TriggerCTA>
 				<TriggerCTA
@@ -128,7 +124,7 @@ export default class TriggerComp extends Component {
 					}}
 					disabled={this.state.isTransitioning}
 				>
-					<img src={MinusIcon} alt="minus icon" />
+					<img src={`minus.svg`} alt="minus icon" />
 					<span>{this.props.textCTAclose}</span>
 				</TriggerCTA>
 			</TriggerCTAContainer>
