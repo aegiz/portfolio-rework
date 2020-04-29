@@ -3,10 +3,10 @@ import React from "react";
 import { graphql } from "gatsby";
 
 // Components
-import Footer from "@components/footer";
-import Gallery from "@components/grid/gallery";
+import Footer from "@components/shared/footer";
+import Gallery from "@components/homepage/grid";
 import Layout from "@components/layout";
-import Header from "@components/header";
+import Header from "@components/shared/header";
 import SEO from "@components/seo";
 
 class PortfolioIndex extends React.Component {

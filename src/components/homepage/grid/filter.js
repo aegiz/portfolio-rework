@@ -19,7 +19,9 @@ const handleColorType = type => {
 };
 
 // Styled Components
-const Filter = styled.div`
+const Filter = styled.button`
+	background: transparent;
+	border: none;
 	cursor: pointer;
 	position: relative;
 	margin: 0 20px 0 0;
@@ -47,30 +49,30 @@ const Filter = styled.div`
 		background: ${props => handleColorType(props.typeOfProject)};
 		transition: all 0.35s;
 	}
-	.square {
-		border: 1px solid rgba(255, 255, 255, 0);
-		transition: all 0.3s;
-		cursor: pointer;
-		width: 15px;
-		height: 15px;
-		background: ${props => handleColorType(props.typeOfProject)};
-	}
-	button {
-		cursor: pointer;
-		text-transform: uppercase;
-		text-indent: 0.5em;
-		font-size: ${({ theme }) => theme.fontSizes["l"]};
-		background: transparent;
-		padding: 0;
-		border: none;
-		color: ${({ theme }) => theme.colors.white};
-	}
 `;
 
-class GalleryFilter extends Component {
+const Square = styled.span`
+	border: 1px solid rgba(255, 255, 255, 0);
+	transition: all 0.3s;
+	width: 15px;
+	height: 15px;
+	background: ${props => handleColorType(props.typeOfProject)};
+`;
+
+const Text = styled.span`
+	text-transform: uppercase;
+	text-indent: 0.5em;
+	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	background: transparent;
+	padding: 0;
+	border: none;
+	color: ${({ theme }) => theme.colors.white};
+`;
+
+export default class FilterComp extends Component {
 	static propTypes = {
 		filter: PropTypes.string.isRequired,
-		updateGrid: PropTypes.func.isRequired,
+		updateGallery: PropTypes.func.isRequired,
 		updateFilter: PropTypes.func.isRequired,
 		currentFilter: PropTypes.string.isRequired,
 	};
@@ -81,17 +83,15 @@ class GalleryFilter extends Component {
 		return (
 			<Filter
 				onClick={() => {
-					this.props.updateGrid(typeOfProjectClean);
+					this.props.updateGallery(typeOfProjectClean);
 					this.props.updateFilter(typeOfProjectClean);
 				}}
 				typeOfProject={typeOfProjectClean}
 				currentFilter={this.props.currentFilter}
 			>
-				<div className="square" />
-				<button>{this.props.filter}</button>
+				<Square typeOfProject={typeOfProjectClean} />
+				<Text>{this.props.filter}</Text>
 			</Filter>
 		);
 	}
 }
-
-export default GalleryFilter;

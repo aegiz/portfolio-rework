@@ -50,7 +50,7 @@ const Close = styled.a`
 `;
 
 const Title = styled.h2`
-	margin: 0;
+	margin: 0 0 15px 0;
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};

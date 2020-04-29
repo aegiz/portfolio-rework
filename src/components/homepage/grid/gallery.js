@@ -5,13 +5,13 @@ import styled from "styled-components";
 import React, { Component } from "react";
 
 // Component
-import GalleryItem from "./galleryItem";
+import Item from "./item";
 
-const ShuffleGrid = styled.div`
+const GalleryContainer = styled.div`
 	margin: 0 10px 40px;
 `;
 
-const GridItem = styled.div`
+const GalleryItemOuter = styled.div`
 	opacity: ${props => (props.instance ? "1" : "0")} !important;
 	margin: 10px 0 0 0;
 	width: ${props => {
@@ -49,10 +49,10 @@ const Sizer = styled.div`
 	}
 `;
 
-class GalleryGrid extends Component {
+export default class GalleryComp extends Component {
 	static propTypes = {
-		createGrid: PropTypes.func.isRequired,
-		destroyGrid: PropTypes.func.isRequired,
+		createGallery: PropTypes.func.isRequired,
+		destroyGallery: PropTypes.func.isRequired,
 		posts: PropTypes.arrayOf(
 			PropTypes.shape({
 				instance: PropTypes.shape(),
@@ -66,20 +66,20 @@ class GalleryGrid extends Component {
 		this.sizer = React.createRef();
 	}
 	componentDidMount() {
-		this.props.createGrid(this.element.current, this.sizer.current);
+		this.props.createGallery(this.element.current, this.sizer.current);
 	}
 	componentWillUnmount() {
-		this.props.destroyGrid();
+		this.props.destroyGallery();
 	}
 	render() {
 		return (
-			<ShuffleGrid ref={this.element}>
+			<GalleryContainer ref={this.element}>
 				{this.props.posts.map((post, i) => (
-					<GridItem
+					<GalleryItemOuter
 						key={i}
 						instance={this.props.instance}
 						currentFilter={this.props.currentFilter}
-						className="grid-item"
+						className="gallery-item"
 						data-type={post.node.frontmatter.typeOfProject
 							.toLowerCase()
 							.replace(/\s/g, "")}
@@ -104,14 +104,12 @@ class GalleryGrid extends Component {
 								textDecoration: "none",
 							}}
 						>
-							<GalleryItem frontmatter={post.node.frontmatter} />
+							<Item frontmatter={post.node.frontmatter} />
 						</AniLink>
-					</GridItem>
+					</GalleryItemOuter>
 				))}
 				<Sizer ref={this.sizer}></Sizer>
-			</ShuffleGrid>
+			</GalleryContainer>
 		);
 	}
 }
-
-export default GalleryGrid;

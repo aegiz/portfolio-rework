@@ -36,6 +36,9 @@ const OtherLinks = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		right: 50%;
 		transform: translateX(50%);
+		ul li:first-child {
+			margin: 0;
+		}
 	}
 	ul {
 		list-style: none;
@@ -121,8 +124,8 @@ const Logo = styled.div`
 		height: 141px;
 	}
 	${({ theme }) => theme.mediaQueries.m} {
-		top: calc(50% - 3px);
-		left: calc(50% - 2px);
+		top: calc(50% + 11px);
+		left: calc(50% - 1px);
 		img {
 			width: 129px;
 			height: 99px;

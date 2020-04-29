@@ -5,8 +5,10 @@ import styled from "styled-components";
 
 // Components
 import InnerStep from "./innerStep";
-const Carousel = lazy(() => import("@components/post/carousel"));
-const Video = lazy(() => import("@components/post/video"));
+const Carousel = lazy(() => import("@components/post/inner/carousel"));
+const Illustration = lazy(() => import("@components/post/inner/illustration"));
+const Paragraphs = lazy(() => import("@components/post/inner/paragraphs"));
+const Video = lazy(() => import("@components/post/inner/video"));
 
 /* Styles */
 
@@ -153,6 +155,8 @@ export default class StepsComp extends Component {
 		return (
 			<Suspense key={index} fallback="Loading charts">
 				{type === "carousel" && <Carousel images={data} id={index} />}
+				{type === "illustration" && <Illustration data={data} />}
+				{type === "paragraphs" && <Paragraphs data={data} />}
 				{type === "video" && <Video data={data} />}
 			</Suspense>
 		);

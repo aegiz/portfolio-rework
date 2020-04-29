@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
-import Cover from "@components/post/Cover";
+import Cover from "@components/post/cover";
 import CTAhome from "@components/post/CTAhome";
 import CTAotherProject from "@components/post/CTAotherProject";
 import Layout from "@components/layout";
