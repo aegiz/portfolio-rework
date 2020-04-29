@@ -26,6 +26,7 @@ const handleCTAappearance = (more, stepsColumnOpen) => {
 
 // Styled Components
 const TriggerCTAContainer = styled.div`
+	z-index: 1;
 	position: relative;
 	width: 100%;
 	height: 80px;
@@ -50,12 +51,8 @@ const TriggerCTA = styled.button`
 	top: 50%;
 	left: 0;
 	transform: translateY(-50%);
-	border: 0;
 	margin: 0;
 	padding: inherit;
-	cursor: pointer;
-	outline: none;
-	background: transparent;
 	text-transform: uppercase;
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["normal"]};

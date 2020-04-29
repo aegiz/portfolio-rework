@@ -83,7 +83,6 @@ const StepsContainer = styled.div`
 
 const StepOuterContainer = styled.div`
 	position: absolute;
-	cursor: pointer;
 	width: 100%;
 	left: 0;
 	padding: 50px 119px 0;
@@ -117,6 +116,7 @@ const StepOuterContainer = styled.div`
 `;
 
 const Step = styled.div`
+	cursor: pointer;
 	position: relative;
 `;
 
@@ -154,7 +154,9 @@ export default class StepsComp extends Component {
 	_importAsset = (type, data, index) => {
 		return (
 			<Suspense key={index} fallback="Loading charts">
-				{type === "carousel" && <Carousel images={data} id={index} />}
+				{type === "carousel" && data.length > 1 && (
+					<Carousel images={data} id={index} />
+				)}
 				{type === "illustration" && <Illustration data={data} />}
 				{type === "paragraphs" && <Paragraphs data={data} />}
 				{type === "video" && <Video data={data} />}
@@ -201,11 +203,13 @@ export default class StepsComp extends Component {
 							nbSteps={this.props.content.length}
 							HEIGHT_STEP={this.props.HEIGHT_STEP}
 							TIME_TRANSITION={this.props.TIME_TRANSITION}
-							onClick={() => {
-								this._clickOnStep(step, i);
-							}}
 						>
-							<Step>
+							<Step
+								onClick={() => {
+									this._clickOnStep(step, i);
+								}}
+								role={"button"}
+							>
 								<StepTitle>{step.title}</StepTitle>
 								<StepDescription>{step.description}</StepDescription>
 							</Step>

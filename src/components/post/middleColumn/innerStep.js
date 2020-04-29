@@ -20,10 +20,10 @@ const handleInnerStepTransition = (
 
 // Styled Components
 const InnerStepsContainer = styled.div`
+	z-index: 2;
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 20px;
 	width: ${props => (props.innerStepsOpen ? `100%` : `0`)};
 	height: 100%;
 	opacity: ${props => (props.innerStepsOpen ? `1` : `0`)};
@@ -34,20 +34,23 @@ const InnerStepsContainer = styled.div`
 			props.TIME_TRANSITION,
 			props.innerStepsOpen
 		)};
+	padding: 30px 70px 10px;
 `;
 
-const Close = styled.a`
+const Close = styled.button`
 	position: absolute;
 	top: 0;
 	right: 0;
+	padding: 0;
+	margin: 0;
 	img {
-		width: 50px;
-		height: 50px;
+		width: 35px;
+		height: 35px;
 	}
 `;
 
 const Title = styled.h2`
-	margin: 0 0 15px 0;
+	margin: 0 0 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};

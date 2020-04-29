@@ -98,6 +98,11 @@ const GlobalStyle = createGlobalStyle`
 	input:focus {
 		outline: 0;
 	}
+	button {
+		cursor: pointer;
+		background: transparent;
+		border: none;
+	}
 `;
 
 function Layout({ children }) {

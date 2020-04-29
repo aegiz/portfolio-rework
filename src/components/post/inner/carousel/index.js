@@ -2,9 +2,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Slider from "react-slick";
-
-// Components
-import CTAicon from "./icons";
+import { theme } from "@components/layout";
 
 // Utils
 import CustImg from "@utils/StaticImg";
@@ -15,46 +13,62 @@ import "slick-carousel/slick/slick-theme.css";
 import "./assets/carousel.css";
 import styled from "styled-components";
 
-const MainContainer = styled.div`
-	opacity: ${props => (props.carouselReady ? "1" : "0")};
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	max-width: 1000px;
-	margin: 0 auto;
-`;
-
+// Styled Components
 const CarouselContainer = styled.div`
 	position: relative;
+	margin: 85px 0 75px 0;
 	width: 100%;
-	.slider-item img {
+	height: 473px;
+	opacity: ${props => (props.carouselReady ? "1" : "0")};
+`;
+
+const PhotoCounter = styled.div`
+	position: absolute;
+	top: -80px;
+	right: 85px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+`;
+
+const Digits = styled.div`
+	transform: rotate(-90deg);
+	transform-origin: center;
+	margin: 0 0 10px 0;
+	color: ${({ theme }) => theme.colors.white};
+	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
+`;
+
+const Current = styled(Digits)`
+	margin: 10px 0 0 0;
+	mix-blend-mode: exclusion;
+`;
+
+const Bar = styled.div`
+	width: 3px;
+	height: 45px;
+	background: ${props =>
+		props.bottom ? theme.colors.black : theme.colors.white};
+`;
+
+const SliderItem = styled.div`
+	img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		margin: 0 auto;
 	}
-	.photos-counter {
-		position: absolute;
-		top: 10px;
-		right: 0;
-		padding: 0 20px;
-		color: white;
-		background: #292929;
-	}
-	@media (max-width: 1023px) {
-		width: 100%;
-	}
 `;
 
 const IconContainter = styled.div`
 	position: absolute;
-	bottom: -50px;
+	bottom: -75px;
 	left: 0;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	background: rgba(255, 255, 255, 0.3);
 	img {
 		opacity: 0.5;
 		padding: 0 10px;
@@ -63,6 +77,33 @@ const IconContainter = styled.div`
 		&:hover {
 			opacity: 1;
 		}
+	}
+`;
+
+const CTAprev = styled.button`
+	position: relative;
+	width: 60px;
+	height: 75px;
+	padding: 0;
+	margin: 0;
+	background: ${theme.colors.white};
+	&:before {
+		content: "";
+		position: absolute;
+		top: calc(50% - 9px);
+		right: calc(50% - 10px);
+		width: 17px;
+		height: 17px;
+		border-top: 2px solid ${theme.colors.grey.main};
+		border-right: 2px solid ${theme.colors.grey.main};
+		transform: rotate(225deg);
+	}
+`;
+
+const CTAnext = styled(CTAprev)`
+	&:before {
+		transform: rotate(45deg);
+		right: calc(50% - 4px);
 	}
 `;
 
@@ -76,21 +117,23 @@ export default class CustomCarousel extends Component {
 		).isRequired,
 	};
 	state = {
-		slickRight: null,
-		currentSlide: null,
+		slider: null,
+		DigitsSlide: null,
 		totalSlide: null,
-		sliderRightLoaded: false,
+		sliderLoaded: false,
 	};
 	componentDidMount() {
 		this.setState({
-			slickRight: this.sliderRight,
-			currentSlide: 0,
+			slider: this.slider,
+			DigitsSlide: 0,
 			totalSlide: this.props.images.length,
 		});
 	}
+	_addDigits = nb => {
+		return nb < 10 ? `0${nb}` : nb;
+	};
 	render() {
 		const settingsSlider = {
-			autoplaySpeed: 300,
 			fade: true,
 			arrows: false,
 			useTransform: false,
@@ -98,9 +141,9 @@ export default class CustomCarousel extends Component {
 			swipe: false,
 			slidesToScroll: 1,
 			autoplay: false,
-			onInit: () => this.setState(state => ({ sliderRightLoaded: true })),
-			beforeChange: (current, next) =>
-				this.setState(state => ({ currentSlide: next })),
+			onInit: () => this.setState(state => ({ sliderLoaded: true })),
+			beforeChange: (Digits, next) =>
+				this.setState(state => ({ DigitsSlide: next })),
 			responsive: [
 				{
 					breakpoint: 480,
@@ -113,43 +156,31 @@ export default class CustomCarousel extends Component {
 			],
 		};
 		return (
-			<MainContainer carouselReady={this.state.sliderRightLoaded}>
-				<CarouselContainer>
-					<Slider
-						ref={slider => (this.sliderRight = slider)}
-						{...settingsSlider}
-					>
-						{this.props.images.map((image, i) => (
-							<div className="slider-item" key={i}>
-								<CustImg src={`${image.src}`} alt={`${image.alt}`} />
-							</div>
-						))}
-					</Slider>
-					<div className="photos-counter">
-						<span>{this.state.currentSlide + 1}</span>
-						<span>/</span>
-						<span>{this.state.totalSlide}</span>
-					</div>
-					<IconContainter>
-						<CTAicon
-							type={"previous"}
-							alt={"previous icon"}
-							width={24}
-							height={24}
-							onClick={() => this.state.slickRight.slickPrev()}
-							onKeyDown={() => this.state.slickRight.slickPrev()}
-						/>
-						<CTAicon
-							type={"next"}
-							alt={"next icon"}
-							width={24}
-							height={24}
-							onClick={() => this.state.slickRight.slickNext()}
-							onKeyDown={() => this.state.slickRight.slickNext()}
-						/>
-					</IconContainter>
-				</CarouselContainer>
-			</MainContainer>
+			<CarouselContainer carouselReady={this.state.sliderLoaded}>
+				<Slider ref={slider => (this.slider = slider)} {...settingsSlider}>
+					{this.props.images.map((image, i) => (
+						<SliderItem key={i}>
+							<CustImg src={`${image.src}`} alt={`${image.alt}`} />
+						</SliderItem>
+					))}
+				</Slider>
+				<PhotoCounter>
+					<Digits>/ {this._addDigits(this.state.totalSlide)}</Digits>
+					<Bar />
+					<Bar bottom />
+					<Current>{this._addDigits(this.state.DigitsSlide + 1)}</Current>
+				</PhotoCounter>
+				<IconContainter>
+					<CTAprev
+						onClick={() => this.state.slider.slickPrev()}
+						onKeyDown={() => this.state.slider.slickPrev()}
+					/>
+					<CTAnext
+						onClick={() => this.state.slider.slickNext()}
+						onKeyDown={() => this.state.slider.slickNext()}
+					/>
+				</IconContainter>
+			</CarouselContainer>
 		);
 	}
 }

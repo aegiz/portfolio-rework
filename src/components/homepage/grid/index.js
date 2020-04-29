@@ -33,22 +33,25 @@ const FilterTrigger = styled.div`
 const CTA = styled.button`
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	padding: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	transition: all 0.3s;
 	background: ${props =>
 		props.filterOpen ? "rgba(255, 255, 255, 0.2)" : "rgba(255, 255, 255, 0)"};
-	span {
-		user-select: none;
-		color: ${({ theme }) => theme.colors.white};
-		margin-left: 8px;
-	}
 	&:hover {
 		border: 1px solid rgba(255, 255, 255, 0.5);
 	}
 	&:focus {
 		outline: none;
 	}
+`;
+
+const CTAText = styled.span`
+	user-select: none;
+	color: ${({ theme }) => theme.colors.white};
+	margin-left: 8px;
+	font-size: ${({ theme }) => theme.fontSizes["normal"]};
 `;
 
 const FilterContainer = styled.div`
@@ -120,7 +123,7 @@ export default class GridComp extends Component {
 				<FilterTrigger filterOpen={this.state.filterOpen}>
 					<CTA onClick={this._handleClick} onKeyDown={this._handleKeyDown}>
 						<img src={`filter.svg`} alt="filter" />
-						<span>Filters</span>
+						<CTAText>Filters</CTAText>
 					</CTA>
 				</FilterTrigger>
 				<FilterContainer filterOpen={this.state.filterOpen}>

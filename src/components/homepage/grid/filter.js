@@ -20,9 +20,6 @@ const handleColorType = type => {
 
 // Styled Components
 const Filter = styled.button`
-	background: transparent;
-	border: none;
-	cursor: pointer;
 	position: relative;
 	margin: 0 20px 0 0;
 	padding: 0;

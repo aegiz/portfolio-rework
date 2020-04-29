@@ -29,10 +29,6 @@ const Button = styled.button`
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: flex-start;
-	border: 0;
-	cursor: pointer;
-	outline: none;
-	background: transparent;
 	padding: 0;
 `;
 
