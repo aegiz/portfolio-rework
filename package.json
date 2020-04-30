@@ -1,12 +1,9 @@
 {
-	"name": "gatsby-starter-blog",
+	"name": "portfolio",
 	"private": true,
-	"description": "A starter for a blog powered by Gatsby and Markdown",
+	"description": "Adrien Rahier Portfolio",
 	"version": "0.1.0",
-	"author": "Kyle Mathews <mathews.kyle@gmail.com>",
-	"bugs": {
-		"url": "https://github.com/gatsbyjs/gatsby/issues"
-	},
+	"author": "Adrien Rahier <adrien.rahier@gmail.com>",
 	"dependencies": {
 		"@mdx-js/mdx": "^1.5.8",
 		"@mdx-js/react": "^1.5.8",
@@ -44,8 +41,6 @@
 		"styled-components": "^4.4.1",
 		"theme-ui": "^0.3.1",
 		"typeface-ibm-plex-sans": "0.0.75",
-		"typeface-libre-baskerville": "0.0.72",
-		"typeface-merriweather": "0.0.72",
 		"typeface-poppins": "0.0.72"
 	},
 	"devDependencies": {

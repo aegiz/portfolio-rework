@@ -13,9 +13,7 @@ import SlideShow from "@components/post/slideshow";
 // Styles: Theme
 export const theme = {
 	fonts: {
-		merri: "Merriweather, Open Sans, Helvetica, Arial, sans-serif",
 		ibm: "IBM Plex Sans, Open Sans, Helvetica, Arial, sans-serif",
-		libre: "Libre Baskerville, Arial, Tahoma, sans-serif",
 		pop: "Poppins, Arial, Tahoma, sans-serif",
 		open: "Open Sans, Helvetica, Arial, sans-serif",
 		lato: "Lato, Helvetica, Arial, sans-serif",
