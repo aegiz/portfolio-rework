@@ -16,21 +16,6 @@ import SEO from "@components/seo";
 import MdToHtml from "@utils/MdToHtml";
 import withWindowDimensions from "@utils/withWindowDimensions";
 
-// Assets
-import Middle from "@static/start.png";
-
-const Background = styled.div`
-	position: absolute;
-	/* z-index:  10; */
-	/* opacity: 0.5; */
-	width: 100%;
-	height: 100%;
-	background-image: url("${Middle}");
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: 0 0;
-`;
-
 const BlogPostContainer = styled.div`
 	position: relative;
 	z-index: 1;
@@ -161,13 +146,13 @@ class BlogPostTemplate extends React.Component {
 					description={post.frontmatter.description || post.excerpt}
 					path={post.frontmatter.path}
 				/>
-				<Background />
 				<BlogPostContainer>
 					<LeftPanel>
 						<LeftPanelTop>
 							<CTAhome text={"Homepage"} />
 							{this.props.isM && (
 								<CTAotherProject
+									mobileDisplay
 									previous={
 										previous
 											? { slug: previous.fields.slug, text: "Previous Project" }
@@ -184,6 +169,7 @@ class BlogPostTemplate extends React.Component {
 						<LeftPanelIntro>
 							{this.props.isM && (
 								<Cover
+									mobileDisplay
 									src={post.frontmatter.featuredImage.childImageSharp.fluid}
 								/>
 							)}

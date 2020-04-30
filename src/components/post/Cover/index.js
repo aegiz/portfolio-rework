@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Cover = styled.div`
+	display: ${props => (props.mobileDisplay ? `none` : `block`)};
 	width: 100%;
 	height: 76.05%;
 	${({ theme }) => theme.mediaQueries.m} {
@@ -20,11 +21,12 @@ const Cover = styled.div`
 
 export default class CoverComp extends Component {
 	static propTypes = {
+		mobileDisplay: PropTypes.bool,
 		src: PropTypes.object.isRequired,
 	};
 	render() {
 		return (
-			<Cover>
+			<Cover mobileDisplay={this.props.mobileDisplay}>
 				<Img fluid={this.props.src} />
 			</Cover>
 		);
