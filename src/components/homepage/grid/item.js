@@ -13,46 +13,6 @@ const GalleryItem = styled.div`
 
 const SideProject = styled.div`
 	height: 100%;
-	img {
-		transition: all 0.35s !important;
-		opacity: 0.7;
-		transform: scale(1);
-	}
-	.gatsby-image-wrapper {
-		height: 100%;
-	}
-	.title {
-		padding: 0 40px;
-		transition: all 0.35s;
-		position: absolute;
-		bottom: 70px;
-		left: 0;
-		color: ${({ theme }) => theme.colors.white};
-		text-transform: uppercase;
-		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
-		word-break: break-word;
-		z-index: 3;
-		&:after {
-			content: "";
-			background: ${({ theme }) => theme.colors.white};
-			display: block;
-			width: 30px;
-			height: 3px;
-			margin-top: 10px;
-			transition: all 0.35s ease-out;
-		}
-	}
-	.figcap {
-		opacity: 0;
-		transition: all 0.35s;
-		z-index: 4;
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		bottom: 10px;
-		left: 10px;
-		border: 1px solid ${({ theme }) => theme.colors.yellow.main};
-	}
 	&:after {
 		content: "";
 		width: 100%;
@@ -70,143 +30,165 @@ const SideProject = styled.div`
 		transition: all 0.35s;
 	}
 	&:hover {
-		img {
-			opacity: 0.5;
-			transform: scale(1.05);
-		}
-		.figcap {
-			opacity: 0.2;
-		}
 		&:after {
 			height: 200px;
 		}
 	}
 `;
 
-const Project = styled.div`
-	position: relative;
+const TitleSideProject = styled.h2`
+	position: absolute;
+	left: 0;
+	padding: 0 40px;
+	bottom: 70px;
+	transition: all 0.35s;
+	color: ${({ theme }) => theme.colors.white};
+	text-transform: uppercase;
+	font-size: ${({ theme }) => theme.fontSizes["4xl"]};
+	word-break: break-word;
+	z-index: 3;
+	&:after {
+		content: "";
+		background: ${({ theme }) => theme.colors.white};
+		display: block;
+		width: 30px;
+		height: 3px;
+		margin-top: 10px;
+		transition: all 0.35s ease-out;
+	}
+`;
+
+const Figcap = styled.div`
+	opacity: 0;
+	transition: all 0.35s;
+	z-index: 4;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	bottom: 10px;
+	left: 10px;
+	border: 1px solid ${({ theme }) => theme.colors.yellow.main};
+	${SideProject}:hover & {
+		opacity: 0.2;
+	}
+`;
+
+const SideProjectImg = styled.div`
 	height: 100%;
+	img {
+		transition: all 0.35s !important;
+		opacity: 0.7;
+		transform: scale(1);
+		${SideProject}:hover & {
+			opacity: 0.5;
+			transform: scale(1.05);
+		}
+	}
+	.gatsby-image-wrapper {
+		height: 100%;
+	}
+`;
+
+// Project inherit from most of Side Project
+const Project = styled(SideProject)`
+	position: relative;
 	background: ${props =>
 		props.typeOfProject === "freelancework"
 			? ({ theme }) => theme.colors.yellow.main
 			: ({ theme }) => theme.colors.yellow.light};
-	.gatsby-image-wrapper {
-		height: 100%;
-		img {
-			width: calc(100% + 60px);
-			transition: all 0.35s !important;
-			transform: translate3d(-50px, 0, 0);
-		}
-	}
-	.overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 2;
-		transition: all 0.3s;
-		opacity: 1;
-		background: ${props =>
-			props.typeOfProject === "freelancework"
-				? ({ theme }) => theme.colors.yellow.main
-				: ({ theme }) => theme.colors.yellow.light};
-	}
-	.title {
-		transition: all 0.35s;
-		position: absolute;
-		bottom: 70px;
-		left: 40px;
-		color: ${({ theme }) => theme.colors.white};
-		text-transform: uppercase;
-		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
-		word-break: break-word;
-		z-index: 3;
-		p {
-			margin: 0;
-			font-weight: ${({ theme }) => theme.fontWeights.medium};
-			font-size: ${({ theme }) => theme.fontSizes["l"]};
-		}
-		&:after {
-			content: "";
-			background: ${({ theme }) => theme.colors.white};
-			display: block;
-			width: 30px;
-			height: 3px;
-			margin-top: 10px;
-			transition: all 0.35s ease-out;
-		}
-	}
-	.hashtag {
-		opacity: 0;
-		position: absolute;
-		bottom: 40px;
-		left: 40px;
-		transform: translate3d(-10px, 0, 0);
-		color: ${({ theme }) => theme.colors.white};
-		transition: all 0.35s;
-		font-size: ${({ theme }) => theme.fontSizes["m"]};
-		z-index: 3;
-		p {
-			margin: 0;
-		}
-		.diese {
-			font-weight: ${({ theme }) => theme.fontWeights.medium};
-			color: ${({ theme }) => theme.colors.yellow.main};
-		}
-	}
-	.figcap {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		bottom: 10px;
-		left: 10px;
-		z-index: 4;
-		border: 1px solid ${({ theme }) => theme.colors.yellow.main};
-		opacity: 0;
-		transition: all 0.35s;
-		transform: translate3d(-20px, 0, 0);
-	}
 	&:after {
-		content: "";
-		opacity: 0;
-		width: 100%;
 		height: 250px;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		z-index: 2;
-		transition: all 0.35s;
-		background: linear-gradient(
-			0deg,
-			rgba(0, 0, 0, 0.7) 0%,
-			rgba(0, 0, 0, 0) 100%
-		);
+		opacity: 0;
 	}
-	&:hover {
-		img {
+	${Project}:hover & {
+		&:after {
+			opacity: 1;
+		}
+	}
+`;
+
+const TitleProject = styled(TitleSideProject)`
+	left: 40px;
+	padding: 0;
+	&:after {
+		margin-top: 57px;
+	}
+	${Project}:hover & {
+		&:after {
+			width: 0;
+		}
+	}
+`;
+
+const TypeProject = styled.h3`
+	z-index: 3;
+	position: absolute;
+	bottom: 87px;
+	left: 40px;
+	text-transform: uppercase;
+	word-break: break-word;
+	color: ${({ theme }) => theme.colors.white};
+	margin: 0;
+	font-weight: ${({ theme }) => theme.fontWeights.medium};
+	font-size: 1.5rem;
+`;
+
+const Hashtags = styled.p`
+	opacity: 0;
+	z-index: 3;
+	position: absolute;
+	bottom: 40px;
+	left: 40px;
+	margin: 0;
+	transform: translate3d(-10px, 0, 0);
+	color: ${({ theme }) => theme.colors.white};
+	transition: all 0.35s;
+	font-size: ${({ theme }) => theme.fontSizes["m"]};
+	${Project}:hover & {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+`;
+
+const Diese = styled.span`
+	font-weight: ${({ theme }) => theme.fontWeights.medium};
+	color: ${({ theme }) => theme.colors.yellow.main};
+`;
+
+const Overlay = styled.div`
+	z-index: 2;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transition: all 0.3s;
+	opacity: 1;
+	background: ${props =>
+		props.typeOfProject === "freelancework"
+			? ({ theme }) => theme.colors.yellow.main
+			: ({ theme }) => theme.colors.yellow.light};
+	${Project}:hover & {
+		opacity: 0;
+	}
+`;
+
+const ProjectImg = styled(SideProjectImg)`
+	img {
+		width: calc(100% + 60px);
+		opacity: 1;
+		transform: translate3d(-50px, 0, 0);
+		${Project}:hover & {
 			opacity: 0.7;
 			transform: translate3d(0, 0, 0);
 		}
-		.title {
-			&:after {
-				width: 0;
-			}
-		}
-		.hashtag {
-			opacity: 1;
-			transform: translate3d(0, 0, 0);
-		}
-		.overlay {
-			opacity: 0;
-		}
-		.figcap {
-			opacity: 0.2;
-			transform: translate3d(0, 0, 0);
-		}
-		&:after {
-			opacity: 1;
-		}
+	}
+`;
+
+const FigcapProject = styled(Figcap)`
+	transform: translate3d(-20px, 0, 0);
+	${Project}:hover & {
+		transform: translate3d(0, 0, 0);
 	}
 `;
 
@@ -228,41 +210,39 @@ class galleryItem extends Component {
 			<GalleryItem>
 				{typeOfProjectClean === "sideproject" ? (
 					<SideProject>
-						<div className="title">
-							<h2>{frontmatter.title}</h2>
-						</div>
-						<Img
-							loading="eager"
-							fluid={frontmatter.featuredImage.childImageSharp.grayscale}
-						/>
-						<div className="figcap" />
+						<TitleSideProject>{frontmatter.title}</TitleSideProject>
+						<SideProjectImg>
+							<Img
+								loading="eager"
+								fluid={frontmatter.featuredImage.childImageSharp.grayscale}
+							/>
+						</SideProjectImg>
+						<Figcap />
 					</SideProject>
 				) : (
 					<Project typeOfProject={typeOfProjectClean}>
-						<div className="title">
-							<h2>{frontmatter.title}</h2>
-							<p>
-								{typeOfProjectClean === "freelancework"
-									? "Freelance"
-									: "Full-time"}
-							</p>
-						</div>
-						<div className="hashtag">
-							<p>
-								{frontmatter.hashtags.split(" ").map((word, i) => (
-									<span key={i}>
-										<span className="diese"> #</span>
-										{word}
-									</span>
-								))}
-							</p>
-						</div>
-						<div className="overlay" />
-						<Img
-							loading="eager"
-							fluid={frontmatter.featuredImage.childImageSharp.grayscale}
-						/>
-						<div className="figcap" />
+						<TitleProject>{frontmatter.title}</TitleProject>
+						<TypeProject>
+							{typeOfProjectClean === "freelancework"
+								? "Freelance"
+								: "Full-time"}
+						</TypeProject>
+						<Hashtags>
+							{frontmatter.hashtags.split(" ").map((word, i) => (
+								<span key={i}>
+									<Diese> #</Diese>
+									{word}
+								</span>
+							))}
+						</Hashtags>
+						<Overlay typeOfProject={typeOfProjectClean} />
+						<ProjectImg>
+							<Img
+								loading="eager"
+								fluid={frontmatter.featuredImage.childImageSharp.grayscale}
+							/>
+						</ProjectImg>
+						<FigcapProject />
 					</Project>
 				)}
 			</GalleryItem>
