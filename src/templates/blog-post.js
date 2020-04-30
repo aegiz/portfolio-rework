@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 
 // Components
-import Cover from "@components/post/cover";
+// import Cover from "@components/post/cover";
 import CTAhome from "@components/post/CTAhome";
 import CTAotherProject from "@components/post/CTAotherProject";
 import Layout from "@components/layout";
@@ -183,9 +183,9 @@ class BlogPostTemplate extends React.Component {
 						</LeftPanelTop>
 						<LeftPanelIntro>
 							{this.props.isM && (
-								<Cover
-									src={post.frontmatter.featuredImage.childImageSharp.fluid}
-								/>
+								// <Cover
+								// 	src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								// />
 							)}
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
@@ -215,9 +215,9 @@ class BlogPostTemplate extends React.Component {
 					<RightPanel>
 						{post.frontmatter.typeOfArticle === "multistep" &&
 							!this.props.isM && (
-								<Cover
-									src={post.frontmatter.featuredImage.childImageSharp.fluid}
-								/>
+								// <Cover
+								// 	src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								// />
 							)}
 						{post.frontmatter.typeOfArticle === "singlestep" && (
 							<MDXRenderer>{post.body}</MDXRenderer>
