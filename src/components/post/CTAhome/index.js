@@ -22,6 +22,7 @@ const MainContainer = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		margin: 0;
 		padding: 0;
+		max-width: 170px;
 	}
 `;
 
@@ -44,12 +45,17 @@ const Circle = styled.span`
 	border-radius: 1.625rem;
 	width: 48px;
 	height: 48px;
+	${Button}:hover & {
+		width: 100%;
+	}
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 40px;
 		height: 40px;
 	}
-	${Button}:hover & {
-		width: 100%;
+	${({ theme }) => theme.mediaQueries.m} {
+		${Button}:hover & {
+			width: 48px;
+		}
 	}
 `;
 
@@ -126,7 +132,7 @@ class BackHomeCTAComp extends Component {
 						</Button>
 					</AniLink>
 				) : (
-					<AniLink fade to={"/"}>
+					<AniLink fade to={"/"} duration={0.2}>
 						<Button>
 							<Circle aria-hidden="true">
 								<Icon />

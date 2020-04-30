@@ -65,6 +65,10 @@ const Close = styled.button`
 		width: 35px;
 		height: 35px;
 	}
+	${({ theme }) => theme.mediaQueries.m} {
+		top: 20px;
+		right: 5px;
+	}
 `;
 
 const Title = styled.h2`
@@ -72,6 +76,9 @@ const Title = styled.h2`
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		padding: 20px 0;
 	}
 `;
 

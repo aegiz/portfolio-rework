@@ -63,6 +63,9 @@ const LeftPanelTop = styled.div`
 		background: ${({ theme }) => theme.colors.white};
 		padding: 0 70px;
 	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 0 25px;
+	}
 `;
 
 const LeftPanelIntro = styled.div`
@@ -83,6 +86,9 @@ const LeftPanelIntro = styled.div`
 		}
 		${({ theme }) => theme.mediaQueries.m} {
 			padding: 0 70px 30px;
+		}
+		${({ theme }) => theme.mediaQueries.s} {
+			padding: 0 25px 25px;
 		}
 	}
 `;

@@ -40,6 +40,10 @@ const Paragraph = styled.div`
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 	}
+	${({ theme }) => theme.mediaQueries.s} {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
 `;
 
 export default class ParagraphComp extends Component {

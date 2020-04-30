@@ -59,11 +59,17 @@ const MiddleColumn = styled.div`
 		padding: 25px 70px 0;
 	}
 	${({ theme }) => theme.mediaQueries.m} {
+		justify-content: flex-start;
 		position: relative;
 		width: 100%;
 		height: 100%;
+		min-height: ${props => props.nbSteps * 113 + 50}px;
 		left: auto;
 		bottom: auto;
+		padding: 25px 70px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 25px;
 	}
 `;
 

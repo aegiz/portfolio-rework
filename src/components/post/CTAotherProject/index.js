@@ -20,7 +20,8 @@ const OtherProjects = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? `flex` : `none`)};
 		justify-content: flex-end;
-		margin: auto;
+		max-width: inherit;
+		margin: auto 0;
 	}
 `;
 
@@ -40,6 +41,9 @@ const Projects = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		&:nth-child(2) {
 			padding: 0 0 0 20px;
+		}
+		&:before {
+			content: none;
 		}
 	}
 	a {
@@ -84,7 +88,7 @@ class CTAotherProjectComp extends Component {
 								{this.props.previous.text}
 							</AniLink>
 						) : (
-							<AniLink fade to={this.props.previous.slug}>
+							<AniLink fade to={this.props.previous.slug} duration={0.2}>
 								{this.props.previous.text}
 							</AniLink>
 						)}
@@ -104,7 +108,7 @@ class CTAotherProjectComp extends Component {
 								{this.props.next.text}
 							</AniLink>
 						) : (
-							<AniLink fade to={this.props.next.slug}>
+							<AniLink fade to={this.props.next.slug} duration={0.2}>
 								{this.props.next.text}
 							</AniLink>
 						)}

@@ -113,7 +113,7 @@ const StepOuterContainer = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.innerStepsOpen ? `none` : `block`)};
 		position: relative;
-		padding: 50px 0;
+		padding: 20px 0;
 		height: auto;
 		bottom: 0;
 		opacity: 1;
@@ -136,6 +136,11 @@ const StepTitle = styled.h2`
 	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 100%;
+		max-width: 500px;
+		font-size: ${({ theme }) => theme.fontSizes["2xl"]};
 	}
 `;
 
