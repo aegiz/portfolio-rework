@@ -131,7 +131,7 @@ const RightPanel = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-end;
 	height: 100%;
 	width: 55%;
 	margin: 0;

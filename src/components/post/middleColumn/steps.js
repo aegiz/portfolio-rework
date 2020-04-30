@@ -129,11 +129,17 @@ const StepOuterContainer = styled.div`
 const Step = styled.div`
 	cursor: pointer;
 	position: relative;
+	width: 100%;
+	max-width: 300px;
+	${({ theme }) => theme.mediaQueries.m} {
+		max-width: 500px;
+	}
 `;
 
 const StepTitle = styled.h2`
 	margin: 0;
 	font-size: ${({ theme }) => theme.fontSizes["2xl"]};
+	line-height: 1.4;
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
 	}

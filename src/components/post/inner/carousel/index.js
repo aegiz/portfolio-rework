@@ -16,10 +16,13 @@ import styled from "styled-components";
 // Styled Components
 const CarouselContainer = styled.div`
 	position: relative;
-	margin: 85px 0 75px 0;
+	margin: ${props => (props.margin ? props.margin : "105px 0 95px 0")};
 	width: 100%;
-	height: 473px;
+	height: ${props => (props.height ? props.height : "473px")};
 	opacity: ${props => (props.carouselReady ? "1" : "0")};
+	${({ theme }) => theme.mediaQueries.m} {
+		height: 390px;
+	}
 `;
 
 const PhotoCounter = styled.div`
@@ -89,7 +92,7 @@ const CTAprev = styled.button`
 	height: 75px;
 	padding: 0;
 	margin: 0;
-	background: ${theme.colors.white};
+	background: ${({ theme }) => theme.colors.white};
 	${({ theme }) => theme.mediaQueries.l} {
 		height: 50px;
 	}
@@ -100,8 +103,8 @@ const CTAprev = styled.button`
 		right: calc(50% - 10px);
 		width: 17px;
 		height: 17px;
-		border-top: 2px solid ${theme.colors.grey.main};
-		border-right: 2px solid ${theme.colors.grey.main};
+		border-top: 2px solid ${({ theme }) => theme.colors.grey.main};
+		border-right: 2px solid ${({ theme }) => theme.colors.grey.main};
 		transform: rotate(225deg);
 	}
 `;
@@ -115,6 +118,9 @@ const CTAnext = styled(CTAprev)`
 
 export default class CarouselComp extends Component {
 	static propTypes = {
+		withoutCounter: PropTypes.bool,
+		height: PropTypes.string,
+		margin: PropTypes.string,
 		data: PropTypes.arrayOf(
 			PropTypes.shape({
 				src: PropTypes.string.isRequired,
@@ -152,7 +158,7 @@ export default class CarouselComp extends Component {
 				this.setState(state => ({ DigitsSlide: next })),
 			responsive: [
 				{
-					breakpoint: 480,
+					breakpoint: 979,
 					settings: {
 						fade: false,
 						draggable: true,
@@ -162,7 +168,11 @@ export default class CarouselComp extends Component {
 			],
 		};
 		return (
-			<CarouselContainer carouselReady={this.state.sliderLoaded}>
+			<CarouselContainer
+				height={this.props.height}
+				margin={this.props.margin}
+				carouselReady={this.state.sliderLoaded}
+			>
 				<Slider ref={slider => (this.slider = slider)} {...settingsSlider}>
 					{this.props.data.map((image, i) => (
 						<SliderItem key={i}>
@@ -170,12 +180,14 @@ export default class CarouselComp extends Component {
 						</SliderItem>
 					))}
 				</Slider>
-				<PhotoCounter>
-					<Digits>/ {this._addDigits(this.state.totalSlide)}</Digits>
-					<Bar />
-					<Bar bottom />
-					<Current>{this._addDigits(this.state.DigitsSlide + 1)}</Current>
-				</PhotoCounter>
+				{!this.props.withoutCounter && (
+					<PhotoCounter>
+						<Digits>/ {this._addDigits(this.state.totalSlide)}</Digits>
+						<Bar />
+						<Bar bottom />
+						<Current>{this._addDigits(this.state.DigitsSlide + 1)}</Current>
+					</PhotoCounter>
+				)}
 				<IconContainter>
 					<CTAprev
 						onClick={() => this.state.slider.slickPrev()}

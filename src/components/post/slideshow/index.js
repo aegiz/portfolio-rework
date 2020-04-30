@@ -1,17 +1,31 @@
 // Package
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-
-// Styles
 import styled from "styled-components";
 
-const Container = styled.div`
+// Components
+import Carousel from "@components/post/inner/carousel";
+
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
+const SlideShow = styled.div`
 	width: 100%;
 `;
 
-export default class SlideShow extends Component {
-	static propTypes = { title: PropTypes.string };
+class SlideShowComp extends Component {
 	render() {
-		return <Container>{this.props.title}</Container>;
+		const heighCarousel = `${(this.props.windowHeight * 76.05) / 100}px`;
+		return (
+			<SlideShow>
+				<Carousel
+					withoutCounter
+					height={heighCarousel}
+					margin={"0 0 0 0"}
+					data={this.props.data}
+				/>
+			</SlideShow>
+		);
 	}
 }
+
+export default withWindowDimensions(SlideShowComp);

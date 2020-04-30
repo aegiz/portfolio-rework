@@ -100,8 +100,11 @@ const Project = styled(SideProject)`
 		height: 250px;
 		opacity: 0;
 	}
-	${Project}:hover & {
+	&:hover & {
 		&:after {
+			${({ theme }) => theme.mediaQueries.m} {
+				opacity: 0;
+			}
 			opacity: 1;
 		}
 	}
@@ -116,6 +119,9 @@ const TitleProject = styled(TitleSideProject)`
 	${Project}:hover & {
 		&:after {
 			width: 0;
+			${({ theme }) => theme.mediaQueries.m} {
+				width: 30px;
+			}
 		}
 	}
 `;
@@ -147,6 +153,10 @@ const Hashtags = styled.p`
 	${Project}:hover & {
 		opacity: 1;
 		transform: translate3d(0, 0, 0);
+		${({ theme }) => theme.mediaQueries.m} {
+			opacity: 0;
+			transform: translate3d(-10px, 0, 0);
+		}
 	}
 `;
 
@@ -170,6 +180,9 @@ const Overlay = styled.div`
 			: ({ theme }) => theme.colors.yellow.light};
 	${Project}:hover & {
 		opacity: 0;
+		${({ theme }) => theme.mediaQueries.m} {
+			opacity: 1;
+		}
 	}
 `;
 
@@ -181,12 +194,19 @@ const ProjectImg = styled(SideProjectImg)`
 		${Project}:hover & {
 			opacity: 0.7;
 			transform: translate3d(0, 0, 0);
+			${({ theme }) => theme.mediaQueries.m} {
+				opacity: 1;
+				transform: translate3d(-50px, 0, 0);
+			}
 		}
 	}
 `;
 
 const FigcapProject = styled(Figcap)`
 	transform: translate3d(-20px, 0, 0);
+	${({ theme }) => theme.mediaQueries.m} {
+		display: none;
+	}
 	${Project}:hover & {
 		transform: translate3d(0, 0, 0);
 	}

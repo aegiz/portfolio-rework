@@ -1,6 +1,6 @@
 //  Packages
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";

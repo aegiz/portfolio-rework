@@ -47,7 +47,7 @@ const InnerStepsContainer = styled.div`
 			props.innerStepsOpen,
 			props.isM
 		)};
-	padding: 30px 70px 10px;
+	padding: 70px;
 	${({ theme }) => theme.mediaQueries.m} {
 		height: ${props => (props.innerStepsOpen ? `100%` : `0`)};
 		padding: 0;
@@ -57,8 +57,8 @@ const InnerStepsContainer = styled.div`
 
 const Close = styled.button`
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 70px;
+	right: 70px;
 	padding: 0;
 	margin: 0;
 	img {
@@ -72,7 +72,7 @@ const Close = styled.button`
 `;
 
 const Title = styled.h2`
-	margin: 0 0 0 0;
+	margin: 0 40px 0 0;
 	font-size: ${({ theme }) => theme.fontSizes["3xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["2xl"]};

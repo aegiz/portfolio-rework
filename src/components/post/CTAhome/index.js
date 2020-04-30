@@ -2,13 +2,12 @@
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-
-// Styles
 import styled from "styled-components";
 
 // Utils
 import withWindowDimensions from "@utils/withWindowDimensions";
 
+// Style Components
 const MainContainer = styled.div`
 	margin-top: 73px;
 	width: 100%;
