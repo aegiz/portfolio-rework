@@ -11,6 +11,7 @@ const Cover = styled.div`
 	width: 100%;
 	height: 76.05%;
 	${({ theme }) => theme.mediaQueries.m} {
+		display: ${props => (props.mobileDisplay ? `block` : `none`)};
 		height: 400px;
 		padding: 0 70px;
 	}

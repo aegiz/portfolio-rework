@@ -7,6 +7,9 @@ import React, { Component } from "react";
 // Component
 import Item from "./item";
 
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
 const GalleryContainer = styled.div`
 	margin: 0 10px 40px;
 `;
@@ -49,7 +52,7 @@ const Sizer = styled.div`
 	}
 `;
 
-export default class GalleryComp extends Component {
+class GalleryComp extends Component {
 	static propTypes = {
 		createGallery: PropTypes.func.isRequired,
 		destroyGallery: PropTypes.func.isRequired,
@@ -90,22 +93,39 @@ export default class GalleryComp extends Component {
 							.toLowerCase()
 							.replace(/\s/g, "")}
 					>
-						<AniLink
-							cover
-							bg="#000000"
-							direction="left"
-							duration={0.8}
-							to={post.node.frontmatter.path}
-							style={{
-								display: "block",
-								width: "calc(100% - 10px)",
-								height: "100%",
-								margin: "0 auto",
-								textDecoration: "none",
-							}}
-						>
-							<Item frontmatter={post.node.frontmatter} />
-						</AniLink>
+						{!this.props.isM ? (
+							<AniLink
+								cover
+								bg="#000000"
+								direction="left"
+								duration={0.8}
+								to={post.node.frontmatter.path}
+								style={{
+									display: "block",
+									width: "calc(100% - 10px)",
+									height: "100%",
+									margin: "0 auto",
+									textDecoration: "none",
+								}}
+							>
+								<Item frontmatter={post.node.frontmatter} />
+							</AniLink>
+						) : (
+							<AniLink
+								fade
+								to={post.node.frontmatter.path}
+								duration={0.2}
+								style={{
+									display: "block",
+									width: "calc(100% - 10px)",
+									height: "100%",
+									margin: "0 auto",
+									textDecoration: "none",
+								}}
+							>
+								<Item frontmatter={post.node.frontmatter} />
+							</AniLink>
+						)}
 					</GalleryItemOuter>
 				))}
 				<Sizer ref={this.sizer}></Sizer>
@@ -113,3 +133,5 @@ export default class GalleryComp extends Component {
 		);
 	}
 }
+
+export default withWindowDimensions(GalleryComp);

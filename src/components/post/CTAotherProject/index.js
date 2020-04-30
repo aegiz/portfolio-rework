@@ -6,8 +6,11 @@ import React, { Component } from "react";
 // Styles
 import styled from "styled-components";
 
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
 const OtherProjects = styled.div`
-	display: flex;
+	display: ${props => (props.mobileDisplay ? `none` : `flex`)};
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
@@ -15,6 +18,7 @@ const OtherProjects = styled.div`
 	max-width: 350px;
 	margin: 0 auto 20px;
 	${({ theme }) => theme.mediaQueries.m} {
+		display: ${props => (props.mobileDisplay ? `flex` : `none`)};
 		justify-content: flex-end;
 		margin: auto;
 	}
@@ -51,8 +55,9 @@ const Projects = styled.div`
 	}
 `;
 
-export default class CTAotherProject extends Component {
+class CTAotherProjectComp extends Component {
 	static propTypes = {
+		mobileDisplay: PropTypes.bool,
 		previous: PropTypes.shape({
 			slug: PropTypes.string.isRequired,
 			text: PropTypes.shape.isRequired,
@@ -64,36 +69,50 @@ export default class CTAotherProject extends Component {
 	};
 	render() {
 		return (
-			<OtherProjects>
+			<OtherProjects mobileDisplay={this.props.mobileDisplay}>
 				{this.props.previous && (
 					<Projects previous>
-						<AniLink
-							cover
-							bg="#000000"
-							direction="down"
-							duration={0.8}
-							to={this.props.previous.slug}
-							rel="previous"
-						>
-							{this.props.previous.text}
-						</AniLink>
+						{!this.props.isM ? (
+							<AniLink
+								cover
+								bg="#000000"
+								direction="down"
+								duration={0.8}
+								to={this.props.previous.slug}
+								rel="previous"
+							>
+								{this.props.previous.text}
+							</AniLink>
+						) : (
+							<AniLink fade to={this.props.previous.slug}>
+								{this.props.previous.text}
+							</AniLink>
+						)}
 					</Projects>
 				)}
 				{this.props.next && (
 					<Projects>
-						<AniLink
-							cover
-							bg="#000000"
-							direction="up"
-							duration={0.8}
-							to={this.props.next.slug}
-							rel="next"
-						>
-							{this.props.next.text}
-						</AniLink>
+						{!this.props.isM ? (
+							<AniLink
+								cover
+								bg="#000000"
+								direction="up"
+								duration={0.8}
+								to={this.props.next.slug}
+								rel="next"
+							>
+								{this.props.next.text}
+							</AniLink>
+						) : (
+							<AniLink fade to={this.props.next.slug}>
+								{this.props.next.text}
+							</AniLink>
+						)}
 					</Projects>
 				)}
 			</OtherProjects>
 		);
 	}
 }
+
+export default withWindowDimensions(CTAotherProjectComp);

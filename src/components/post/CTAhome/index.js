@@ -6,6 +6,9 @@ import React, { Component } from "react";
 // Styles
 import styled from "styled-components";
 
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
 const MainContainer = styled.div`
 	margin-top: 73px;
 	width: 100%;
@@ -99,29 +102,42 @@ const ButtonText = styled.span`
 	}
 `;
 
-export default class BackHomeCTA extends Component {
+class BackHomeCTAComp extends Component {
 	static propTypes = {
 		text: PropTypes.string.isRequired,
 	};
 	render() {
 		return (
 			<MainContainer>
-				<AniLink
-					cover
-					bg="#000000"
-					top="entry"
-					direction="right"
-					duration={0.8}
-					to="/"
-				>
-					<Button>
-						<Circle aria-hidden="true">
-							<Icon />
-						</Circle>
-						<ButtonText>{this.props.text}</ButtonText>
-					</Button>
-				</AniLink>
+				{!this.props.isM ? (
+					<AniLink
+						cover
+						bg="#000000"
+						top="entry"
+						direction="right"
+						duration={0.8}
+						to="/"
+					>
+						<Button>
+							<Circle aria-hidden="true">
+								<Icon />
+							</Circle>
+							<ButtonText>{this.props.text}</ButtonText>
+						</Button>
+					</AniLink>
+				) : (
+					<AniLink fade to={"/"}>
+						<Button>
+							<Circle aria-hidden="true">
+								<Icon />
+							</Circle>
+							<ButtonText>{this.props.text}</ButtonText>
+						</Button>
+					</AniLink>
+				)}
 			</MainContainer>
 		);
 	}
 }
+
+export default withWindowDimensions(BackHomeCTAComp);
