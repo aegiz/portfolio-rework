@@ -182,11 +182,11 @@ class BlogPostTemplate extends React.Component {
 							)}
 						</LeftPanelTop>
 						<LeftPanelIntro>
-							{this.props.isM && (
-								// <Cover
-								// 	src={post.frontmatter.featuredImage.childImageSharp.fluid}
-								// />
-							)}
+							{/* {this.props.isM && (
+								<Cover
+									src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								/>
+							)} */}
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
 								<Description windowHeight={this.props.windowHeight}>
@@ -213,12 +213,12 @@ class BlogPostTemplate extends React.Component {
 						<MDXRenderer>{post.body}</MDXRenderer>
 					)}
 					<RightPanel>
-						{post.frontmatter.typeOfArticle === "multistep" &&
+						{/* {post.frontmatter.typeOfArticle === "multistep" &&
 							!this.props.isM && (
-								// <Cover
-								// 	src={post.frontmatter.featuredImage.childImageSharp.fluid}
-								// />
-							)}
+								<Cover
+									src={post.frontmatter.featuredImage.childImageSharp.fluid}
+								/>
+							)} */}
 						{post.frontmatter.typeOfArticle === "singlestep" && (
 							<MDXRenderer>{post.body}</MDXRenderer>
 						)}
