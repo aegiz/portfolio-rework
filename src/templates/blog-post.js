@@ -96,6 +96,9 @@ const LeftPanelIntro = styled.div`
 			margin-top: 15px;
 			padding: 0 70px;
 		}
+		${({ theme }) => theme.mediaQueries.m} {
+			padding: 0 70px 30px;
+		}
 	}
 `;
 
@@ -120,6 +123,9 @@ const Description = styled.div`
 	margin-top: 50px;
 	overflow: auto;
 	height: ${props => props.windowHeight - 435}px;
+	${({ theme }) => theme.mediaQueries.m} {
+		height: 100%;
+	}
 	p {
 		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};

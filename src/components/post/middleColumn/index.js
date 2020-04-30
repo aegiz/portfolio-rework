@@ -7,6 +7,9 @@ import styled from "styled-components";
 import Steps from "./steps";
 import TriggerCTA from "./triggerCTA";
 
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
 /* Styles */
 const HEIGHT_STEP = 150;
 const TIME_TRANSITION = 0.25;
@@ -58,12 +61,13 @@ const MiddleColumn = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		position: relative;
 		width: 100%;
+		height: 100%;
 		left: auto;
 		bottom: auto;
 	}
 `;
 
-export default class middleColumn extends Component {
+class middleColumnComp extends Component {
 	static propTypes = {
 		textCTAopen: PropTypes.string.isRequired,
 		textCTAclose: PropTypes.string.isRequired,
@@ -110,7 +114,7 @@ export default class middleColumn extends Component {
 					updateStepsColumnOpen={this.updateStepsColumnOpen}
 					updateInnerStepsOpen={this.updateInnerStepsOpen}
 				/>
-				{this.props.content.length > 2 && (
+				{!this.props.isM && this.props.content.length > 2 && (
 					<TriggerCTA
 						textCTAopen={this.props.textCTAopen}
 						textCTAclose={this.props.textCTAclose}
@@ -125,3 +129,5 @@ export default class middleColumn extends Component {
 		);
 	}
 }
+
+export default withWindowDimensions(middleColumnComp);

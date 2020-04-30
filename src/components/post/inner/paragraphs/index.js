@@ -23,6 +23,9 @@ const ParagraphContainer = styled.div`
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: flex-start;
+	${({ theme }) => theme.mediaQueries.m} {
+		flex-direction: column;
+	}
 `;
 
 const Paragraph = styled.div`
@@ -32,6 +35,10 @@ const Paragraph = styled.div`
 	${props => handleMarginParagraph(props.nbParagraph)}
 	a {
 		color: ${({ theme }) => theme.colors.white};
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
 	}
 `;
 

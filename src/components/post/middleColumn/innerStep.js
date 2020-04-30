@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+
 // Assets
 import closeIcon from "@static/close.svg";
 
@@ -12,10 +15,15 @@ import closeIcon from "@static/close.svg";
 const handleInnerStepTransition = (
 	nbSteps,
 	TIME_TRANSITION,
-	innerStepsOpen
+	innerStepsOpen,
+	isM
 ) => {
 	if (innerStepsOpen) {
-		return `opacity ${TIME_TRANSITION}s ease ${nbSteps * TIME_TRANSITION}s`;
+		if (isM) {
+			return `opacity ${TIME_TRANSITION}s ease`;
+		} else {
+			return `opacity ${TIME_TRANSITION}s ease ${nbSteps * TIME_TRANSITION}s`;
+		}
 	} else {
 		return `opacity ${TIME_TRANSITION}s eases, width ${TIME_TRANSITION}s eases`;
 	}
@@ -36,9 +44,15 @@ const InnerStepsContainer = styled.div`
 		handleInnerStepTransition(
 			props.nbSteps,
 			props.TIME_TRANSITION,
-			props.innerStepsOpen
+			props.innerStepsOpen,
+			props.isM
 		)};
 	padding: 30px 70px 10px;
+	${({ theme }) => theme.mediaQueries.m} {
+		height: ${props => (props.innerStepsOpen ? `100%` : `0`)};
+		padding: 0;
+		position: relative;
+	}
 `;
 
 const Close = styled.button`
@@ -61,7 +75,7 @@ const Title = styled.h2`
 	}
 `;
 
-export default class InnerStepsComp extends Component {
+class InnerStepsComp extends Component {
 	static propTypes = {
 		nbSteps: PropTypes.number.isRequired,
 		innerStepsOpen: PropTypes.bool.isRequired,
@@ -85,6 +99,7 @@ export default class InnerStepsComp extends Component {
 				nbSteps={this.props.nbSteps}
 				innerStepsOpen={this.props.innerStepsOpen}
 				TIME_TRANSITION={this.props.TIME_TRANSITION}
+				isM={this.props.isM}
 			>
 				{this.props.currentTitle && (
 					<>
@@ -103,3 +118,5 @@ export default class InnerStepsComp extends Component {
 		);
 	}
 }
+
+export default withWindowDimensions(InnerStepsComp);

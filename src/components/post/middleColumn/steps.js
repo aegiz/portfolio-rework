@@ -79,6 +79,9 @@ const StepsContainer = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	${({ theme }) => theme.mediaQueries.m} {
+		position: relative;
+	}
 `;
 
 const StepOuterContainer = styled.div`
@@ -106,6 +109,14 @@ const StepOuterContainer = styled.div`
 	/* Media queries */
 	${({ theme }) => theme.mediaQueries.xl} {
 		padding: 50px 70px 0;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		display: ${props => (props.innerStepsOpen ? `none` : `block`)};
+		position: relative;
+		padding: 50px 0;
+		height: auto;
+		bottom: 0;
+		opacity: 1;
 	}
 	&:nth-child(1) {
 		${props => (props.nbSteps === 1 ? `bottom: auto;` : ``)}
