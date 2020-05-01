@@ -32,6 +32,9 @@ const SideProject = styled.div`
 	&:hover {
 		&:after {
 			height: 200px;
+			${({ theme }) => theme.mediaQueries.m} {
+				height: 100%;
+			}
 		}
 	}
 `;
@@ -70,6 +73,9 @@ const Figcap = styled.div`
 	border: 1px solid ${({ theme }) => theme.colors.yellow.main};
 	${SideProject}:hover & {
 		opacity: 0.2;
+		${({ theme }) => theme.mediaQueries.m} {
+			opacity: 0;
+		}
 	}
 `;
 
@@ -82,6 +88,10 @@ const SideProjectImg = styled.div`
 		${SideProject}:hover & {
 			opacity: 0.5;
 			transform: scale(1.05);
+			${({ theme }) => theme.mediaQueries.m} {
+				opacity: 0.7;
+				transform: scale(1);
+			}
 		}
 	}
 	.gatsby-image-wrapper {
@@ -102,10 +112,10 @@ const Project = styled(SideProject)`
 	}
 	&:hover & {
 		&:after {
+			opacity: 1;
 			${({ theme }) => theme.mediaQueries.m} {
 				opacity: 0;
 			}
-			opacity: 1;
 		}
 	}
 `;

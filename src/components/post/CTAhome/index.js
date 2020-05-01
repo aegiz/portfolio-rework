@@ -21,7 +21,7 @@ const MainContainer = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		margin: 0;
 		padding: 0;
-		max-width: 170px;
+		width: auto;
 	}
 `;
 
@@ -33,6 +33,9 @@ const Button = styled.button`
 	align-items: flex-start;
 	justify-content: flex-start;
 	padding: 0;
+	${({ theme }) => theme.mediaQueries.xs} {
+		width: auto;
+	}
 `;
 
 const Circle = styled.span`
@@ -104,6 +107,9 @@ const ButtonText = styled.span`
 	}
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		display: none;
 	}
 `;
 

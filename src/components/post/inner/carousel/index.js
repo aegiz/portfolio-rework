@@ -16,7 +16,7 @@ import styled from "styled-components";
 // Styled Components
 const CarouselContainer = styled.div`
 	position: relative;
-	margin: ${props => (props.margin ? props.margin : "105px 0 95px 0")};
+	margin: ${props => (props.margin ? props.margin : "105px 0 15px 0")};
 	width: 100%;
 	height: ${props => (props.height ? props.height : "473px")};
 	opacity: ${props => (props.carouselReady ? "1" : "0")};
@@ -74,6 +74,9 @@ const IconContainter = styled.div`
 	align-items: center;
 	${({ theme }) => theme.mediaQueries.l} {
 		bottom: -50px;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		bottom: 0;
 	}
 	img {
 		opacity: 0.5;

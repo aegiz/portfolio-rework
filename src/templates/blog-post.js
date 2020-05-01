@@ -173,14 +173,24 @@ class BlogPostTemplate extends React.Component {
 							)}
 						</LeftPanelTop>
 						<LeftPanelIntro>
-							{this.props.isM && (
-								<Cover
-									mobileDisplay
-									src={post.frontmatter.featuredImage.childImageSharp.fluid}
-								/>
-							)}
+							{this.props.isM &&
+								post.frontmatter.typeOfArticle === "singlestep" && (
+									<MDXRenderer>{post.body}</MDXRenderer>
+								)}
+							{this.props.isM &&
+								post.frontmatter.typeOfArticle === "multistep" && (
+									<Cover
+										mobileDisplay
+										src={post.frontmatter.featuredImage.childImageSharp.fluid}
+									/>
+								)}
 							<div className="upper">
 								<Title>{post.frontmatter.title}</Title>
+								<OtherInfo
+									mobileDisplay
+									beginning={post.frontmatter.beginning}
+									duration={post.frontmatter.duration}
+								/>
 								<Description windowHeight={this.props.windowHeight}>
 									<MdToHtml content={post.frontmatter.description} />
 								</Description>
@@ -204,21 +214,22 @@ class BlogPostTemplate extends React.Component {
 					{post.frontmatter.typeOfArticle === "multistep" && (
 						<MDXRenderer>{post.body}</MDXRenderer>
 					)}
-					<RightPanel>
-						{post.frontmatter.typeOfArticle === "multistep" &&
-							!this.props.isM && (
+					{!this.props.isM && (
+						<RightPanel>
+							{post.frontmatter.typeOfArticle === "multistep" && (
 								<Cover
 									src={post.frontmatter.featuredImage.childImageSharp.fluid}
 								/>
 							)}
-						{post.frontmatter.typeOfArticle === "singlestep" && (
-							<MDXRenderer>{post.body}</MDXRenderer>
-						)}
-						<OtherInfo
-							beginning={post.frontmatter.beginning}
-							duration={post.frontmatter.duration}
-						/>
-					</RightPanel>
+							{post.frontmatter.typeOfArticle === "singlestep" && (
+								<MDXRenderer>{post.body}</MDXRenderer>
+							)}
+							<OtherInfo
+								beginning={post.frontmatter.beginning}
+								duration={post.frontmatter.duration}
+							/>
+						</RightPanel>
+					)}
 				</BlogPostContainer>
 			</Layout>
 		);

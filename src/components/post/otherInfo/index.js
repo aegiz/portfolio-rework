@@ -8,11 +8,14 @@ import styled from "styled-components";
 const OtherInfo = styled.div`
 	width: 100%;
 	height: 23.95%;
-	display: flex;
+	display: ${props => (props.mobileDisplay ? "none" : "flex")};
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
 	background: ${({ theme }) => theme.colors.yellow.light};
+	${({ theme }) => theme.mediaQueries.m} {
+		display: ${props => (props.mobileDisplay ? "flex" : "none")};
+	}
 `;
 
 const OtherInfoInner = styled.div`
@@ -39,12 +42,13 @@ const Date = styled.div`
 
 export default class OtherInfoComp extends Component {
 	static propTypes = {
+		mobileDisplay: PropTypes.bool,
 		beginning: PropTypes.string.isRequired,
 		duration: PropTypes.string.isRequired,
 	};
 	render() {
 		return (
-			<OtherInfo>
+			<OtherInfo mobileDisplay={this.props.mobileDisplay}>
 				<OtherInfoInner>
 					<TypeOfProject>
 						Project Type: <b>TBC</b>
