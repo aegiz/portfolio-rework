@@ -16,7 +16,7 @@ const OtherProjects = styled.div`
 	align-items: center;
 	width: 100%;
 	max-width: 350px;
-	margin: 0 auto 20px;
+	margin: 20px auto;
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? `flex` : `none`)};
 		justify-content: flex-end;

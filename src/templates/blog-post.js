@@ -76,29 +76,25 @@ const LeftPanelIntro = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	.upper {
-		justify-content: normal;
-		width: 100%;
-		padding: 0 90px;
-		${({ theme }) => theme.mediaQueries.l} {
-			margin-top: 15px;
-			padding: 0 70px;
-		}
-		${({ theme }) => theme.mediaQueries.m} {
-			padding: 0 70px 30px;
-		}
-		${({ theme }) => theme.mediaQueries.s} {
-			padding: 0 25px 25px;
-		}
+	padding: 0 90px;
+	${({ theme }) => theme.mediaQueries.m} {
+		padding: 0 70px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 0 25px;
 	}
 `;
 
 const Title = styled.h1`
+	width: 100%;
 	mix-blend-mode: exclusion;
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["5xl"]};
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		margin-top: 15px;
 	}
 	&:after {
 		content: "";
@@ -111,11 +107,24 @@ const Title = styled.h1`
 `;
 
 const Description = styled.div`
-	margin-top: 50px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	${({ theme }) => theme.mediaQueries.m} {
+		margin: 15px 0;
+	}
+`;
+
+const DescriptionInner = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
 	overflow: auto;
-	height: ${props => props.windowHeight - 435}px;
+	width: 100%;
+	height: calc(100% - 50px);
 	${({ theme }) => theme.mediaQueries.m} {
 		height: 100%;
+		position: relative;
 	}
 	p {
 		margin: 0;
@@ -184,17 +193,20 @@ class BlogPostTemplate extends React.Component {
 										src={post.frontmatter.featuredImage.childImageSharp.fluid}
 									/>
 								)}
-							<div className="upper">
-								<Title>{post.frontmatter.title}</Title>
+
+							<Title>{post.frontmatter.title}</Title>
+							{this.props.isM && (
 								<OtherInfo
 									mobileDisplay
-									beginning={post.frontmatter.beginning}
+									date={post.frontmatter.dateTimeStamp}
 									duration={post.frontmatter.duration}
 								/>
-								<Description windowHeight={this.props.windowHeight}>
+							)}
+							<Description windowHeight={this.props.windowHeight}>
+								<DescriptionInner>
 									<MdToHtml content={post.frontmatter.description} />
-								</Description>
-							</div>
+								</DescriptionInner>
+							</Description>
 							{!this.props.isM && (
 								<CTAotherProject
 									previous={
@@ -225,7 +237,7 @@ class BlogPostTemplate extends React.Component {
 								<MDXRenderer>{post.body}</MDXRenderer>
 							)}
 							<OtherInfo
-								beginning={post.frontmatter.beginning}
+								date={post.frontmatter.dateTimeStamp}
 								duration={post.frontmatter.duration}
 							/>
 						</RightPanel>
@@ -252,7 +264,7 @@ export const pageQuery = graphql`
 			body
 			frontmatter {
 				title
-				beginning
+				dateTimeStamp
 				end
 				duration
 				typeOfProject

@@ -29,7 +29,7 @@ export const pageQuery = graphql`
 	query {
 		allMdx(
 			filter: { frontmatter: { draft: { eq: false } } }
-			sort: { fields: [frontmatter___date], order: DESC }
+			sort: { fields: [frontmatter___dateTimeStamp], order: DESC }
 		) {
 			edges {
 				node {
@@ -40,7 +40,7 @@ export const pageQuery = graphql`
 					}
 					frontmatter {
 						title
-						beginning
+						dateTimeStamp
 						typeOfProject
 						description
 						featuredImage {

@@ -86,9 +86,7 @@ class GalleryComp extends Component {
 						data-type={post.node.frontmatter.typeOfProject
 							.toLowerCase()
 							.replace(/\s/g, "")}
-						data-date={Math.floor(
-							new Date(post.node.frontmatter.beginning).getTime() / 1000
-						)}
+						data-date={post.node.frontmatter.dateTimeStamp}
 						typeOfProject={post.node.frontmatter.typeOfProject
 							.toLowerCase()
 							.replace(/\s/g, "")}

@@ -15,6 +15,7 @@ const OtherInfo = styled.div`
 	background: ${({ theme }) => theme.colors.yellow.light};
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? "flex" : "none")};
+		margin: 15px 0 0 0;
 	}
 `;
 
@@ -43,7 +44,7 @@ const Date = styled.div`
 export default class OtherInfoComp extends Component {
 	static propTypes = {
 		mobileDisplay: PropTypes.bool,
-		beginning: PropTypes.string.isRequired,
+		date: PropTypes.string.isRequired,
 		duration: PropTypes.string.isRequired,
 	};
 	render() {
@@ -57,7 +58,7 @@ export default class OtherInfoComp extends Component {
 						Role: <b>Solutions Engineer</b>
 					</Role>
 					<Date>
-						{this.props.beginning} ({this.props.duration})
+						{this.props.date} ({this.props.duration})
 					</Date>
 				</OtherInfoInner>
 			</OtherInfo>
