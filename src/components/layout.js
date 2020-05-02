@@ -1,6 +1,7 @@
 //  Packages
 import PropTypes from "prop-types";
 import React from "react";
+import styled from "styled-components";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { MDXProvider } from "@mdx-js/react";
 import { Message } from "theme-ui";
@@ -24,6 +25,7 @@ export const theme = {
 		black: "#000",
 		grey: {
 			main: "#888",
+			middle: "#222",
 			dark: "#111",
 		},
 		yellow: {
@@ -75,6 +77,12 @@ export const theme = {
 	},
 };
 
+// Styles: Style Component
+const Main = styled.main`
+	min-height: 100vh;
+	background: rgba(47, 50, 56, 1);
+`;
+
 // Styles: Reset and Global
 const GlobalStyle = createGlobalStyle`
 	*, *:before, *:after {
@@ -117,13 +125,9 @@ function Layout({ children }) {
 	const layoutContent = data => (
 		<>
 			<GlobalStyle />
-			<main
-				style={{
-					background: `rgba(47, 50, 56, 1`,
-				}}
-			>
+			<Main>
 				<MDXProvider components={shortcodes}>{children}</MDXProvider>
-			</main>
+			</Main>
 		</>
 	);
 

@@ -16,7 +16,7 @@ const MainContainer = styled.div`
 		display: block;
 	}
 	${({ theme }) => theme.mediaQueries.l} {
-		padding: 0 70px;
+		padding: 0 90px;
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		margin: 0;
@@ -56,7 +56,7 @@ const Circle = styled.span`
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		${Button}:hover & {
-			width: 48px;
+			width: 40px;
 		}
 	}
 `;
@@ -72,8 +72,14 @@ const Icon = styled.span`
 	width: 1.125rem;
 	height: 0.125rem;
 	background: none;
+	${({ theme }) => theme.mediaQueries.l} {
+		left: 0.45rem;
+	}
 	${Button}:hover & {
 		background: ${({ theme }) => theme.colors.white};
+		${({ theme }) => theme.mediaQueries.m} {
+			background: transparent;
+		}
 	}
 	&:before {
 		content: "";
@@ -85,9 +91,6 @@ const Icon = styled.span`
 		border-top: 0.125rem solid #fff;
 		border-right: 0.125rem solid #fff;
 		transform: rotate(45deg);
-	}
-	${({ theme }) => theme.mediaQueries.l} {
-		left: 0.45rem;
 	}
 `;
 
@@ -104,6 +107,9 @@ const ButtonText = styled.span`
 	font-size: 0.9rem;
 	${Button}:hover & {
 		color: ${({ theme }) => theme.colors.white};
+		${({ theme }) => theme.mediaQueries.m} {
+			color: ${({ theme }) => theme.colors.black};
+		}
 	}
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["normal"]};
