@@ -71,6 +71,9 @@ const MiddleColumn = styled.div`
 	${({ theme }) => theme.mediaQueries.s} {
 		padding: 25px;
 	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 25px 10px;
+	}
 `;
 
 class middleColumnComp extends Component {

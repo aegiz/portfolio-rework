@@ -46,6 +46,9 @@ const Projects = styled.div`
 			content: none;
 		}
 	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 0 0 0 20px;
+	}
 	a {
 		display: block;
 		opacity: 0.5;

@@ -33,6 +33,31 @@ const BlogPostContainer = styled.div`
 	}
 `;
 
+const FixedMenu = styled.div`
+	display: none;
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 100%;
+		z-index: 3;
+		height: 60px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		background: ${({ theme }) => theme.colors.white};
+		padding: 0 70px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 0 25px;
+	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 0 10px;
+	}
+`;
+
+
 const LeftPanel = styled.div`
 	z-index: 1;
 	display: flex;
@@ -53,18 +78,7 @@ const LeftPanelTop = styled.div`
 	display: block;
 	width: 100%;
 	${({ theme }) => theme.mediaQueries.m} {
-		position: fixed;
-		z-index: 2;
-		height: 60px;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: flex-start;
-		background: ${({ theme }) => theme.colors.white};
-		padding: 0 70px;
-	}
-	${({ theme }) => theme.mediaQueries.s} {
-		padding: 0 25px;
+		display: none;
 	}
 `;
 
@@ -82,6 +96,9 @@ const LeftPanelIntro = styled.div`
 	}
 	${({ theme }) => theme.mediaQueries.s} {
 		padding: 0 25px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 0 10px;
 	}
 `;
 
@@ -163,25 +180,30 @@ class BlogPostTemplate extends React.Component {
 					path={post.frontmatter.path}
 				/>
 				<BlogPostContainer>
-					<LeftPanel>
-						<LeftPanelTop>
+					{this.props.isM && (
+						<FixedMenu>
 							<CTAhome text={"Homepage"} />
-							{this.props.isM && (
-								<CTAotherProject
-									mobileDisplay
-									previous={
-										previous
-											? { slug: previous.fields.slug, text: "Previous Project" }
-											: undefined
-									}
-									next={
-										next
-											? { slug: next.fields.slug, text: "Next Project" }
-											: undefined
-									}
-								/>
-							)}
-						</LeftPanelTop>
+							<CTAotherProject
+								mobileDisplay
+								previous={
+									previous
+										? { slug: previous.fields.slug, text: "Previous Project" }
+										: undefined
+								}
+								next={
+									next
+										? { slug: next.fields.slug, text: "Next Project" }
+										: undefined
+								}
+							/>
+						</FixedMenu>
+					)}
+					<LeftPanel>
+						{!this.props.isM && (
+							<LeftPanelTop>
+								<CTAhome text={"Homepage"} />
+							</LeftPanelTop>
+						)}
 						<LeftPanelIntro>
 							{this.props.isM &&
 								post.frontmatter.typeOfArticle === "singlestep" && (
