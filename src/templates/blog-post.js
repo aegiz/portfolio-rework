@@ -16,23 +16,6 @@ import SEO from "@components/seo";
 import MdToHtml from "@utils/MdToHtml";
 import withWindowDimensions from "@utils/withWindowDimensions";
 
-const BlogPostContainer = styled.div`
-	position: relative;
-	z-index: 1;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	justify-content: center;
-	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-	margin: 0 auto;
-	${({ theme }) => theme.mediaQueries.m} {
-		flex-direction: column;
-		height: auto;
-	}
-`;
-
 const FixedMenu = styled.div`
 	display: none;
 	${({ theme }) => theme.mediaQueries.m} {
@@ -54,6 +37,23 @@ const FixedMenu = styled.div`
 	}
 	${({ theme }) => theme.mediaQueries.xs} {
 		padding: 0 10px;
+	}
+`;
+
+const BlogPostContainer = styled.div`
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0 auto;
+	${({ theme }) => theme.mediaQueries.m} {
+		flex-direction: column;
+		height: auto;
 	}
 `;
 
@@ -179,25 +179,25 @@ class BlogPostTemplate extends React.Component {
 					description={post.frontmatter.description || post.excerpt}
 					path={post.frontmatter.path}
 				/>
+				{this.props.isM && (
+					<FixedMenu>
+						<CTAhome text={"Homepage"} />
+						<CTAotherProject
+							mobileDisplay
+							previous={
+								previous
+									? { slug: previous.fields.slug, text: "Previous Project" }
+									: undefined
+							}
+							next={
+								next
+									? { slug: next.fields.slug, text: "Next Project" }
+									: undefined
+							}
+						/>
+					</FixedMenu>
+				)}
 				<BlogPostContainer>
-					{this.props.isM && (
-						<FixedMenu>
-							<CTAhome text={"Homepage"} />
-							<CTAotherProject
-								mobileDisplay
-								previous={
-									previous
-										? { slug: previous.fields.slug, text: "Previous Project" }
-										: undefined
-								}
-								next={
-									next
-										? { slug: next.fields.slug, text: "Next Project" }
-										: undefined
-								}
-							/>
-						</FixedMenu>
-					)}
 					<LeftPanel>
 						{!this.props.isM && (
 							<LeftPanelTop>
