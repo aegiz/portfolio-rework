@@ -37,6 +37,10 @@ function SEO({ description, lang, meta, title, path, cover }) {
 			content: metaDescription,
 		},
 		{
+			property: `og:image`,
+			content: metaImage,
+		},
+		{
 			property: `og:type`,
 			content: `website`,
 		},
