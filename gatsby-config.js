@@ -1,14 +1,21 @@
 module.exports = {
 	siteMetadata: {
 		title: `Adrien Rahier Portfolio`,
-		author: `@AdrienRahier`,
+		author: `Adrien Rahier`,
 		description: `Portfolio of Adrien Rahier.`,
 		siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
-		defaultImage: `logo_defaultImage.png`
+		defaultImage: `logo_defaultImage.png`,
+		twitterUsername: `@AdrienRahier`,
 	},
 	plugins: [
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
+		{
+			resolve: `gatsby-plugin-canonical-urls`,
+			options: {
+				siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
+			},
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -56,12 +63,6 @@ module.exports = {
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 				],
-			},
-		},
-		{
-			resolve: `gatsby-plugin-canonical-urls`,
-			options: {
-				siteUrl: `https://www.adrienrahier.com/portfolio`,
 			},
 		},
 		{
