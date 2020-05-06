@@ -46,7 +46,7 @@ const BlogPostContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-start;
 	width: 100%;
 	height: 100vh;
 	overflow: hidden;
@@ -178,6 +178,7 @@ class BlogPostTemplate extends React.Component {
 					title={post.frontmatter.title}
 					description={post.frontmatter.description || post.excerpt}
 					path={post.frontmatter.path}
+					cover={post.frontmatter.featuredImage.childImageSharp.fluid.src}
 				/>
 				{this.props.isM && (
 					<FixedMenu>

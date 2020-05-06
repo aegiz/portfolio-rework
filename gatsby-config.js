@@ -1,12 +1,10 @@
 module.exports = {
 	siteMetadata: {
 		title: `Adrien Rahier Portfolio`,
-		author: `Adrien Rahier`,
+		author: `@AdrienRahier`,
 		description: `Portfolio of Adrien Rahier.`,
-		siteUrl: `https://adrienrahier.com/portfolio/`,
-		social: {
-			twitter: `adrienrahier`,
-		},
+		siteUrl: `https://adrienrahier.com`,
+		defaultImage: `logo_defaultImage.png`
 	},
 	plugins: [
 		`gatsby-plugin-sharp`,
