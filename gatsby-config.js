@@ -3,7 +3,7 @@ module.exports = {
 		title: `Adrien Rahier Portfolio`,
 		author: `@AdrienRahier`,
 		description: `Portfolio of Adrien Rahier.`,
-		siteUrl: `https://adrienrahier.com`,
+		siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
 		defaultImage: `logo_defaultImage.png`
 	},
 	plugins: [
