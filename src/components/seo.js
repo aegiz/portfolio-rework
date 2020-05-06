@@ -24,6 +24,7 @@ function SEO({ description, lang, meta, title, path, cover }) {
 	const metaDescription = description || site.siteMetadata.description;
 	const metaTitle = title || site.siteMetadata.title;
 	const metaImage = `${site.siteMetadata.siteUrl}${cover}` || site.siteMetadata.defaultImage;
+	console.log(metaImage)
 	const customMeta = [
 		{
 			name: `description`,
