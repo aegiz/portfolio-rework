@@ -13,7 +13,8 @@ function SEO({ description, lang, meta, title, path, cover }) {
 						author
 						description
 						siteUrl
-						defaultImage
+						defaultImage,
+						twitterUsername
 					}
 				}
 			}
@@ -29,6 +30,18 @@ function SEO({ description, lang, meta, title, path, cover }) {
 			content: metaDescription,
 		},
 		{
+			name: `image`,
+			content: metaImage,
+		},
+		{
+			property: `og:url`,
+			content: site.siteMetadata.siteUrl,
+		},
+		{
+			property: `og:type`,
+			content: `website`,
+		},
+		{
 			property: `og:title`,
 			content: metaTitle,
 		},
@@ -41,16 +54,12 @@ function SEO({ description, lang, meta, title, path, cover }) {
 			content: metaImage,
 		},
 		{
-			property: `og:type`,
-			content: `website`,
-		},
-		{
 			name: `twitter:card`,
-			content: `summary`,
+			content: `summary_large_image`,
 		},
 		{
 			name: `twitter:creator`,
-			content: site.siteMetadata.author,
+			content: site.siteMetadata.twitterUsername,
 		},
 		{
 			name: `twitter:title`,
