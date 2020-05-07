@@ -221,7 +221,8 @@ class BlogPostTemplate extends React.Component {
 							{this.props.isM && (
 								<OtherInfo
 									mobileDisplay
-									date={post.frontmatter.dateTimeStamp}
+									date={post.frontmatter.date}
+									techno={post.frontmatter.techno}
 									duration={post.frontmatter.duration}
 									typeOfProject={post.frontmatter.typeOfProject}
 								/>
@@ -261,8 +262,9 @@ class BlogPostTemplate extends React.Component {
 								<MDXRenderer>{post.body}</MDXRenderer>
 							)}
 							<OtherInfo
-								date={post.frontmatter.dateTimeStamp}
+								date={post.frontmatter.date}
 								duration={post.frontmatter.duration}
+								techno={post.frontmatter.techno}
 								typeOfProject={post.frontmatter.typeOfProject}
 								typeOfArticle={post.frontmatter.typeOfArticle}
 							/>
@@ -290,7 +292,7 @@ export const pageQuery = graphql`
 			body
 			frontmatter {
 				title
-				dateTimeStamp
+				date
 				end
 				duration
 				typeOfProject

@@ -39,22 +39,29 @@ const OtherInfoInner = styled.div`
 	}
 `;
 
-const TypeOfProject = styled.p`
-	font-size: ${({ theme }) => theme.fontSizes.normal};
-`; // Maybe here use inheritance instead of reapeating myself
-
-const Role = styled.p`
+const Info = styled.p`
 	font-size: ${({ theme }) => theme.fontSizes.normal};
 `;
 
-const Date = styled.div`
-	font-size: ${({ theme }) => theme.fontSizes.normal};
+const InfoDate = styled(Info)`
+	color: red;
+`;
+
+const InfoTool = styled(Info)`
+	color: blue;
+`;
+
+const Techno = styled.span`
+	padding: 10px;
+	background: ${({ theme }) => theme.colors.black};
+	color: ${({ theme }) => theme.colors.white};
 `;
 
 export default class OtherInfoComp extends Component {
 	static propTypes = {
 		mobileDisplay: PropTypes.bool,
 		date: PropTypes.string.isRequired,
+		techno: PropTypes.string.isRequired,
 		duration: PropTypes.string.isRequired,
 		typeOfProject: PropTypes.string.isRequired,
 		typeOfArticle: PropTypes.string,
@@ -66,15 +73,16 @@ export default class OtherInfoComp extends Component {
 				typeOfProject={this.props.typeOfProject}
 			>
 				<OtherInfoInner typeOfArticle={this.props.typeOfArticle}>
-					<TypeOfProject>
-						Project Type: <b>TBC</b>
-					</TypeOfProject>
-					<Role>
-						Role: <b>Solutions Engineer</b>
-					</Role>
-					<Date>
+					<Info>Category: {this.props.typeOfProject}</Info>
+					<InfoDate>
 						{this.props.date} ({this.props.duration})
-					</Date>
+					</InfoDate>
+					<InfoTool>
+						Tools used:
+						{this.props.techno.split(",").map((techno, i) => (
+							<Techno key={i}>{techno}</Techno>
+						))}
+					</InfoTool>
 				</OtherInfoInner>
 			</OtherInfo>
 		);
