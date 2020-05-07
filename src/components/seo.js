@@ -3,7 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
-function SEO({ description, lang, meta, title, path, cover }) {
+function SEO({ title, description, path, cover }) {
 	const { site } = useStaticQuery(
 		graphql`
 			query {
@@ -13,7 +13,7 @@ function SEO({ description, lang, meta, title, path, cover }) {
 						author
 						description
 						siteUrl
-						defaultImage,
+						defaultImage
 						twitterUsername
 					}
 				}
@@ -23,8 +23,9 @@ function SEO({ description, lang, meta, title, path, cover }) {
 
 	const metaDescription = description || site.siteMetadata.description;
 	const metaTitle = title || site.siteMetadata.title;
-	const metaImage = `${site.siteMetadata.siteUrl}${cover}` || site.siteMetadata.defaultImage;
-	console.log(metaImage)
+	const metaImage = cover
+		? `${site.siteMetadata.siteUrl}${cover}`
+		: site.siteMetadata.defaultImage;
 	const customMeta = [
 		{
 			name: `description`,
@@ -87,28 +88,19 @@ function SEO({ description, lang, meta, title, path, cover }) {
 	}
 	return (
 		<Helmet
-			htmlAttributes={{
-				lang,
-			}}
-			title={title}
+			htmlAttributes={{ lang: "en" }}
+			title={metaTitle}
 			titleTemplate={`%s | ${site.siteMetadata.title}`}
-			meta={customMeta.concat(meta)}
+			meta={customMeta}
 		/>
 	);
 }
 
-SEO.defaultProps = {
-	lang: `en`,
-	meta: [],
-	description: `Adrien Rahier Portfolio`,
-};
-
 SEO.propTypes = {
+	title: PropTypes.string,
 	description: PropTypes.string,
-	lang: PropTypes.string,
-	meta: PropTypes.arrayOf(PropTypes.object),
-	title: PropTypes.string.isRequired,
-	cover: PropTypes.string.isRequired
+	path: PropTypes.string,
+	cover: PropTypes.string,
 };
 
 export default SEO;
