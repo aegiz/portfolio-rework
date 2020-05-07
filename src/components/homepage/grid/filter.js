@@ -3,20 +3,8 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 
-/* Styles */
-
-// Helpers
-const handleColorType = type => {
-	if (type === "freelancework") {
-		return ({ theme }) => theme.colors.yellow.main;
-	} else if (type === "full-timework") {
-		return ({ theme }) => theme.colors.yellow.light;
-	} else if (type === "sideproject") {
-		return ({ theme }) => theme.colors.black;
-	} else {
-		return ({ theme }) => theme.colors.white;
-	}
-};
+// Utils
+import { handleColorType, cleanProjectName } from "@utils/projectHelpers";
 
 // Styled Components
 const Filter = styled.button`
@@ -74,9 +62,7 @@ export default class FilterComp extends Component {
 		currentFilter: PropTypes.string.isRequired,
 	};
 	render() {
-		const typeOfProjectClean = this.props.filter
-			.toLowerCase()
-			.replace(/\s/g, "");
+		const typeOfProjectClean = cleanProjectName(this.props.filter);
 		return (
 			<Filter
 				onClick={() => {

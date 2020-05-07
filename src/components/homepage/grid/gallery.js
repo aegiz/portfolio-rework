@@ -9,6 +9,7 @@ import Item from "./item";
 
 // Utils
 import withWindowDimensions from "@utils/withWindowDimensions";
+import { cleanProjectName } from "@utils/projectHelpers";
 
 const GalleryContainer = styled.div`
 	margin: 0 10px 40px;
@@ -83,13 +84,11 @@ class GalleryComp extends Component {
 						instance={this.props.instance}
 						currentFilter={this.props.currentFilter}
 						className="gallery-item"
-						data-type={post.node.frontmatter.typeOfProject
-							.toLowerCase()
-							.replace(/\s/g, "")}
+						data-type={cleanProjectName(post.node.frontmatter.typeOfProject)}
 						data-date={post.node.frontmatter.dateTimeStamp}
-						typeOfProject={post.node.frontmatter.typeOfProject
-							.toLowerCase()
-							.replace(/\s/g, "")}
+						typeOfProject={cleanProjectName(
+							post.node.frontmatter.typeOfProject
+						)}
 					>
 						{!this.props.isM ? (
 							<AniLink

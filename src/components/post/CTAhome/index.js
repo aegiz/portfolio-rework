@@ -94,7 +94,7 @@ const Icon = styled.span`
 	}
 `;
 
-const ButtonText = styled.span`
+const InnerButtonText = styled.span`
 	color: ${({ theme }) => theme.colors.black};
 	font-weight: ${({ theme }) => theme.fontWeights.semibold};
 	transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
@@ -139,7 +139,7 @@ class BackHomeCTAComp extends Component {
 							<Circle aria-hidden="true">
 								<Icon />
 							</Circle>
-							<ButtonText>{this.props.text}</ButtonText>
+							<InnerButtonText>{this.props.text}</InnerButtonText>
 						</Button>
 					</AniLink>
 				) : (
@@ -148,7 +148,7 @@ class BackHomeCTAComp extends Component {
 							<Circle aria-hidden="true">
 								<Icon />
 							</Circle>
-							<ButtonText>{this.props.text}</ButtonText>
+							<InnerButtonText>{this.props.text}</InnerButtonText>
 						</Button>
 					</AniLink>
 				)}

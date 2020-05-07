@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import React, { Component } from "react";
 
+// Utils
+import { handleColorType, cleanProjectName } from "@utils/projectHelpers";
+
 const GalleryItem = styled.div`
 	position: relative;
 	width: 100%;
@@ -102,10 +105,7 @@ const SideProjectImg = styled.div`
 // Project inherit from most of Side Project
 const Project = styled(SideProject)`
 	position: relative;
-	background: ${props =>
-		props.typeOfProject === "freelancework"
-			? ({ theme }) => theme.colors.yellow.main
-			: ({ theme }) => theme.colors.yellow.light};
+	background: ${props => handleColorType(props.typeOfProject)};
 	&:after {
 		height: 250px;
 		opacity: 0;
@@ -184,10 +184,7 @@ const Overlay = styled.div`
 	height: 100%;
 	transition: all 0.3s;
 	opacity: 1;
-	background: ${props =>
-		props.typeOfProject === "freelancework"
-			? ({ theme }) => theme.colors.yellow.main
-			: ({ theme }) => theme.colors.yellow.light};
+	background: ${props => handleColorType(props.typeOfProject)};
 	${Project}:hover & {
 		opacity: 0;
 		${({ theme }) => theme.mediaQueries.m} {
@@ -233,9 +230,7 @@ class galleryItem extends Component {
 	};
 	render() {
 		const frontmatter = this.props.frontmatter;
-		const typeOfProjectClean = frontmatter.typeOfProject
-			.toLowerCase()
-			.replace(/\s/g, "");
+		const typeOfProjectClean = cleanProjectName(frontmatter.typeOfProject);
 		return (
 			<GalleryItem>
 				{typeOfProjectClean === "sideproject" ? (

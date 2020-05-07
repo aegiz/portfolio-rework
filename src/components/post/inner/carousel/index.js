@@ -48,6 +48,7 @@ const Digits = styled.div`
 `;
 
 const Current = styled(Digits)`
+	/* Inheritance */
 	margin: 10px 0 0 0;
 	mix-blend-mode: exclusion;
 `;

@@ -57,7 +57,6 @@ const BlogPostContainer = styled.div`
 	}
 `;
 
-
 const LeftPanel = styled.div`
 	z-index: 1;
 	display: flex;
@@ -224,6 +223,7 @@ class BlogPostTemplate extends React.Component {
 									mobileDisplay
 									date={post.frontmatter.dateTimeStamp}
 									duration={post.frontmatter.duration}
+									typeOfProject={post.frontmatter.typeOfProject}
 								/>
 							)}
 							<Description windowHeight={this.props.windowHeight}>
@@ -263,6 +263,8 @@ class BlogPostTemplate extends React.Component {
 							<OtherInfo
 								date={post.frontmatter.dateTimeStamp}
 								duration={post.frontmatter.duration}
+								typeOfProject={post.frontmatter.typeOfProject}
+								typeOfArticle={post.frontmatter.typeOfArticle}
 							/>
 						</RightPanel>
 					)}
