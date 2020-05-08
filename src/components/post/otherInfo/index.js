@@ -37,12 +37,11 @@ const OtherInfoInner = styled.ul`
 	align-items: flex-start;
 	justify-content: space-around;
 	height: 100%;
-	padding: 25px 35px 5px 35px;
+	padding: 25px 35px 0px 35px;
 	margin: 0;
 	list-style: none;
-	a {
-		text-decoration: none;
-		color: ${({ theme }) => theme.colors.black};
+	${({ theme }) => theme.mediaQueries.xl} {
+		padding: 20px 20px 0px 20px;
 	}
 `;
 
@@ -57,12 +56,19 @@ const Info = styled.li`
 
 const InfoDate = styled(Info)``;
 
-const InfoTool = styled(Info)``;
+const InfoTool = styled(Info)`
+	${({ theme }) => theme.mediaQueries.xl} {
+		flex-direction: column;
+	}
+`;
 
 const InfoType = styled.div`
 	width: 135px;
 	font-size: ${({ theme }) => theme.fontSizes["l"]};
 	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
+	${({ theme }) => theme.mediaQueries.l} {
+		width: 105px;
+	}
 `;
 
 const InfoContent = styled.div`
@@ -79,6 +85,9 @@ const Techno = styled.span`
 	padding: 10px;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
+	${({ theme }) => theme.mediaQueries.xl} {
+		margin: 8px 8px 0 0;
+	}
 `;
 
 export default class OtherInfoComp extends Component {
