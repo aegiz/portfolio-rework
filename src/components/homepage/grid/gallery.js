@@ -13,6 +13,9 @@ import { cleanProjectName } from "@utils/projectHelpers";
 
 const GalleryContainer = styled.div`
 	margin: 0 10px 40px;
+	${({ theme }) => theme.mediaQueries.s} {
+		margin: 0 10px 5px;
+	}
 `;
 
 const GalleryItemOuter = styled.div`

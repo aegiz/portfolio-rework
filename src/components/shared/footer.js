@@ -13,24 +13,51 @@ const FooterContainer = styled.div`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	${({ theme }) => theme.mediaQueries.s} {
+		border: none;
+		flex-direction: column;
+		padding: 16px;
+	}
 `;
 
 const Copyright = styled.div`
 	color: ${({ theme }) => theme.colors.white};
+	${({ theme }) => theme.mediaQueries.s} {
+		font-size: ${({ theme }) => theme.fontSizes["m"]};
+	}
 `;
 
-const OtherInfo = styled.div`
+const OtherInfoList = styled.ul`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	${({ theme }) => theme.mediaQueries.s} {
+		margin-top: 8px;
+	}
+`;
+
+const OtherInfoItem = styled.li`
+	position: relative;
+	margin: 0 12px;
 	a {
 		color: ${({ theme }) => theme.colors.white};
 	}
-	span {
-		margin: 0 10px;
+	&:after {
+		content: "·";
 		color: ${({ theme }) => theme.colors.white};
-		font-size: ${({ theme }) => theme.fontSizes["l"]};
+		position: absolute;
+		top: 1px;
+		right: -14px;
+	}
+	&:last-child {
+		&:after {
+			content: none;
+		}
 	}
 `;
 
@@ -41,41 +68,47 @@ export default class FooterComp extends Component {
 				<Copyright>
 					© 20012 - {new Date().getFullYear()} · Adrien Rahier{" "}
 				</Copyright>
-				<OtherInfo>
-					<a href="mailto:adrien.rahier@gmail.com">Email</a>
-					<span>·</span>
-					<a
-						href="http://linkedin.com/in/adrienrahier"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						LinkedIn
-					</a>
-					<span>·</span>
-					<a
-						href="https://github.com/aegiz"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Github
-					</a>
-					<span>·</span>
-					<a
-						href="https://twitter.com/adrienrahier"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Twitter
-					</a>
-					<span>·</span>
-					<a
-						href="https://medium.com/@adrienrahier"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Medium
-					</a>
-				</OtherInfo>
+				<OtherInfoList>
+					<OtherInfoItem>
+						<a href="mailto:adrien.rahier@gmail.com">Email</a>
+					</OtherInfoItem>
+					<OtherInfoItem>
+						<a
+							href="http://linkedin.com/in/adrienrahier"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							LinkedIn
+						</a>
+					</OtherInfoItem>
+					<OtherInfoItem>
+						<a
+							href="https://github.com/aegiz"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Github
+						</a>
+					</OtherInfoItem>
+					<OtherInfoItem>
+						<a
+							href="https://twitter.com/adrienrahier"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Twitter
+						</a>
+					</OtherInfoItem>
+					<OtherInfoItem>
+						<a
+							href="https://medium.com/@adrienrahier"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Medium
+						</a>
+					</OtherInfoItem>
+				</OtherInfoList>
 			</FooterContainer>
 		);
 	}

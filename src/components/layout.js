@@ -35,6 +35,7 @@ export const theme = {
 		},
 	},
 	breakpoints: {
+		xxs: 305,
 		xs: 480,
 		s: 767,
 		m: 979,
@@ -69,6 +70,7 @@ export const theme = {
 	},
 
 	mediaQueries: {
+		xxs: "@media only screen and (max-width: 305px)",
 		xs: "@media only screen and (max-width: 480px)",
 		s: "@media only screen and (max-width: 767px)",
 		m: "@media only screen and (max-width: 979px)",

@@ -45,7 +45,7 @@ const SideProject = styled.div`
 const TitleSideProject = styled.h2`
 	position: absolute;
 	left: 0;
-	padding: 0 40px;
+	padding: 0 30px;
 	bottom: 70px;
 	transition: all 0.35s;
 	color: ${({ theme }) => theme.colors.white};
@@ -61,6 +61,14 @@ const TitleSideProject = styled.h2`
 		height: 3px;
 		margin-top: 10px;
 		transition: all 0.35s ease-out;
+	}
+	${({ theme }) => theme.mediaQueries.l} {
+		span {
+			display: none;
+		}
+	}
+	${({ theme }) => theme.mediaQueries.xxs} {
+		hyphens: auto;
 	}
 `;
 
@@ -121,7 +129,7 @@ const Project = styled(SideProject)`
 `;
 
 const TitleProject = styled(TitleSideProject)`
-	left: 40px;
+	left: 30px;
 	padding: 0;
 	&:after {
 		margin-top: 57px;
@@ -140,7 +148,7 @@ const TypeProject = styled.h3`
 	z-index: 3;
 	position: absolute;
 	bottom: 87px;
-	left: 40px;
+	left: 30px;
 	text-transform: uppercase;
 	word-break: break-word;
 	color: ${({ theme }) => theme.colors.white};
@@ -154,7 +162,7 @@ const Hashtags = styled.p`
 	z-index: 3;
 	position: absolute;
 	bottom: 40px;
-	left: 40px;
+	left: 30px;
 	margin: 0;
 	transform: translate3d(-10px, 0, 0);
 	color: ${({ theme }) => theme.colors.white};
@@ -228,6 +236,19 @@ class galleryItem extends Component {
 			hashtags: PropTypes.string.isRequired,
 		}),
 	};
+	_addHyphenToTitle = title => {
+		if (title.split(" ").length !== 1) {
+			return title;
+		} else {
+			return (
+				<>
+					{title.slice(0, 6)}
+					<span>-</span>
+					{title.slice(6)}
+				</>
+			);
+		}
+	};
 	render() {
 		const frontmatter = this.props.frontmatter;
 		const typeOfProjectClean = cleanProjectName(frontmatter.typeOfProject);
@@ -235,7 +256,9 @@ class galleryItem extends Component {
 			<GalleryItem>
 				{typeOfProjectClean === "sideproject" ? (
 					<SideProject>
-						<TitleSideProject>{frontmatter.title}</TitleSideProject>
+						<TitleSideProject>
+							{this._addHyphenToTitle(frontmatter.title)}
+						</TitleSideProject>
 						<SideProjectImg>
 							<Img
 								loading="eager"

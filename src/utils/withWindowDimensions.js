@@ -26,6 +26,7 @@ export default function withWindowDimensions(WrappedComponent) {
 					{...this.props}
 					windowWidth={this.state.width}
 					windowHeight={this.state.height}
+					isXXs={this.state.width <= theme.breakpoints.xxs}
 					isXs={this.state.width <= theme.breakpoints.xs}
 					isS={this.state.width <= theme.breakpoints.s}
 					isM={this.state.width <= theme.breakpoints.m}
