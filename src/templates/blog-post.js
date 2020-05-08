@@ -222,6 +222,7 @@ class BlogPostTemplate extends React.Component {
 								<OtherInfo
 									mobileDisplay
 									date={post.frontmatter.date}
+									end={post.frontmatter.end}
 									techno={post.frontmatter.techno}
 									duration={post.frontmatter.duration}
 									typeOfProject={post.frontmatter.typeOfProject}
@@ -263,6 +264,7 @@ class BlogPostTemplate extends React.Component {
 							)}
 							<OtherInfo
 								date={post.frontmatter.date}
+								end={post.frontmatter.end}
 								duration={post.frontmatter.duration}
 								techno={post.frontmatter.techno}
 								typeOfProject={post.frontmatter.typeOfProject}

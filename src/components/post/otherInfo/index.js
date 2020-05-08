@@ -17,7 +17,7 @@ const OtherInfo = styled.div`
 	background: ${props =>
 		handleColorType(
 			props.typeOfProject,
-			({ theme }) => theme.colors.grey.main
+			({ theme }) => theme.colors.grey.light
 		)};
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? "flex" : "none")};
@@ -27,31 +27,55 @@ const OtherInfo = styled.div`
 	}
 `;
 
-const OtherInfoInner = styled.div`
-	width: ${props => (props.typeOfArticle === "multistep" ? "33%" : "100%")};
+const OtherInfoInner = styled.ul`
+	width: ${props =>
+		props.typeOfArticle === "multistep" ? `calc(42.36% + 40px)` : `100%`};
+	display: flex;
 	flex-direction: ${props =>
 		props.typeOfArticle === "multistep" ? "column" : "row"};
-	text-align: right;
-	padding: 20px;
+
+	align-items: flex-start;
+	justify-content: space-around;
+	height: 100%;
+	padding: 25px 35px 5px 35px;
+	margin: 0;
+	list-style: none;
 	a {
 		text-decoration: none;
 		color: ${({ theme }) => theme.colors.black};
 	}
 `;
 
-const Info = styled.p`
+const Info = styled.li`
+	margin: 0;
 	font-size: ${({ theme }) => theme.fontSizes.normal};
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
 `;
 
-const InfoDate = styled(Info)`
-	color: red;
+const InfoDate = styled(Info)``;
+
+const InfoTool = styled(Info)``;
+
+const InfoType = styled.div`
+	width: 135px;
+	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	font-weight: ${({ theme }) => theme.fontWeights["semibold"]};
 `;
 
-const InfoTool = styled(Info)`
-	color: blue;
+const InfoContent = styled.div`
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
 `;
 
 const Techno = styled.span`
+	margin: 0 10px 10px 0;
 	padding: 10px;
 	background: ${({ theme }) => theme.colors.black};
 	color: ${({ theme }) => theme.colors.white};
@@ -61,10 +85,28 @@ export default class OtherInfoComp extends Component {
 	static propTypes = {
 		mobileDisplay: PropTypes.bool,
 		date: PropTypes.string.isRequired,
+		end: PropTypes.string.isRequired,
 		techno: PropTypes.string.isRequired,
 		duration: PropTypes.string.isRequired,
 		typeOfProject: PropTypes.string.isRequired,
 		typeOfArticle: PropTypes.string,
+	};
+	_displayDate = (start, end, duration) => {
+		let date = "";
+		if (start === end) {
+			if (duration !== "") {
+				date = `${start} (${duration})`;
+			} else {
+				date = start;
+			}
+		} else {
+			if (duration !== "") {
+				date = `${start}-${end} (${duration})`;
+			} else {
+				date = `${start}-${end}`;
+			}
+		}
+		return date;
 	};
 	render() {
 		return (
@@ -73,15 +115,27 @@ export default class OtherInfoComp extends Component {
 				typeOfProject={this.props.typeOfProject}
 			>
 				<OtherInfoInner typeOfArticle={this.props.typeOfArticle}>
-					<Info>Category: {this.props.typeOfProject}</Info>
+					<Info>
+						<InfoType>Category:</InfoType>
+						<InfoContent>{this.props.typeOfProject}</InfoContent>
+					</Info>
 					<InfoDate>
-						{this.props.date} ({this.props.duration})
+						<InfoType>Date:</InfoType>
+						<InfoContent>
+							{this._displayDate(
+								this.props.date.split("-")[2],
+								this.props.end.split("-")[2],
+								this.props.duration
+							)}
+						</InfoContent>
 					</InfoDate>
 					<InfoTool>
-						Tools used:
-						{this.props.techno.split(",").map((techno, i) => (
-							<Techno key={i}>{techno}</Techno>
-						))}
+						<InfoType>Tools used:</InfoType>
+						<InfoContent>
+							{this.props.techno.split(",").map((techno, i) => (
+								<Techno key={i}>{techno.trim()}</Techno>
+							))}
+						</InfoContent>
 					</InfoTool>
 				</OtherInfoInner>
 			</OtherInfo>
