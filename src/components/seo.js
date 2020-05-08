@@ -3,6 +3,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
+// Assets
+import defaultImage from "@static/logo_defaultImage.png";
+
 function SEO({ title, description, path, cover }) {
 	const { site } = useStaticQuery(
 		graphql`
@@ -13,7 +16,6 @@ function SEO({ title, description, path, cover }) {
 						author
 						description
 						siteUrl
-						defaultImage
 						twitterUsername
 					}
 				}
@@ -23,9 +25,9 @@ function SEO({ title, description, path, cover }) {
 
 	const metaDescription = description || site.siteMetadata.description;
 	const metaTitle = title || site.siteMetadata.title;
-	const metaImage = cover
-		? `${site.siteMetadata.siteUrl}${cover}`
-		: site.siteMetadata.defaultImage;
+	const metaImage = `${site.siteMetadata.siteUrl}${
+		cover ? cover : defaultImage
+	}`;
 	const customMeta = [
 		{
 			name: `description`,

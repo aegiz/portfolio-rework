@@ -4,7 +4,6 @@ module.exports = {
 		author: `Adrien Rahier`,
 		description: `Portfolio of Adrien Rahier.`,
 		siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
-		defaultImage: `logo_defaultImage.png`,
 		twitterUsername: `@AdrienRahier`,
 	},
 	plugins: [
