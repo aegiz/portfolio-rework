@@ -3,7 +3,7 @@ module.exports = {
 		title: `Adrien Rahier Portfolio`,
 		author: `Adrien Rahier`,
 		description: `Portfolio of Adrien Rahier.`,
-		siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
+		siteUrl: `https://adrien-rahier-sandbox.netlify.app`,
 		twitterUsername: `@AdrienRahier`,
 	},
 	plugins: [
@@ -12,7 +12,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl: `https://naughty-agnesi-5d9989.netlify.app`,
+				siteUrl: `https://adrien-rahier-sandbox.netlify.app`,
 			},
 		},
 		{

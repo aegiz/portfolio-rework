@@ -71,18 +71,12 @@ const SliderItem = styled.div`
 
 const IconContainter = styled.div`
 	position: absolute;
-	bottom: -75px;
+	bottom: 0;
 	left: 0;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	${({ theme }) => theme.mediaQueries.l} {
-		bottom: -50px;
-	}
-	${({ theme }) => theme.mediaQueries.m} {
-		bottom: 0;
-	}
 	img {
 		opacity: 0.5;
 		padding: 0 10px;
