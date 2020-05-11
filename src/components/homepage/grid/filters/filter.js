@@ -57,9 +57,9 @@ const Text = styled.span`
 export default class FilterComp extends Component {
 	static propTypes = {
 		filter: PropTypes.string.isRequired,
-		updateGallery: PropTypes.func.isRequired,
-		updateFilter: PropTypes.func.isRequired,
 		currentFilter: PropTypes.string.isRequired,
+		updateFilter: PropTypes.func.isRequired,
+		updateGallery: PropTypes.func.isRequired,
 	};
 	render() {
 		const typeOfProjectClean = cleanProjectName(this.props.filter);
