@@ -1,23 +1,64 @@
 // Package
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
 import styled from "styled-components";
+import React, { Component } from "react";
 
-// Components
-import Gallery from "./gallery";
+// Component
+import Item from "./item";
 
-const GridContainer = styled.div`
-	z-index: 2;
-	position: relative;
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+import { cleanProjectName } from "@utils/projectHelpers";
+
+const GalleryContainer = styled.div`
+	margin: 0 auto 40px;
 	width: 100%;
-	max-width: 1400px;
-	margin: 80px auto 0;
-	${({ theme }) => theme.mediaQueries.m} {
-		margin: 40px auto 0;
+	max-width: 1380px;
+	${({ theme }) => theme.mediaQueries.s} {
+		margin: 0 auto 5px;
 	}
 `;
 
-export default class GridComp extends Component {
+const GalleryItemOuter = styled.div`
+	opacity: ${props => (props.instance ? "1" : "0")} !important;
+	margin: 10px 0 0 0;
+	width: ${props => {
+		if (props.typeOfProject === "sideproject") {
+			return `20%`;
+		} else if (props.typeOfProject === "freelancework") {
+			return `40%`;
+		} else if (
+			props.currentFilter === "full-timework" &&
+			props.typeOfProject === "full-timework"
+		) {
+			return `50%`;
+		} else if (props.typeOfProject === "full-timework") {
+			return `60%`;
+		} else {
+			return `20%`;
+		}
+	}};
+	height: 270px;
+	${({ theme }) => theme.mediaQueries.l} {
+		width: 50%;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		width: 100%;
+	}
+`;
+
+const Sizer = styled.div`
+	width: 20%;
+	${({ theme }) => theme.mediaQueries.l} {
+		width: 50%;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		width: 100%;
+	}
+`;
+
+class GridComp extends Component {
 	static propTypes = {
 		createGallery: PropTypes.func.isRequired,
 		destroyGallery: PropTypes.func.isRequired,
@@ -28,17 +69,71 @@ export default class GridComp extends Component {
 			}).isRequired
 		),
 	};
+	constructor(props) {
+		super(props);
+		this.element = React.createRef();
+		this.sizer = React.createRef();
+	}
+	componentDidMount() {
+		this.props.createGallery(this.element.current, this.sizer.current);
+	}
+	componentWillUnmount() {
+		this.props.destroyGallery();
+	}
 	render() {
 		return (
-			<GridContainer>
-				<Gallery
-					instance={this.props.gallery}
-					currentFilter={this.props.currentFilter}
-					createGallery={this.props.createGallery}
-					destroyGallery={this.props.destroyGallery}
-					posts={this.props.posts}
-				/>
-			</GridContainer>
+			<GalleryContainer ref={this.element}>
+				{this.props.posts.map((post, i) => (
+					<GalleryItemOuter
+						key={i}
+						instance={this.props.instance}
+						currentFilter={this.props.currentFilter}
+						className="gallery-item"
+						data-type={cleanProjectName(post.node.frontmatter.typeOfProject)}
+						data-date={post.node.frontmatter.dateTimeStamp}
+						typeOfProject={cleanProjectName(
+							post.node.frontmatter.typeOfProject
+						)}
+					>
+						{!this.props.isM ? (
+							<AniLink
+								cover
+								bg="#000000"
+								direction="left"
+								duration={0.8}
+								to={post.node.frontmatter.path}
+								style={{
+									display: "block",
+									width: "calc(100% - 10px)",
+									height: "100%",
+									margin: "0 auto",
+									textDecoration: "none",
+								}}
+							>
+								<Item frontmatter={post.node.frontmatter} />
+							</AniLink>
+						) : (
+							<AniLink
+								fade
+								to={post.node.frontmatter.path}
+								duration={0.2}
+								style={{
+									display: "block",
+									width: "calc(100% - 10px)",
+									height: "100%",
+									margin: "0 auto",
+									textDecoration: "none",
+								}}
+							>
+								<Item frontmatter={post.node.frontmatter} />
+							</AniLink>
+						)}
+					</GalleryItemOuter>
+				))}
+				<Sizer ref={this.sizer}></Sizer>
+			</GalleryContainer>
 		);
 	}
 }
+
+export default withWindowDimensions(GridComp);

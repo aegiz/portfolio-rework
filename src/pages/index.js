@@ -60,12 +60,26 @@ const styles = {
 		background: "rgba(0, 0, 0, 0.3)",
 	},
 };
-const OuterMenu = styled.div`
+
+const HomepageContent = styled.div`
+	z-index: 2;
+	position: relative;
+	width: 100%;
+	max-width: 1400px;
+	margin: 80px auto 0;
+	padding: 0 10px;
+`;
+
+const MobileFilterMenu = styled.div`
+	display: none;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0%;
 	left: 0;
+	${({ theme }) => theme.mediaQueries.m} {
+		display: block;
+	}
 `;
 
 export default class PortfolioIndex extends React.Component {
@@ -109,39 +123,34 @@ export default class PortfolioIndex extends React.Component {
 			<Layout>
 				<SEO title="Portfolio - Adrien Rahier" />
 				<Header />
-				<OuterMenu>
-					<Menu customBurgerIcon={<img src={filterIcon} />} styles={styles}>
-						<a id="home" className="menu-item" href="/">
-							Home
-						</a>
-						<a id="about" className="menu-item" href="/about">
-							About
-						</a>
-						<a id="contact" className="menu-item" href="/contact">
-							Contact
-						</a>
-						<a
-							onClick={this._showSettings}
-							className="menu-item--small"
-							href=""
-						>
-							Settings
-						</a>
+				<MobileFilterMenu>
+					<Menu
+						customBurgerIcon={<img src={filterIcon} alt={"filters"} />}
+						styles={styles}
+					>
+						<Filters
+							updateGallery={this.updateGallery}
+							filterOpen={this.state.filterOpen}
+							currentFilter={this.state.currentFilter}
+							updateFilter={this.updateFilter}
+						/>
 					</Menu>
-				</OuterMenu>
-				<Filters
-					updateGallery={this.updateGallery}
-					filterOpen={this.state.filterOpen}
-					currentFilter={this.state.currentFilter}
-					updateFilter={this.updateFilter}
-				/>
-				<Grid
-					instance={this.state.gallery}
-					currentFilter={this.state.currentFilter}
-					createGallery={this.createGallery}
-					destroyGallery={this.destroyGallery}
-					posts={data.allMdx.edges}
-				/>
+				</MobileFilterMenu>
+				<HomepageContent>
+					<Filters
+						updateGallery={this.updateGallery}
+						filterOpen={this.state.filterOpen}
+						currentFilter={this.state.currentFilter}
+						updateFilter={this.updateFilter}
+					/>
+					<Grid
+						instance={this.state.gallery}
+						currentFilter={this.state.currentFilter}
+						createGallery={this.createGallery}
+						destroyGallery={this.destroyGallery}
+						posts={data.allMdx.edges}
+					/>
+				</HomepageContent>
 				<Footer />
 			</Layout>
 		);

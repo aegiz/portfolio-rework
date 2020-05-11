@@ -1,7 +1,6 @@
 // Package
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import Shuffle from "shufflejs";
 import styled from "styled-components";
 
 // Components
@@ -13,7 +12,7 @@ const FiltersContainer = styled.div`
 	flex-direction: row;
 	opacity: 1;
 	height: 50px;
-	margin: 0 15px;
+	margin: 0 5px;
 	transition: all 0.2s;
 `;
 
