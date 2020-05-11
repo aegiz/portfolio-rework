@@ -1,10 +1,12 @@
 // Packages
 import React from "react";
 import { graphql } from "gatsby";
+import Shuffle from "shufflejs";
 import styled from "styled-components";
 
 // Components
 import Footer from "@components/shared/footer";
+import Filters from "@components/homepage/filters";
 import Grid from "@components/homepage/grid";
 import Layout from "@components/layout";
 import Menu from "react-burger-menu/lib/menus/slide";
@@ -67,6 +69,40 @@ const OuterMenu = styled.div`
 `;
 
 export default class PortfolioIndex extends React.Component {
+	state = {
+		gallery: null,
+		filterOpen: false,
+		currentFilter: "all",
+	};
+	createGallery = (gallery, sizer) => {
+		this.setState({
+			gallery: new Shuffle(gallery, {
+				itemSelector: ".gallery-item",
+				sizer: sizer,
+				initialSort: {
+					reverse: true,
+					by: function(element) {
+						return element.getAttribute("data-date");
+					},
+				},
+			}),
+		});
+	};
+	updateGallery = newFilter => {
+		this.state.gallery.filter(element => {
+			return newFilter === "all"
+				? element
+				: element.dataset.type.includes(newFilter);
+		});
+	};
+	destroyGallery = () => {
+		this.state.gallery.destroy();
+	};
+	updateFilter = newFilter => {
+		this.setState({
+			currentFilter: newFilter,
+		});
+	};
 	render() {
 		const { data } = this.props;
 		return (
@@ -93,7 +129,19 @@ export default class PortfolioIndex extends React.Component {
 						</a>
 					</Menu>
 				</OuterMenu>
-				<Grid posts={data.allMdx.edges} />
+				<Filters
+					updateGallery={this.updateGallery}
+					filterOpen={this.state.filterOpen}
+					currentFilter={this.state.currentFilter}
+					updateFilter={this.updateFilter}
+				/>
+				<Grid
+					instance={this.state.gallery}
+					currentFilter={this.state.currentFilter}
+					createGallery={this.createGallery}
+					destroyGallery={this.destroyGallery}
+					posts={data.allMdx.edges}
+				/>
 				<Footer />
 			</Layout>
 		);

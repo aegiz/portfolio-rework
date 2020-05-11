@@ -15,18 +15,14 @@ const FiltersContainer = styled.div`
 	height: 50px;
 	margin: 0 15px;
 	transition: all 0.2s;
-	${({ theme }) => theme.mediaQueries.m} {
-		${props =>
-			props.filterOpen ? "opacity:1; height:50px;" : "opacity:0; height:0;"};
-	}
 `;
 
 export default class GridComp extends Component {
 	static propTypes = {
-		updateGallery: PropTypes.func,
+		updateGallery: PropTypes.func.isRequired,
 		filterOpen: PropTypes.bool.isRequired,
-		currentFilter: PropTypes.string,
-		updateFilter: PropTypes.func,
+		currentFilter: PropTypes.string.isRequired,
+		updateFilter: PropTypes.func.isRequired,
 	};
 	render() {
 		return (
