@@ -1,6 +1,7 @@
 // Package
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+// import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { theme } from "@components/layout";
 
@@ -42,8 +43,10 @@ const MobileFilterMenuContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	top: 0%;
+	top: 0;
 	left: 0;
+	opacity: ${props => (props.offset > 200 ? `1` : `0`)};
+	transition: all 0.2s;
 	${({ theme }) => theme.mediaQueries.s} {
 		display: block;
 	}
@@ -57,28 +60,33 @@ const TextMenu = styled.div`
 	}
 `;
 
-export default class MobileFilterMenuComp extends Component {
-	static propTypes = {
-		updateGallery: PropTypes.func.isRequired,
-		currentFilter: PropTypes.string.isRequired,
-		updateFilter: PropTypes.func.isRequired,
-	};
-	render() {
-		return (
-			<MobileFilterMenuContainer>
-				<Menu
-					customBurgerIcon={<img src={filterIcon} alt={"filters"} />}
-					styles={styles}
-				>
-					<TextMenu>Filters:</TextMenu>
-					<Filters
-						mobileDisplay
-						updateGallery={this.props.updateGallery}
-						currentFilter={this.props.currentFilter}
-						updateFilter={this.props.updateFilter}
-					/>
-				</Menu>
-			</MobileFilterMenuContainer>
-		);
-	}
+export default function MobileFilterMenu(props) {
+	const [offset, setOffset] = useState(0);
+	useEffect(() => {
+		window.onscroll = () => {
+			setOffset(window.pageYOffset);
+		};
+	}, []);
+	return (
+		<MobileFilterMenuContainer offset={offset}>
+			<Menu
+				customBurgerIcon={<img src={filterIcon} alt={"filters"} />}
+				styles={styles}
+			>
+				<TextMenu>Filters:</TextMenu>
+				<Filters
+					mobileDisplay
+					updateGallery={props.updateGallery}
+					currentFilter={props.currentFilter}
+					updateFilter={props.updateFilter}
+				/>
+			</Menu>
+		</MobileFilterMenuContainer>
+	);
 }
+
+MobileFilterMenu.propTypes = {
+	updateGallery: PropTypes.func.isRequired,
+	currentFilter: PropTypes.string.isRequired,
+	updateFilter: PropTypes.func.isRequired,
+};

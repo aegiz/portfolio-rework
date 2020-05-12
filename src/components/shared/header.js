@@ -198,7 +198,13 @@ export default props => {
 						<ul>
 							<li>Portfolio</li>
 							<li>
-								<a href="/blog">Blog</a>
+								<a
+									href="https://medium.com/@adrienrahier"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									Blog
+								</a>
 							</li>
 							<li>
 								<a href="/about">About</a>
