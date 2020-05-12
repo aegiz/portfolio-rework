@@ -12,7 +12,7 @@ import withWindowDimensions from "@utils/withWindowDimensions";
 import { cleanProjectName } from "@utils/projectHelpers";
 
 const GalleryContainer = styled.div`
-	margin: 0 auto 40px;
+	margin: 15px auto 40px;
 	width: 100%;
 	max-width: 1380px;
 	${({ theme }) => theme.mediaQueries.s} {

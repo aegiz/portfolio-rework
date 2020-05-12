@@ -9,7 +9,7 @@ import { handleColorType, cleanProjectName } from "@utils/projectHelpers";
 // Styled Components
 const Filter = styled.button`
 	position: relative;
-	margin: 0 20px 0 0;
+	margin: ${props => (props.mobileDisplay ? `0 0 15px 0` : `0 20px 0 0`)};
 	padding: 0;
 	display: flex;
 	flex-direction: row;
@@ -17,7 +17,9 @@ const Filter = styled.button`
 	justify-content: center;
 	opacity: ${props =>
 		props.typeOfProject === props.currentFilter ? "1" : "0.5"};
+	transition: all 0.3s;
 	&:hover {
+		opacity: 1;
 		&:after {
 			width: 100%;
 			opacity: 0.4;
@@ -29,7 +31,7 @@ const Filter = styled.button`
 		opacity: 0;
 		height: 1px;
 		position: absolute;
-		bottom: 5px;
+		bottom: -7px;
 		left: 0;
 		background: ${props => handleColorType(props.typeOfProject)};
 		transition: all 0.35s;
@@ -57,6 +59,7 @@ const Text = styled.span`
 export default class FilterComp extends Component {
 	static propTypes = {
 		filter: PropTypes.string.isRequired,
+		mobileDisplay: PropTypes.bool,
 		currentFilter: PropTypes.string.isRequired,
 		updateFilter: PropTypes.func.isRequired,
 		updateGallery: PropTypes.func.isRequired,
@@ -65,6 +68,7 @@ export default class FilterComp extends Component {
 		const typeOfProjectClean = cleanProjectName(this.props.filter);
 		return (
 			<Filter
+				mobileDisplay={this.props.mobileDisplay}
 				onClick={() => {
 					this.props.updateGallery(typeOfProjectClean);
 					this.props.updateFilter(typeOfProjectClean);

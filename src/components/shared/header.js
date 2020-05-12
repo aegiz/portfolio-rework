@@ -48,6 +48,9 @@ const OtherLinks = styled.div`
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
+		${({ theme }) => theme.mediaQueries.xxs} {
+			margin-left: 50px;
+		}
 		li {
 			opacity: 0.3;
 			transition: all 0.3s;
@@ -59,6 +62,9 @@ const OtherLinks = styled.div`
 			}
 			&:hover {
 				opacity: 1;
+			}
+			${({ theme }) => theme.mediaQueries.xs} {
+				margin-left: 8px;
 			}
 		}
 		a {

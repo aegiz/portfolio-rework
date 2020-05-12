@@ -18,7 +18,7 @@ const HomepageContent = styled.div`
 	position: relative;
 	width: 100%;
 	max-width: 1400px;
-	margin: 80px auto 0;
+	margin: 95px auto 0;
 	padding: 0 10px;
 `;
 

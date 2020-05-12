@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
+import { theme } from "@components/layout";
 
 // Components
 import Filters from "@components/homepage/filters";
@@ -13,50 +14,29 @@ import filterIcon from "@static/filter.svg";
 const styles = {
 	bmBurgerButton: {
 		position: "fixed",
-		width: "36px",
-		height: "30px",
-		left: "36px",
-		top: "36px",
-	},
-	bmBurgerBars: {
-		background: "#373a47",
-	},
-	bmBurgerBarsHover: {
-		background: "#a90000",
+		width: "57px",
+		height: "42px",
+		left: "12px",
+		top: "15px",
 	},
 	bmCrossButton: {
 		height: "24px",
 		width: "24px",
 	},
 	bmCross: {
-		background: "#bdc3c7",
+		background: theme.colors.white,
 	},
 	bmMenuWrap: {
 		position: "fixed",
 		height: "100%",
 	},
 	bmMenu: {
-		background: "#373a47",
-		padding: "2.5em 1.5em 0",
-		fontSize: "1.15em",
-	},
-	bmMorphShape: {
-		fill: "#373a47",
-	},
-	bmItemList: {
-		color: "#b8b7ad",
-		padding: "0.8em",
-	},
-	bmItem: {
-		display: "inline-block",
-	},
-	bmOverlay: {
-		background: "rgba(0, 0, 0, 0.3)",
+		background: theme.colors.grey.middle,
+		padding: "15px",
 	},
 };
 
 // Styled Components
-
 const MobileFilterMenuContainer = styled.div`
 	display: none;
 	width: 100%;
@@ -64,8 +44,16 @@ const MobileFilterMenuContainer = styled.div`
 	position: absolute;
 	top: 0%;
 	left: 0;
-	${({ theme }) => theme.mediaQueries.m} {
+	${({ theme }) => theme.mediaQueries.s} {
 		display: block;
+	}
+`;
+const TextMenu = styled.div`
+	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	color: ${({ theme }) => theme.colors.white};
+	margin: 15px 0;
+	&:focus {
+		outline: none;
 	}
 `;
 
@@ -82,7 +70,9 @@ export default class MobileFilterMenuComp extends Component {
 					customBurgerIcon={<img src={filterIcon} alt={"filters"} />}
 					styles={styles}
 				>
+					<TextMenu>Filters:</TextMenu>
 					<Filters
+						mobileDisplay
 						updateGallery={this.props.updateGallery}
 						currentFilter={this.props.currentFilter}
 						updateFilter={this.props.updateFilter}
