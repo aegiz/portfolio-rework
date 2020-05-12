@@ -4,8 +4,8 @@ import { useStaticQuery, graphql } from "gatsby"; // useStaticQuery -> Because w
 import Img from "gatsby-image";
 import styled from "styled-components";
 
-// Assets
-import clouds from "@static/clouds.jpg";
+// Components
+import Logo from "./logo";
 
 const MainContainer = styled.div`
 	width: 100%;
@@ -14,6 +14,40 @@ const MainContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+`;
+
+const BackgroundContainer = styled.div`
+	width: 100%;
+	height: 730px;
+	position: absolute;
+	top: -80px;
+	left: 0;
+	.box-shadow {
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		box-shadow: inset 0px 160px 40px rgba(0, 0, 0, 0.05);
+	}
+	.gatsby-image-wrapper {
+		height: 100%;
+	}
+	& :after {
+		content: "";
+		width: 100%;
+		height: 400px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		opacity: 1;
+		background: linear-gradient(
+			0deg,
+			rgba(47, 50, 56, 1) 0%,
+			rgba(47, 50, 56, 0) 100%
+		);
+	}
 `;
 
 const InnerContainer = styled.div`
@@ -68,105 +102,6 @@ const OtherLinks = styled.div`
 	}
 `;
 
-const LogoContainer = styled.div`
-	position: absolute;
-	z-index: 10;
-	left: 50%;
-	transform: translateX(-50%);
-	top: 130px;
-	overflow: hidden;
-	border-radius: 50%;
-	--size-logo: 256px;
-	${({ theme }) => theme.mediaQueries.m} {
-		top: 100px;
-		--size-logo: 220px;
-	}
-`;
-
-const Slice = styled.div`
-	opacity: 0.2;
-	width: var(--size-logo);
-	height: var(--size-logo);
-	border-radius: 50%;
-	background-image: url("${clouds}");
-	background-size: var(--size-logo) var(--size-logo);
-	overflow: hidden;
-`;
-
-const SliceItem = styled.div`
-	width: var(--size-logo);
-	overflow: hidden;
-	height: calc(var(--size-logo) / 16);
-	background-image: url("${clouds}");
-	background-repeat: no-repeat;
-	background-position: center -${props => props.index}rem;
-	background-size: var(--size-logo) var(--size-logo);
-	transition: all 0.3s ease-in-out;
-	animation: sliceAnim 3s ease-in-out ${props => props.index * -0.5}s
-		alternate infinite;
-	@keyframes sliceAnim {
-		from {
-			transform: translateX(16px);
-		}
-		to {
-			transform: translateX(-16px);
-		}
-	}
-`;
-
-const Logo = styled.div`
-	position: absolute;
-	top: calc(50% + 19px);
-	left: 50%;
-	transform: translate(-50%, -50%);
-	img {
-		width: 139px;
-		height: 141px;
-	}
-	${({ theme }) => theme.mediaQueries.m} {
-		top: calc(50% + 11px);
-		left: calc(50% - 1px);
-		img {
-			width: 129px;
-			height: 99px;
-		}
-	}
-`;
-
-const BackgroundContainer = styled.div`
-	width: 100%;
-	height: 730px;
-	position: absolute;
-	top: -80px;
-	left: 0;
-	.box-shadow {
-		z-index: 2;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		box-shadow: inset 0px 160px 40px rgba(0, 0, 0, 0.05);
-	}
-	.gatsby-image-wrapper {
-		height: 100%;
-	}
-	& :after {
-		content: "";
-		width: 100%;
-		height: 400px;
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		opacity: 1;
-		background: linear-gradient(
-			0deg,
-			rgba(47, 50, 56, 1) 0%,
-			rgba(47, 50, 56, 0) 100%
-		);
-	}
-`;
-
 const Header = props => {
 	const data = useStaticQuery(graphql`
 		query HeadingQuery {
@@ -179,7 +114,6 @@ const Header = props => {
 			}
 		}
 	`);
-
 	return (
 		<header>
 			<MainContainer>
@@ -205,16 +139,7 @@ const Header = props => {
 							</li>
 						</ul>
 					</OtherLinks>
-					<LogoContainer>
-						<Slice>
-							{[...Array(16)].map((e, i) => (
-								<SliceItem index={i} key={i} />
-							))}
-						</Slice>
-						<Logo>
-							<img src={`logo.svg`} alt="Logo Portfolio AR (Adrien Rahier)" />
-						</Logo>
-					</LogoContainer>
+					<Logo />
 				</InnerContainer>
 			</MainContainer>
 		</header>
