@@ -12,6 +12,9 @@ import Menu from "react-burger-menu/lib/menus/slide";
 // Assets
 import filterIcon from "@static/filter.svg";
 
+/* Styles */
+
+// Styles fixed menu
 const styles = {
 	bmBurgerButton: {
 		position: "fixed",
@@ -39,14 +42,14 @@ const styles = {
 
 // Styled Components
 const MobileFilterMenuContainer = styled.div`
+	${props => (props.offset > 200 ? `opacity:1; z-index: 10;` : `opacity:0`)};
 	display: none;
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
-	opacity: ${props => (props.offset > 200 ? `1` : `0`)};
-	transition: all 0.2s;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	${({ theme }) => theme.mediaQueries.s} {
 		display: block;
 	}

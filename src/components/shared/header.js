@@ -1,6 +1,6 @@
 // Package
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby"; // useStaticQuery -> Because we are in a functional component
 import Img from "gatsby-image";
 import styled from "styled-components";
 
@@ -48,9 +48,6 @@ const OtherLinks = styled.div`
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		${({ theme }) => theme.mediaQueries.xxs} {
-			margin-left: 50px;
-		}
 		li {
 			opacity: 0.3;
 			transition: all 0.3s;
@@ -62,9 +59,6 @@ const OtherLinks = styled.div`
 			}
 			&:hover {
 				opacity: 1;
-			}
-			${({ theme }) => theme.mediaQueries.xs} {
-				margin-left: 8px;
 			}
 		}
 		a {
@@ -173,7 +167,7 @@ const BackgroundContainer = styled.div`
 	}
 `;
 
-export default props => {
+const Header = props => {
 	const data = useStaticQuery(graphql`
 		query HeadingQuery {
 			file(relativePath: { eq: "new-zealand.jpg" }) {
@@ -226,3 +220,5 @@ export default props => {
 		</header>
 	);
 };
+
+export default Header;
