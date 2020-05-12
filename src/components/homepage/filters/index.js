@@ -16,16 +16,15 @@ const FiltersContainer = styled.div`
 	transition: all 0.2s;
 `;
 
-export default class GridComp extends Component {
+export default class FiltersComp extends Component {
 	static propTypes = {
 		updateGallery: PropTypes.func.isRequired,
-		filterOpen: PropTypes.bool.isRequired,
 		currentFilter: PropTypes.string.isRequired,
 		updateFilter: PropTypes.func.isRequired,
 	};
 	render() {
 		return (
-			<FiltersContainer filterOpen={this.props.filterOpen}>
+			<FiltersContainer>
 				<Filter
 					filter={"All"}
 					currentFilter={this.props.currentFilter}

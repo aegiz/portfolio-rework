@@ -227,7 +227,7 @@ const FigcapProject = styled(Figcap)`
 	}
 `;
 
-class galleryItem extends Component {
+export default class galleryItemComp extends Component {
 	static propTypes = {
 		frontmatter: PropTypes.shape({
 			typeOfProject: PropTypes.string.isRequired,
@@ -297,5 +297,3 @@ class galleryItem extends Component {
 		);
 	}
 }
-
-export default galleryItem;

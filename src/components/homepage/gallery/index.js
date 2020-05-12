@@ -58,8 +58,10 @@ const Sizer = styled.div`
 	}
 `;
 
-class GridComp extends Component {
+class GalleryComp extends Component {
 	static propTypes = {
+		instance: PropTypes.shape(),
+		currentFilter: PropTypes.string.isRequired,
 		createGallery: PropTypes.func.isRequired,
 		destroyGallery: PropTypes.func.isRequired,
 		posts: PropTypes.arrayOf(
@@ -136,4 +138,4 @@ class GridComp extends Component {
 	}
 }
 
-export default withWindowDimensions(GridComp);
+export default withWindowDimensions(GalleryComp);
