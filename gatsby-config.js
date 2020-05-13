@@ -84,13 +84,13 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `Gatsby Starter Blog`,
-				short_name: `GatsbyJS`,
+				name: `Adrien Rahier Portfolio`,
+				short_name: `AR-Portfolio`,
 				start_url: `/`,
-				background_color: `#ffffff`,
-				theme_color: `#663399`,
+				background_color: `#FFF`,
+				theme_color: `#FFCC44`,
 				display: `minimal-ui`,
-				icon: `static/gatsby-icon.png`,
+				icon: `static/AR-favicon.svg`,
 			},
 		},
 		`gatsby-plugin-offline`,

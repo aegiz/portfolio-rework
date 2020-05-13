@@ -1,6 +1,5 @@
 {
 	"name": "portfolio",
-	"private": true,
 	"description": "Adrien Rahier Portfolio",
 	"version": "0.1.0",
 	"author": "Adrien Rahier <adrien.rahier@gmail.com>",
@@ -47,15 +46,16 @@
 	"devDependencies": {
 		"prettier": "^1.19.1"
 	},
-	"homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
 	"keywords": [
-		"gatsby"
+		"gatsby",
+		"MDX",
+		"Portfolio"
 	],
 	"license": "MIT",
 	"main": "n/a",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+		"url": "git+https://github.com/aegiz/portfolio-rework.git"
 	},
 	"scripts": {
 		"build": "gatsby build",

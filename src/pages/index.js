@@ -60,7 +60,7 @@ export default class PortfolioIndex extends React.Component {
 		const { data } = this.props;
 		return (
 			<Layout>
-				<SEO title="Portfolio - Adrien Rahier" />
+				<SEO title="Home" />
 				<Header />
 				<MobileFilterMenu
 					updateGallery={this.updateGallery}
