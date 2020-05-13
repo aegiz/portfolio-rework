@@ -1,16 +1,136 @@
 ---
-title: Example template
-date: "01-01-2020"
-dateTimeStamp: "1577833200"
-end: "01-01-2020"
+title: Example title. 
+# => *Compulsory* will be used to set the title of the page in the meta and the h1)
+date: "01-01-2020" 
+# => *Compulsory* and within quotes. In format: DD-MM-YYYY . This is usually the beginning date.
+dateTimeStamp: "1577833200" 
+# => *Compulsory* The corresponding timestamp (within quotes). To calculate it: timestamp Math.floor(new Date("01-01-2020").getTime() / 1000)
+end: "01-01-2020" 
+# => *Compulsory* within quotes, in format: DD-MM-YYYY 
 duration: "x months"
-typeOfProject: "Side Project"
-typeOfArticle: "multistep"
-description: This is an example post to demonstrate what kind of custom component can be imported within a post. Simply tweak the draft to true to change its visibility.
+# => string, if no duration just leave ""
+typeOfProject: "Side Project" 
+# => *Compulsory* within quotes, has to be one of the three types: "Full-time work", "Side Project", "Freelance work"
+typeOfArticle: "multistep" 
+# => *Compulsory* within quotes, has to be one of the two types: "multistep", "singlestep"
+description: This is a description. 
+# => *Compulsory* (at least a couple of characters). No quote, not too long either.
 featuredImage: ./featured-image/lilo_1.jpg
-hashtags: "no hashtag"
-techno: ""
-role: ""
-path: "/example"
-draft: true
+# => *Compulsory*, no quote. The feature image in the folder featured-image
+hashtags: "JavaScript CSS" 
+# => *Compulsory when type is freelance or full-time* otherwise just put "". Separation has to be done with spaces.
+techno: "JavaScript, CSS" 
+# => *Compulsory* within quotes, every techno should be separated with a comma
+role: "" string, 
+# => if no duration just leave ""
+path: "/example" 
+# => *Compulsory* has to be the same name as the folder
+draft: true 
+# => *Compulsory* boolean to indicate if the article is in draft or not. If in draft won't generate the corresponding page.
 ---
+
+For a singlestep type:
+
+<SlideShow data={[
+        {
+            src: "IMG_3977.jpg",
+            alt: "Carousel 1",
+        },
+        {
+            src: "IMG_5098.jpg",
+            alt: "Carousel 2",
+        },
+        {
+            src: "IMG_4631.jpg",
+            alt: "Carousel 3",
+        },
+        {
+            src: "IMG_5024.jpg",
+            alt: "Carousel 4",
+        },
+        {
+            src: "IMG_5077.jpg",
+            alt: "Carousel 5",
+        },
+        {
+            src: "IMG_4698.jpg",
+            alt: "Carousel 6",
+        },
+    ]} />
+
+
+For a multistep type:
+<MiddleColumn
+	textCTAopen={"See more"}
+	textCTAclose={"See less"}
+	content={[
+		{
+			title: "I am middle column item",
+			description: "I am a middle column item description",
+			components: [
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "This is an inner column item paragraph",
+						},
+					],
+				},
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "You can have up to 3 paragraphs in a type paragraph component",
+						},
+						{
+							text: "You can even put HTML in this component like this:<br><br>",
+						},
+					],
+				},
+				{
+					type: "carousel",
+					data: [
+						{
+							src: "lilo_1.jpg",
+							alt: "Carousel 1",
+						},
+						{
+							src: "lilo_2.jpg",
+							alt: "Carousel 2",
+						},
+					],
+				},
+                {
+					type: "paragraphs",
+					data: [
+						{
+							text: "There are 4 types of content:paragraphs, carousel, video, illustration",
+						},
+					],
+				},
+				{
+					type: "video",
+					data: {
+						title: "this is a great title",
+						width: 560,
+						height: 315,
+						src: "https://www.youtube.com/embed/4t9a0To2ygo",
+					},
+				},
+			],
+		},
+		{
+			title: "I am another middle column item (has to be between 1 and 5 max)",
+			description: "I am another middle column item description",
+			components: [
+				{
+					type: "illustration",
+					data: {
+						src: "IMG_5098.jpg",
+						alt: "Lilo is cool",
+					},
+				},
+			],
+		},
+	]}
+/>
