@@ -14,9 +14,11 @@ const SlideShow = styled.div`
 
 class SlideShowComp extends Component {
 	render() {
-		const heighCarousel = `${(this.props.windowHeight * 76.05) / 100}px`;
+		const heighCarousel = `${Math.floor(
+			(this.props.windowHeight * 81) / 100
+		)}px`;
 		return (
-			<SlideShow>
+			<SlideShow heighCarousel={heighCarousel}>
 				<Carousel
 					withoutCounter
 					height={heighCarousel}

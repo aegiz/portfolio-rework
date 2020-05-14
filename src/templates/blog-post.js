@@ -143,7 +143,8 @@ const DescriptionInner = styled.div`
 		height: 100%;
 		position: relative;
 	}
-	p {
+	p,
+	ul li {
 		margin: 0;
 		font-size: ${({ theme }) => theme.fontSizes["xl"]};
 		${({ theme }) => theme.mediaQueries.l} {

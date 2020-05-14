@@ -10,7 +10,7 @@ import { handleColorType } from "@utils/projectHelpers";
 // Styled Components
 const OtherInfo = styled.div`
 	width: 100%;
-	height: 23.95%;
+	height: ${props => (props.typeOfArticle === "multistep" ? "23.95%" : "100%")};
 	display: ${props => (props.mobileDisplay ? "none" : "flex")};
 	flex-direction: row;
 	align-items: center;
@@ -177,6 +177,7 @@ export default class OtherInfoComp extends Component {
 			<OtherInfo
 				mobileDisplay={this.props.mobileDisplay}
 				typeOfProject={this.props.typeOfProject}
+				typeOfArticle={this.props.typeOfArticle}
 			>
 				<OtherInfoInner typeOfArticle={this.props.typeOfArticle}>
 					<Info typeOfArticle={this.props.typeOfArticle}>

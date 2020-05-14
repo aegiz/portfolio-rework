@@ -276,10 +276,10 @@ export default class galleryItemComp extends Component {
 								: "Full-time"}
 						</TypeProject>
 						<Hashtags>
-							{frontmatter.hashtags.split(" ").map((word, i) => (
+							{frontmatter.hashtags.split(",").map((word, i) => (
 								<span key={i}>
 									<Diese> #</Diese>
-									{word}
+									{word.trim()}
 								</span>
 							))}
 						</Hashtags>

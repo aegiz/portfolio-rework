@@ -1,12 +1,12 @@
 ## Project description.
 
-In 2020 the global COVID pandemy stroke Europe. So, to keep myself busy I decided to conclude a side-project that started a while ago: finishing my new portfolio.
+In 2020 the global COVID pandemy stroke Europe. This was a great occasion to conclude a side-project that started a while ago: finishing my new portfolio ✨.
 
 ## Dev stack
 
 - React
 - Gatsby
-- Mdx (Markdown on steroid)
+- Mdx (Markdown on steroid [Link](https://mdxjs.com/) 🔥)
 
 ## Project Structure
 
@@ -37,7 +37,7 @@ In 2020 the global COVID pandemy stroke Europe. So, to keep myself busy I decide
 
 ## Quick start
 
-Execute the following command
+Execute the following commands:
 
 - To install the dependencies
 

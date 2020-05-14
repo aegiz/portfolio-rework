@@ -42,7 +42,7 @@ const styles = {
 
 // Styled Components
 const MobileFilterMenuContainer = styled.div`
-	${props => (props.offset > 200 ? `opacity:1; z-index: 10;` : `opacity:0`)};
+	${props => (props.scrollY > 200 ? `opacity:1; z-index: 10;` : `opacity:0`)};
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -64,14 +64,25 @@ const TextMenu = styled.div`
 `;
 
 export default function MobileFilterMenu(props) {
-	const [offset, setOffset] = useState(0);
+	const [scrollY, setScrollY] = useState(0);
+
+	function logit() {
+		setScrollY(window.pageYOffset);
+	}
+
 	useEffect(() => {
-		window.onscroll = () => {
-			setOffset(window.pageYOffset);
+		function watchScroll() {
+			window.addEventListener("scroll", logit);
+		}
+		watchScroll();
+		// Remove listener (like componentWillUnmount)
+		return () => {
+			window.removeEventListener("scroll", logit);
 		};
 	}, []);
+
 	return (
-		<MobileFilterMenuContainer offset={offset}>
+		<MobileFilterMenuContainer scrollY={scrollY}>
 			<Menu
 				customBurgerIcon={<img src={filterIcon} alt={"filters"} />}
 				styles={styles}
