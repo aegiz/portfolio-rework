@@ -143,6 +143,9 @@ const DescriptionInner = styled.div`
 		height: 100%;
 		position: relative;
 	}
+	a {
+		color: ${({ theme }) => theme.colors.black};
+	}
 	p,
 	ul li {
 		margin: 0;
@@ -170,12 +173,11 @@ const RightPanel = styled.div`
 class BlogPostTemplate extends React.Component {
 	render() {
 		const post = this.props.data.mdx;
-		const siteTitle = this.props.data.site.siteMetadata.title;
 		const { previous, next } = this.props.pageContext;
 		return (
-			<Layout location={this.props.location} title={siteTitle}>
+			<Layout location={this.props.location}>
 				<SEO
-					title={post.frontmatter.title}
+					title={post.frontmatter.titleInnerArticle}
 					description={post.frontmatter.description || post.excerpt}
 					path={post.frontmatter.path}
 					cover={post.frontmatter.featuredImage.childImageSharp.fluid.src}
@@ -218,7 +220,7 @@ class BlogPostTemplate extends React.Component {
 									/>
 								)}
 
-							<Title>{post.frontmatter.title}</Title>
+							<Title>{post.frontmatter.titleInnerArticle}</Title>
 							{this.props.isM && (
 								<OtherInfo
 									mobileDisplay
@@ -283,18 +285,11 @@ export default withWindowDimensions(BlogPostTemplate);
 
 export const pageQuery = graphql`
 	query BlogPostBySlug($slug: String!) {
-		site {
-			siteMetadata {
-				title
-				author
-			}
-		}
 		mdx(fields: { slug: { eq: $slug } }) {
 			id
 			excerpt(pruneLength: 160)
 			body
 			frontmatter {
-				title
 				date
 				end
 				duration
@@ -309,7 +304,7 @@ export const pageQuery = graphql`
 					}
 				}
 				techno
-				role
+				titleInnerArticle
 				path
 			}
 		}

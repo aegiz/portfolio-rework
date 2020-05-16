@@ -29,7 +29,7 @@ const ParagraphContainer = styled.div`
 `;
 
 const Paragraph = styled.div`
-	margin: 15px 0;
+	margin: 0;
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["normal"]};
 	${props => handleMarginParagraph(props.nbParagraph)}

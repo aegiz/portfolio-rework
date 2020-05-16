@@ -1,13 +1,15 @@
 ---
-title: Example title. 
-# => *Compulsory* will be used to set the title of the page in the meta and the h1)
+title: "The title that shows up on the homepage."
+# => *Compulsory* will be used on the homepage to set the title of the page in the meta
+titleInnerArticle: The title that shows up on the article page.
+# => The title that will show up on the article apge itself. Will also be used for the SEO
 date: "01-01-2020" 
 # => *Compulsory* and within quotes. In format: DD-MM-YYYY . This is usually the beginning date.
 dateTimeStamp: "1577833200" 
 # => *Compulsory* The corresponding timestamp (within quotes). To calculate it: timestamp Math.floor(new Date("01-01-2020").getTime() / 1000)
 end: "01-01-2020" 
 # => *Compulsory* within quotes, in format: DD-MM-YYYY 
-duration: "x months"
+duration: "2 months"
 # => string, if no duration just leave ""
 typeOfProject: "Side Project" 
 # => *Compulsory* within quotes, has to be one of the three types: "Full-time work", "Side Project", "Freelance work"
@@ -21,8 +23,6 @@ hashtags: "JavaScript, CSS"
 # => *Compulsory when type is freelance or full-time* otherwise just put "". Separation has to be done with comas.
 techno: "JavaScript, CSS" 
 # => *Compulsory* within quotes, every techno should be separated with a comma
-role: ""
-# => if no duration just leave ""
 path: "/example" 
 # => *Compulsory* has to be the same name as the folder
 draft: true 

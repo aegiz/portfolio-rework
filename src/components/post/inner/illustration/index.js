@@ -11,7 +11,7 @@ const IllustrationContainer = styled.div`
 `;
 
 const Caption = styled.div`
-	margin-top: 7px;
+	margin: 17px 0 20px;
 	text-align: center;
 	font-style: italic;
 	font-size: ${({ theme }) => theme.fontSizes["l"]};
