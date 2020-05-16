@@ -131,10 +131,13 @@ const Project = styled(SideProject)`
 const TitleProject = styled(TitleSideProject)`
 	left: 30px;
 	padding: 0;
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s;
 	&:after {
 		margin-top: 57px;
 	}
 	${Project}:hover & {
+		text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 		&:after {
 			width: 0;
 			${({ theme }) => theme.mediaQueries.m} {
@@ -155,6 +158,9 @@ const TypeProject = styled.h3`
 	margin: 0;
 	font-weight: ${({ theme }) => theme.fontWeights.medium};
 	font-size: 1.5rem;
+	${Project}:hover & {
+		text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	}
 `;
 
 const Hashtags = styled.p`
@@ -176,6 +182,11 @@ const Hashtags = styled.p`
 			transform: translate3d(-10px, 0, 0);
 		}
 	}
+`;
+
+const Hashtag = styled.span`
+	margin-right: 5px;
+	background-color: ${({ theme }) => theme.colors.black};
 `;
 
 const Diese = styled.span`
@@ -236,19 +247,6 @@ export default class galleryItemComp extends Component {
 			hashtags: PropTypes.string.isRequired,
 		}),
 	};
-	_addHyphenToTitle = title => {
-		if (title.split(" ").length !== 1) {
-			return title;
-		} else {
-			return (
-				<>
-					{title.slice(0, 6)}
-					<span>-</span>
-					{title.slice(6)}
-				</>
-			);
-		}
-	};
 	render() {
 		const frontmatter = this.props.frontmatter;
 		const typeOfProjectClean = cleanProjectName(frontmatter.typeOfProject);
@@ -256,9 +254,7 @@ export default class galleryItemComp extends Component {
 			<GalleryItem>
 				{typeOfProjectClean === "sideproject" ? (
 					<SideProject>
-						<TitleSideProject>
-							{this._addHyphenToTitle(frontmatter.title)}
-						</TitleSideProject>
+						<TitleSideProject>{frontmatter.title}</TitleSideProject>
 						<SideProjectImg>
 							<Img
 								loading="eager"
@@ -272,15 +268,15 @@ export default class galleryItemComp extends Component {
 						<TitleProject>{frontmatter.title}</TitleProject>
 						<TypeProject>
 							{typeOfProjectClean === "freelancework"
-								? "Freelance"
-								: "Full-time"}
+								? "Freelance Work"
+								: "Full-time Work"}
 						</TypeProject>
 						<Hashtags>
 							{frontmatter.hashtags.split(",").map((word, i) => (
-								<span key={i}>
+								<Hashtag key={i}>
 									<Diese> #</Diese>
 									{word.trim()}
-								</span>
+								</Hashtag>
 							))}
 						</Hashtags>
 						<Overlay typeOfProject={typeOfProjectClean} />
