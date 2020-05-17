@@ -26,6 +26,11 @@ const GalleryItemOuter = styled.div`
 	width: ${props => {
 		if (props.typeOfProject === "sideproject") {
 			return `20%`;
+		} else if (
+			props.currentFilter === "freelancework" &&
+			props.typeOfProject === "freelancework"
+		) {
+			return `50%`;
 		} else if (props.typeOfProject === "freelancework") {
 			return `40%`;
 		} else if (
@@ -49,7 +54,12 @@ const GalleryItemOuter = styled.div`
 `;
 
 const Sizer = styled.div`
-	width: 20%;
+	width: ${props =>
+		props.currentFilter === "full-timework" ||
+		props.currentFilter === "freelancework"
+			? "50%"
+			: "20%"};
+	/* width: 50%; */
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
@@ -132,7 +142,7 @@ class GalleryComp extends Component {
 						)}
 					</GalleryItemOuter>
 				))}
-				<Sizer ref={this.sizer}></Sizer>
+				<Sizer ref={this.sizer} currentFilter={this.props.currentFilter} />
 			</GalleryContainer>
 		);
 	}

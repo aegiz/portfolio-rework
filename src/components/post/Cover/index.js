@@ -27,7 +27,12 @@ export default class CoverComp extends Component {
 	render() {
 		return (
 			<Cover mobileDisplay={this.props.mobileDisplay}>
-				<Img fluid={this.props.src} />
+				<Img
+					fluid={{
+						...this.props.src,
+						sizes: "(max-width: 1000px) calc(100vw - 20px), 1000px",
+					}}
+				/>
 			</Cover>
 		);
 	}

@@ -7,6 +7,7 @@ import styled from "styled-components";
 import InnerStep from "./innerStep";
 const Carousel = lazy(() => import("@components/post/inner/carousel"));
 const Illustration = lazy(() => import("@components/post/inner/illustration"));
+const Quote = lazy(() => import("@components/post/inner/quote"));
 const Paragraphs = lazy(() => import("@components/post/inner/paragraphs"));
 const Video = lazy(() => import("@components/post/inner/video"));
 
@@ -175,11 +176,12 @@ export default class StepsComp extends Component {
 	};
 	_importAsset = (type, data, index) => {
 		return (
-			<Suspense key={index} fallback="Loading charts">
+			<Suspense key={index} fallback="...">
 				{type === "carousel" && data.length > 1 && (
 					<Carousel data={data} id={index} />
 				)}
 				{type === "illustration" && <Illustration data={data} />}
+				{type === "quote" && <Quote data={data} />}
 				{type === "paragraphs" && <Paragraphs data={data} />}
 				{type === "video" && <Video data={data} />}
 			</Suspense>

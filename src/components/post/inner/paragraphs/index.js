@@ -36,6 +36,14 @@ const Paragraph = styled.div`
 	a {
 		color: ${({ theme }) => theme.colors.white};
 	}
+	hr {
+		border: none;
+		margin: 10px 0;
+	}
+	h3 {
+		font-size: ${({ theme }) => theme.fontSizes["l"]};
+		font-weight: ${({ theme }) => theme.fontWeights.semibold};
+	}
 	${({ theme }) => theme.mediaQueries.m} {
 		margin-left: 0 !important;
 		margin-right: 0 !important;

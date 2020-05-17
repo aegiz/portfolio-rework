@@ -42,11 +42,14 @@ export default class PortfolioIndex extends React.Component {
 		});
 	};
 	updateGallery = newFilter => {
-		this.state.gallery.filter(element => {
-			return newFilter === `all`
-				? element
-				: element.dataset.type.includes(newFilter);
-		});
+		setTimeout(() => {
+			this.state.gallery.update();
+			this.state.gallery.filter(element => {
+				return newFilter === `all`
+					? element
+					: element.dataset.type.includes(newFilter);
+			});
+		}, 0); // Ugly hack to force the reflow of the sizer
 	};
 	destroyGallery = () => {
 		this.state.gallery.destroy();

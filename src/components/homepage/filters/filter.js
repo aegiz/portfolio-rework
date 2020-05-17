@@ -70,8 +70,8 @@ export default class FilterComp extends Component {
 			<Filter
 				mobileDisplay={this.props.mobileDisplay}
 				onClick={() => {
-					this.props.updateGallery(typeOfProjectClean);
 					this.props.updateFilter(typeOfProjectClean);
+					this.props.updateGallery(typeOfProjectClean);
 				}}
 				typeOfProject={typeOfProjectClean}
 				currentFilter={this.props.currentFilter}
