@@ -176,7 +176,7 @@ export default class StepsComp extends Component {
 	};
 	_importAsset = (type, data, index) => {
 		return (
-			<Suspense key={index} fallback="...">
+			<Suspense key={index} fallback="">
 				{type === "carousel" && data.length > 1 && (
 					<Carousel data={data} id={index} />
 				)}

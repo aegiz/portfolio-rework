@@ -59,7 +59,6 @@ const Sizer = styled.div`
 		props.currentFilter === "freelancework"
 			? "50%"
 			: "20%"};
-	/* width: 50%; */
 	${({ theme }) => theme.mediaQueries.l} {
 		width: 50%;
 	}
