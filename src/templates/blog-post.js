@@ -189,12 +189,12 @@ class BlogPostTemplate extends React.Component {
 							mobileDisplay
 							previous={
 								previous
-									? { slug: previous.fields.slug, text: "Previous Project" }
+									? { slug: previous.fields.slug, text: "Next Project" }
 									: undefined
 							}
 							next={
 								next
-									? { slug: next.fields.slug, text: "Next Project" }
+									? { slug: next.fields.slug, text: "Previous Project" }
 									: undefined
 							}
 						/>
@@ -240,12 +240,12 @@ class BlogPostTemplate extends React.Component {
 								<CTAotherProject
 									previous={
 										previous
-											? { slug: previous.fields.slug, text: "Previous Project" }
+											? { slug: previous.fields.slug, text: "Next Project" }
 											: undefined
 									}
 									next={
 										next
-											? { slug: next.fields.slug, text: "Next Project" }
+											? { slug: next.fields.slug, text: "Previous Project" }
 											: undefined
 									}
 								/>

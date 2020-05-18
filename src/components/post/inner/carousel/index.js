@@ -95,6 +95,8 @@ const CTAprev = styled.button`
 	padding: 0;
 	margin: 0;
 	background: ${({ theme }) => theme.colors.white};
+	border-top: 1px solid ${({ theme }) => theme.colors.grey.light};
+	border-left: 1px solid ${({ theme }) => theme.colors.grey.light};
 	${({ theme }) => theme.mediaQueries.l} {
 		height: 50px;
 	}
@@ -112,6 +114,8 @@ const CTAprev = styled.button`
 `;
 
 const CTAnext = styled(CTAprev)`
+	border-left: none;
+	border-right: 1px solid ${({ theme }) => theme.colors.grey.light};
 	&:before {
 		transform: rotate(45deg);
 		right: calc(50% - 4px);
