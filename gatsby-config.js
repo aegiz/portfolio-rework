@@ -1,6 +1,6 @@
 module.exports = {
 	siteMetadata: {
-		title: `Adrien Rahier Portfolio`,
+		title: `Adrien Rahier Work`,
 		author: `Adrien Rahier`,
 		description: `Portfolio of Adrien Rahier.`,
 		siteUrl: `https://adrien-rahier-sandbox.netlify.app`,
@@ -84,7 +84,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `Adrien Rahier Portfolio`,
+				name: `Adrien Rahier Work`,
 				short_name: `AR-Portfolio`,
 				start_url: `/`,
 				background_color: `#FFF`,

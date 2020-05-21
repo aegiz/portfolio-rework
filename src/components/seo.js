@@ -79,7 +79,7 @@ function SEO({ title, description, path, cover }) {
 		},
 		{
 			name: `twitter:image:alt`,
-			content: `Featured image, Adrien Rahier Portfolio`,
+			content: `Featured image, Adrien Rahier Work`,
 		},
 	];
 	if (path === "/example") {
