@@ -6,38 +6,40 @@ dateTimeStamp: "1487113200"
 end: "04-23-2017"
 duration: ""
 typeOfProject: "Side Project"
-typeOfArticle: "singlestep"
-description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
-featuredImage: ./featured-image/lilo_5.jpg
-hashtags: "light, you, are, hip, painting"
-techno: "Javascript, Node.js, CSS, JQuery, MongoDB"
+typeOfArticle: "multistep"
+description: "In 2017, I spearheaded the development of a streetart webapp: Graffmap.<br>Originally for mobile only, this app helps its users find street art based on their geolocation.<br><br>Using Node.js, MongoDB and the Google Vision API, I succeeded in designing and redeploying this app at scale.<br><br>All the code is available in open-source on <a href='https://github.com/aegiz/graffmap' target='_blank'>Github<a>."
+featuredImage: ./featured-image/featured_graffmap.jpg
+hashtags: ""
+techno: "MongoDB, Node.js, JQuery"
 path: "/graffmap"
 draft: false
 ---
 
-<SlideShow data={[
-        {
-            src: "IMG_3977.jpg",
-            alt: "Carousel 1",
-        },
-        {
-            src: "IMG_5098.jpg",
-            alt: "Carousel 2",
-        },
-        {
-            src: "IMG_4631.jpg",
-            alt: "Carousel 3",
-        },
-        {
-            src: "IMG_5024.jpg",
-            alt: "Carousel 4",
-        },
-        {
-            src: "IMG_5077.jpg",
-            alt: "Carousel 5",
-        },
-        {
-            src: "IMG_4698.jpg",
-            alt: "Carousel 6",
-        },
-    ]} />
+<MiddleColumn
+	textCTAopen={"See more"}
+	textCTAclose={"See less"}
+	content={[
+		{
+			title: "How does it work",
+			description: "See it in action!",
+			components: [
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "<hr>",
+						},
+					],
+				},
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "SOON",
+						},
+					],
+				},
+			],
+		},
+	]}
+/>
