@@ -44,8 +44,6 @@ const styles = {
 const MobileFilterMenuContainer = styled.div`
 	${props => (props.scrollY > 200 ? `opacity:1; z-index: 10;` : `opacity:0`)};
 	display: none;
-	width: 100%;
-	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;

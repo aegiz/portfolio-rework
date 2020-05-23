@@ -24,8 +24,11 @@ const CarouselContainer = styled.div`
 		margin: ${props => (props.margin ? props.margin : "105px 0 45px 0")};
 	}
 	${({ theme }) => theme.mediaQueries.m} {
-		height: 390px;
+		height: 400px;
 		margin: ${props => (props.margin ? props.margin : "105px 0 15px 0")};
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		height: 250px;
 	}
 `;
 
@@ -99,6 +102,9 @@ const CTAprev = styled.button`
 	border-left: 1px solid ${({ theme }) => theme.colors.grey.light};
 	${({ theme }) => theme.mediaQueries.l} {
 		height: 50px;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		border-bottom: 1px solid ${({ theme }) => theme.colors.grey.light};
 	}
 	&:before {
 		content: "";

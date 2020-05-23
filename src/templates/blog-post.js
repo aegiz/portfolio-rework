@@ -111,7 +111,7 @@ const Title = styled.h1`
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		margin-top: 15px;
-		word-break: break-all;
+		word-break: break-word;
 	}
 	&:after {
 		content: "";

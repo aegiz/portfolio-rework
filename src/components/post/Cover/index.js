@@ -14,6 +14,9 @@ const Cover = styled.div`
 		display: ${props => (props.mobileDisplay ? `block` : `none`)};
 		height: 400px;
 	}
+	${({ theme }) => theme.mediaQueries.s} {
+		height: 250px;
+	}
 	.gatsby-image-wrapper {
 		height: 100%;
 	}
