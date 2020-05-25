@@ -13,7 +13,7 @@ const handleMarginParagraph = nbParagraph => {
 	if (nbParagraph === 2) {
 		return `&:nth-child(1) { margin-right: 15px; } &:nth-child(2) { margin-left: 15px; }`;
 	} else if (nbParagraph === 3) {
-		return `&:nth-child(2) { margin: 15px 30px; }`;
+		return `&:nth-child(2) { margin: 0 30px; }`;
 	}
 };
 
@@ -29,9 +29,9 @@ const ParagraphContainer = styled.div`
 `;
 
 const Paragraph = styled.div`
-	margin: 0;
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	margin: 0;
 	${props => handleMarginParagraph(props.nbParagraph)}
 	a {
 		color: ${({ theme }) => theme.colors.white};
