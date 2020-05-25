@@ -9,7 +9,7 @@ typeOfProject: "Full-time work"
 typeOfArticle: "multistep"
 description: "As a Solutions Engineer working in the BBC Experimentation team, I was responsible for turning business requirements into tangible tools and deliverables through my technical expertise.<br>Being the sole technical expert within the wider team, I was required to adapt to changing business needs, keep abreast of the latest development, and constantly gaining new skills.<br><br><b>Key outcomes:</b></b><ul><li>Drove the internal adoption of Optimizely, our A/B testing provider.</li><li>Development of apps, modules and A/B tests that were pushed live to millions of users.</li></ul>"
 featuredImage: ./featured-image/bbc_featured.jpg
-hashtags: "A/B testing, Solutions Engineer, Optimizely"
+hashtags: "A/B testing, Solutions Engineering, Optimizely"
 techno: "Node.js, Optimizely, Zapier"
 path: "/bbc"
 draft: false
@@ -214,16 +214,54 @@ draft: false
 			],
 		},
 		{
-			title: "Better monitor the Optimizely's activity",
+			title: "How to better monitor Optimizely's activity",
 			description: "Case study n°3",
 			components: [
 				{
 					type: "paragraphs",
 					data: [
 						{
-							text: "SOON.",
+							text: "<hr>",
 						},
 					],
+				},
+				{
+					type: "illustration",
+					data: {
+						src: "bbc_5.jpg",
+						alt: "",
+					},
+				},
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "<hr><h3>The challenge</h3><hr>In order to build a broad culture of experimentation at the BBC, my team and I had to strive to get large numbers of BBC teams to adopt Optimizely. It worked so well that eventually, we had more than 150 project spaces opened in Optimizely! <br>In this context, keeping track of the totality proved to be challenging.",
+						},
+					],
+				},
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "<hr><h3>The solution</h3><hr>As there was no built-in notification service in Optimizely (yet), I advocated for the creation of our own internal Optimizely ⇒ Slack service.<br><br>I coded a Node.js script (hosted on Zapier) that monitored all the BBC project spaces. Then everyday, it used the Optimizely and Slack APIs to push us notifications.",
+						},
+					],
+				},
+				{
+					type: "paragraphs",
+					data: [
+						{
+							text: "<hr>",
+						},
+					],
+				},
+				{
+					type: "illustration",
+					data: {
+						src: "bbc_slack_integration.jpg",
+						alt: "Screenshot of a daily notification",
+					},
 				},
 			],
 		},
