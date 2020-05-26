@@ -19,7 +19,8 @@ const OtherProjects = styled.div`
 	margin: 20px auto;
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? `flex` : `none`)};
-		justify-content: flex-end;
+		flex-direction: row-reverse;
+		justify-content: flex-start;
 		max-width: inherit;
 		margin: auto 0;
 	}
@@ -39,7 +40,7 @@ const Projects = styled.div`
 		transform: ${props => (props.previous ? "" : "rotate(180deg)")};
 	}
 	${({ theme }) => theme.mediaQueries.m} {
-		&:nth-child(2) {
+		&:nth-child(1) {
 			padding: 0 0 0 20px;
 		}
 		&:before {

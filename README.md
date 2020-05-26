@@ -1,6 +1,6 @@
 ## Project description.
 
-In 2020 the global COVID pandemy stroke Europe. This was a great occasion to conclude a side-project that started a while ago: finishing my new portfolio ✨.
+New (Gatsby) portfolio ✨!
 
 ## Dev stack
 

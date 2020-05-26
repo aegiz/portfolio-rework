@@ -15,6 +15,9 @@ const Caption = styled.div`
 	text-align: center;
 	font-style: italic;
 	font-size: ${({ theme }) => theme.fontSizes["l"]};
+	${({ theme }) => theme.mediaQueries.m} {
+		font-size: ${({ theme }) => theme.fontSizes["normal"]};
+	}
 `;
 
 export default class IllustrationComp extends Component {

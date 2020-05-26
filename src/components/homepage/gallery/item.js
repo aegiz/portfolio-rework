@@ -138,12 +138,18 @@ const TitleProject = styled(TitleSideProject)`
 	}
 	${Project}:hover & {
 		text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+		${({ theme }) => theme.mediaQueries.m} {
+			text-shadow: none;
+		}
 		&:after {
 			width: 0;
 			${({ theme }) => theme.mediaQueries.m} {
 				width: 30px;
 			}
 		}
+	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 0 15px 0 0;
 	}
 `;
 
@@ -160,6 +166,9 @@ const TypeProject = styled.h3`
 	font-size: 1.5rem;
 	${Project}:hover & {
 		text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+		${({ theme }) => theme.mediaQueries.m} {
+			text-shadow: none;
+		}
 	}
 `;
 
