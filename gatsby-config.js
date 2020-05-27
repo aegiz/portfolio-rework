@@ -2,7 +2,7 @@ module.exports = {
 	siteMetadata: {
 		title: `Adrien Rahier Work`,
 		author: `Adrien Rahier`,
-		description: `Portfolio of Adrien Rahier.`,
+		description: `Adrien Rahier Work.`,
 		siteUrl: `https://adrien-rahier-sandbox.netlify.app`,
 		twitterUsername: `@AdrienRahier`,
 	},
