@@ -79,6 +79,7 @@ const Title = styled.h2`
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		padding: 20px 0;
+		margin: 0 47px 0 0;
 	}
 `;
 
