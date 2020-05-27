@@ -16,19 +16,16 @@ import styled from "styled-components";
 // Styled Components
 const CarouselContainer = styled.div`
 	position: relative;
-	margin: ${props => (props.margin ? props.margin : "105px 0 65px 0")};
+	margin: ${props => (props.margin ? props.margin : "105px 0 35px 0")};
 	width: 100%;
 	height: ${props => (props.height ? props.height : "473px")};
 	opacity: ${props => (props.carouselReady ? "1" : "0")};
-	${({ theme }) => theme.mediaQueries.l} {
-		margin: ${props => (props.margin ? props.margin : "105px 0 45px 0")};
-	}
 	${({ theme }) => theme.mediaQueries.m} {
 		height: 400px;
-		margin: ${props => (props.margin ? props.margin : "105px 0 15px 0")};
 	}
 	${({ theme }) => theme.mediaQueries.s} {
 		height: 250px;
+		margin: ${props => (props.margin ? props.margin : "105px 0 15px 0")};
 	}
 `;
 
