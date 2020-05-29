@@ -18,6 +18,7 @@ const Filter = styled.button`
 	opacity: ${props =>
 		props.typeOfProject === props.currentFilter ? "1" : "0.5"};
 	transition: all 0.3s;
+	font-weight: ${({ theme }) => theme.fontWeights["medium"]};
 	&:hover {
 		opacity: 1;
 		&:after {

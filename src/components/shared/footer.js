@@ -65,9 +65,7 @@ export default class FooterComp extends Component {
 	render() {
 		return (
 			<FooterContainer>
-				<Copyright>
-					© 20012 - {new Date().getFullYear()} · Adrien Rahier{" "}
-				</Copyright>
+				<Copyright>© {new Date().getFullYear()} · Adrien Rahier </Copyright>
 				<OtherInfoList>
 					<OtherInfoItem>
 						<a href="mailto:adrien.rahier@gmail.com">Email</a>

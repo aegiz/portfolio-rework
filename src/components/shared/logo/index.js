@@ -30,7 +30,7 @@ const Slices = styled.div`
 	background: url("${clouds}") ${({ theme }) => theme.colors.grey.dark};
 	background-size: var(--size-logo) var(--size-logo);
 	overflow: hidden;
-    transition: all .3s;
+    transition: all 1s;
 `;
 
 const SliceItem = styled.div`
@@ -41,7 +41,7 @@ const SliceItem = styled.div`
 	background-repeat: no-repeat;
 	background-position: center -${props => props.index}rem;
 	background-size: var(--size-logo) var(--size-logo);
-	transition: all 0.3s ease-in-out;
+	transition: all 1s ease-in-out;
 	animation: sliceAnim 3s ease-in-out ${props => props.index * -0.5}s
 		alternate infinite;
 	@keyframes sliceAnim {

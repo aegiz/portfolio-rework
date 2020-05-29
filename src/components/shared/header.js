@@ -135,7 +135,7 @@ const Header = props => {
 								</a>
 							</li>
 							<li>
-								<a href="/about">About</a>
+								<a href="/">About</a>
 							</li>
 						</ul>
 					</OtherLinks>
