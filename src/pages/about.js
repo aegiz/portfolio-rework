@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 // Components
 import CTAhome from "@components/shared/CTAhome";
-import Layout from "@components/layout";
-import SEO from "@components/seo";
+import Layout from "@components/shared/layout";
+import SEO from "@components/shared/seo";
 
 const Content = styled.div`
 	position: relative;

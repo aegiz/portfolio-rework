@@ -8,9 +8,9 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Cover from "@components/post/Cover";
 import CTAhome from "@components/shared/CTAhome";
 import CTAotherProject from "@components/post/CTAotherProject";
-import Layout from "@components/layout";
+import Layout from "@components/shared/layout";
 import OtherInfo from "@components/post/otherInfo";
-import SEO from "@components/seo";
+import SEO from "@components/shared/seo";
 
 // Utils
 import MdToHtml from "@utils/MdToHtml";

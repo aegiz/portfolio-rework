@@ -2,7 +2,7 @@
 // See: https://stackoverflow.com/questions/36862334/get-viewport-window-height-in-reactjs
 
 import React, { Component } from "react";
-import { theme } from "@components/layout";
+import { theme } from "@components/shared/layout";
 
 export default function withWindowDimensions(WrappedComponent) {
 	return class extends Component {

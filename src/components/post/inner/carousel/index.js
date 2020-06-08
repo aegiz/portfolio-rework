@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { theme } from "@components/layout";
+import { theme } from "@components/shared/layout";
 
 // Utils
 import CustImg from "@utils/StaticImg";

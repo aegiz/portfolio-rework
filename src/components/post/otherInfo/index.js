@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { theme } from "@components/layout";
+import { theme } from "@components/shared/layout";
 
 // Utils
 import { handleColorType } from "@utils/projectHelpers";
