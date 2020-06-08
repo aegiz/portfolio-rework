@@ -6,11 +6,11 @@ import styled from "styled-components";
 
 // Components
 import Filters from "@components/homepage/filters";
-import Footer from "@components/shared/footer";
+import Footer from "@components/homepage/footer";
 import Gallery from "@components/homepage/gallery";
 import Layout from "@components/layout";
 import MobileFilterMenu from "@components/homepage/mobileFilterMenu";
-import Header from "@components/shared/header";
+import Header from "@components/homepage/header";
 import SEO from "@components/seo";
 
 const HomepageContent = styled.div`
