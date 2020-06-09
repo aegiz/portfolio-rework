@@ -99,6 +99,7 @@ const OtherLinks = styled.div`
 			}
 		}
 		a {
+			display: block;
 			color: ${({ theme }) => theme.colors.black};
 			text-decoration: none;
 		}
@@ -126,29 +127,11 @@ class Header extends React.Component {
 											direction="left"
 											duration={0.8}
 											to="/about"
-											style={{
-												display: "block",
-												width: "calc(100% - 10px)",
-												height: "100%",
-												margin: "0 auto",
-												textDecoration: "none",
-											}}
 										>
 											About
 										</AniLink>
 									) : (
-										<AniLink
-											fade
-											to="/about"
-											duration={0.2}
-											style={{
-												display: "block",
-												width: "calc(100% - 10px)",
-												height: "100%",
-												margin: "0 auto",
-												textDecoration: "none",
-											}}
-										>
+										<AniLink fade to="/about" duration={0.2}>
 											About
 										</AniLink>
 									)}

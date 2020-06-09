@@ -9,19 +9,8 @@ import withWindowDimensions from "@utils/withWindowDimensions";
 
 // Style Components
 const MainContainer = styled.div`
-	margin-top: 73px;
-	width: 100%;
-	padding: 0 90px;
 	a {
 		display: block;
-	}
-	${({ theme }) => theme.mediaQueries.l} {
-		padding: 0 90px;
-	}
-	${({ theme }) => theme.mediaQueries.m} {
-		margin: 0;
-		padding: 0;
-		width: auto;
 	}
 `;
 

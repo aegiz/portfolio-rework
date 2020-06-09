@@ -18,7 +18,7 @@ export default class AboutPage extends React.Component {
 		const siteTitle = data.site.siteMetadata.title;
 		return (
 			<Layout location={this.props.location} title={siteTitle}>
-				<SEO title="About page" />
+				<SEO title="About" />
 				<Content>
 					<CTAhome text={"Homepage"} />
 					<h1>Hello</h1>

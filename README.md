@@ -12,19 +12,24 @@ New (Gatsby) portfolio ✨!
 
 ```sh
 .
-├── content/                  # This folder contains all the files necessary to generate the page (like texts, images etc.).
-│   ├── assets/               # The assets to display inside a project (can be an illustration or a carousel picture).
-│   ├── blog/                 # The project files. Each project contains a MDX file and it's feature-image folder.
-│   └── new-zealand.jpg       # The banner image displayed on the homepage.
-├── framerx/                  # The ideation mockups I made to explore different UI display.
+├── content/                  # This folder contains all the necessary assets to generate the page (like texts, images etc.).
+│   ├── assets/               # This folder contains all the images that must be processed.
+│   │   ├── carousel/         # The image that goes into a carousel.
+│   │   └── illustration/     # The rest (can be an image for a project or a page)
+│   └── blog/                 # The project files. Each project contains a MDX file and it's feature-image folder.
+├── inspiration/              # Different inspiration resources for the UI.
 ├── node_modules/             # Dependencies.
 ├── public/                   # Contains all the page generated after a build.
 ├── src/                      # This folder contains all the code.
 │   ├── components/           # All the React components.
+│   │   ├── about/            # The components specific to the about page
+│   │   ├── homepage/         # The components specific to the homepage
+│   │   ├── post/             # The components specific to all the blogpost pages
+│   │   └── shared/           # The components shared accross the different pages
 │   ├── pages/                # The home, about and 404 pages.
-│   ├── templates/            # The template common to all the projects.
+│   ├── templates/            # The blog post template.
 │   └── utils/                # Contain useful functions and helpers.
-├── static/                   # This folder contains all the assets that don't need any preprocessing.
+├── static/                   # This folder contains all the images that don't need any preprocessing.
 ├── .gitignore                # Specifies untracked files to ignore.
 ├── .prettierignore           # Specifies the kind of files that prettier won't process.
 ├── gatsby-browser.js         # Useful to import custom fonts.

@@ -40,6 +40,20 @@ const FixedMenu = styled.div`
 	}
 `;
 
+const CTAhomeContainer = styled.div`
+	margin-top: 73px;
+	width: 100%;
+	padding: 0 90px;
+	${({ theme }) => theme.mediaQueries.l} {
+		padding: 0 90px;
+	}
+	${({ theme }) => theme.mediaQueries.m} {
+		margin: 0;
+		padding: 0;
+		width: auto;
+	}
+`;
+
 const BlogPostContainer = styled.div`
 	position: relative;
 	z-index: 1;
@@ -184,7 +198,9 @@ class BlogPostTemplate extends React.Component {
 				/>
 				{this.props.isM && (
 					<FixedMenu>
-						<CTAhome text={"Homepage"} />
+						<CTAhomeContainer>
+							<CTAhome text={"Homepage"} />
+						</CTAhomeContainer>
 						<CTAotherProject
 							mobileDisplay
 							previous={
@@ -204,7 +220,9 @@ class BlogPostTemplate extends React.Component {
 					<LeftPanel>
 						{!this.props.isM && (
 							<LeftPanelTop>
-								<CTAhome text={"Homepage"} />
+								<CTAhomeContainer>
+									<CTAhome text={"Homepage"} />
+								</CTAhomeContainer>
 							</LeftPanelTop>
 						)}
 						<LeftPanelIntro>
