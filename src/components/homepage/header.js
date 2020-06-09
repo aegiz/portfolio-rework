@@ -1,11 +1,14 @@
 // Package
+import AniLink from "gatsby-plugin-transition-link/AniLink";
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby"; // useStaticQuery -> Because we are in a functional component
-import Img from "gatsby-image";
 import styled from "styled-components";
 
 // Components
 import Logo from "./logo";
+
+// Utils
+import withWindowDimensions from "@utils/withWindowDimensions";
+import CustImg from "@utils/StaticImg";
 
 const MainContainer = styled.div`
 	width: 100%;
@@ -102,48 +105,71 @@ const OtherLinks = styled.div`
 	}
 `;
 
-const Header = props => {
-	const data = useStaticQuery(graphql`
-		query HeadingQuery {
-			file(relativePath: { eq: "new-zealand.jpg" }) {
-				childImageSharp {
-					fluid(maxWidth: 1500) {
-						...GatsbyImageSharpFluid
-					}
-				}
-			}
-		}
-	`);
-	return (
-		<header>
-			<MainContainer>
-				<BackgroundContainer>
-					<div className="box-shadow"></div>
-					<Img fluid={data.file.childImageSharp.fluid} />
-				</BackgroundContainer>
-				<InnerContainer>
-					<OtherLinks>
-						<ul>
-							<li>Portfolio</li>
-							<li>
-								<a
-									href="https://medium.com/@adrienrahier"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									Blog
-								</a>
-							</li>
-							<li>
-								<a href="/">About</a>
-							</li>
-						</ul>
-					</OtherLinks>
-					<Logo />
-				</InnerContainer>
-			</MainContainer>
-		</header>
-	);
-};
+class Header extends React.Component {
+	render() {
+		return (
+			<header>
+				<MainContainer>
+					<BackgroundContainer>
+						<div className="box-shadow" />
+						<CustImg src={`new-zealand.jpg`} alt={`New Zealand background`} />
+					</BackgroundContainer>
+					<InnerContainer>
+						<OtherLinks>
+							<ul>
+								<li>Portfolio</li>
+								<li>
+									{!this.props.isM ? (
+										<AniLink
+											cover
+											bg="#000000"
+											direction="left"
+											duration={0.8}
+											to="/about"
+											style={{
+												display: "block",
+												width: "calc(100% - 10px)",
+												height: "100%",
+												margin: "0 auto",
+												textDecoration: "none",
+											}}
+										>
+											About
+										</AniLink>
+									) : (
+										<AniLink
+											fade
+											to="/about"
+											duration={0.2}
+											style={{
+												display: "block",
+												width: "calc(100% - 10px)",
+												height: "100%",
+												margin: "0 auto",
+												textDecoration: "none",
+											}}
+										>
+											About
+										</AniLink>
+									)}
+								</li>
+								<li>
+									<a
+										href="https://medium.com/@adrienrahier"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Blog
+									</a>
+								</li>
+							</ul>
+						</OtherLinks>
+						<Logo />
+					</InnerContainer>
+				</MainContainer>
+			</header>
+		);
+	}
+}
 
-export default Header;
+export default withWindowDimensions(Header);

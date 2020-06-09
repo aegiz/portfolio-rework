@@ -15,7 +15,7 @@ export default function Image({ src, alt }) {
 			allImageSharp {
 				edges {
 					node {
-						fluid(maxWidth: 950, quality: 100) {
+						fluid(maxWidth: 1500, quality: 100) {
 							...GatsbyImageSharpFluid
 							originalName
 						}
