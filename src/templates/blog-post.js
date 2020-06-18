@@ -189,7 +189,7 @@ class BlogPostTemplate extends React.Component {
 		const post = this.props.data.mdx;
 		const { previous, next } = this.props.pageContext;
 		return (
-			<Layout location={this.props.location}>
+			<Layout>
 				<SEO
 					title={post.frontmatter.titleInnerArticle}
 					description={post.frontmatter.description || post.excerpt}

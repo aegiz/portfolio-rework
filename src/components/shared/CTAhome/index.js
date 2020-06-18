@@ -9,6 +9,7 @@ import withWindowDimensions from "@utils/withWindowDimensions";
 
 // Style Components
 const MainContainer = styled.div`
+	user-select: none;
 	a {
 		display: block;
 	}

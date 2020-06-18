@@ -68,6 +68,8 @@ export const theme = {
 		"6xl": "5rem",
 		"7xl": "8rem",
 		"8xl": "10rem",
+		"9xl": "12rem",
+		"10xl": "15rem",
 	},
 
 	mediaQueries: {
@@ -79,12 +81,6 @@ export const theme = {
 		xl: "@media only screen and (max-width: 1650px)",
 	},
 };
-
-// Styles: Style Component
-const Main = styled.main`
-	min-height: 100vh;
-	background: rgba(47, 50, 56, 1);
-`;
 
 // Styles: Reset and Global
 const GlobalStyle = createGlobalStyle`
@@ -114,7 +110,14 @@ const GlobalStyle = createGlobalStyle`
 	}
 `;
 
-function Layout({ children }) {
+// Styles: Style Component
+const Main = styled.main`
+	min-height: 100vh;
+	background: ${props =>
+		props.background ? props.background : theme.colors.white};
+`;
+
+function Layout({ background, children }) {
 	const layoutQuery = graphql`
 		query SiteTitleQuery {
 			site {
@@ -128,7 +131,7 @@ function Layout({ children }) {
 	const layoutContent = data => (
 		<>
 			<GlobalStyle />
-			<Main>
+			<Main background={background}>
 				<MDXProvider components={shortcodes}>{children}</MDXProvider>
 			</Main>
 		</>
