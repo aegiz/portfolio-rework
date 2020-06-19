@@ -16,7 +16,7 @@ import rightIcon from "@static/right.svg";
 const OtherProjects = styled.div`
 	display: ${props => (props.mobileDisplay ? `none` : `flex`)};
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
 	margin: 20px auto;
@@ -71,6 +71,9 @@ const Text = styled.p`
 	opacity: ${props => (props.separator ? `0.2` : `0.6`)};
 	font-size: ${({ theme }) => theme.fontSizes["m"]};
 	color: ${({ theme }) => theme.colors.black};
+	${({ theme }) => theme.mediaQueries.xs} {
+		display: ${props => (props.separator ? `block` : `none`)};
+	}
 `;
 
 class CTAotherProjectComp extends Component {
@@ -88,7 +91,9 @@ class CTAotherProjectComp extends Component {
 	render() {
 		return (
 			<OtherProjects mobileDisplay={this.props.mobileDisplay}>
-				<Text>Discover More Projects:</Text>
+				{!(this.props.next && this.props.previous) && (
+					<Text>Discover More Projects:</Text>
+				)}
 				{this.props.previous && (
 					<Projects previous>
 						{!this.props.isM ? (

@@ -187,18 +187,18 @@ export default class StepsComp extends Component {
 			</Suspense>
 		);
 	};
-	_renderInnerContentStep = (step, index) => {
+	_renderInnerContentStep = index => {
 		let assets = [];
-		step.components.forEach((component, i) => {
+		this.props.content[index].components.forEach((component, i) => {
 			assets.push(this._importAsset(component.type, component.data, index + i));
 		});
 		this.setState({
 			currentStep: assets,
-			currentTitle: step.title,
+			currentTitle: this.props.content[index].title,
 		});
 	};
-	_clickOnStep = (step, i) => {
-		this._renderInnerContentStep(step, i);
+	_clickOnStep = i => {
+		this._renderInnerContentStep(i);
 		if (!this.props.stepsColumnOpen) {
 			this.props.updateStepsColumnOpen(true);
 		}
@@ -214,6 +214,14 @@ export default class StepsComp extends Component {
 			this.props.updateInnerStepsOpen(true);
 		}
 	};
+	componentDidUpdate(prevProps) {
+		if (
+			this.props.innerStepsOpen &&
+			this.props.innerStepsOpen !== prevProps.innerStepsOpen
+		) {
+			this._renderInnerContentStep(0);
+		}
+	}
 	render() {
 		return (
 			<StepsContainer>
@@ -230,7 +238,7 @@ export default class StepsComp extends Component {
 						>
 							<Step
 								onClick={() => {
-									this._clickOnStep(step, i);
+									this._clickOnStep(i);
 								}}
 								role={"button"}
 							>

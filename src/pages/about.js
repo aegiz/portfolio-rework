@@ -247,8 +247,9 @@ export default class AboutPage extends React.Component {
 								I’m a tireless traveller currently living in Utrech, The
 								Netherlands.
 								<br />
-								When I am not at home, you will find me outside sharing a coffee
-								with friends or simply walking around with Lilo, our little{" "}
+								When I am not at home, you will find me outside, sharing a
+								coffee with friends or simply walking around with Lilo, our
+								little{" "}
 								<a
 									href="https://en.wikipedia.org/wiki/Coton_de_Tulear"
 									target="_blank"

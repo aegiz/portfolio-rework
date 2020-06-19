@@ -97,6 +97,24 @@ class middleColumnComp extends Component {
 		stepsColumnOpen: false,
 		innerStepsOpen: false,
 	};
+	componentDidMount() {
+		window.addEventListener("wheel", this.listenToWheelScroll);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener("wheel", this.listenToWheelScroll);
+	}
+	listenToWheelScroll = e => {
+		console.log(this.props.content.length);
+		if (!this.state.stepsColumnOpen) {
+			if (this.props.content.length === 1) {
+				this.setState({
+					stepsColumnOpen: true,
+					innerStepsOpen: true,
+				});
+			}
+		}
+	};
 	updateStepsColumnOpen = open => {
 		this.setState({
 			stepsColumnOpen: open,
