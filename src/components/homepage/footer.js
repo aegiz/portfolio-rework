@@ -90,7 +90,7 @@ export default class FooterComp extends Component {
 					</OtherInfoItem>
 					<OtherInfoItem>
 						<a
-							href="https://twitter.com/adrienrahier"
+							href="https://twitter.com/intent/follow?original_referer=&region=follow_link&screen_name=adrienrahier&tw_p=followbutton&variant=2.0"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

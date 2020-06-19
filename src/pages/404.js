@@ -50,7 +50,7 @@ const TextContainer = styled.div`
 const Title = styled.h1`
 	text-transform: uppercase;
 	color: ${({ theme }) => theme.colors.white};
-	font-size: ${({ theme }) => theme.fontSizes["9xl"]};
+	font-size: ${({ theme }) => theme.fontSizes["11xl"]};
 	font-weight: ${({ theme }) => theme.fontWeights.medium};
 	mix-blend-mode: multiply;
 `;

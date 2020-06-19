@@ -70,6 +70,7 @@ export const theme = {
 		"8xl": "10rem",
 		"9xl": "12rem",
 		"10xl": "15rem",
+		"11xl": "18rem",
 	},
 
 	mediaQueries: {

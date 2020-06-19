@@ -42,7 +42,7 @@ const SliceItem = styled.div`
 	background-position: center -${props => props.index}rem;
 	background-size: var(--size-logo) var(--size-logo);
 	transition: all 1s ease-in-out;
-	animation: sliceAnim 3s ease-in-out ${props => props.index * -0.5}s
+	animation: sliceAnim 2s ease-in-out ${props => props.index * -0.5}s
 		alternate infinite;
 	@keyframes sliceAnim {
 		from {
