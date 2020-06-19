@@ -100,17 +100,19 @@ class middleColumnComp extends Component {
 	componentDidMount() {
 		window.addEventListener("wheel", this.listenToWheelScroll);
 	}
-
 	componentWillUnmount() {
 		window.removeEventListener("wheel", this.listenToWheelScroll);
 	}
 	listenToWheelScroll = e => {
-		console.log(this.props.content.length);
-		if (!this.state.stepsColumnOpen) {
-			if (this.props.content.length === 1) {
+		if (!this.props.isM && !this.state.stepsColumnOpen) {
+			if (this.props.content.length === 1 || this.props.content.length === 2) {
 				this.setState({
 					stepsColumnOpen: true,
 					innerStepsOpen: true,
+				});
+			} else {
+				this.setState({
+					stepsColumnOpen: true,
 				});
 			}
 		}

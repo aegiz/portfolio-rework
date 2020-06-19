@@ -30,7 +30,7 @@ const OtherProjects = styled.div`
 
 const Projects = styled.div`
 	position: relative;
-	width: 40px;
+	width: ${props => (props.limit ? `240px` : `40px`)};
 	height: 30px;
 	transition: all 0.3s;
 	a {
@@ -39,15 +39,18 @@ const Projects = styled.div`
 		height: 100%;
 		top: 0;
 		left: 0;
-		display: block;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
 		opacity: 0.5;
 		text-decoration: none;
 		color: ${({ theme }) => theme.colors.black};
 		transition: all 0.3s;
 	}
 	img {
-		width: 100%;
 		height: 100%;
+		width: ${props => (props.limit ? `auto` : `100%`)};
 	}
 	&:hover {
 		a {
@@ -67,13 +70,19 @@ const Projects = styled.div`
 	}
 `;
 
-const Text = styled.p`
-	opacity: ${props => (props.separator ? `0.2` : `0.6`)};
+const Text = styled.span`
+	opacity: 0.6;
 	font-size: ${({ theme }) => theme.fontSizes["m"]};
 	color: ${({ theme }) => theme.colors.black};
 	${({ theme }) => theme.mediaQueries.xs} {
-		display: ${props => (props.separator ? `block` : `none`)};
+		display: none;
 	}
+`;
+
+const Separator = styled.span`
+	opacity: 0.2;
+	font-size: ${({ theme }) => theme.fontSizes["m"]};
+	color: ${({ theme }) => theme.colors.black};
 `;
 
 class CTAotherProjectComp extends Component {
@@ -91,11 +100,8 @@ class CTAotherProjectComp extends Component {
 	render() {
 		return (
 			<OtherProjects mobileDisplay={this.props.mobileDisplay}>
-				{!(this.props.next && this.props.previous) && (
-					<Text>Discover More Projects:</Text>
-				)}
 				{this.props.previous && (
-					<Projects previous>
+					<Projects previous limit={!(this.props.next && this.props.previous)}>
 						{!this.props.isM ? (
 							<AniLink
 								swipe
@@ -106,6 +112,9 @@ class CTAotherProjectComp extends Component {
 								top="exit"
 								entryOffset={100}
 							>
+								{!(this.props.next && this.props.previous) && (
+									<Text>Discover More Projects</Text>
+								)}
 								<img src={leftIcon} alt={`Left icon`} />
 							</AniLink>
 						) : (
@@ -115,9 +124,9 @@ class CTAotherProjectComp extends Component {
 						)}
 					</Projects>
 				)}
-				{this.props.next && this.props.previous && <Text separator> | </Text>}
+				{this.props.next && this.props.previous && <Separator> | </Separator>}
 				{this.props.next && (
-					<Projects>
+					<Projects limit={!(this.props.next && this.props.previous)}>
 						{!this.props.isM ? (
 							<AniLink
 								swipe
@@ -128,11 +137,14 @@ class CTAotherProjectComp extends Component {
 								top="exit"
 								entryOffset={100}
 							>
-								<img src={rightIcon} alt={`Left icon`} />
+								{!(this.props.next && this.props.previous) && (
+									<Text>Discover More Projects</Text>
+								)}
+								<img src={rightIcon} alt={`Right icon`} />
 							</AniLink>
 						) : (
 							<AniLink fade to={this.props.next.slug} duration={0.2}>
-								<img src={rightIcon} alt={`Left icon`} />
+								<img src={rightIcon} alt={`Right icon`} />
 							</AniLink>
 						)}
 					</Projects>

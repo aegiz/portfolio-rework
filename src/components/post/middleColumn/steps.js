@@ -198,10 +198,11 @@ export default class StepsComp extends Component {
 		});
 	};
 	_clickOnStep = i => {
+		// Start lazyloading innercontent immediatly
 		this._renderInnerContentStep(i);
-		if (!this.props.stepsColumnOpen) {
-			this.props.updateStepsColumnOpen(true);
-		}
+		// Open the Middle column immediately
+		this.props.updateStepsColumnOpen(true);
+		// Then wait a bit before opening the Inner step column
 		if (this.props.content.length === 1) {
 			setTimeout(() => {
 				this.props.updateInnerStepsOpen(true);
@@ -219,7 +220,9 @@ export default class StepsComp extends Component {
 			this.props.innerStepsOpen &&
 			this.props.innerStepsOpen !== prevProps.innerStepsOpen
 		) {
-			this._renderInnerContentStep(0);
+			setTimeout(() => {
+				this._renderInnerContentStep(0);
+			}, 350);
 		}
 	}
 	render() {
