@@ -245,9 +245,11 @@ export default class AboutPage extends React.Component {
 							<Title>Offline</Title>
 							<Paragraphs>
 								I’m a tireless traveller currently living in Utrech, The
-								Netherlands. Offline, you will likely find me at a restaurant
-								terrasse sharing a good coffee with friends or walking around
-								with Lilo, our little{" "}
+								Netherlands.
+								<br />
+								When I am not at home, you will surely find me outside sharing a
+								coffee with friends or simply walking around with Lilo, our
+								little{" "}
 								<a
 									href="https://en.wikipedia.org/wiki/Coton_de_Tulear"
 									target="_blank"
@@ -258,7 +260,7 @@ export default class AboutPage extends React.Component {
 								.
 							</Paragraphs>
 							<Paragraphs>
-								As an individual I am passionate about Geo-politics, News,
+								As an individual, I am passionate about Geo-politics, News,
 								History, Linguistic and Science. On the side, I also love
 								playing cards (Bridge especially), Urbex, Streetart and trekking
 								in the mountains.
