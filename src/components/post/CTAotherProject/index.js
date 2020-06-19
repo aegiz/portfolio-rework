@@ -9,18 +9,20 @@ import styled from "styled-components";
 // Utils
 import withWindowDimensions from "@utils/withWindowDimensions";
 
+// Assets
+import leftIcon from "@static/left.svg";
+import rightIcon from "@static/right.svg";
+
 const OtherProjects = styled.div`
 	display: ${props => (props.mobileDisplay ? `none` : `flex`)};
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
-	max-width: 350px;
 	margin: 20px auto;
 	${({ theme }) => theme.mediaQueries.m} {
 		display: ${props => (props.mobileDisplay ? `flex` : `none`)};
-		flex-direction: row-reverse;
-		justify-content: flex-start;
+		justify-content: flex-end;
 		max-width: inherit;
 		margin: auto 0;
 	}
@@ -28,16 +30,29 @@ const OtherProjects = styled.div`
 
 const Projects = styled.div`
 	position: relative;
-	padding: 0 20px;
-	&:before {
-		content: "";
+	width: 40px;
+	height: 30px;
+	transition: all 0.3s;
+	a {
 		position: absolute;
-		top: calc(50% - 3px);
-		left: 4px;
-		border-style: solid;
-		border-width: 0 6px 7px 6px;
-		border-color: transparent transparent #000000 transparent;
-		transform: ${props => (props.previous ? "" : "rotate(180deg)")};
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: block;
+		opacity: 0.5;
+		text-decoration: none;
+		color: ${({ theme }) => theme.colors.black};
+		transition: all 0.3s;
+	}
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	&:hover {
+		a {
+			opacity: 1;
+		}
 	}
 	${({ theme }) => theme.mediaQueries.m} {
 		&:nth-child(1) {
@@ -50,17 +65,12 @@ const Projects = styled.div`
 	${({ theme }) => theme.mediaQueries.xs} {
 		padding: 0 0 0 20px;
 	}
-	a {
-		display: block;
-		opacity: 0.5;
-		text-decoration: none;
-		color: ${({ theme }) => theme.colors.black};
-		font-size: ${({ theme }) => theme.fontSizes["m"]};
-		transition: all 0.3s;
-		&:hover {
-			opacity: 1;
-		}
-	}
+`;
+
+const Text = styled.p`
+	opacity: ${props => (props.separator ? `0.2` : `0.6`)};
+	font-size: ${({ theme }) => theme.fontSizes["m"]};
+	color: ${({ theme }) => theme.colors.black};
 `;
 
 class CTAotherProjectComp extends Component {
@@ -78,42 +88,46 @@ class CTAotherProjectComp extends Component {
 	render() {
 		return (
 			<OtherProjects mobileDisplay={this.props.mobileDisplay}>
+				<Text>Discover More Projects:</Text>
 				{this.props.previous && (
 					<Projects previous>
 						{!this.props.isM ? (
 							<AniLink
-								cover
-								bg="#000000"
-								direction="down"
+								swipe
+								direction="right"
 								duration={0.8}
 								to={this.props.previous.slug}
 								rel="previous"
+								top="exit"
+								entryOffset={100}
 							>
-								{this.props.previous.text}
+								<img src={leftIcon} alt={`Left icon`} />
 							</AniLink>
 						) : (
 							<AniLink fade to={this.props.previous.slug} duration={0.2}>
-								{this.props.previous.text}
+								<img src={leftIcon} alt={`Left icon`} />
 							</AniLink>
 						)}
 					</Projects>
 				)}
+				{this.props.next && this.props.previous && <Text separator> | </Text>}
 				{this.props.next && (
 					<Projects>
 						{!this.props.isM ? (
 							<AniLink
-								cover
-								bg="#000000"
-								direction="up"
+								swipe
+								direction="left"
 								duration={0.8}
 								to={this.props.next.slug}
 								rel="next"
+								top="exit"
+								entryOffset={100}
 							>
-								{this.props.next.text}
+								<img src={rightIcon} alt={`Left icon`} />
 							</AniLink>
 						) : (
 							<AniLink fade to={this.props.next.slug} duration={0.2}>
-								{this.props.next.text}
+								<img src={rightIcon} alt={`Left icon`} />
 							</AniLink>
 						)}
 					</Projects>
