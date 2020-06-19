@@ -83,7 +83,7 @@ export default class LogoComp extends Component {
 					))}
 				</Slices>
 				<ARLogo>
-					<img src={`logo.svg`} alt="Logo Adrien Rahier" />
+					<img src={`logo.svg`} alt="AR Logo" />
 				</ARLogo>
 			</LogoContainer>
 		);

@@ -26,24 +26,43 @@ const Content = styled.div`
 	flex-direction: row;
 	align-items: flex-start;
 	justify-content: flex-start;
+	${({ theme }) => theme.mediaQueries.m} {
+		flex-direction: column;
+	}
 `;
 
 const LeftColumn = styled.div`
 	position: relative;
 	width: 40%;
 	min-height: 100vh;
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 100%;
+		min-height: inherit;
+	}
 `;
 
 const CTAHomeContainer = styled.div`
 	position: absolute;
 	top: 8%;
 	left: 13%;
+	${({ theme }) => theme.mediaQueries.m} {
+		position: relative;
+		top: inherit;
+		left: inherit;
+		padding: 10px 70px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 10px 25px;
+	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 10px;
+	}
 `;
 
-const Illustration = styled.div`
+const DesktopIllustration = styled.div`
+	position: absolute;
 	z-index: 1;
 	mix-blend-mode: multiply;
-	position: absolute;
 	top: calc(50% - ${HEIGHT_ILLUSTRATION / 2 - 55}px);
 	right: 0;
 	width: ${WIDTH_ILLUSTRATION}px;
@@ -57,6 +76,29 @@ const Illustration = styled.div`
 		height: 100%;
 		background: transparent;
 	}
+	${({ theme }) => theme.mediaQueries.m} {
+		display: none;
+	}
+`;
+
+const MobileIllustration = styled.div`
+	display: none;
+	${({ theme }) => theme.mediaQueries.m} {
+		height: 200px;
+		width: 347px;
+		margin: 20px auto;
+		display: block;
+		user-select: none;
+		.gatsby-image-wrapper {
+			height: 100%;
+		}
+		${({ theme }) => theme.mediaQueries.xs} {
+			padding: 0 10px;
+			margin: 0 0 10px 0;
+			height: 100%;
+			width: 100%;
+		}
+	}
 `;
 
 const RightColumn = styled.div`
@@ -64,6 +106,10 @@ const RightColumn = styled.div`
 	background: ${({ theme }) => theme.colors.grey.dark};
 	width: 60%;
 	min-height: 100vh;
+	${({ theme }) => theme.mediaQueries.m} {
+		width: 100%;
+		min-height: inherit;
+	}
 `;
 
 const RightColumnContent = styled.div`
@@ -73,7 +119,20 @@ const RightColumnContent = styled.div`
 	transform: translate(-50%, -50%);
 	width: 100%;
 	max-width: 750px;
-	padding: 25px;
+	padding: 0 25px;
+	${({ theme }) => theme.mediaQueries.m} {
+		position: relative;
+		top: inherit;
+		left: inherit;
+		transform: translate(0, 0);
+		padding: 40px 70px;
+	}
+	${({ theme }) => theme.mediaQueries.s} {
+		padding: 40px 25px;
+	}
+	${({ theme }) => theme.mediaQueries.xs} {
+		padding: 30px 10px;
+	}
 `;
 
 const Title = styled.h2`
@@ -94,6 +153,9 @@ const CTA = styled.a`
 	text-decoration: none;
 	display: inline-block;
 	margin: 15px 0 50px 0;
+	${({ theme }) => theme.mediaQueries.xs} {
+		margin: 15px 0 30px 0;
+	}
 `;
 
 const CTAinner = styled.button`
@@ -171,9 +233,12 @@ export default class AboutPage extends React.Component {
 						<CTAHomeContainer>
 							<CTAhome text={"Homepage"} />
 						</CTAHomeContainer>
-						<Illustration>
+						<DesktopIllustration>
 							<CustImg src={`bike2.jpg`} alt={`Hello bikey`} />
-						</Illustration>
+						</DesktopIllustration>
+						<MobileIllustration>
+							<CustImg src={`bike1.jpg`} alt={`Hello bikey`} />
+						</MobileIllustration>
 					</LeftColumn>
 					<RightColumn>
 						<RightColumnContent>
