@@ -261,9 +261,9 @@ export default class AboutPage extends React.Component {
 							</Paragraphs>
 							<Paragraphs>
 								As an individual, I am passionate about Geo-politics, News,
-								History, Linguistic and Science. On the side, I also love
-								playing cards (Bridge especially), Urbex, Streetart and trekking
-								in the mountains.
+								Linguistics and Science. On the side, I also love playing cards
+								(Bridge especially), Urbex, Streetart and trekking in the
+								mountains.
 							</Paragraphs>
 							<CTA href="mailto:adrien.rahier@gmail.com">
 								<CTAinner>Get in touch</CTAinner>
