@@ -88,8 +88,8 @@ class InnerStepsComp extends Component {
 		nbSteps: PropTypes.number.isRequired,
 		innerStepsOpen: PropTypes.bool.isRequired,
 		TIME_TRANSITION: PropTypes.number.isRequired,
-		currentStep: PropTypes.array,
-		currentTitle: PropTypes.string,
+		assets: PropTypes.array,
+		title: PropTypes.string,
 		updateStepsColumnOpen: PropTypes.func.isRequired,
 		updateInnerStepsOpen: PropTypes.func.isRequired,
 	};
@@ -109,7 +109,7 @@ class InnerStepsComp extends Component {
 				TIME_TRANSITION={this.props.TIME_TRANSITION}
 				isM={this.props.isM}
 			>
-				{this.props.currentTitle && (
+				{this.props.title && (
 					<>
 						<Close
 							onClick={() => {
@@ -118,10 +118,10 @@ class InnerStepsComp extends Component {
 						>
 							<img src={closeIcon} alt={"close icon"} />
 						</Close>
-						<Title>{this.props.currentTitle}</Title>
+						<Title>{this.props.title}</Title>
 					</>
 				)}
-				{this.props.currentStep}
+				{this.props.assets}
 			</InnerStepsContainer>
 		);
 	}

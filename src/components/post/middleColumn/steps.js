@@ -171,8 +171,11 @@ export default class StepsComp extends Component {
 		updateInnerStepsOpen: PropTypes.func.isRequired,
 	};
 	state = {
-		currentStep: null,
-		currentTitle: null,
+		currentlyDisplayedStep: {
+			index: null,
+			title: null,
+			assets: null,
+		},
 	};
 	_importAsset = (type, data, index) => {
 		return (
@@ -193,8 +196,11 @@ export default class StepsComp extends Component {
 			assets.push(this._importAsset(component.type, component.data, index + i));
 		});
 		this.setState({
-			currentStep: assets,
-			currentTitle: this.props.content[index].title,
+			currentlyDisplayedStep: {
+				index: index,
+				title: this.props.content[index].title,
+				assets: assets,
+			},
 		});
 	};
 	_clickOnStep = i => {
@@ -221,7 +227,9 @@ export default class StepsComp extends Component {
 			this.props.innerStepsOpen !== prevProps.innerStepsOpen
 		) {
 			setTimeout(() => {
-				this._renderInnerContentStep(0);
+				this._renderInnerContentStep(
+					this.state.currentlyDisplayedStep.index || 0
+				);
 			}, 350);
 		}
 	}
@@ -255,8 +263,8 @@ export default class StepsComp extends Component {
 					nbSteps={this.props.content.length}
 					innerStepsOpen={this.props.innerStepsOpen}
 					TIME_TRANSITION={this.props.TIME_TRANSITION}
-					currentStep={this.state.currentStep}
-					currentTitle={this.state.currentTitle}
+					assets={this.state.currentlyDisplayedStep.assets}
+					title={this.state.currentlyDisplayedStep.title}
 					updateStepsColumnOpen={this.props.updateStepsColumnOpen}
 					updateInnerStepsOpen={this.props.updateInnerStepsOpen}
 				/>
