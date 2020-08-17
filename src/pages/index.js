@@ -62,7 +62,7 @@ export default class PortfolioIndex extends React.Component {
 	render() {
 		const { data } = this.props;
 		return (
-			<Layout background="#2f3238">
+			<Layout background="linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(47,50,56,1) 45%)">
 				<SEO title="Portfolio" />
 				<Header />
 				<MobileFilterMenu
