@@ -119,7 +119,11 @@ const Title = styled.h1`
 	width: 100%;
 	mix-blend-mode: exclusion;
 	color: ${({ theme }) => theme.colors.white};
-	font-size: ${({ theme }) => theme.fontSizes["6xl"]};
+	font-size: ${props => {
+		return props.windowHeight > 850
+			? props.theme.fontSizes["6xl"]
+			: props.theme.fontSizes["5xl"];
+	}};
 	${({ theme }) => theme.mediaQueries.l} {
 		font-size: ${({ theme }) => theme.fontSizes["5xl"]};
 	}
@@ -238,7 +242,9 @@ class BlogPostTemplate extends React.Component {
 									/>
 								)}
 
-							<Title>{post.frontmatter.titleInnerArticle}</Title>
+							<Title windowHeight={this.props.windowHeight}>
+								{post.frontmatter.titleInnerArticle}
+							</Title>
 							{this.props.isM && (
 								<OtherInfo
 									mobileDisplay

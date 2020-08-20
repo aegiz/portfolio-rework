@@ -40,6 +40,7 @@ export default class PortfolioIndex extends React.Component {
 				},
 			}),
 		});
+		this.updateGallery("all");
 	};
 	updateGallery = newFilter => {
 		setTimeout(() => {

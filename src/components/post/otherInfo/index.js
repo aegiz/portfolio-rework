@@ -6,6 +6,7 @@ import { theme } from "@components/shared/layout";
 
 // Utils
 import { handleColorType } from "@utils/projectHelpers";
+import withWindowDimensions from "@utils/withWindowDimensions";
 
 // Styled Components
 const OtherInfo = styled.div`
@@ -35,7 +36,8 @@ const OtherInfoInner = styled.ul`
 	list-style: none;
 	display: flex;
 	align-items: flex-start;
-	justify-content: space-around;
+	justify-content: ${props =>
+		props.windowHeight > 850 ? "space-around" : "space-evenly"};
 	flex-direction: ${props =>
 		props.typeOfArticle === "multistep" ? "column" : "row"};
 	width: ${props =>
@@ -86,8 +88,11 @@ const InfoDate = styled(Info)`
 `;
 
 const InfoTool = styled(Info)`
+	display: ${props =>
+		props.windowHeight > 850 || props.isM ? "block" : "none"};
 	max-width: ${props =>
 		props.typeOfArticle === "multistep" ? "inherit" : "300px"};
+
 	${({ theme }) => theme.mediaQueries.xl} {
 		flex-direction: column;
 	}
@@ -145,7 +150,7 @@ const Techno = styled.span`
 	}
 `;
 
-export default class OtherInfoComp extends Component {
+class OtherInfoComp extends Component {
 	static propTypes = {
 		mobileDisplay: PropTypes.bool,
 		date: PropTypes.string.isRequired,
@@ -179,7 +184,10 @@ export default class OtherInfoComp extends Component {
 				typeOfProject={this.props.typeOfProject}
 				typeOfArticle={this.props.typeOfArticle}
 			>
-				<OtherInfoInner typeOfArticle={this.props.typeOfArticle}>
+				<OtherInfoInner
+					windowHeight={this.props.windowHeight}
+					typeOfArticle={this.props.typeOfArticle}
+				>
 					<Info typeOfArticle={this.props.typeOfArticle}>
 						<InfoType>Category:</InfoType>
 						<InfoContent typeOfArticle={this.props.typeOfArticle}>
@@ -196,7 +204,11 @@ export default class OtherInfoComp extends Component {
 							)}
 						</InfoContent>
 					</InfoDate>
-					<InfoTool typeOfArticle={this.props.typeOfArticle}>
+					<InfoTool
+						isM={this.props.isM}
+						windowHeight={this.props.windowHeight}
+						typeOfArticle={this.props.typeOfArticle}
+					>
 						<InfoType>Tools used:</InfoType>
 						<InfoContent typeOfArticle={this.props.typeOfArticle}>
 							{this.props.techno.split(",").map((techno, i) => (
@@ -209,3 +221,5 @@ export default class OtherInfoComp extends Component {
 		);
 	}
 }
+
+export default withWindowDimensions(OtherInfoComp);

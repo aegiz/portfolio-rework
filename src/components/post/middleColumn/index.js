@@ -104,7 +104,15 @@ class middleColumnComp extends Component {
 		window.removeEventListener("wheel", this.listenToWheelScroll);
 	}
 	listenToWheelScroll = e => {
-		if (!this.props.isM && !this.state.stepsColumnOpen) {
+		// We only want to show the content of the middle column if:
+		// 1. It's not on mobile
+		// 2. The windows height is big enough
+		// 3. It's not already open
+		if (
+			!this.props.isM &&
+			this.props.windowHeight > 850 &&
+			!this.state.stepsColumnOpen
+		) {
 			if (this.props.content.length === 1 || this.props.content.length === 2) {
 				this.setState({
 					stepsColumnOpen: true,
