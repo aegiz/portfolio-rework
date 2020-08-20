@@ -11,11 +11,13 @@ import SEO from "@components/shared/seo";
 import CustImg from "@utils/StaticImg";
 
 // Assets
-import githubIcon from "@static/github.svg";
-import twitterIcon from "@static/twitter.svg";
-import polarstepIcon from "@static/polarstep.svg";
-import mediumIcon from "@static/medium.svg";
 import discordIcon from "@static/discord.svg";
+import emailIcon from "@static/email.svg";
+import githubIcon from "@static/github.svg";
+import linkedinIcon from "@static/linkedin.svg";
+import mediumIcon from "@static/medium.svg";
+import polarstepIcon from "@static/polarstep.svg";
+import twitterIcon from "@static/twitter.svg";
 
 // Styled Components
 const WIDTH_ILLUSTRATION = (571 * 70) / 100;
@@ -136,6 +138,7 @@ const RightColumnContent = styled.div`
 `;
 
 const Title = styled.h2`
+	margin: ${props => (props.extramargin ? `50px 0 0 0` : `0`)};
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["5xl"]};
 	font-weight: ${({ theme }) => theme.fontWeights.medium};
@@ -146,51 +149,6 @@ const Paragraphs = styled.p`
 	font-size: ${({ theme }) => theme.fontSizes["xl"]};
 	a {
 		color: ${({ theme }) => theme.colors.white};
-	}
-`;
-
-const CTA = styled.a`
-	text-decoration: none;
-	display: inline-block;
-	margin: 15px 0 50px 0;
-	${({ theme }) => theme.mediaQueries.xs} {
-		margin: 15px 0 30px 0;
-	}
-`;
-
-const CTAinner = styled.button`
-	border: 1px solid ${({ theme }) => theme.colors.white};
-	color: ${({ theme }) => theme.colors.white};
-	font-size: ${({ theme }) => theme.fontSizes["l"]};
-	margin: 0;
-	padding: 15px 20px;
-	transition: all 0.2s;
-	user-select: none;
-	&:hover {
-		text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-		background-image: linear-gradient(
-			to right,
-			#e40303,
-			#e40303 16.65%,
-			#ff8c00 16.65%,
-			#ff8c00 33.3%,
-			#ffed00 33.3%,
-			#ffed00 49.95%,
-			#008026 49.95%,
-			#008026 66.6%,
-			#004dff 66.6%,
-			#004dff 83.25%,
-			#750787 83.25%,
-			#750787 100%,
-			#e40303 100%
-		);
-		animation: slidebg 2s linear infinite;
-	}
-	/* Credits: https://codepen.io/althi/pen/eKdmaa */
-	@keyframes slidebg {
-		to {
-			background-position: 20vw;
-		}
 	}
 `;
 
@@ -207,6 +165,7 @@ const ListItem = styled.li`
 	font-size: ${({ theme }) => theme.fontSizes["xl"]};
 	position: relative;
 	a {
+		margin-left: 6px;
 		text-decoration: none;
 		color: ${({ theme }) => theme.colors.white};
 	}
@@ -262,14 +221,19 @@ export default class AboutPage extends React.Component {
 							<Paragraphs>
 								As an individual, I am passionate about Geo-politics, News,
 								Linguistics and Science. On the side, I also love playing cards
-								(Bridge especially), Urbex, Streetart and trekking in the
-								mountains.
+								(Bridge &lt;3), Urbex, Streetart and trekking in the mountains.
 							</Paragraphs>
-							<CTA href="mailto:adrien.rahier@gmail.com">
-								<CTAinner>Get in touch</CTAinner>
-							</CTA>
-							<Title>Online</Title>
+							<Title extramargin>Online</Title>
 							<List>
+								<ListItem img={emailIcon}>
+									<a
+										href="mailto:adrien.rahier@gmail.com"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										adrien.rahier@gmail.com
+									</a>
+								</ListItem>
 								<ListItem img={twitterIcon}>
 									<a
 										href="https://twitter.com/intent/follow?original_referer=&region=follow_link&screen_name=adrienrahier&tw_p=followbutton&variant=2.0"
@@ -277,6 +241,15 @@ export default class AboutPage extends React.Component {
 										rel="noopener noreferrer"
 									>
 										Twitter
+									</a>
+								</ListItem>
+								<ListItem img={linkedinIcon}>
+									<a
+										href="https://www.linkedin.com/in/adrienrahier/"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Linkedin
 									</a>
 								</ListItem>
 								<ListItem img={githubIcon}>

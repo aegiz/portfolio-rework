@@ -30,7 +30,7 @@ const OtherProjects = styled.div`
 
 const Projects = styled.div`
 	position: relative;
-	width: ${props => (props.limit ? `240px` : `40px`)};
+	width: 40px;
 	height: 30px;
 	transition: all 0.3s;
 	a {
@@ -50,7 +50,7 @@ const Projects = styled.div`
 	}
 	img {
 		height: 100%;
-		width: ${props => (props.limit ? `auto` : `100%`)};
+		width: ${props => (props.isLimit ? `auto` : `100%`)};
 	}
 	&:hover {
 		a {
@@ -100,8 +100,12 @@ class CTAotherProjectComp extends Component {
 	render() {
 		return (
 			<OtherProjects mobileDisplay={this.props.mobileDisplay}>
+				<Text>Other Projects</Text>
 				{this.props.previous && (
-					<Projects previous limit={!(this.props.next && this.props.previous)}>
+					<Projects
+						previous
+						isLimit={!(this.props.next && this.props.previous)}
+					>
 						{!this.props.isM ? (
 							<AniLink
 								swipe
@@ -112,9 +116,6 @@ class CTAotherProjectComp extends Component {
 								top="exit"
 								entryOffset={100}
 							>
-								{!(this.props.next && this.props.previous) && (
-									<Text>Discover More Projects</Text>
-								)}
 								<img src={leftIcon} alt={`Left icon`} />
 							</AniLink>
 						) : (
@@ -137,9 +138,6 @@ class CTAotherProjectComp extends Component {
 								top="exit"
 								entryOffset={100}
 							>
-								{!(this.props.next && this.props.previous) && (
-									<Text>Discover More Projects</Text>
-								)}
 								<img src={rightIcon} alt={`Right icon`} />
 							</AniLink>
 						) : (
