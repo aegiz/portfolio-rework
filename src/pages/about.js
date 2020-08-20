@@ -88,6 +88,7 @@ const MobileIllustration = styled.div`
 	${({ theme }) => theme.mediaQueries.m} {
 		height: 200px;
 		width: 347px;
+		width: 347px;
 		margin: 20px auto;
 		display: block;
 		user-select: none;
@@ -96,9 +97,10 @@ const MobileIllustration = styled.div`
 		}
 		${({ theme }) => theme.mediaQueries.xs} {
 			padding: 0 10px;
-			margin: 0 0 10px 0;
+			margin: 0 auto 20px;
 			height: 100%;
 			width: 100%;
+			max-width: 300px;
 		}
 	}
 `;
