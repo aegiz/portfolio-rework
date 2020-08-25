@@ -205,7 +205,7 @@ export default class AboutPage extends React.Component {
 						<RightColumnContent>
 							<Title>Offline</Title>
 							<Paragraphs>
-								I’m a tireless traveller currently living in Utrech, The
+								I’m a tireless traveller currently living in Utrecht, The
 								Netherlands.
 								<br />
 								When I am not at home, you will find me outside, sharing a
@@ -269,7 +269,7 @@ export default class AboutPage extends React.Component {
 										target="_blank"
 										rel="noopener noreferrer"
 									>
-										Polarstep
+										Polarsteps
 									</a>
 								</ListItem>
 								<ListItem img={mediumIcon}>
