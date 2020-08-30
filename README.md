@@ -56,4 +56,10 @@ sudo npm install --unsafe-perm
 gatsby develop
 ```
 
+- Clearing the cache
+
+```bash
+gatsby clean
+```
+
 The website should now be running on `http://localhost:8000`.
