@@ -30,6 +30,10 @@ function SEO({ title, description, path, cover }) {
 	}`;
 	const customMeta = [
 		{
+			name: `google-site-verification`,
+			content: `Ise8Gh5jBfVRid6Z61dTbo_ZLgAHd0gKbn8BuDTiBmk`,
+		},
+		{
 			name: `description`,
 			content: metaDescription,
 		},
