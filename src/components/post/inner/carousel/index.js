@@ -114,6 +114,12 @@ const CTAprev = styled.button`
 		border-right: 2px solid ${({ theme }) => theme.colors.grey.main};
 		transform: rotate(225deg);
 	}
+	.cta-label {
+		font-size: 0;
+		height: 1px;
+		overflow: hidden;
+		display: block;
+	}
 `;
 
 const CTAnext = styled(CTAprev)`
@@ -201,11 +207,15 @@ export default class CarouselComp extends Component {
 					<CTAprev
 						onClick={() => this.state.slider.slickPrev()}
 						onKeyDown={() => this.state.slider.slickPrev()}
-					/>
+					>
+						<span className="cta-label">Previous</span>
+					</CTAprev>
 					<CTAnext
 						onClick={() => this.state.slider.slickNext()}
 						onKeyDown={() => this.state.slider.slickNext()}
-					/>
+					>
+						<span className="cta-label">Next</span>
+					</CTAnext>
 				</IconContainter>
 			</CarouselContainer>
 		);

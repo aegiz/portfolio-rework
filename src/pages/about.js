@@ -23,6 +23,25 @@ import twitterIcon from "@static/twitter.svg";
 const WIDTH_ILLUSTRATION = (571 * 70) / 100;
 const HEIGHT_ILLUSTRATION = (603 * 70) / 100;
 
+const Title = styled.h1`
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	&:active,
+	&:focus {
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+	}
+`;
+
 const Content = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -139,7 +158,7 @@ const RightColumnContent = styled.div`
 	}
 `;
 
-const Title = styled.h2`
+const SubTitle = styled.h2`
 	margin: ${props => (props.extramargin ? `50px 0 0 0` : `0`)};
 	color: ${({ theme }) => theme.colors.white};
 	font-size: ${({ theme }) => theme.fontSizes["5xl"]};
@@ -189,6 +208,7 @@ export default class AboutPage extends React.Component {
 		return (
 			<Layout>
 				<SEO title="About" />
+				<Title aria-label="About page">About page</Title>
 				<Content>
 					<LeftColumn>
 						<CTAHomeContainer>
@@ -203,7 +223,7 @@ export default class AboutPage extends React.Component {
 					</LeftColumn>
 					<RightColumn>
 						<RightColumnContent>
-							<Title>Offline</Title>
+							<SubTitle>Offline</SubTitle>
 							<Paragraphs>
 								I’m a tireless traveller currently living in Utrecht, The
 								Netherlands.
@@ -225,7 +245,7 @@ export default class AboutPage extends React.Component {
 								Linguistics and Science. On the side, I also love playing cards
 								(Bridge &lt;3), Urbex, Streetart and trekking in the mountains.
 							</Paragraphs>
-							<Title extramargin>Online</Title>
+							<SubTitle extramargin>Online</SubTitle>
 							<List>
 								<ListItem img={emailIcon}>
 									<a

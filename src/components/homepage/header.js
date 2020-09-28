@@ -53,6 +53,25 @@ const BackgroundContainer = styled.div`
 	}
 `;
 
+const Title = styled.h1`
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	&:active,
+	&:focus {
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+	}
+`;
+
 const InnerContainer = styled.div`
 	position: relative;
 	width: 100%;
@@ -64,7 +83,7 @@ const InnerContainer = styled.div`
 	}
 `;
 
-const OtherLinks = styled.div`
+const OtherLinks = styled.nav`
 	position: absolute;
 	z-index: 2;
 	top: 25px;
@@ -115,6 +134,7 @@ class Header extends React.Component {
 						<div className="box-shadow" />
 						<CustImg src={`new-zealand.jpg`} alt={`New Zealand background`} />
 					</BackgroundContainer>
+					<Title aria-label="Homepage">Homepage</Title>
 					<InnerContainer>
 						<OtherLinks>
 							<ul>
