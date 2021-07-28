@@ -48,6 +48,9 @@ Execute the following commands:
 
 ```bash
 sudo npm install --unsafe-perm
+// Or
+nvm use 11.10.0 (install sharp correctly)
+npm install
 ```
 
 - To start developping

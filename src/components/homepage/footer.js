@@ -1,5 +1,6 @@
 // Package
 import React, { Component } from "react";
+
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
@@ -22,6 +23,9 @@ const FooterContainer = styled.div`
 
 const Copyright = styled.div`
 	color: ${({ theme }) => theme.colors.white};
+	a {
+		color: ${({ theme }) => theme.colors.white};
+	}
 	${({ theme }) => theme.mediaQueries.s} {
 		font-size: ${({ theme }) => theme.fontSizes["m"]};
 	}
@@ -65,7 +69,15 @@ export default class FooterComp extends Component {
 	render() {
 		return (
 			<FooterContainer>
-				<Copyright>© {new Date().getFullYear()} · Adrien Rahier </Copyright>
+				<Copyright>
+					© {new Date().getFullYear()} Adrien Rahier · Cover by{" "}
+					<a
+						href="https://www.flickr.com/photos/miny-lou/40564194193/in/album-72157663122683148/"
+						target="_blank"
+					>
+						Louise Feige
+					</a>
+				</Copyright>
 				<OtherInfoList>
 					<OtherInfoItem>
 						<a href="mailto:adrien.rahier@gmail.com">Email</a>
